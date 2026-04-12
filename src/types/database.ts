@@ -12,6 +12,7 @@ export type Restaurant = {
   stripe_customer_id: string | null
   stripe_subscription_id: string | null
   subscription_status: 'trialing' | 'active' | 'past_due' | 'canceled' | 'inactive'
+  google_review_url: string | null
   trial_ends_at: string
   created_at: string
   updated_at: string
@@ -77,6 +78,13 @@ export type MenuImport = {
   created_at: string
 }
 
+export type Review = {
+  id: string
+  restaurant_id: string
+  rating: number
+  created_at: string
+}
+
 export type Database = {
   public: {
     Tables: {
@@ -114,6 +122,12 @@ export type Database = {
         Row: DailyMenu
         Insert: Pick<DailyMenu, 'restaurant_id'> & Partial<Omit<DailyMenu, 'restaurant_id'>>
         Update: Partial<DailyMenu>
+        Relationships: []
+      }
+      reviews: {
+        Row: Review
+        Insert: Pick<Review, 'restaurant_id' | 'rating'> & Partial<Omit<Review, 'restaurant_id' | 'rating'>>
+        Update: Partial<Review>
         Relationships: []
       }
     }

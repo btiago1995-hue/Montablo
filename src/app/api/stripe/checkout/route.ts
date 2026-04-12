@@ -2,7 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { getStripe } from '@/lib/stripe'
 import { NextResponse } from 'next/server'
 
-export async function POST() {
+export async function POST(request: Request) {
   const supabase = createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
@@ -20,13 +20,20 @@ export async function POST() {
     return NextResponse.json({ error: 'Restaurant introuvable' }, { status: 404 })
   }
 
+  // Determine which price to use
+  const body = await request.json().catch(() => ({}))
+  const plan = body.plan === 'annual' ? 'annual' : 'monthly'
+  const priceId = plan === 'annual'
+    ? process.env.STRIPE_PRICE_ID_ANNUAL!
+    : process.env.STRIPE_PRICE_ID!
+
   const stripe = getStripe()
   const session = await stripe.checkout.sessions.create({
     customer_email: user.email,
     mode: 'subscription',
     line_items: [
       {
-        price: process.env.STRIPE_PRICE_ID!,
+        price: priceId,
         quantity: 1,
       },
     ],

@@ -1,6 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
-import { ExternalLink, Plus, UtensilsCrossed, FolderOpen, Tag } from 'lucide-react'
+import { ExternalLink, Plus, UtensilsCrossed, FolderOpen, Tag, Star } from 'lucide-react'
 import { formatPrice } from '@/lib/utils'
 
 export default async function DashboardPage() {
@@ -28,6 +28,19 @@ export default async function DashboardPage() {
     .from('promotions')
     .select('*', { count: 'exact', head: true })
     .eq('is_active', true)
+
+  // Reviews metrics
+  const { data: reviews } = await supabase
+    .from('reviews')
+    .select('rating')
+    .eq('restaurant_id', restaurant!.id)
+
+  const reviewCount = reviews?.length ?? 0
+  const avgRating = reviewCount > 0
+    ? (reviews!.reduce((sum, r) => sum + r.rating, 0) / reviewCount)
+    : 0
+  const distribution = [0, 0, 0, 0, 0]
+  reviews?.forEach((r) => { distribution[r.rating - 1]++ })
 
   // Recent items for the table
   const { data: recentItems } = await supabase
@@ -103,6 +116,56 @@ export default async function DashboardPage() {
           </div>
           <div className="text-[22px] sm:text-[28px] font-bold tracking-tight text-[#1A1A1A]">{promoCount ?? 0}</div>
         </div>
+      </div>
+
+      {/* Reviews metrics */}
+      <div className="bg-white border border-[#E8E8E4] rounded-xl p-4 sm:p-5 mb-7">
+        <div className="flex items-center gap-2 mb-4">
+          <Star className="w-4 h-4 text-[#FBBC04]" />
+          <span className="text-[14px] font-semibold text-[#1A1A1A]">Avis clients</span>
+          <span className="text-[12px] text-[#9B9B9B] ml-auto">{reviewCount} avis</span>
+        </div>
+        {reviewCount > 0 ? (
+          <div className="flex items-center gap-6">
+            {/* Average */}
+            <div className="text-center shrink-0">
+              <div className="text-[32px] font-bold tracking-tight text-[#1A1A1A]">{avgRating.toFixed(1)}</div>
+              <div className="flex gap-0.5 justify-center mt-1">
+                {[1, 2, 3, 4, 5].map((s) => (
+                  <svg key={s} width="14" height="14" viewBox="0 0 24 24"
+                    fill={s <= Math.round(avgRating) ? '#FBBC04' : 'none'}
+                    stroke={s <= Math.round(avgRating) ? '#FBBC04' : '#D1D5DB'}
+                    strokeWidth="2">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                  </svg>
+                ))}
+              </div>
+            </div>
+            {/* Distribution bars */}
+            <div className="flex-1 space-y-1.5">
+              {[5, 4, 3, 2, 1].map((star) => {
+                const count = distribution[star - 1]
+                const pct = reviewCount > 0 ? (count / reviewCount) * 100 : 0
+                return (
+                  <div key={star} className="flex items-center gap-2">
+                    <span className="text-[11px] text-[#9B9B9B] w-4 text-right">{star}</span>
+                    <div className="flex-1 h-2 bg-[#F0EDE8] rounded-full overflow-hidden">
+                      <div
+                        className="h-full rounded-full transition-all"
+                        style={{ width: `${pct}%`, backgroundColor: star >= 4 ? '#FBBC04' : star === 3 ? '#F59E0B' : '#EF4444' }}
+                      />
+                    </div>
+                    <span className="text-[11px] text-[#9B9B9B] w-6">{count}</span>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        ) : (
+          <p className="text-sm text-[#9B9B9B] text-center py-4">
+            Aucun avis pour l&apos;instant. Les avis apparaitront ici quand vos clients evalueront votre menu.
+          </p>
+        )}
       </div>
 
       {/* Quick actions */}

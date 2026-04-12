@@ -11,6 +11,7 @@ CREATE TABLE restaurants (
   primary_color TEXT DEFAULT '#1A1A1A',
   secondary_color TEXT DEFAULT '#D4A574',
   unavailable_behavior TEXT DEFAULT 'greyed_out' CHECK (unavailable_behavior IN ('greyed_out', 'hidden')),
+  google_review_url TEXT,
   languages TEXT[] DEFAULT '{fr}',
   stripe_customer_id TEXT,
   stripe_subscription_id TEXT,
@@ -75,6 +76,14 @@ CREATE TABLE daily_menus (
   items_description_en TEXT,
   valid_date DATE NOT NULL DEFAULT CURRENT_DATE,
   is_active BOOLEAN DEFAULT true,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- reviews
+CREATE TABLE reviews (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  restaurant_id UUID REFERENCES restaurants(id) ON DELETE CASCADE,
+  rating INTEGER NOT NULL CHECK (rating >= 1 AND rating <= 5),
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 

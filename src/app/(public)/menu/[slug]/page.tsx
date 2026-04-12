@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
 import { MenuContent } from '@/components/public/menu-content'
+import { ReviewPopup } from '@/components/public/review-popup'
 import type { Metadata } from 'next'
 
 type Props = { params: { slug: string } }
@@ -128,6 +129,17 @@ export default async function PublicMenuPage({ params }: Props) {
         unavailableBehavior={restaurant.unavailable_behavior}
         primaryColor={primaryColor}
       />
+
+      {/* Review popup */}
+      {restaurant.google_review_url && (
+        <ReviewPopup
+          restaurantId={restaurant.id}
+          googleReviewUrl={restaurant.google_review_url}
+          restaurantName={restaurant.name}
+          logoUrl={restaurant.logo_url}
+          primaryColor={primaryColor}
+        />
+      )}
 
       {/* Footer */}
       <footer className="text-center py-10 px-4 border-t border-[#E8E8E4] mt-4">

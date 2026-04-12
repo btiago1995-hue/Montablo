@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import type { Category, Item } from '@/types/database'
@@ -344,7 +344,124 @@ export function MenuManager({
   const [expanded, setExpanded] = useState<Set<string>>(new Set(initialCategories.map((c) => c.id)))
   const [deleting, setDeleting] = useState<string | null>(null)
 
+  // Drag and drop state
+  const [dragCatId, setDragCatId] = useState<string | null>(null)
+  const [dragItemId, setDragItemId] = useState<string | null>(null)
+  const [dragOverCatId, setDragOverCatId] = useState<string | null>(null)
+  const [dragOverItemId, setDragOverItemId] = useState<string | null>(null)
+  const dragType = useRef<'category' | 'item' | null>(null)
+  const dragSourceCatId = useRef<string | null>(null)
+
   const supabase = createClient()
+
+  // ─── Drag & Drop: Categories ──────────────────────────────────────
+
+  function handleCatDragStart(e: React.DragEvent, catId: string) {
+    dragType.current = 'category'
+    setDragCatId(catId)
+    e.dataTransfer.effectAllowed = 'move'
+    e.dataTransfer.setData('text/plain', catId)
+  }
+
+  function handleCatDragOver(e: React.DragEvent, catId: string) {
+    if (dragType.current !== 'category') return
+    e.preventDefault()
+    e.dataTransfer.dropEffect = 'move'
+    setDragOverCatId(catId)
+  }
+
+  async function handleCatDrop(e: React.DragEvent, targetCatId: string) {
+    e.preventDefault()
+    setDragOverCatId(null)
+    if (dragType.current !== 'category' || !dragCatId || dragCatId === targetCatId) {
+      setDragCatId(null)
+      return
+    }
+
+    const catIds = initialCategories.map((c) => c.id)
+    const fromIdx = catIds.indexOf(dragCatId)
+    const toIdx = catIds.indexOf(targetCatId)
+    if (fromIdx === -1 || toIdx === -1) return
+
+    const reordered = [...catIds]
+    reordered.splice(fromIdx, 1)
+    reordered.splice(toIdx, 0, dragCatId)
+
+    setDragCatId(null)
+    dragType.current = null
+
+    const updates = reordered.map((id, i) =>
+      supabase.from('categories').update({ sort_order: i }).eq('id', id)
+    )
+    await Promise.all(updates)
+    router.refresh()
+  }
+
+  function handleCatDragEnd() {
+    setDragCatId(null)
+    setDragOverCatId(null)
+    dragType.current = null
+  }
+
+  // ─── Drag & Drop: Items ───────────────────────────────────────────
+
+  function handleItemDragStart(e: React.DragEvent, itemId: string, categoryId: string | null) {
+    dragType.current = 'item'
+    setDragItemId(itemId)
+    dragSourceCatId.current = categoryId
+    e.dataTransfer.effectAllowed = 'move'
+    e.dataTransfer.setData('text/plain', itemId)
+  }
+
+  function handleItemDragOver(e: React.DragEvent, itemId: string) {
+    if (dragType.current !== 'item') return
+    e.preventDefault()
+    e.dataTransfer.dropEffect = 'move'
+    setDragOverItemId(itemId)
+  }
+
+  async function handleItemDrop(e: React.DragEvent, targetItemId: string, categoryId: string | null) {
+    e.preventDefault()
+    setDragOverItemId(null)
+    if (dragType.current !== 'item' || !dragItemId || dragItemId === targetItemId) {
+      setDragItemId(null)
+      return
+    }
+
+    // Only reorder within the same category
+    if (dragSourceCatId.current !== categoryId) {
+      setDragItemId(null)
+      return
+    }
+
+    const catItems = categoryId
+      ? initialItems.filter((i) => i.category_id === categoryId)
+      : initialItems.filter((i) => !i.category_id)
+
+    const itemIds = catItems.map((i) => i.id)
+    const fromIdx = itemIds.indexOf(dragItemId)
+    const toIdx = itemIds.indexOf(targetItemId)
+    if (fromIdx === -1 || toIdx === -1) return
+
+    const reordered = [...itemIds]
+    reordered.splice(fromIdx, 1)
+    reordered.splice(toIdx, 0, dragItemId)
+
+    setDragItemId(null)
+    dragType.current = null
+
+    const updates = reordered.map((id, i) =>
+      supabase.from('items').update({ sort_order: i }).eq('id', id)
+    )
+    await Promise.all(updates)
+    router.refresh()
+  }
+
+  function handleItemDragEnd() {
+    setDragItemId(null)
+    setDragOverItemId(null)
+    dragType.current = null
+  }
 
   function toggleExpand(id: string) {
     setExpanded((prev) => {
@@ -421,13 +538,36 @@ export function MenuManager({
         const isExpanded = expanded.has(category.id)
 
         return (
-          <div key={category.id} className="bg-white rounded-xl border border-border overflow-hidden">
+          <div
+            key={category.id}
+            className={`bg-white rounded-xl border overflow-hidden transition-all ${
+              dragOverCatId === category.id && dragCatId !== category.id
+                ? 'border-primary border-2'
+                : dragCatId === category.id
+                  ? 'opacity-50 border-border'
+                  : 'border-border'
+            }`}
+            onDragOver={(e) => handleCatDragOver(e, category.id)}
+            onDrop={(e) => handleCatDrop(e, category.id)}
+            onDragLeave={() => setDragOverCatId(null)}
+          >
             {/* Category header */}
             <div
               className="flex items-center gap-3 px-5 py-4 cursor-pointer hover:bg-background/50 transition-colors"
               onClick={() => toggleExpand(category.id)}
             >
-              <GripVertical className="w-4 h-4 text-muted/40 shrink-0" />
+              <div
+                draggable
+                onDragStart={(e) => {
+                  e.stopPropagation()
+                  handleCatDragStart(e, category.id)
+                }}
+                onDragEnd={handleCatDragEnd}
+                className="cursor-grab active:cursor-grabbing shrink-0"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <GripVertical className="w-4 h-4 text-muted/40" />
+              </div>
               {isExpanded ? (
                 <ChevronDown className="w-4 h-4 text-muted shrink-0" />
               ) : (
@@ -491,6 +631,13 @@ export function MenuManager({
                       onEdit={() => setItemModal({ open: true, edit: item })}
                       onDelete={() => deleteItem(item.id)}
                       onToggle={() => toggleAvailability(item)}
+                      isDragging={dragItemId === item.id}
+                      isDragOver={dragOverItemId === item.id}
+                      onDragStart={(e) => handleItemDragStart(e, item.id, category.id)}
+                      onDragOver={(e) => handleItemDragOver(e, item.id)}
+                      onDrop={(e) => handleItemDrop(e, item.id, category.id)}
+                      onDragEnd={handleItemDragEnd}
+                      onDragLeave={() => setDragOverItemId(null)}
                     />
                   ))
                 )}
@@ -515,6 +662,13 @@ export function MenuManager({
                 onEdit={() => setItemModal({ open: true, edit: item })}
                 onDelete={() => deleteItem(item.id)}
                 onToggle={() => toggleAvailability(item)}
+                isDragging={dragItemId === item.id}
+                isDragOver={dragOverItemId === item.id}
+                onDragStart={(e) => handleItemDragStart(e, item.id, null)}
+                onDragOver={(e) => handleItemDragOver(e, item.id)}
+                onDrop={(e) => handleItemDrop(e, item.id, null)}
+                onDragEnd={handleItemDragEnd}
+                onDragLeave={() => setDragOverItemId(null)}
               />
             ))}
           </div>
@@ -572,16 +726,44 @@ function ItemRow({
   onEdit,
   onDelete,
   onToggle,
+  isDragging,
+  isDragOver,
+  onDragStart,
+  onDragOver,
+  onDrop,
+  onDragEnd,
+  onDragLeave,
 }: {
   item: Item
   deleting: boolean
   onEdit: () => void
   onDelete: () => void
   onToggle: () => void
+  isDragging?: boolean
+  isDragOver?: boolean
+  onDragStart?: (e: React.DragEvent) => void
+  onDragOver?: (e: React.DragEvent) => void
+  onDrop?: (e: React.DragEvent) => void
+  onDragEnd?: () => void
+  onDragLeave?: () => void
 }) {
   return (
-    <div className={`flex items-center gap-4 px-5 py-3 ${!item.is_available ? 'opacity-50' : ''}`}>
-      <GripVertical className="w-4 h-4 text-muted/40 shrink-0" />
+    <div
+      className={`flex items-center gap-4 px-5 py-3 transition-all ${
+        !item.is_available ? 'opacity-50' : ''
+      } ${isDragging ? 'opacity-30' : ''} ${isDragOver ? 'bg-primary/5 border-t-2 border-primary' : ''}`}
+      onDragOver={onDragOver}
+      onDrop={onDrop}
+      onDragLeave={onDragLeave}
+    >
+      <div
+        draggable
+        onDragStart={onDragStart}
+        onDragEnd={onDragEnd}
+        className="cursor-grab active:cursor-grabbing shrink-0"
+      >
+        <GripVertical className="w-4 h-4 text-muted/40" />
+      </div>
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2">
           <p className="font-medium text-foreground truncate">{item.name_fr}</p>

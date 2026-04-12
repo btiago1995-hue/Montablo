@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { ArrowRight, Check, UtensilsCrossed } from 'lucide-react'
+import { PricingToggle } from '@/components/public/pricing-toggle'
 
 const steps = [
   { num: '01', title: 'Inscrivez-vous', desc: 'Créez votre compte en 30 secondes. Aucune carte de crédit requise.' },
@@ -203,30 +204,7 @@ export default function LandingPage() {
           <p className="text-[17px] text-muted mb-12">
             Pas de paliers, pas de fonctionnalités cachées.
           </p>
-          <div className="bg-white border border-border rounded-[20px] p-12 max-w-sm mx-auto hover:shadow-xl hover:shadow-black/[0.04] transition-shadow duration-300">
-            <div className="flex items-baseline justify-center gap-1 mb-1">
-              <span className="font-serif text-[52px] text-foreground">29€</span>
-              <span className="text-base text-muted">/mois</span>
-            </div>
-            <p className="text-[13px] text-muted/60 mb-8">
-              14 jours d&apos;essai gratuit inclus
-            </p>
-            <ul className="text-left mb-8 space-y-0">
-              {pricingFeatures.map((f) => (
-                <li key={f} className="flex items-center gap-2.5 py-2 border-b border-border/40 last:border-b-0 text-sm text-foreground">
-                  <Check className="w-4 h-4 text-accent-dark shrink-0" />
-                  {f}
-                </li>
-              ))}
-            </ul>
-            <Link
-              href="/signup"
-              className="group flex items-center justify-center gap-2 w-full bg-primary text-white font-medium py-3.5 rounded-full hover:bg-primary-light transition-all hover:shadow-lg hover:shadow-primary/15 text-[15px]"
-            >
-              Commencer l&apos;essai
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-            </Link>
-          </div>
+          <PricingToggle features={pricingFeatures} />
         </div>
       </section>
 

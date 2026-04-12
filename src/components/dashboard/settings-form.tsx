@@ -7,7 +7,7 @@ import type { Restaurant } from '@/types/database'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { ImageUpload } from '@/components/ui/image-upload'
-import { Check, CreditCard } from 'lucide-react'
+import { Check, CreditCard, Star } from 'lucide-react'
 
 export function SettingsForm({ restaurant }: { restaurant: Restaurant }) {
   const router = useRouter()
@@ -17,9 +17,11 @@ export function SettingsForm({ restaurant }: { restaurant: Restaurant }) {
   const [behavior, setBehavior] = useState(restaurant.unavailable_behavior)
   const [logoUrl, setLogoUrl] = useState(restaurant.logo_url)
   const [coverUrl, setCoverUrl] = useState(restaurant.cover_url)
+  const [googleReviewUrl, setGoogleReviewUrl] = useState(restaurant.google_review_url ?? '')
   const [loading, setLoading] = useState(false)
   const [saved, setSaved] = useState(false)
   const [billingLoading, setBillingLoading] = useState(false)
+  const [billingPlan, setBillingPlan] = useState<'monthly' | 'annual'>('annual')
 
   async function handleSave(e: React.FormEvent) {
     e.preventDefault()
@@ -35,6 +37,7 @@ export function SettingsForm({ restaurant }: { restaurant: Restaurant }) {
         primary_color: primaryColor,
         secondary_color: secondaryColor,
         unavailable_behavior: behavior,
+        google_review_url: googleReviewUrl.trim() || null,
       })
       .eq('id', restaurant.id)
 
@@ -47,7 +50,11 @@ export function SettingsForm({ restaurant }: { restaurant: Restaurant }) {
   async function handleSubscribe() {
     setBillingLoading(true)
     try {
-      const res = await fetch('/api/stripe/checkout', { method: 'POST' })
+      const res = await fetch('/api/stripe/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ plan: billingPlan }),
+      })
       const { url } = await res.json()
       if (url) window.location.href = url
     } catch {
@@ -151,6 +158,27 @@ export function SettingsForm({ restaurant }: { restaurant: Restaurant }) {
           </select>
         </div>
 
+        {/* Google Reviews */}
+        <div className="pt-4 border-t border-border space-y-4">
+          <div className="flex items-center gap-2">
+            <Star className="w-5 h-5 text-[#FBBC04]" />
+            <h3 className="font-medium text-foreground">Avis Google</h3>
+          </div>
+          <p className="text-sm text-muted">
+            Ajoutez votre lien Google pour rediriger les clients satisfaits vers votre page d&apos;avis.
+          </p>
+          <Input
+            label="Lien Google My Business"
+            value={googleReviewUrl}
+            onChange={(e) => setGoogleReviewUrl(e.target.value)}
+            placeholder="https://g.page/r/votre-restaurant/review"
+          />
+          <p className="text-xs text-muted">
+            5 etoiles → redirige vers Google pour un avis public.
+            Moins de 5 → remerciement interne.
+          </p>
+        </div>
+
         <Button type="submit" disabled={loading}>
           {saved ? (
             <>
@@ -188,10 +216,40 @@ export function SettingsForm({ restaurant }: { restaurant: Restaurant }) {
         </div>
 
         {restaurant.subscription_status !== 'active' && (
-          <Button onClick={handleSubscribe} disabled={billingLoading}>
-            <CreditCard className="w-4 h-4" />
-            {billingLoading ? 'Redirection...' : 'Souscrire un abonnement'}
-          </Button>
+          <div className="space-y-4">
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={() => setBillingPlan('monthly')}
+                className={`flex-1 p-3 rounded-lg border-2 text-left transition-all ${
+                  billingPlan === 'monthly'
+                    ? 'border-primary bg-primary/5'
+                    : 'border-border hover:border-primary/30'
+                }`}
+              >
+                <div className="text-sm font-semibold text-foreground">Mensuel</div>
+                <div className="text-lg font-bold text-foreground">29,99 &euro;<span className="text-xs font-normal text-muted">/mois</span></div>
+              </button>
+              <button
+                type="button"
+                onClick={() => setBillingPlan('annual')}
+                className={`flex-1 p-3 rounded-lg border-2 text-left transition-all relative ${
+                  billingPlan === 'annual'
+                    ? 'border-primary bg-primary/5'
+                    : 'border-border hover:border-primary/30'
+                }`}
+              >
+                <span className="absolute -top-2.5 right-2 text-[10px] font-bold bg-green-600 text-white px-2 py-0.5 rounded-full">-10%</span>
+                <div className="text-sm font-semibold text-foreground">Annuel</div>
+                <div className="text-lg font-bold text-foreground">26,99 &euro;<span className="text-xs font-normal text-muted">/mois</span></div>
+                <div className="text-[11px] text-muted">323,89 &euro;/an</div>
+              </button>
+            </div>
+            <Button onClick={handleSubscribe} disabled={billingLoading} className="w-full">
+              <CreditCard className="w-4 h-4" />
+              {billingLoading ? 'Redirection...' : 'Souscrire un abonnement'}
+            </Button>
+          </div>
         )}
       </div>
     </div>
