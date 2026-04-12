@@ -1,0 +1,22 @@
+{
+  "name": "MonTablo",
+  "short_name": "MonTablo",
+  "description": "Menu digital pour restaurants",
+  "start_url": "/dashboard",
+  "display": "standalone",
+  "background_color": "#FAFAF7",
+  "theme_color": "#2C3E2D",
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
