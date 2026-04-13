@@ -3,6 +3,14 @@ import Link from 'next/link'
 import { ExternalLink, Plus, UtensilsCrossed, FolderOpen, Tag, Star } from 'lucide-react'
 import { formatPrice } from '@/lib/utils'
 
+function formatFrenchDate(): string {
+  return new Intl.DateTimeFormat('fr-FR', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+  }).format(new Date())
+}
+
 export default async function DashboardPage() {
   const supabase = createClient()
   const { data: { user } } = await supabase.auth.getUser()
@@ -61,16 +69,18 @@ export default async function DashboardPage() {
   return (
     <div>
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-7">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-5">
         <div>
-          <h1 className="font-serif text-[28px] tracking-tight text-[#1A1A1A] mb-1">Tableau de bord</h1>
-          <p className="text-sm text-[#6B6B6B]">Gérez votre menu en temps réel</p>
+          <h1 className="font-serif text-[28px] tracking-tight text-foreground mb-1">
+            {restaurant!.name}
+          </h1>
+          <p className="text-sm text-muted capitalize">{formatFrenchDate()}</p>
         </div>
         <div className="flex gap-2">
           <Link
             href={`/menu/${restaurant!.slug}`}
             target="_blank"
-            className="inline-flex items-center gap-2 px-4 py-2.5 border-[1.5px] border-[#E8E8E4] rounded-lg text-sm font-semibold text-[#1A1A1A] hover:bg-white hover:border-[#9B9B9B] transition-all"
+            className="inline-flex items-center gap-2 px-4 py-2.5 border-[1.5px] border-border rounded-lg text-sm font-semibold text-foreground hover:bg-white hover:border-muted-light transition-all"
           >
             <ExternalLink className="w-4 h-4" />
             <span className="hidden sm:inline">Voir mon menu</span>
@@ -78,7 +88,7 @@ export default async function DashboardPage() {
           </Link>
           <Link
             href="/dashboard/menu"
-            className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#2C3E2D] text-white rounded-lg text-sm font-semibold hover:bg-[#243324] transition-all"
+            className="inline-flex items-center gap-2 px-4 py-2.5 bg-primary text-white rounded-lg text-sm font-semibold hover:bg-primary-light transition-all"
           >
             <Plus className="w-4 h-4" />
             <span className="hidden sm:inline">Ajouter un plat</span>
