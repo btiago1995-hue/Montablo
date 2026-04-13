@@ -230,14 +230,25 @@ export default function LandingPage() {
 
       {/* Footer */}
       <footer className="border-t border-border py-8 px-6">
-        <div className="max-w-[1120px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <UtensilsCrossed className="w-[18px] h-[18px] text-primary" />
-            <span className="font-serif text-[15px] text-primary">MonTablo</span>
+        <div className="max-w-[1120px] mx-auto">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4">
+            <div className="flex items-center gap-2">
+              <UtensilsCrossed className="w-[18px] h-[18px] text-primary" />
+              <span className="font-serif text-[15px] text-primary">MonTablo</span>
+            </div>
+            <p className="text-xs text-muted/60">
+              &copy; {new Date().getFullYear()} MonTablo. Tous droits réservés.
+            </p>
           </div>
-          <p className="text-xs text-muted/60">
-            &copy; {new Date().getFullYear()} MonTablo. Tous droits réservés.
-          </p>
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] text-muted/50">
+            <Link href="/mentions-legales" className="hover:text-muted transition-colors">Mentions légales</Link>
+            <span className="hidden sm:inline">·</span>
+            <Link href="/cgu" className="hover:text-muted transition-colors">CGU</Link>
+            <span className="hidden sm:inline">·</span>
+            <Link href="/confidentialite" className="hover:text-muted transition-colors">Confidentialité</Link>
+            <span className="hidden sm:inline">·</span>
+            <Link href="/cookies" className="hover:text-muted transition-colors">Cookies</Link>
+          </div>
         </div>
       </footer>
     </div>

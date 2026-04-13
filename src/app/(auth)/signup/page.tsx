@@ -16,6 +16,7 @@ export default function SignupPage() {
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [emailSent, setEmailSent] = useState(false)
+  const [acceptedCGU, setAcceptedCGU] = useState(false)
 
   async function handleSignup(e: React.FormEvent) {
     e.preventDefault()
@@ -178,6 +179,26 @@ export default function SignupPage() {
                   </div>
                 </div>
 
+                <label className="flex items-start gap-2.5 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={acceptedCGU}
+                    onChange={(e) => setAcceptedCGU(e.target.checked)}
+                    required
+                    className="mt-1 w-4 h-4 rounded border-border text-primary focus:ring-primary/20 cursor-pointer"
+                  />
+                  <span className="text-xs text-muted leading-relaxed">
+                    J&apos;accepte les{' '}
+                    <Link href="/cgu" target="_blank" className="text-primary hover:underline">
+                      Conditions Générales d&apos;Utilisation
+                    </Link>{' '}
+                    et la{' '}
+                    <Link href="/confidentialite" target="_blank" className="text-primary hover:underline">
+                      Politique de confidentialité
+                    </Link>
+                  </span>
+                </label>
+
                 {error && (
                   <div className="bg-red-50 text-red-600 text-sm px-4 py-3 rounded-lg">
                     {error}
@@ -186,7 +207,7 @@ export default function SignupPage() {
 
                 <button
                   type="submit"
-                  disabled={loading}
+                  disabled={loading || !acceptedCGU}
                   className="w-full bg-primary hover:bg-primary-light text-white font-medium py-3 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading ? 'Création...' : 'Commencer l\'essai gratuit'}
