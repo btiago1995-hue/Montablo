@@ -198,75 +198,96 @@ export default async function DashboardPage() {
         </div>
       </div>
 
-      {/* Recent items table */}
-      <div className="bg-white border border-[#E8E8E4] rounded-xl overflow-hidden">
-        <div className="flex items-center justify-between px-5 py-4 border-b border-[#E8E8E4]">
-          <span className="text-[16px] font-semibold text-[#1A1A1A]">Mes plats</span>
+      {/* Items table */}
+      <div className="bg-white border border-border rounded-xl overflow-hidden">
+        <div className="flex items-center justify-between px-5 py-3.5 border-b border-border">
+          <span className="font-serif text-base font-semibold text-foreground">Mes plats</span>
           <Link
             href="/dashboard/menu"
-            className="text-[13px] font-semibold text-[#2C3E2D] hover:underline"
+            className="text-xs font-semibold text-primary hover:underline"
           >
-            Voir tout
+            Gérer la carte →
           </Link>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="bg-[#FAFAF7]">
-                <th className="text-left px-5 py-3 text-[11px] uppercase tracking-[0.08em] text-[#9B9B9B] font-semibold border-b border-[#E8E8E4]">Plat</th>
-                <th className="text-left px-5 py-3 text-[11px] uppercase tracking-[0.08em] text-[#9B9B9B] font-semibold border-b border-[#E8E8E4]">Prix</th>
-                <th className="text-left px-5 py-3 text-[11px] uppercase tracking-[0.08em] text-[#9B9B9B] font-semibold border-b border-[#E8E8E4]">Tags</th>
-                <th className="text-left px-5 py-3 text-[11px] uppercase tracking-[0.08em] text-[#9B9B9B] font-semibold border-b border-[#E8E8E4]">Disponible</th>
+              <tr className="bg-background">
+                <th className="text-left px-5 py-2.5 text-[10px] uppercase tracking-[0.08em] text-muted-light font-semibold border-b border-border">
+                  Plat
+                </th>
+                <th className="text-left px-5 py-2.5 text-[10px] uppercase tracking-[0.08em] text-muted-light font-semibold border-b border-border w-[80px]">
+                  Prix
+                </th>
+                <th className="text-left px-5 py-2.5 text-[10px] uppercase tracking-[0.08em] text-muted-light font-semibold border-b border-border w-[80px] hidden sm:table-cell">
+                  Tags
+                </th>
+                <th className="text-left px-5 py-2.5 text-[10px] uppercase tracking-[0.08em] text-muted-light font-semibold border-b border-border w-[70px]">
+                  Statut
+                </th>
               </tr>
             </thead>
             <tbody>
               {recentItems && recentItems.length > 0 ? (
                 recentItems.map((item) => (
-                  <tr key={item.id} className="hover:bg-[#FAFAF7] border-b border-[#E8E8E4] last:border-b-0">
-                    <td className="px-5 py-3.5">
+                  <tr
+                    key={item.id}
+                    className={`border-b border-border/30 last:border-b-0 hover:bg-background/50 transition-colors ${
+                      !item.is_available ? 'opacity-50' : ''
+                    }`}
+                  >
+                    <td className="px-5 py-3">
                       <div className="flex items-center gap-3">
                         {item.image_url ? (
                           // eslint-disable-next-line @next/next/no-img-element
                           <img
                             src={item.image_url}
                             alt=""
-                            className="w-11 h-11 rounded-lg object-cover bg-[#F5F5F2]"
+                            className="w-9 h-9 rounded-lg object-cover bg-background"
                           />
                         ) : (
-                          <div className="w-11 h-11 rounded-lg bg-[#F5F5F2] flex items-center justify-center text-[#9B9B9B] text-lg">
+                          <div className="w-9 h-9 rounded-lg bg-background flex items-center justify-center text-muted-light text-sm">
                             🍽️
                           </div>
                         )}
                         <div>
-                          <div className="text-sm font-semibold text-[#1A1A1A]">{item.name_fr}</div>
-                          <div className="text-[12px] text-[#9B9B9B]">
+                          <div className="text-xs font-semibold text-foreground">{item.name_fr}</div>
+                          <div className="text-[10px] text-muted-light">
                             {item.category_id ? catMap.get(item.category_id) ?? '—' : '—'}
                           </div>
                         </div>
                       </div>
                     </td>
-                    <td className="px-5 py-3.5">
-                      <span className="text-sm font-semibold">{formatPrice(item.price)}</span>
+                    <td className="px-5 py-3">
+                      <span className="text-xs font-semibold text-foreground">
+                        {formatPrice(item.price)}
+                      </span>
                     </td>
-                    <td className="px-5 py-3.5">
+                    <td className="px-5 py-3 hidden sm:table-cell">
                       <div className="flex gap-1 flex-wrap">
                         {item.tags?.map((tag: string) => (
                           <span
                             key={tag}
-                            className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-[#F0EDE8] text-[#6B6B6B] uppercase tracking-wide"
+                            className="text-[9px] font-semibold px-1.5 py-0.5 rounded bg-surface text-muted uppercase tracking-wide"
                           >
                             {tag}
                           </span>
                         ))}
                       </div>
                     </td>
-                    <td className="px-5 py-3.5">
-                      <span className={`inline-flex items-center gap-1.5 text-[12px] font-semibold px-2.5 py-1 rounded-full ${
-                        item.is_available
-                          ? 'bg-[#E8F5E9] text-[#2D6A4F]'
-                          : 'bg-[#F5F5F2] text-[#9B9B9B]'
-                      }`}>
-                        <span className={`w-1.5 h-1.5 rounded-full ${item.is_available ? 'bg-[#2D6A4F]' : 'bg-[#9B9B9B]'}`} />
+                    <td className="px-5 py-3">
+                      <span
+                        className={`inline-flex items-center gap-1.5 text-[9px] font-semibold px-2 py-0.5 rounded-full ${
+                          item.is_available
+                            ? 'bg-[#E8F5E9] text-[#2D6A4F]'
+                            : 'bg-background text-muted-light'
+                        }`}
+                      >
+                        <span
+                          className={`w-1.5 h-1.5 rounded-full ${
+                            item.is_available ? 'bg-[#2D6A4F]' : 'bg-muted-light'
+                          }`}
+                        />
                         {item.is_available ? 'Actif' : 'Inactif'}
                       </span>
                     </td>
@@ -274,9 +295,9 @@ export default async function DashboardPage() {
                 ))
               ) : (
                 <tr>
-                  <td colSpan={4} className="px-5 py-8 text-center text-[#9B9B9B] text-sm">
+                  <td colSpan={4} className="px-5 py-8 text-center text-muted-light text-sm">
                     Aucun plat pour l&apos;instant.{' '}
-                    <Link href="/dashboard/menu" className="text-[#2C3E2D] font-semibold hover:underline">
+                    <Link href="/dashboard/menu" className="text-primary font-semibold hover:underline">
                       Ajouter votre premier plat
                     </Link>
                   </td>
