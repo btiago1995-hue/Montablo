@@ -37,9 +37,11 @@
   - Card heading: `font-serif text-base font-semibold text-foreground`
   - Body: `text-sm text-foreground`
   - Secondary: `text-sm text-muted`
-  - Metadata: `text-[10px] text-muted-light`
-  - Table headers: `text-[10px] uppercase tracking-[0.08em] text-muted-light font-semibold`
-  - Tags: `text-[9px] font-semibold uppercase tracking-wide`
+  - Metadata: `text-[11px] text-muted-light`
+  - Table headers: `text-[11px] uppercase tracking-[0.08em] text-muted-light font-semibold`
+  - Table body: `text-[13px] font-semibold`
+  - Tags: `text-[11px] font-semibold uppercase tracking-wide`
+  - **Minimum font size: 11px** — nothing smaller, for tablet/accessibility readability
 
 ## Spacing
 
