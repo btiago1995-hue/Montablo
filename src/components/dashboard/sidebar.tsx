@@ -61,12 +61,6 @@ export function Sidebar({ restaurant }: { restaurant: Restaurant }) {
     )
   }
 
-  const status = restaurant.subscription_status === 'active'
-    ? 'Actif'
-    : restaurant.subscription_status === 'trialing'
-    ? 'Essai gratuit'
-    : 'Inactif'
-
   return (
     <>
       {/* Mobile toggle */}
@@ -140,13 +134,6 @@ export function Sidebar({ restaurant }: { restaurant: Restaurant }) {
           </button>
         </div>
 
-        {/* Footer badge */}
-        <div className="px-6 py-4 border-t border-white/10">
-          <div className="flex items-center gap-1.5 text-[12px] text-[#D4A574] font-semibold">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#2D6A4F]" />
-            {status} · 29€/mois
-          </div>
-        </div>
       </aside>
     </>
   )
