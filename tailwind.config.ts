@@ -21,8 +21,12 @@ const config: Config = {
         },
         background: '#FAFAF7',
         foreground: '#1A1A1A',
-        muted: '#6B7280',
+        muted: {
+          DEFAULT: '#6B7280',
+          light: '#9B9B9B',
+        },
         border: '#E5E5E0',
+        surface: '#F0EDE8',
       },
       fontFamily: {
         sans: ['var(--font-dm-sans)', 'system-ui', 'sans-serif'],
