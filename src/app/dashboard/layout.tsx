@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase/server'
+import { getUser, getRestaurant } from '@/lib/supabase/cached'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { slugify } from '@/lib/utils'
 import { redirect } from 'next/navigation'
@@ -9,18 +9,13 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode
 }) {
-  const supabase = createClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const user = await getUser()
 
   if (!user) {
     redirect('/login')
   }
 
-  let { data: restaurant } = await supabase
-    .from('restaurants')
-    .select('*')
-    .eq('owner_id', user.id)
-    .single()
+  let restaurant = await getRestaurant()
 
   // Safety net: if user has no restaurant but has metadata, create one
   if (!restaurant && user.user_metadata?.restaurant_name) {
@@ -48,7 +43,7 @@ export default async function DashboardLayout({
   return (
     <div className="min-h-screen bg-[#F5F5F2] flex">
       <Sidebar restaurant={restaurant} />
-      <main className="flex-1 p-6 pt-16 lg:pt-8 lg:p-8 lg:ml-[260px] max-w-[1100px]">
+      <main className="flex-1 px-4 py-6 pt-16 sm:p-6 sm:pt-16 lg:pt-8 lg:p-8 lg:ml-[260px] max-w-[1100px]">
         {children}
       </main>
     </div>

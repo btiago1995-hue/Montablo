@@ -1,30 +1,25 @@
 import { createClient } from '@/lib/supabase/server'
+import { getRestaurant } from '@/lib/supabase/cached'
 import { redirect } from 'next/navigation'
 import { PromotionsManager } from '@/components/dashboard/promotions-manager'
 
 export default async function PromotionsPage() {
-  const supabase = createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) redirect('/login')
-
-  const { data: restaurant } = await supabase
-    .from('restaurants')
-    .select('*')
-    .eq('owner_id', user.id)
-    .single()
-
+  const restaurant = await getRestaurant()
   if (!restaurant) redirect('/signup')
 
-  const { data: items } = await supabase
-    .from('items')
-    .select('*')
-    .eq('restaurant_id', restaurant.id)
-    .order('name_fr')
+  const supabase = createClient()
 
-  const { data: promotions } = await supabase
-    .from('promotions')
-    .select('*')
-    .order('created_at', { ascending: false })
+  const [{ data: items }, { data: promotions }] = await Promise.all([
+    supabase
+      .from('items')
+      .select('*')
+      .eq('restaurant_id', restaurant.id)
+      .order('name_fr'),
+    supabase
+      .from('promotions')
+      .select('*')
+      .order('created_at', { ascending: false }),
+  ])
 
   // Filter promotions to only those belonging to this restaurant's items
   const itemIds = new Set((items ?? []).map((i) => i.id))

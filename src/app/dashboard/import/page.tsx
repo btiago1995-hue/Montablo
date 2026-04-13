@@ -1,26 +1,14 @@
 import { createClient } from '@/lib/supabase/server'
+import { getRestaurant } from '@/lib/supabase/cached'
 import { redirect } from 'next/navigation'
 import { ImportPageClient } from './import-client'
 
 export default async function ImportPage() {
-  const supabase = createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-
-  if (!user) {
-    redirect('/login')
-  }
-
-  const { data: restaurant } = await supabase
-    .from('restaurants')
-    .select('id')
-    .eq('owner_id', user.id)
-    .single()
-
-  if (!restaurant) {
-    redirect('/signup')
-  }
+  const restaurant = await getRestaurant()
+  if (!restaurant) redirect('/signup')
 
   // Check if restaurant already has items
+  const supabase = createClient()
   const { count } = await supabase
     .from('items')
     .select('id', { count: 'exact', head: true })

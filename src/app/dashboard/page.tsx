@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
+import { getRestaurant } from '@/lib/supabase/cached'
 import Link from 'next/link'
 import { ExternalLink, Plus } from 'lucide-react'
 import { formatPrice } from '@/lib/utils'
@@ -13,53 +14,50 @@ function formatFrenchDate(): string {
 
 export default async function DashboardPage() {
   const supabase = createClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const restaurant = (await getRestaurant())!
 
-  const { data: restaurant } = await supabase
-    .from('restaurants')
-    .select('*')
-    .eq('owner_id', user!.id)
-    .single()
-
-  const { count: itemCount } = await supabase
-    .from('items')
-    .select('*', { count: 'exact', head: true })
-    .eq('restaurant_id', restaurant!.id)
-    .eq('is_available', true)
-
-  const { count: categoryCount } = await supabase
-    .from('categories')
-    .select('*', { count: 'exact', head: true })
-    .eq('restaurant_id', restaurant!.id)
-
-  const { count: promoCount } = await supabase
-    .from('promotions')
-    .select('*', { count: 'exact', head: true })
-    .eq('is_active', true)
-
-  // Reviews metrics
-  const { data: reviews } = await supabase
-    .from('reviews')
-    .select('rating')
-    .eq('restaurant_id', restaurant!.id)
+  // Run all independent queries in parallel
+  const [
+    { count: itemCount },
+    { count: categoryCount },
+    { count: promoCount },
+    { data: reviews },
+    { data: recentItems },
+    { data: allCategories },
+  ] = await Promise.all([
+    supabase
+      .from('items')
+      .select('*', { count: 'exact', head: true })
+      .eq('restaurant_id', restaurant!.id)
+      .eq('is_available', true),
+    supabase
+      .from('categories')
+      .select('*', { count: 'exact', head: true })
+      .eq('restaurant_id', restaurant!.id),
+    supabase
+      .from('promotions')
+      .select('*', { count: 'exact', head: true })
+      .eq('is_active', true),
+    supabase
+      .from('reviews')
+      .select('rating')
+      .eq('restaurant_id', restaurant!.id),
+    supabase
+      .from('items')
+      .select('id, name_fr, price, image_url, is_available, category_id, tags, created_at')
+      .eq('restaurant_id', restaurant!.id)
+      .order('created_at', { ascending: false })
+      .limit(6),
+    supabase
+      .from('categories')
+      .select('id, name_fr')
+      .eq('restaurant_id', restaurant!.id),
+  ])
 
   const reviewCount = reviews?.length ?? 0
   const avgRating = reviewCount > 0
     ? (reviews!.reduce((sum, r) => sum + r.rating, 0) / reviewCount)
     : 0
-  // Recent items for the table
-  const { data: recentItems } = await supabase
-    .from('items')
-    .select('*')
-    .eq('restaurant_id', restaurant!.id)
-    .order('created_at', { ascending: false })
-    .limit(6)
-
-  // Get categories for display
-  const { data: allCategories } = await supabase
-    .from('categories')
-    .select('id, name_fr')
-    .eq('restaurant_id', restaurant!.id)
 
   const catMap = new Map(allCategories?.map((c) => [c.id, c.name_fr]) ?? [])
 
@@ -198,9 +196,9 @@ export default async function DashboardPage() {
         </div>
       </div>
 
-      {/* Items table */}
+      {/* Items section */}
       <div className="bg-white border border-border rounded-xl overflow-hidden">
-        <div className="flex items-center justify-between px-5 py-3.5 border-b border-border">
+        <div className="flex items-center justify-between px-4 sm:px-5 py-3.5 border-b border-border">
           <span className="font-serif text-base font-semibold text-foreground">Mes plats</span>
           <Link
             href="/dashboard/menu"
@@ -209,103 +207,146 @@ export default async function DashboardPage() {
             Gérer la carte →
           </Link>
         </div>
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead>
-              <tr className="bg-background">
-                <th className="text-left px-5 py-2.5 text-[11px] uppercase tracking-[0.08em] text-muted-light font-semibold border-b border-border">
-                  Plat
-                </th>
-                <th className="text-left px-5 py-2.5 text-[11px] uppercase tracking-[0.08em] text-muted-light font-semibold border-b border-border w-[80px]">
-                  Prix
-                </th>
-                <th className="text-left px-5 py-2.5 text-[11px] uppercase tracking-[0.08em] text-muted-light font-semibold border-b border-border w-[80px] hidden sm:table-cell">
-                  Tags
-                </th>
-                <th className="text-left px-5 py-2.5 text-[11px] uppercase tracking-[0.08em] text-muted-light font-semibold border-b border-border w-[70px]">
-                  Statut
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {recentItems && recentItems.length > 0 ? (
-                recentItems.map((item) => (
-                  <tr
-                    key={item.id}
-                    className={`border-b border-border/30 last:border-b-0 hover:bg-background/50 transition-colors ${
-                      !item.is_available ? 'opacity-50' : ''
-                    }`}
-                  >
-                    <td className="px-5 py-3">
-                      <div className="flex items-center gap-3">
-                        {item.image_url ? (
-                          // eslint-disable-next-line @next/next/no-img-element
-                          <img
-                            src={item.image_url}
-                            alt=""
-                            className="w-9 h-9 rounded-lg object-cover bg-background"
-                          />
-                        ) : (
-                          <div className="w-9 h-9 rounded-lg bg-background flex items-center justify-center text-muted-light text-sm">
-                            🍽️
-                          </div>
-                        )}
-                        <div>
-                          <div className="text-[13px] font-semibold text-foreground">{item.name_fr}</div>
-                          <div className="text-[11px] text-muted-light">
-                            {item.category_id ? catMap.get(item.category_id) ?? '—' : '—'}
+
+        {recentItems && recentItems.length > 0 ? (
+          <>
+            {/* Mobile: compact list */}
+            <div className="sm:hidden divide-y divide-border/30">
+              {recentItems.map((item) => (
+                <div
+                  key={item.id}
+                  className={`flex items-center gap-3 px-4 py-3 ${
+                    !item.is_available ? 'opacity-50' : ''
+                  }`}
+                >
+                  {item.image_url ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={item.image_url}
+                      alt=""
+                      className="w-10 h-10 rounded-lg object-cover bg-background flex-shrink-0"
+                    />
+                  ) : (
+                    <div className="w-10 h-10 rounded-lg bg-background flex items-center justify-center text-muted-light text-sm flex-shrink-0">
+                      🍽️
+                    </div>
+                  )}
+                  <div className="flex-1 min-w-0">
+                    <div className="text-[13px] font-semibold text-foreground truncate">{item.name_fr}</div>
+                    <div className="text-[11px] text-muted-light">
+                      {item.category_id ? catMap.get(item.category_id) ?? '—' : '—'}
+                    </div>
+                  </div>
+                  <div className="flex flex-col items-end gap-1 flex-shrink-0">
+                    <span className="text-[13px] font-semibold text-foreground">
+                      {formatPrice(item.price)}
+                    </span>
+                    <span
+                      className={`w-2 h-2 rounded-full ${
+                        item.is_available ? 'bg-[#2D6A4F]' : 'bg-muted-light'
+                      }`}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop: full table */}
+            <div className="hidden sm:block">
+              <table className="w-full">
+                <thead>
+                  <tr className="bg-background">
+                    <th className="text-left px-5 py-2.5 text-[11px] uppercase tracking-[0.08em] text-muted-light font-semibold border-b border-border">
+                      Plat
+                    </th>
+                    <th className="text-left px-5 py-2.5 text-[11px] uppercase tracking-[0.08em] text-muted-light font-semibold border-b border-border w-[80px]">
+                      Prix
+                    </th>
+                    <th className="text-left px-5 py-2.5 text-[11px] uppercase tracking-[0.08em] text-muted-light font-semibold border-b border-border w-[80px]">
+                      Tags
+                    </th>
+                    <th className="text-left px-5 py-2.5 text-[11px] uppercase tracking-[0.08em] text-muted-light font-semibold border-b border-border w-[70px]">
+                      Statut
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {recentItems.map((item) => (
+                    <tr
+                      key={item.id}
+                      className={`border-b border-border/30 last:border-b-0 hover:bg-background/50 transition-colors ${
+                        !item.is_available ? 'opacity-50' : ''
+                      }`}
+                    >
+                      <td className="px-5 py-3">
+                        <div className="flex items-center gap-3">
+                          {item.image_url ? (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img
+                              src={item.image_url}
+                              alt=""
+                              className="w-9 h-9 rounded-lg object-cover bg-background"
+                            />
+                          ) : (
+                            <div className="w-9 h-9 rounded-lg bg-background flex items-center justify-center text-muted-light text-sm">
+                              🍽️
+                            </div>
+                          )}
+                          <div>
+                            <div className="text-[13px] font-semibold text-foreground">{item.name_fr}</div>
+                            <div className="text-[11px] text-muted-light">
+                              {item.category_id ? catMap.get(item.category_id) ?? '—' : '—'}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </td>
-                    <td className="px-5 py-3">
-                      <span className="text-[13px] font-semibold text-foreground">
-                        {formatPrice(item.price)}
-                      </span>
-                    </td>
-                    <td className="px-5 py-3 hidden sm:table-cell">
-                      <div className="flex gap-1 flex-wrap">
-                        {item.tags?.map((tag: string) => (
-                          <span
-                            key={tag}
-                            className="text-[11px] font-semibold px-1.5 py-0.5 rounded bg-surface text-muted uppercase tracking-wide"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </td>
-                    <td className="px-5 py-3">
-                      <span
-                        className={`inline-flex items-center gap-1.5 text-[11px] font-semibold px-2 py-0.5 rounded-full ${
-                          item.is_available
-                            ? 'bg-[#E8F5E9] text-[#2D6A4F]'
-                            : 'bg-background text-muted-light'
-                        }`}
-                      >
+                      </td>
+                      <td className="px-5 py-3">
+                        <span className="text-[13px] font-semibold text-foreground">
+                          {formatPrice(item.price)}
+                        </span>
+                      </td>
+                      <td className="px-5 py-3">
+                        <div className="flex gap-1 flex-wrap">
+                          {item.tags?.map((tag: string) => (
+                            <span
+                              key={tag}
+                              className="text-[11px] font-semibold px-1.5 py-0.5 rounded bg-surface text-muted uppercase tracking-wide"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </td>
+                      <td className="px-5 py-3">
                         <span
-                          className={`w-1.5 h-1.5 rounded-full ${
-                            item.is_available ? 'bg-[#2D6A4F]' : 'bg-muted-light'
+                          className={`inline-flex items-center gap-1.5 text-[11px] font-semibold px-2 py-0.5 rounded-full ${
+                            item.is_available
+                              ? 'bg-[#E8F5E9] text-[#2D6A4F]'
+                              : 'bg-background text-muted-light'
                           }`}
-                        />
-                        {item.is_available ? 'Actif' : 'Inactif'}
-                      </span>
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan={4} className="px-5 py-8 text-center text-muted-light text-sm">
-                    Aucun plat pour l&apos;instant.{' '}
-                    <Link href="/dashboard/menu" className="text-primary font-semibold hover:underline">
-                      Ajouter votre premier plat
-                    </Link>
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
+                        >
+                          <span
+                            className={`w-1.5 h-1.5 rounded-full ${
+                              item.is_available ? 'bg-[#2D6A4F]' : 'bg-muted-light'
+                            }`}
+                          />
+                          {item.is_available ? 'Actif' : 'Inactif'}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </>
+        ) : (
+          <div className="px-4 sm:px-5 py-8 text-center text-muted-light text-sm">
+            Aucun plat pour l&apos;instant.{' '}
+            <Link href="/dashboard/menu" className="text-primary font-semibold hover:underline">
+              Ajouter votre premier plat
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   )

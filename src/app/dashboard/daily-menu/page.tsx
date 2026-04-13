@@ -1,22 +1,15 @@
 import { createClient } from '@/lib/supabase/server'
+import { getRestaurant } from '@/lib/supabase/cached'
 import { redirect } from 'next/navigation'
 import { DailyMenuEditor } from '@/components/dashboard/daily-menu-editor'
 
 export default async function DailyMenuPage() {
-  const supabase = createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) redirect('/login')
-
-  const { data: restaurant } = await supabase
-    .from('restaurants')
-    .select('*')
-    .eq('owner_id', user.id)
-    .single()
-
+  const restaurant = await getRestaurant()
   if (!restaurant) redirect('/signup')
 
   const today = new Date().toISOString().split('T')[0]
 
+  const supabase = createClient()
   const { data: dailyMenu } = await supabase
     .from('daily_menus')
     .select('*')

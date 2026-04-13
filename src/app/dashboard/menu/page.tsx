@@ -1,31 +1,26 @@
 import { createClient } from '@/lib/supabase/server'
+import { getRestaurant } from '@/lib/supabase/cached'
 import { redirect } from 'next/navigation'
 import { MenuManager } from '@/components/dashboard/menu-manager'
 
 export default async function MenuManagementPage() {
-  const supabase = createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) redirect('/login')
-
-  const { data: restaurant } = await supabase
-    .from('restaurants')
-    .select('*')
-    .eq('owner_id', user.id)
-    .single()
-
+  const restaurant = await getRestaurant()
   if (!restaurant) redirect('/signup')
 
-  const { data: categories } = await supabase
-    .from('categories')
-    .select('*')
-    .eq('restaurant_id', restaurant.id)
-    .order('sort_order')
+  const supabase = createClient()
 
-  const { data: items } = await supabase
-    .from('items')
-    .select('*')
-    .eq('restaurant_id', restaurant.id)
-    .order('sort_order')
+  const [{ data: categories }, { data: items }] = await Promise.all([
+    supabase
+      .from('categories')
+      .select('*')
+      .eq('restaurant_id', restaurant.id)
+      .order('sort_order'),
+    supabase
+      .from('items')
+      .select('*')
+      .eq('restaurant_id', restaurant.id)
+      .order('sort_order'),
+  ])
 
   return (
     <div>

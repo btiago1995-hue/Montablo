@@ -1,18 +1,9 @@
-import { createClient } from '@/lib/supabase/server'
+import { getRestaurant } from '@/lib/supabase/cached'
 import { redirect } from 'next/navigation'
 import { QRCodeGenerator } from '@/components/dashboard/qr-code-generator'
 
 export default async function QRCodePage() {
-  const supabase = createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) redirect('/login')
-
-  const { data: restaurant } = await supabase
-    .from('restaurants')
-    .select('*')
-    .eq('owner_id', user.id)
-    .single()
-
+  const restaurant = await getRestaurant()
   if (!restaurant) redirect('/signup')
 
   const menuUrl = `${process.env.NEXT_PUBLIC_APP_URL}/menu/${restaurant.slug}`
