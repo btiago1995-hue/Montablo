@@ -3,6 +3,8 @@ import { createAdminClient } from '@/lib/supabase/admin'
 import { slugify } from '@/lib/utils'
 import { redirect } from 'next/navigation'
 import { Sidebar } from '@/components/dashboard/sidebar'
+import { PaywallOverlay } from '@/components/dashboard/paywall-overlay'
+import { isSubscriptionActive, getSubscriptionStatusLabel } from '@/lib/subscription'
 
 export default async function DashboardLayout({
   children,
@@ -40,12 +42,17 @@ export default async function DashboardLayout({
     redirect('/signup')
   }
 
+  const subscriptionActive = isSubscriptionActive(restaurant)
+
   return (
     <div className="min-h-screen bg-[#F5F5F2] flex">
       <Sidebar restaurant={restaurant} />
       <main className="flex-1 px-4 py-6 pt-16 sm:p-6 sm:pt-16 lg:pt-8 lg:p-8 lg:ml-[260px] max-w-[1100px]">
         {children}
       </main>
+      {!subscriptionActive && (
+        <PaywallOverlay statusLabel={getSubscriptionStatusLabel(restaurant)} />
+      )}
     </div>
   )
 }

@@ -85,9 +85,22 @@ export type Review = {
   created_at: string
 }
 
+export type ReviewRateLimit = {
+  id: string
+  ip_address: string
+  restaurant_id: string
+  created_at: string
+}
+
 export type Database = {
   public: {
     Tables: {
+      review_rate_limits: {
+        Row: ReviewRateLimit
+        Insert: Pick<ReviewRateLimit, 'ip_address' | 'restaurant_id'> & Partial<Omit<ReviewRateLimit, 'ip_address' | 'restaurant_id'>>
+        Update: Partial<ReviewRateLimit>
+        Relationships: []
+      }
       menu_imports: {
         Row: MenuImport
         Insert: Pick<MenuImport, 'restaurant_id'> & Partial<Omit<MenuImport, 'restaurant_id'>>

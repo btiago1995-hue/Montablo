@@ -11,7 +11,8 @@ export async function POST(request: Request) {
 
   const formData = await request.formData()
   const file = formData.get('file') as File
-  const bucket = (formData.get('bucket') as string) || 'images'
+  // Hardcode bucket to 'images' only -- ignore user-provided value to prevent bucket enumeration
+  const bucket = 'images'
 
   if (!file) {
     return NextResponse.json({ error: 'Fichier requis' }, { status: 400 })

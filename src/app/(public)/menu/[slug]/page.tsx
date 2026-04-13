@@ -2,6 +2,8 @@ import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
 import { MenuContent } from '@/components/public/menu-content'
 import { ReviewPopup } from '@/components/public/review-popup'
+import { isSubscriptionActive } from '@/lib/subscription'
+import type { Restaurant } from '@/types/database'
 import type { Metadata } from 'next'
 
 type Props = { params: { slug: string } }
@@ -51,6 +53,34 @@ export default async function PublicMenuPage({ params }: Props) {
     .single()
 
   if (!restaurant) notFound()
+
+  if (!isSubscriptionActive(restaurant as Restaurant)) {
+    const primaryColor = restaurant.primary_color || '#2C3E2D'
+    return (
+      <div className="min-h-screen bg-[#FAFAF7] flex items-center justify-center px-4">
+        <div className="text-center max-w-sm">
+          <div
+            className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 text-3xl"
+            style={{ backgroundColor: `${primaryColor}15` }}
+          >
+            🍽️
+          </div>
+          <h1 className="font-serif text-2xl text-[#1A1A1A] mb-2">
+            {restaurant.name}
+          </h1>
+          <p className="text-[15px] text-[#6B6B6B] leading-relaxed">
+            Ce menu n&apos;est pas disponible actuellement.
+          </p>
+          <div className="mt-8 inline-flex items-center gap-1.5 text-[11px] text-[#9B9B9B]/60">
+            Propulsé par{' '}
+            <a href="/" className="text-[#D4A574] font-semibold no-underline hover:text-[#C08E5A] transition-colors">
+              MonTablo
+            </a>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   const { data: categories } = await supabase
     .from('categories')
