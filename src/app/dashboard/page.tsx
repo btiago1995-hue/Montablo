@@ -1,6 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
-import { ExternalLink, Plus, UtensilsCrossed, FolderOpen, Tag, Star } from 'lucide-react'
+import { ExternalLink, Plus } from 'lucide-react'
 import { formatPrice } from '@/lib/utils'
 
 function formatFrenchDate(): string {
@@ -47,9 +47,6 @@ export default async function DashboardPage() {
   const avgRating = reviewCount > 0
     ? (reviews!.reduce((sum, r) => sum + r.rating, 0) / reviewCount)
     : 0
-  const distribution = [0, 0, 0, 0, 0]
-  reviews?.forEach((r) => { distribution[r.rating - 1]++ })
-
   // Recent items for the table
   const { data: recentItems } = await supabase
     .from('items')
@@ -97,104 +94,108 @@ export default async function DashboardPage() {
         </div>
       </div>
 
-      {/* Stats grid */}
-      <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-7">
-        <div className="bg-white border border-[#E8E8E4] rounded-xl p-3 sm:p-5 hover:shadow-sm transition-shadow">
-          <div className="flex items-center justify-between mb-2 sm:mb-3">
-            <div className="text-[10px] sm:text-[12px] text-[#9B9B9B] uppercase tracking-[0.06em] font-semibold leading-tight">Plats actifs</div>
-            <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg bg-[#2C3E2D]/[0.07] flex-shrink-0 flex items-center justify-center">
-              <UtensilsCrossed className="w-3 h-3 sm:w-4 sm:h-4 text-[#2C3E2D]" />
+      {/* Stat bar */}
+      <div className="bg-white border border-border rounded-xl p-4 sm:px-5 mb-5">
+        {/* Desktop: single row */}
+        <div className="hidden sm:flex items-center">
+          <div className="flex items-center gap-5 flex-1">
+            <div>
+              <div className="text-[26px] font-bold tracking-tight text-foreground leading-none">
+                {itemCount ?? 0}
+              </div>
+              <div className="text-[10px] text-muted-light mt-0.5">plats actifs</div>
             </div>
-          </div>
-          <div className="text-[22px] sm:text-[28px] font-bold tracking-tight text-[#1A1A1A]">{itemCount ?? 0}</div>
-        </div>
-        <div className="bg-white border border-[#E8E8E4] rounded-xl p-3 sm:p-5 hover:shadow-sm transition-shadow">
-          <div className="flex items-center justify-between mb-2 sm:mb-3">
-            <div className="text-[10px] sm:text-[12px] text-[#9B9B9B] uppercase tracking-[0.06em] font-semibold leading-tight">Catégories</div>
-            <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg bg-[#2C3E2D]/[0.07] flex-shrink-0 flex items-center justify-center">
-              <FolderOpen className="w-3 h-3 sm:w-4 sm:h-4 text-[#2C3E2D]" />
+            <div className="w-px h-8 bg-border" />
+            <div>
+              <div className="text-[26px] font-bold tracking-tight text-foreground leading-none">
+                {categoryCount ?? 0}
+              </div>
+              <div className="text-[10px] text-muted-light mt-0.5">catégories</div>
             </div>
-          </div>
-          <div className="text-[22px] sm:text-[28px] font-bold tracking-tight text-[#1A1A1A]">{categoryCount ?? 0}</div>
-        </div>
-        <div className="bg-white border border-[#E8E8E4] rounded-xl p-3 sm:p-5 hover:shadow-sm transition-shadow">
-          <div className="flex items-center justify-between mb-2 sm:mb-3">
-            <div className="text-[10px] sm:text-[12px] text-[#9B9B9B] uppercase tracking-[0.06em] font-semibold leading-tight">Promotions</div>
-            <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg bg-[#D4A574]/[0.12] flex-shrink-0 flex items-center justify-center">
-              <Tag className="w-3 h-3 sm:w-4 sm:h-4 text-[#D4A574]" />
+            <div className="w-px h-8 bg-border" />
+            <div>
+              <div className="text-[26px] font-bold tracking-tight text-foreground leading-none">
+                {promoCount ?? 0}
+              </div>
+              <div className="text-[10px] text-muted-light mt-0.5">promos</div>
             </div>
-          </div>
-          <div className="text-[22px] sm:text-[28px] font-bold tracking-tight text-[#1A1A1A]">{promoCount ?? 0}</div>
-        </div>
-      </div>
-
-      {/* Reviews metrics */}
-      <div className="bg-white border border-[#E8E8E4] rounded-xl p-4 sm:p-5 mb-7">
-        <div className="flex items-center gap-2 mb-4">
-          <Star className="w-4 h-4 text-[#FBBC04]" />
-          <span className="text-[14px] font-semibold text-[#1A1A1A]">Avis clients</span>
-          <span className="text-[12px] text-[#9B9B9B] ml-auto">{reviewCount} avis</span>
-        </div>
-        {reviewCount > 0 ? (
-          <div className="flex items-center gap-6">
-            {/* Average */}
-            <div className="text-center shrink-0">
-              <div className="text-[32px] font-bold tracking-tight text-[#1A1A1A]">{avgRating.toFixed(1)}</div>
-              <div className="flex gap-0.5 justify-center mt-1">
-                {[1, 2, 3, 4, 5].map((s) => (
-                  <svg key={s} width="14" height="14" viewBox="0 0 24 24"
-                    fill={s <= Math.round(avgRating) ? '#FBBC04' : 'none'}
-                    stroke={s <= Math.round(avgRating) ? '#FBBC04' : '#D1D5DB'}
-                    strokeWidth="2">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                  </svg>
-                ))}
+            <div className="w-px h-8 bg-border" />
+            <div>
+              <div className="flex items-baseline gap-1">
+                <span className="text-[26px] font-bold tracking-tight text-foreground leading-none">
+                  {reviewCount > 0 ? avgRating.toFixed(1) : '—'}
+                </span>
+                <span className="text-[13px] text-[#FBBC04]">★</span>
+              </div>
+              <div className="text-[10px] text-muted-light mt-0.5">
+                {reviewCount} avis
               </div>
             </div>
-            {/* Distribution bars */}
-            <div className="flex-1 space-y-1.5">
-              {[5, 4, 3, 2, 1].map((star) => {
-                const count = distribution[star - 1]
-                const pct = reviewCount > 0 ? (count / reviewCount) * 100 : 0
-                return (
-                  <div key={star} className="flex items-center gap-2">
-                    <span className="text-[11px] text-[#9B9B9B] w-4 text-right">{star}</span>
-                    <div className="flex-1 h-2 bg-[#F0EDE8] rounded-full overflow-hidden">
-                      <div
-                        className="h-full rounded-full transition-all"
-                        style={{ width: `${pct}%`, backgroundColor: star >= 4 ? '#FBBC04' : star === 3 ? '#F59E0B' : '#EF4444' }}
-                      />
-                    </div>
-                    <span className="text-[11px] text-[#9B9B9B] w-6">{count}</span>
-                  </div>
-                )
-              })}
+          </div>
+          <div className="flex gap-1.5 ml-4">
+            <Link
+              href="/dashboard/daily-menu"
+              className="bg-background border border-border rounded-lg px-3.5 py-2 text-xs font-medium text-primary hover:bg-white transition-colors"
+            >
+              Menu du jour
+            </Link>
+            <Link
+              href="/dashboard/qr-code"
+              className="bg-background border border-border rounded-lg px-3.5 py-2 text-xs font-medium text-primary hover:bg-white transition-colors"
+            >
+              QR Code
+            </Link>
+          </div>
+        </div>
+
+        {/* Mobile: 2x2 grid + links row */}
+        <div className="sm:hidden">
+          <div className="grid grid-cols-2 gap-4 mb-4">
+            <div>
+              <div className="text-[22px] font-bold tracking-tight text-foreground leading-none">
+                {itemCount ?? 0}
+              </div>
+              <div className="text-[10px] text-muted-light mt-0.5">plats actifs</div>
+            </div>
+            <div>
+              <div className="text-[22px] font-bold tracking-tight text-foreground leading-none">
+                {categoryCount ?? 0}
+              </div>
+              <div className="text-[10px] text-muted-light mt-0.5">catégories</div>
+            </div>
+            <div>
+              <div className="text-[22px] font-bold tracking-tight text-foreground leading-none">
+                {promoCount ?? 0}
+              </div>
+              <div className="text-[10px] text-muted-light mt-0.5">promos</div>
+            </div>
+            <div>
+              <div className="flex items-baseline gap-1">
+                <span className="text-[22px] font-bold tracking-tight text-foreground leading-none">
+                  {reviewCount > 0 ? avgRating.toFixed(1) : '—'}
+                </span>
+                <span className="text-[12px] text-[#FBBC04]">★</span>
+              </div>
+              <div className="text-[10px] text-muted-light mt-0.5">
+                {reviewCount} avis
+              </div>
             </div>
           </div>
-        ) : (
-          <p className="text-sm text-[#9B9B9B] text-center py-4">
-            Aucun avis pour l&apos;instant. Les avis apparaitront ici quand vos clients evalueront votre menu.
-          </p>
-        )}
-      </div>
-
-      {/* Quick actions */}
-      <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-7">
-        <Link href="/dashboard/daily-menu" className="bg-white border-[1.5px] border-dashed border-[#E8E8E4] rounded-xl p-3 sm:p-5 text-center hover:border-[#2C3E2D] hover:border-solid hover:bg-[#F8F8F5] transition-all">
-          <div className="text-xl sm:text-2xl mb-1 sm:mb-2">📋</div>
-          <div className="text-[11px] sm:text-[13px] font-semibold text-[#1A1A1A]">Menu du jour</div>
-          <div className="text-[10px] sm:text-[12px] text-[#9B9B9B] mt-0.5 hidden sm:block">Configurer pour aujourd&apos;hui</div>
-        </Link>
-        <Link href="/dashboard/promotions" className="bg-white border-[1.5px] border-dashed border-[#E8E8E4] rounded-xl p-3 sm:p-5 text-center hover:border-[#2C3E2D] hover:border-solid hover:bg-[#F8F8F5] transition-all">
-          <div className="text-xl sm:text-2xl mb-1 sm:mb-2">🏷️</div>
-          <div className="text-[11px] sm:text-[13px] font-semibold text-[#1A1A1A]">Nouvelle promo</div>
-          <div className="text-[10px] sm:text-[12px] text-[#9B9B9B] mt-0.5 hidden sm:block">Créer une promotion</div>
-        </Link>
-        <Link href="/dashboard/qr-code" className="bg-white border-[1.5px] border-dashed border-[#E8E8E4] rounded-xl p-3 sm:p-5 text-center hover:border-[#2C3E2D] hover:border-solid hover:bg-[#F8F8F5] transition-all">
-          <div className="text-xl sm:text-2xl mb-1 sm:mb-2">📱</div>
-          <div className="text-[11px] sm:text-[13px] font-semibold text-[#1A1A1A]">QR Code</div>
-          <div className="text-[10px] sm:text-[12px] text-[#9B9B9B] mt-0.5 hidden sm:block">Télécharger / imprimer</div>
-        </Link>
+          <div className="flex gap-1.5 pt-3 border-t border-border">
+            <Link
+              href="/dashboard/daily-menu"
+              className="flex-1 text-center bg-background border border-border rounded-lg px-3 py-2 text-xs font-medium text-primary"
+            >
+              Menu du jour
+            </Link>
+            <Link
+              href="/dashboard/qr-code"
+              className="flex-1 text-center bg-background border border-border rounded-lg px-3 py-2 text-xs font-medium text-primary"
+            >
+              QR Code
+            </Link>
+          </div>
+        </div>
       </div>
 
       {/* Recent items table */}
