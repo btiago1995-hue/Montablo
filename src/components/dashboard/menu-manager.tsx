@@ -502,21 +502,23 @@ export function MenuManager({
   const uncategorizedItems = initialItems.filter((item) => !item.category_id)
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3 sm:space-y-6">
       {/* Action bar */}
-      <div className="grid grid-cols-3 sm:flex sm:flex-wrap gap-2 sm:gap-3">
-        <Button onClick={() => setCatModal({ open: true })} variant="secondary" className="text-xs sm:text-sm px-3 sm:px-4">
-          <Plus className="w-4 h-4 shrink-0" />
-          <span className="truncate">Catégorie</span>
-        </Button>
-        <Button onClick={() => setItemModal({ open: true })} className="text-xs sm:text-sm px-3 sm:px-4">
-          <Plus className="w-4 h-4 shrink-0" />
-          <span className="truncate">Plat</span>
-        </Button>
-        <Button onClick={() => setShowImport(true)} variant="secondary" className="text-xs sm:text-sm px-3 sm:px-4">
-          <Sparkles className="w-4 h-4 shrink-0" />
-          <span className="truncate">Scanner</span>
-        </Button>
+      <div className="sticky top-14 sm:static z-10 -mx-4 px-4 py-2 sm:mx-0 sm:px-0 sm:py-0 bg-[#F5F5F2] sm:bg-transparent">
+        <div className="flex gap-2 sm:gap-3 overflow-x-auto scrollbar-hide">
+          <Button onClick={() => setCatModal({ open: true })} variant="secondary" size="sm" className="whitespace-nowrap sm:text-sm sm:px-4 sm:py-2.5">
+            <Plus className="w-4 h-4 shrink-0" />
+            Catégorie
+          </Button>
+          <Button onClick={() => setItemModal({ open: true })} size="sm" className="whitespace-nowrap sm:text-sm sm:px-4 sm:py-2.5">
+            <Plus className="w-4 h-4 shrink-0" />
+            Plat
+          </Button>
+          <Button onClick={() => setShowImport(true)} variant="secondary" size="sm" className="whitespace-nowrap sm:text-sm sm:px-4 sm:py-2.5">
+            <Sparkles className="w-4 h-4 shrink-0" />
+            Scanner un menu
+          </Button>
+        </div>
       </div>
 
       {showImport && (
@@ -540,7 +542,7 @@ export function MenuManager({
         return (
           <div
             key={category.id}
-            className={`bg-white rounded-xl border overflow-hidden transition-all ${
+            className={`bg-white -mx-4 sm:mx-0 sm:rounded-xl border-y sm:border overflow-hidden transition-all ${
               dragOverCatId === category.id && dragCatId !== category.id
                 ? 'border-primary border-2'
                 : dragCatId === category.id
@@ -749,7 +751,7 @@ function ItemRow({
 }) {
   return (
     <div
-      className={`flex items-center gap-2 sm:gap-4 px-3 sm:px-5 py-2.5 sm:py-3 transition-all ${
+      className={`flex items-center gap-2 sm:gap-4 px-4 sm:px-5 py-3 sm:py-3 transition-all active:bg-background/80 ${
         !item.is_available ? 'opacity-50' : ''
       } ${isDragging ? 'opacity-30' : ''} ${isDragOver ? 'bg-primary/5 border-t-2 border-primary' : ''}`}
       onDragOver={onDragOver}
