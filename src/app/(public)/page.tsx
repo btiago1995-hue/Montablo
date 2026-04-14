@@ -100,13 +100,13 @@ export default function LandingPage() {
       </section>
 
       {/* Proof strip */}
-      <div className="bg-white/60">
-        <div className="max-w-[1120px] mx-auto px-6 py-5 flex items-center justify-center gap-4 sm:gap-10 text-[13px] text-muted/50">
-          <span>Sans engagement</span>
-          <span className="w-[3px] h-[3px] rounded-full bg-muted/20" />
-          <span>Aucune carte bancaire</span>
-          <span className="w-[3px] h-[3px] rounded-full bg-muted/20" />
-          <span>Prêt en 5 min</span>
+      <div className="border-y border-border bg-white">
+        <div className="max-w-[1120px] mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-10">
+          <span className="text-[13px] text-muted/60">Sans engagement</span>
+          <span className="hidden sm:block w-1 h-1 rounded-full bg-border" />
+          <span className="text-[13px] text-muted/60">Aucune carte bancaire</span>
+          <span className="hidden sm:block w-1 h-1 rounded-full bg-border" />
+          <span className="text-[13px] text-muted/60">Prêt en 5 minutes</span>
         </div>
       </div>
 
