@@ -224,7 +224,7 @@ function ItemForm({
         onChange={(e) => setDescFr(e.target.value)}
         placeholder="Laitue romaine, croûtons, parmesan..."
       />
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Input
           label="Prix (€) *"
           type="number"
@@ -553,7 +553,7 @@ export function MenuManager({
           >
             {/* Category header */}
             <div
-              className="flex items-center gap-3 px-5 py-4 cursor-pointer hover:bg-background/50 transition-colors"
+              className="flex items-center gap-2 sm:gap-3 px-3 sm:px-5 py-3 sm:py-4 cursor-pointer hover:bg-background/50 transition-colors"
               onClick={() => toggleExpand(category.id)}
             >
               <div
@@ -563,7 +563,7 @@ export function MenuManager({
                   handleCatDragStart(e, category.id)
                 }}
                 onDragEnd={handleCatDragEnd}
-                className="cursor-grab active:cursor-grabbing shrink-0"
+                className="cursor-grab active:cursor-grabbing shrink-0 hidden sm:block"
                 onClick={(e) => e.stopPropagation()}
               >
                 <GripVertical className="w-4 h-4 text-muted/40" />
@@ -573,38 +573,38 @@ export function MenuManager({
               ) : (
                 <ChevronRight className="w-4 h-4 text-muted shrink-0" />
               )}
-              <span className="text-lg mr-1">{category.icon}</span>
-              <h3 className="font-medium text-foreground flex-1">
+              <span className="text-lg mr-1 shrink-0">{category.icon}</span>
+              <h3 className="font-medium text-foreground flex-1 min-w-0 truncate text-sm sm:text-base">
                 {category.name_fr}
                 {category.name_en && (
-                  <span className="text-muted font-normal ml-2 text-sm">
+                  <span className="text-muted font-normal ml-2 text-sm hidden sm:inline">
                     / {category.name_en}
                   </span>
                 )}
               </h3>
-              <span className="text-xs text-muted bg-background px-2 py-1 rounded-full">
-                {catItems.length} plat{catItems.length !== 1 ? 's' : ''}
+              <span className="text-[11px] sm:text-xs text-muted bg-background px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full shrink-0">
+                {catItems.length}
               </span>
-              <div className="flex items-center gap-1 ml-2" onClick={(e) => e.stopPropagation()}>
+              <div className="flex items-center gap-0.5 sm:gap-1 shrink-0" onClick={(e) => e.stopPropagation()}>
                 <button
                   onClick={() => toggleCategoryVisibility(category)}
-                  className="p-1.5 text-muted hover:text-foreground transition-colors"
+                  className="p-1 sm:p-1.5 text-muted hover:text-foreground transition-colors"
                   title={category.is_visible ? 'Masquer' : 'Afficher'}
                 >
-                  {category.is_visible ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
+                  {category.is_visible ? <Eye className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <EyeOff className="w-3.5 h-3.5 sm:w-4 sm:h-4" />}
                 </button>
                 <button
                   onClick={() => setCatModal({ open: true, edit: category })}
-                  className="p-1.5 text-muted hover:text-foreground transition-colors"
+                  className="p-1 sm:p-1.5 text-muted hover:text-foreground transition-colors"
                 >
-                  <Pencil className="w-4 h-4" />
+                  <Pencil className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </button>
                 <button
                   onClick={() => deleteCategory(category.id)}
                   disabled={deleting === category.id}
-                  className="p-1.5 text-muted hover:text-red-600 transition-colors"
+                  className="p-1 sm:p-1.5 text-muted hover:text-red-600 transition-colors"
                 >
-                  <Trash2 className="w-4 h-4" />
+                  <Trash2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </button>
               </div>
             </div>
@@ -613,7 +613,7 @@ export function MenuManager({
             {isExpanded && (
               <div className="border-t border-border divide-y divide-border">
                 {catItems.length === 0 ? (
-                  <div className="px-5 py-6 text-center text-sm text-muted">
+                  <div className="px-3 sm:px-5 py-6 text-center text-sm text-muted">
                     Aucun plat dans cette catégorie.
                     <button
                       onClick={() => setItemModal({ open: true, defaultCategoryId: category.id })}
@@ -749,7 +749,7 @@ function ItemRow({
 }) {
   return (
     <div
-      className={`flex items-center gap-4 px-5 py-3 transition-all ${
+      className={`flex items-center gap-2 sm:gap-4 px-3 sm:px-5 py-2.5 sm:py-3 transition-all ${
         !item.is_available ? 'opacity-50' : ''
       } ${isDragging ? 'opacity-30' : ''} ${isDragOver ? 'bg-primary/5 border-t-2 border-primary' : ''}`}
       onDragOver={onDragOver}
@@ -760,13 +760,13 @@ function ItemRow({
         draggable
         onDragStart={onDragStart}
         onDragEnd={onDragEnd}
-        className="cursor-grab active:cursor-grabbing shrink-0"
+        className="cursor-grab active:cursor-grabbing shrink-0 hidden sm:block"
       >
         <GripVertical className="w-4 h-4 text-muted/40" />
       </div>
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2">
-          <p className="font-medium text-foreground truncate">{item.name_fr}</p>
+          <p className="font-medium text-foreground truncate text-sm sm:text-base">{item.name_fr}</p>
           {item.tags && item.tags.length > 0 && (
             <div className="hidden sm:flex gap-1">
               {item.tags.slice(0, 2).map((tag) => (
@@ -778,30 +778,30 @@ function ItemRow({
           )}
         </div>
         {item.description_fr && (
-          <p className="text-sm text-muted truncate">{item.description_fr}</p>
+          <p className="text-xs sm:text-sm text-muted truncate">{item.description_fr}</p>
         )}
       </div>
-      <span className="font-medium text-foreground shrink-0">{formatPrice(item.price)}</span>
-      <div className="flex items-center gap-1 shrink-0">
+      <span className="font-medium text-foreground shrink-0 text-sm sm:text-base">{formatPrice(item.price)}</span>
+      <div className="flex items-center gap-0.5 sm:gap-1 shrink-0">
         <button
           onClick={onToggle}
-          className="p-1.5 text-muted hover:text-foreground transition-colors"
+          className="p-1 sm:p-1.5 text-muted hover:text-foreground transition-colors"
           title={item.is_available ? 'Marquer indisponible' : 'Marquer disponible'}
         >
-          {item.is_available ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
+          {item.is_available ? <Eye className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <EyeOff className="w-3.5 h-3.5 sm:w-4 sm:h-4" />}
         </button>
         <button
           onClick={onEdit}
-          className="p-1.5 text-muted hover:text-foreground transition-colors"
+          className="p-1 sm:p-1.5 text-muted hover:text-foreground transition-colors"
         >
-          <Pencil className="w-4 h-4" />
+          <Pencil className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
         </button>
         <button
           onClick={onDelete}
           disabled={deleting}
-          className="p-1.5 text-muted hover:text-red-600 transition-colors"
+          className="p-1 sm:p-1.5 text-muted hover:text-red-600 transition-colors"
         >
-          <Trash2 className="w-4 h-4" />
+          <Trash2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
         </button>
       </div>
     </div>
