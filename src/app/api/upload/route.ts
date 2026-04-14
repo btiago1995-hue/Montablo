@@ -18,6 +18,16 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Fichier requis' }, { status: 400 })
   }
 
+  const MAX_FILE_SIZE = 5 * 1024 * 1024 // 5 MB
+  if (file.size > MAX_FILE_SIZE) {
+    return NextResponse.json({ error: 'Fichier trop volumineux (max 5 Mo)' }, { status: 400 })
+  }
+
+  const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif']
+  if (!ALLOWED_TYPES.includes(file.type)) {
+    return NextResponse.json({ error: 'Format non supporté. Utilisez JPEG, PNG, WebP ou GIF.' }, { status: 400 })
+  }
+
   const ext = file.name.split('.').pop()
   const fileName = `${user.id}/${Date.now()}.${ext}`
 
