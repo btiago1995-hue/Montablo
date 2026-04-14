@@ -7,7 +7,7 @@ import type { Restaurant } from '@/types/database'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { ImageUpload } from '@/components/ui/image-upload'
-import { Check, CreditCard, Star } from 'lucide-react'
+import { Check, CreditCard, Star, Trash2 } from 'lucide-react'
 
 export function SettingsForm({ restaurant }: { restaurant: Restaurant }) {
   const router = useRouter()
@@ -22,6 +22,7 @@ export function SettingsForm({ restaurant }: { restaurant: Restaurant }) {
   const [saved, setSaved] = useState(false)
   const [billingLoading, setBillingLoading] = useState(false)
   const [billingPlan, setBillingPlan] = useState<'monthly' | 'annual'>('annual')
+  const [deleteLoading, setDeleteLoading] = useState(false)
 
   async function handleSave(e: React.FormEvent) {
     e.preventDefault()
@@ -251,6 +252,45 @@ export function SettingsForm({ restaurant }: { restaurant: Restaurant }) {
             </Button>
           </div>
         )}
+      </div>
+
+      {/* Zone dangereuse */}
+      <div className="rounded-xl border border-red-200 bg-red-50 p-6">
+        <div className="flex items-center gap-2 mb-3">
+          <Trash2 className="w-5 h-5 text-red-600" />
+          <h2 className="font-serif text-xl text-red-900">Zone dangereuse</h2>
+        </div>
+        <p className="text-sm text-red-800 mb-4">
+          La suppression de votre compte est irréversible. Toutes vos données seront définitivement effacées : restaurant, menu, catégories et plats.
+        </p>
+        <Button
+          type="button"
+          disabled={deleteLoading}
+          onClick={async () => {
+            const confirmed = window.confirm(
+              'Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible et toutes vos données seront perdues.'
+            )
+            if (!confirmed) return
+
+            setDeleteLoading(true)
+            try {
+              const res = await fetch('/api/account/delete', { method: 'POST' })
+              if (res.ok) {
+                window.location.href = '/'
+              } else {
+                alert('Une erreur est survenue. Veuillez réessayer.')
+                setDeleteLoading(false)
+              }
+            } catch {
+              alert('Une erreur est survenue. Veuillez réessayer.')
+              setDeleteLoading(false)
+            }
+          }}
+          className="bg-red-600 hover:bg-red-700 text-white"
+        >
+          <Trash2 className="w-4 h-4" />
+          {deleteLoading ? 'Suppression...' : 'Supprimer mon compte'}
+        </Button>
       </div>
     </div>
   )

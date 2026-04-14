@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { DM_Sans, DM_Serif_Display } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -27,9 +28,6 @@ export const metadata: Metadata = {
     capable: true,
     statusBarStyle: "default",
     title: "MonTablo",
-  },
-  icons: {
-    apple: "/icons/icon.svg",
   },
   openGraph: {
     title: "MonTablo — Menu digital pour restaurants",
@@ -61,6 +59,7 @@ export default function RootLayout({
     <html lang="fr">
       <body className={`${dmSans.variable} ${dmSerif.variable} font-sans`}>
         {children}
+        <Analytics />
       </body>
     </html>
   );
