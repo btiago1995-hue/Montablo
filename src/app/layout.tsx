@@ -19,7 +19,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://montablo.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://www.montablo.com"),
   title: "MonTablo — Menu digital pour restaurants",
   description:
     "Créez votre menu digital interactif en quelques minutes. QR code, mises à jour en temps réel, design premium.",

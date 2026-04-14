@@ -21,7 +21,7 @@ export async function GET(request: Request) {
   }
 
   const supabase = getAdminClient()
-  const appUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://montablo.com'
+  const appUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.montablo.com'
   const dashboardUrl = `${appUrl}/dashboard`
 
   // Get all trialing restaurants
