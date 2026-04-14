@@ -504,18 +504,18 @@ export function MenuManager({
   return (
     <div className="space-y-6">
       {/* Action bar */}
-      <div className="flex flex-wrap gap-3">
-        <Button onClick={() => setCatModal({ open: true })} variant="secondary">
-          <Plus className="w-4 h-4" />
-          Catégorie
+      <div className="grid grid-cols-3 sm:flex sm:flex-wrap gap-2 sm:gap-3">
+        <Button onClick={() => setCatModal({ open: true })} variant="secondary" className="text-xs sm:text-sm px-3 sm:px-4">
+          <Plus className="w-4 h-4 shrink-0" />
+          <span className="truncate">Catégorie</span>
         </Button>
-        <Button onClick={() => setItemModal({ open: true })}>
-          <Plus className="w-4 h-4" />
-          Plat
+        <Button onClick={() => setItemModal({ open: true })} className="text-xs sm:text-sm px-3 sm:px-4">
+          <Plus className="w-4 h-4 shrink-0" />
+          <span className="truncate">Plat</span>
         </Button>
-        <Button onClick={() => setShowImport(true)} variant="secondary">
-          <Sparkles className="w-4 h-4" />
-          Scanner un menu
+        <Button onClick={() => setShowImport(true)} variant="secondary" className="text-xs sm:text-sm px-3 sm:px-4">
+          <Sparkles className="w-4 h-4 shrink-0" />
+          <span className="truncate">Scanner</span>
         </Button>
       </div>
 

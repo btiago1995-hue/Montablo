@@ -24,8 +24,8 @@ export default async function MenuManagementPage() {
 
   return (
     <div>
-      <h1 className="font-serif text-3xl text-foreground mb-2">Carte & Plats</h1>
-      <p className="text-muted mb-8">Gérez vos catégories et vos plats.</p>
+      <h1 className="font-serif text-2xl sm:text-3xl text-foreground mb-1 sm:mb-2">Carte & Plats</h1>
+      <p className="text-sm sm:text-base text-muted mb-6 sm:mb-8">Gérez vos catégories et vos plats.</p>
       <MenuManager
         restaurantId={restaurant.id}
         initialCategories={categories ?? []}
