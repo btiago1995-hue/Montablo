@@ -75,7 +75,7 @@ export default function LandingPage() {
           Un menu digital élégant que vous mettez à jour en temps réel.
           Vos clients scannent, vous gardez le contrôle.
         </p>
-        <div className="flex items-center gap-6">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5">
           <Link
             href="/signup"
             className="group inline-flex items-center gap-2.5 bg-primary text-white font-medium px-8 py-3.5 rounded-full hover:bg-primary-light transition-all hover:shadow-xl hover:shadow-primary/18 hover:-translate-y-px text-[15px]"
@@ -85,18 +85,12 @@ export default function LandingPage() {
           </Link>
           <Link
             href="/menu/demo"
-            className="hidden sm:inline-flex items-center gap-1.5 text-[14px] text-muted hover:text-foreground transition-colors"
+            className="group inline-flex items-center gap-2 border border-border text-foreground font-medium px-6 py-3.5 rounded-full hover:border-foreground/30 hover:bg-muted/5 transition-all text-[15px]"
           >
             Voir un exemple
-            <ArrowRight className="w-3.5 h-3.5" />
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
           </Link>
         </div>
-        <Link
-          href="/menu/demo"
-          className="sm:hidden inline-flex items-center gap-1.5 mt-4 text-[14px] text-muted hover:text-foreground transition-colors"
-        >
-          Voir un exemple →
-        </Link>
       </section>
 
       {/* Proof strip */}
