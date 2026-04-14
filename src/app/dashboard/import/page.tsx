@@ -7,6 +7,11 @@ export default async function ImportPage() {
   const restaurant = await getRestaurant()
   if (!restaurant) redirect('/signup')
 
+  // If still on welcome step, redirect there
+  if (restaurant.onboarding_step === 'welcome') {
+    redirect('/dashboard/welcome')
+  }
+
   // Check if restaurant already has items
   const supabase = createClient()
   const { count } = await supabase

@@ -22,7 +22,7 @@ export function ImportPageClient({ restaurantId }: { restaurantId: string }) {
           restaurantId={restaurantId}
           mode="onboarding"
           onComplete={() => {
-            router.push('/dashboard')
+            router.push('/dashboard/success')
             router.refresh()
           }}
         />

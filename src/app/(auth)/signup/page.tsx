@@ -65,7 +65,7 @@ export default function SignupPage() {
         return
       }
 
-      router.push('/dashboard/import')
+      router.push('/dashboard/welcome')
       router.refresh()
       return
     }

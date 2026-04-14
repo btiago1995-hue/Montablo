@@ -4,6 +4,7 @@ import { slugify } from '@/lib/utils'
 import { redirect } from 'next/navigation'
 import { Sidebar } from '@/components/dashboard/sidebar'
 import { PaywallOverlay } from '@/components/dashboard/paywall-overlay'
+import { TrialBanner } from '@/components/dashboard/trial-banner'
 import { isSubscriptionActive, getSubscriptionStatusLabel } from '@/lib/subscription'
 
 export default async function DashboardLayout({
@@ -48,6 +49,7 @@ export default async function DashboardLayout({
     <div className="min-h-screen bg-[#F5F5F2] flex">
       <Sidebar restaurant={restaurant} />
       <main className="flex-1 px-4 py-6 pt-16 sm:p-6 sm:pt-16 lg:pt-8 lg:p-8 lg:ml-[260px] max-w-[1100px]">
+        <TrialBanner restaurant={restaurant} />
         {children}
       </main>
       {!subscriptionActive && (
