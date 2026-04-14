@@ -13,6 +13,7 @@ export type Restaurant = {
   stripe_subscription_id: string | null
   subscription_status: 'trialing' | 'active' | 'past_due' | 'canceled' | 'inactive'
   google_review_url: string | null
+  onboarding_step: 'welcome' | 'import' | 'complete' | null
   trial_ends_at: string
   created_at: string
   updated_at: string
