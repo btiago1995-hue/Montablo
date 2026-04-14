@@ -75,17 +75,17 @@ export default function LandingPage() {
           Un menu digital élégant que vous mettez à jour en temps réel.
           Vos clients scannent, vous gardez le contrôle.
         </p>
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-col sm:flex-row gap-3">
           <Link
             href="/signup"
-            className="group inline-flex items-center gap-2.5 bg-primary text-white font-medium px-8 py-3.5 rounded-full hover:bg-primary-light transition-all hover:shadow-xl hover:shadow-primary/18 hover:-translate-y-px text-[15px]"
+            className="group inline-flex items-center justify-center gap-2.5 bg-primary text-white font-medium px-8 py-3.5 rounded-full hover:bg-primary-light transition-all hover:shadow-xl hover:shadow-primary/18 hover:-translate-y-px text-[15px]"
           >
             Essayer 14 jours gratuitement
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
           </Link>
           <Link
             href="/menu/demo"
-            className="inline-flex items-center gap-2 text-muted font-medium px-8 py-3.5 rounded-full hover:text-foreground transition-colors text-[15px]"
+            className="inline-flex items-center justify-center gap-2 text-muted font-medium px-8 py-3.5 rounded-full border border-border hover:text-foreground hover:border-foreground/20 transition-colors text-[15px]"
           >
             Voir un exemple
           </Link>
