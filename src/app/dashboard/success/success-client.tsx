@@ -38,11 +38,11 @@ export function SuccessClient({
   restaurant: Restaurant
   itemCount: number
   categoryCount: number
-  previewItems: { name_fr: string; price: number; category_id: string }[]
+  previewItems: { name_fr: string; price: number; category_id: string | null }[]
   catMap: Record<string, string>
 }) {
   const grouped = previewItems.reduce<Record<string, { name_fr: string; price: number }[]>>((acc, item) => {
-    const catName = catMap[item.category_id] ?? 'Autres'
+    const catName = (item.category_id ? catMap[item.category_id] : null) ?? 'Autres'
     if (!acc[catName]) acc[catName] = []
     acc[catName].push({ name_fr: item.name_fr, price: item.price })
     return acc
