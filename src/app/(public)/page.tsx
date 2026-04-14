@@ -75,31 +75,38 @@ export default function LandingPage() {
           Un menu digital élégant que vous mettez à jour en temps réel.
           Vos clients scannent, vous gardez le contrôle.
         </p>
-        <div className="flex flex-col sm:flex-row gap-3">
+        <div className="flex items-center gap-6">
           <Link
             href="/signup"
-            className="group inline-flex items-center justify-center gap-2.5 bg-primary text-white font-medium px-8 py-3.5 rounded-full hover:bg-primary-light transition-all hover:shadow-xl hover:shadow-primary/18 hover:-translate-y-px text-[15px]"
+            className="group inline-flex items-center gap-2.5 bg-primary text-white font-medium px-8 py-3.5 rounded-full hover:bg-primary-light transition-all hover:shadow-xl hover:shadow-primary/18 hover:-translate-y-px text-[15px]"
           >
             Essayer 14 jours gratuitement
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
           </Link>
           <Link
             href="/menu/demo"
-            className="inline-flex items-center justify-center gap-2 text-muted font-medium px-8 py-3.5 rounded-full border border-border hover:text-foreground hover:border-foreground/20 transition-colors text-[15px]"
+            className="hidden sm:inline-flex items-center gap-1.5 text-[14px] text-muted hover:text-foreground transition-colors"
           >
             Voir un exemple
+            <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
+        <Link
+          href="/menu/demo"
+          className="sm:hidden inline-flex items-center gap-1.5 mt-4 text-[14px] text-muted hover:text-foreground transition-colors"
+        >
+          Voir un exemple →
+        </Link>
       </section>
 
       {/* Proof strip */}
-      <div className="border-y border-border bg-white">
-        <div className="max-w-[1120px] mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-10">
-          <span className="text-[13px] text-muted/60">Sans engagement</span>
-          <span className="hidden sm:block w-1 h-1 rounded-full bg-border" />
-          <span className="text-[13px] text-muted/60">Aucune carte bancaire</span>
-          <span className="hidden sm:block w-1 h-1 rounded-full bg-border" />
-          <span className="text-[13px] text-muted/60">Prêt en 5 minutes</span>
+      <div className="bg-white/60">
+        <div className="max-w-[1120px] mx-auto px-6 py-5 flex items-center justify-center gap-4 sm:gap-10 text-[13px] text-muted/50">
+          <span>Sans engagement</span>
+          <span className="w-[3px] h-[3px] rounded-full bg-muted/20" />
+          <span>Aucune carte bancaire</span>
+          <span className="w-[3px] h-[3px] rounded-full bg-muted/20" />
+          <span>Prêt en 5 min</span>
         </div>
       </div>
 
