@@ -8,10 +8,14 @@ export const metadata: Metadata = {
   title: 'Menu digital restaurant Haute-Savoie (74) — MonTablo',
   description:
     'MonTablo, solution de menu digital QR code pour les restaurants de Haute-Savoie. Annecy, Chamonix, Thonon, Megève... Bilingue FR/EN, mises à jour instantanées. Essai gratuit 14 jours.',
+  alternates: {
+    canonical: 'https://www.montablo.com/solutions/haute-savoie',
+  },
   openGraph: {
     title: 'Menu digital restaurant Haute-Savoie — MonTablo',
     description:
       'La solution de menu digital pour les restaurants de Haute-Savoie. Bilingue, QR code, temps réel.',
+    url: 'https://www.montablo.com/solutions/haute-savoie',
   },
 }
 

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { ArrowRight, ArrowLeft, UtensilsCrossed, Globe, Zap, CalendarDays } from 'lucide-react'
 import { JsonLd, breadcrumbJsonLd, faqJsonLd, localBusinessJsonLd } from '@/components/seo/json-ld'
 import { VILLES, getVilleBySlug } from '@/data/haute-savoie'
+import { getPostBySlug } from '@/lib/blog'
 import type { Metadata } from 'next'
 
 type Props = {
@@ -188,7 +189,7 @@ export default function VillePage({ params }: Props) {
                 className="group inline-flex items-center gap-2 text-[15px] text-primary hover:text-primary-light transition-colors"
               >
                 <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
-                {slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())}
+                {getPostBySlug(slug)?.title ?? slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())}
               </Link>
             ))}
           </div>

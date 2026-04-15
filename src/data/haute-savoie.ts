@@ -37,7 +37,7 @@ export const VILLES: VilleData[] = [
       },
     ],
     relatedBlogSlugs: [
-      'menu-bilingue-restaurant',
+      'menu-bilingue-annecy',
       'menu-digital-restaurant-haute-savoie',
       'prix-menu-digital',
     ],

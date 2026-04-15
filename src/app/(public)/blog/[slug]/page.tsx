@@ -154,6 +154,22 @@ export default function BlogPostPage({ params }: Props) {
           </Link>
         </div>
 
+        {/* Hub regional link for Haute-Savoie content */}
+        {(post.category === 'Local' || post.slug.includes('haute-savoie') || post.slug.includes('chamonix') || post.slug.includes('annecy') || post.slug.includes('station-ski') || post.slug.includes('fondue')) && (
+          <section className="max-w-[780px] mx-auto px-6 pb-8">
+            <div className="bg-white border border-border/50 rounded-[14px] px-6 py-5">
+              <p className="text-[13px] text-muted/60 mb-2">Solution régionale</p>
+              <Link
+                href="/solutions/haute-savoie"
+                className="group inline-flex items-center gap-2 font-serif text-lg text-foreground hover:text-primary transition-colors"
+              >
+                Menu digital pour restaurants en Haute-Savoie
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+              </Link>
+            </div>
+          </section>
+        )}
+
         {/* Internal links */}
         <div className="mt-12 pt-8 border-t border-border/50">
           <p className="text-[13px] font-medium text-muted/60 mb-3">A lire aussi</p>
