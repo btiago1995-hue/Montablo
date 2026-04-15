@@ -118,7 +118,7 @@ export default function HauteSavoiePage() {
         <nav className="text-[13px] text-muted/60">
           <Link href="/" className="hover:text-muted transition-colors">Accueil</Link>
           <span className="mx-2">/</span>
-          <span className="text-muted/60">Solutions</span>
+          <span className="hover:text-muted transition-colors">Solutions</span>
           <span className="mx-2">/</span>
           <span className="text-foreground">Haute-Savoie</span>
         </nav>
@@ -271,6 +271,7 @@ export default function HauteSavoiePage() {
                 <Link href="/mentions-legales" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Mentions legales</Link>
                 <Link href="/cgu" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">CGU</Link>
                 <Link href="/confidentialite" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Confidentialite</Link>
+                <Link href="/cookies" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Cookies</Link>
               </div>
             </div>
           </div>
