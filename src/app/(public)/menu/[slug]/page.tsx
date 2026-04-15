@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
 import { MenuContent } from '@/components/public/menu-content'
 import { ReviewPopup } from '@/components/public/review-popup'
+import { JsonLd, menuPageJsonLd } from '@/components/seo/json-ld'
 import { isSubscriptionActive } from '@/lib/subscription'
 import type { Restaurant } from '@/types/database'
 import type { Metadata } from 'next'
@@ -111,8 +112,15 @@ export default async function PublicMenuPage({ params }: Props) {
 
   const primaryColor = restaurant.primary_color || '#2C3E2D'
 
+  const jsonLd = menuPageJsonLd({
+    restaurant: { name: restaurant.name, slug: restaurant.slug },
+    categories: categories ?? [],
+    items: items ?? [],
+  })
+
   return (
     <div className="min-h-screen bg-[#FAFAF7] max-w-[430px] mx-auto relative">
+      <JsonLd data={jsonLd} />
       {/* Cover */}
       <div className="relative h-[240px] overflow-hidden">
         {restaurant.cover_url ? (

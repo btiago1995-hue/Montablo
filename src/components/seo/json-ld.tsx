@@ -108,6 +108,53 @@ export function faqJsonLd(faqs: { question: string; answer: string }[]) {
   }
 }
 
+export function menuPageJsonLd({
+  restaurant,
+  categories,
+  items,
+}: {
+  restaurant: { name: string; slug: string }
+  categories: { id: string; name_fr: string }[]
+  items: { name_fr: string; description_fr: string | null; price: number; category_id: string | null }[]
+}) {
+  const base = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.montablo.com'
+  const menuUrl = `${base}/menu/${restaurant.slug}`
+
+  const sections = categories
+    .map((cat) => {
+      const catItems = items.filter((item) => item.category_id === cat.id)
+      if (catItems.length === 0) return null
+      return {
+        '@type': 'MenuSection',
+        name: cat.name_fr,
+        hasMenuItem: catItems.map((item) => ({
+          '@type': 'MenuItem',
+          name: item.name_fr,
+          ...(item.description_fr ? { description: item.description_fr } : {}),
+          offers: {
+            '@type': 'Offer',
+            price: item.price.toFixed(2),
+            priceCurrency: 'EUR',
+          },
+        })),
+      }
+    })
+    .filter(Boolean)
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Restaurant',
+    name: restaurant.name,
+    url: menuUrl,
+    hasMenu: {
+      '@type': 'Menu',
+      name: `Menu — ${restaurant.name}`,
+      url: menuUrl,
+      ...(sections.length > 0 ? { hasMenuSection: sections } : {}),
+    },
+  }
+}
+
 export function breadcrumbJsonLd(items: { name: string; url: string }[]) {
   return {
     '@context': 'https://schema.org',
