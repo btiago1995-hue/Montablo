@@ -64,7 +64,7 @@ const posts: BlogPost[] = [
     title: 'Chamonix Mont-Blanc : pourquoi votre menu doit être bilingue dès maintenant',
     description:
       'À Chamonix, la majorité de la clientèle est étrangère. Découvrez pourquoi un menu bilingue français/anglais est devenu indispensable pour les restaurants de la station.',
-    date: '2026-05-26',
+    date: '2026-05-27',
     readTime: '5 min',
     category: 'Local',
     keywords: [
@@ -101,7 +101,7 @@ const posts: BlogPost[] = [
     title: 'Menu digital pour station de ski : les spécificités des restaurants de montagne',
     description:
       'Saisonnalité, clientèle internationale, équipe réduite : les restaurants des stations de ski ont des besoins spécifiques. Voici pourquoi le menu digital s\'impose.',
-    date: '2026-05-22',
+    date: '2026-05-23',
     readTime: '6 min',
     category: 'Guide',
     keywords: [
@@ -182,7 +182,7 @@ const posts: BlogPost[] = [
     title: 'Restaurant en Haute-Savoie : comment gérer un menu pour touristes internationaux',
     description:
       'La Haute-Savoie accueille des millions de touristes étrangers chaque année. Guide pratique pour adapter votre menu digital à cette clientèle internationale.',
-    date: '2026-05-14',
+    date: '2026-05-15',
     readTime: '6 min',
     category: 'Local',
     keywords: [
@@ -944,7 +944,7 @@ const posts: BlogPost[] = [
 ]
 
 export function getAllPosts(): BlogPost[] {
-  return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  return [...posts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 }
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
