@@ -14,14 +14,19 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const base = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.montablo.com'
   const ville = getVilleBySlug(params.ville)
   if (!ville) return {}
   return {
     title: ville.metadata.title,
     description: ville.metadata.description,
+    alternates: {
+      canonical: `${base}/solutions/haute-savoie/${ville.slug}`,
+    },
     openGraph: {
       title: ville.metadata.title,
       description: ville.metadata.description,
+      url: `${base}/solutions/haute-savoie/${ville.slug}`,
     },
   }
 }
@@ -170,6 +175,25 @@ export default function VillePage({ params }: Props) {
           ))}
         </div>
       </section>
+
+      {/* Articles liés */}
+      {ville.relatedBlogSlugs.length > 0 && (
+        <section className="max-w-[780px] mx-auto px-6 pb-24">
+          <h2 className="font-serif text-2xl text-foreground mb-6">Articles liés</h2>
+          <div className="flex flex-col gap-3">
+            {ville.relatedBlogSlugs.map((slug) => (
+              <Link
+                key={slug}
+                href={`/blog/${slug}`}
+                className="group inline-flex items-center gap-2 text-[15px] text-primary hover:text-primary-light transition-colors"
+              >
+                <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+                {slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())}
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* CTA */}
       <section className="max-w-[1120px] mx-auto px-6 pb-24">
