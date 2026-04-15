@@ -16,6 +16,249 @@ export interface BlogSection {
 
 const posts: BlogPost[] = [
   {
+    slug: 'ouvrir-restaurant-haute-savoie',
+    title: 'Ouvrir un restaurant en Haute-Savoie : tout ce qu\'il faut savoir en 2026',
+    description:
+      'Réglementation, clientèle touristique, saisonnalité, concurrence : le guide complet pour ouvrir et gérer un restaurant en Haute-Savoie.',
+    date: '2026-05-30',
+    readTime: '7 min',
+    category: 'Guide',
+    keywords: [
+      'ouvrir restaurant haute-savoie',
+      'restaurant haute-savoie',
+      'restauration haute-savoie 74',
+    ],
+    content: [
+      {
+        heading: 'La Haute-Savoie, un marché de la restauration unique en France',
+        paragraphs: [
+          'La Haute-Savoie (département 74) est l\'un des marchés de la restauration les plus dynamiques de France. Avec ses stations de ski emblématiques (Chamonix, Megève, La Clusaz), ses villes touristiques (Annecy, Évian-les-Bains, Thonon-les-Bains) et sa frontière avec la Suisse, le département accueille chaque année plus de 10 millions de touristes. Ce flux est une opportunité considérable pour les restaurateurs — mais aussi une exigence.',
+          'Les clients de Haute-Savoie ne sont pas des clients ordinaires. En haute saison, une majorité d\'entre eux vient de l\'étranger — Grande-Bretagne, Suisse, États-Unis, Pays-Bas, Belgique. Ils sont habitués à des standards de service élevés, ils ne lisent pas nécessairement le français, et ils comparent avec ce qu\'ils connaissent chez eux. Pour un restaurateur, s\'adapter à cette réalité est une condition de succès.',
+        ],
+      },
+      {
+        heading: 'Gérer la saisonnalité : le défi principal des restaurants de Haute-Savoie',
+        paragraphs: [
+          'La saisonnalité est la contrainte numéro un des restaurateurs de Haute-Savoie. Les stations de ski connaissent deux pics d\'activité — hiver (décembre à avril) et été (juillet à août) — séparés par des creux de mai-juin et septembre-octobre où la fréquentation chute radicalement. Pour les restaurants de plaine comme Annecy ou Thonon, la saison estivale est la principale, avec une clientèle de bords de lac.',
+          'Cette saisonnalité impose une gestion de carte flexible : les menus hivernaux mettent en avant les spécialités savoyardes (fondue, raclette, tartiflette, diots), tandis que les menus estivaux s\'orientent vers des plats plus légers. Changer de carte deux fois par an avec des menus papier représente un coût d\'impression et de gestion significatif. Un menu digital comme MonTablo permet de modifier l\'intégralité de la carte en quelques minutes, sans impression.',
+        ],
+      },
+      {
+        heading: 'La clientèle internationale : pourquoi le menu bilingue est indispensable',
+        paragraphs: [
+          'À Chamonix, plus de 60 % des clients des restaurants sont étrangers en haute saison hivernale. À Annecy, les touristes britanniques, suisses et italiens représentent une part majeure de la fréquentation estivale. Dans ce contexte, proposer un menu uniquement en français est une erreur stratégique : vous perdez des clients qui commettent des erreurs de commande, hésitent, ou choisissent un concurrent avec un menu plus accessible.',
+          'Un menu bilingue français / anglais est le minimum pour accueillir confortablement la clientèle internationale. MonTablo intègre nativement cette fonctionnalité : vous saisissez vos plats en français et en anglais, et vos clients choisissent leur langue directement depuis leur téléphone en scannant le QR code sur la table.',
+        ],
+      },
+      {
+        heading: 'Les outils digitaux indispensables pour un restaurant en Haute-Savoie',
+        paragraphs: [
+          'En 2026, un restaurant en Haute-Savoie qui veut attirer et fidéliser une clientèle internationale doit disposer d\'un minimum d\'outils digitaux : présence sur Google My Business, photos de qualité sur les plateformes de réservation, et menu digital accessible par QR code. Ce dernier point est souvent sous-estimé, alors qu\'il a un impact direct sur l\'expérience client.',
+          'MonTablo est la solution de menu digital conçue pour les restaurateurs de Haute-Savoie : bilingue, simple à gérer, accessible instantanément par QR code sans application. L\'essai gratuit de 14 jours permet de tester la solution sans engagement, avec vos vrais plats et votre vraie carte.',
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'menu-bilingue-chamonix',
+    title: 'Chamonix Mont-Blanc : pourquoi votre menu doit être bilingue dès maintenant',
+    description:
+      'À Chamonix, la majorité de la clientèle est étrangère. Découvrez pourquoi un menu bilingue français/anglais est devenu indispensable pour les restaurants de la station.',
+    date: '2026-05-26',
+    readTime: '5 min',
+    category: 'Local',
+    keywords: [
+      'menu bilingue chamonix',
+      'menu digital chamonix',
+      'restaurant chamonix menu anglais',
+    ],
+    content: [
+      {
+        heading: 'Chamonix, une ville internationale qui parle anglais',
+        paragraphs: [
+          'Chamonix-Mont-Blanc accueille chaque année environ 5 millions de visiteurs, dont une majorité vient de l\'étranger. La station est particulièrement connue des Britanniques — au point que certains appellent Chamonix "the fifth state of Britain" — mais aussi des Américains, des Australiens, des Néo-Zélandais, des Espagnols et des Italiens. En haute saison ski (janvier-mars), il n\'est pas rare que les anglophones représentent plus de la moitié de la clientèle d\'un restaurant.',
+          'Dans ce contexte, proposer uniquement un menu en français n\'est plus viable. Vos clients étrangers commandent au hasard, s\'appuient sur Google Translate (avec des résultats parfois cocasses), ou choisissent simplement un autre restaurant dont le menu est en anglais. La perte de chiffre d\'affaires est réelle.',
+        ],
+      },
+      {
+        heading: 'Ce qu\'un menu bilingue change concrètement pour votre restaurant',
+        paragraphs: [
+          'Un menu bilingue français / anglais améliore l\'expérience client de manière immédiate et mesurable. Les clients étrangers commandent avec confiance, sans avoir besoin d\'appeler un serveur pour des traductions. Le temps moyen de commande diminue, le nombre d\'erreurs de plats baisse, et la satisfaction globale augmente — ce qui se traduit directement par de meilleures notes sur Google et TripAdvisor.',
+          'Pour un restaurant de Chamonix, un menu bilingue est aussi un argument commercial : il signifie que vous accueillez activement la clientèle internationale, pas seulement que vous la tolérez. C\'est un signal de professionnalisme qui différencie votre établissement.',
+        ],
+      },
+      {
+        heading: 'Comment mettre en place un menu bilingue facilement avec MonTablo',
+        paragraphs: [
+          'MonTablo intègre nativement un menu bilingue français / anglais. Lors de la création de chaque plat, vous saisissez le nom et la description dans les deux langues. Vos clients voient un bouton de sélection de langue directement sur le menu digital et basculent d\'un clic. Aucune impression séparée, aucun menu anglais physique à gérer.',
+          'La mise à jour est synchronisée : quand vous modifiez un prix ou ajoutez un plat, la modification est visible dans les deux langues instantanément. Pour les restaurants de Chamonix qui changent de carte entre la saison ski et l\'été, c\'est un gain de temps considérable.',
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'menu-digital-station-ski',
+    title: 'Menu digital pour station de ski : les spécificités des restaurants de montagne',
+    description:
+      'Saisonnalité, clientèle internationale, équipe réduite : les restaurants des stations de ski ont des besoins spécifiques. Voici pourquoi le menu digital s\'impose.',
+    date: '2026-05-22',
+    readTime: '6 min',
+    category: 'Guide',
+    keywords: [
+      'menu digital station ski',
+      'menu restaurant montagne',
+      'menu digital haute-savoie station',
+    ],
+    content: [
+      {
+        heading: 'Les défis uniques de la restauration en station de ski',
+        paragraphs: [
+          'Un restaurant en station de ski n\'est pas un restaurant comme les autres. Il fonctionne à flux tendu pendant 4 à 5 mois par an, avec des pics d\'activité extrêmes les week-ends de vacances scolaires. L\'équipe est souvent saisonnière, les plats changent selon les disponibilités, et la clientèle est massivement internationale. Ces contraintes rendent la gestion d\'une carte papier particulièrement pénible.',
+          'Réimprimer les menus à chaque changement de plat ou de prix représente un coût non négligeable et une perte de temps en pleine saison. Une ardoise est plus flexible mais illisible depuis l\'entrée et impossible à traduire. Le menu digital résout ces problèmes d\'un coup.',
+        ],
+      },
+      {
+        heading: 'Pourquoi la clientèle internationale des stations exige un menu digital',
+        paragraphs: [
+          'Les skieurs étrangers qui déjeunent dans une station alpine sont habitués, dans leurs propres pays, à un niveau de service digital élevé. En Grande-Bretagne, aux Pays-Bas ou en Australie, les QR codes sur table sont devenus la norme après 2020. Arriver dans un restaurant savoyard et se voir remettre un menu papier plastifié en français uniquement est perçu comme un manque de modernité.',
+          'Un menu digital bilingue accessible par QR code est aujourd\'hui perçu comme un standard de qualité, pas comme un gadget. Il envoie le signal que votre restaurant est professionnel et attentif à l\'expérience client.',
+        ],
+      },
+      {
+        heading: 'Gestion de la saisonnalité : changer de carte en 5 minutes',
+        paragraphs: [
+          'Avec MonTablo, passer d\'une carte hiver à une carte été prend moins de 5 minutes. Vous désactivez les plats de saison hivernale (fondues, raclettes, tartiflettes) et activez les plats estivaux, ou vous créez une nouvelle carte complète et la publiez en un clic. Le QR code reste le même — vos clients scannent toujours le même support mais voient la nouvelle carte immédiatement.',
+          'Pendant la saison, vous pouvez aussi désactiver un plat épuisé en quelques secondes depuis votre téléphone, même en plein service. Plus de clients déçus à qui on annonce que le plat qu\'ils ont commandé n\'est plus disponible.',
+        ],
+      },
+      {
+        heading: 'Comment MonTablo répond aux besoins des restaurants de station',
+        paragraphs: [
+          'MonTablo est conçu pour être géré par une seule personne, même sans compétence technique. L\'interface d\'administration est entièrement mobile : vous modifiez votre carte depuis votre téléphone entre deux services. Aucune formation, aucun matériel supplémentaire, aucun abonnement annuel bloquant.',
+          'Pour les restaurants de Chamonix, Megève, La Clusaz ou Les Gets qui veulent moderniser leur expérience client sans investissement lourd, MonTablo propose un essai gratuit de 14 jours puis 29,99 € / mois sans engagement. Le coût est amorti dès le premier mois d\'économies d\'impression.',
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'menu-saisonnier-fondue-raclette',
+    title: 'Fondue, raclette, tartiflette : gérer un menu saisonnier sans se casser la tête',
+    description:
+      'Les spécialités savoyardes font la fierté des restaurants de Haute-Savoie — mais gérer un menu qui change avec les saisons est un casse-tête. Voici comment simplifier ça.',
+    date: '2026-05-18',
+    readTime: '5 min',
+    category: 'Guide',
+    keywords: [
+      'menu saisonnier restaurant',
+      'fondue raclette tartiflette menu digital',
+      'menu restaurant haute-savoie saisonnier',
+    ],
+    content: [
+      {
+        heading: 'La cuisine savoyarde, un atout à double tranchant',
+        paragraphs: [
+          'La fondue, la raclette et la tartiflette sont les plats signatures des restaurants de Haute-Savoie. Ils attirent les touristes, remplissent les salles en hiver, et font l\'identité de la région. Mais ces spécialités sont fondamentalement saisonnières : personne ne commande une fondue en plein mois de juillet, et vos clients estivaux cherchent plutôt des salades fraîches et des grillades.',
+          'Pour les restaurateurs, cette réalité impose de gérer deux cartes très différentes selon la saison. Avec des menus papier, cela signifie deux impressions complètes par an, parfois plus si les prix changent en cours de saison. Le coût et la logistique s\'accumulent rapidement.',
+        ],
+      },
+      {
+        heading: 'Comment le menu digital simplifie la gestion saisonnière',
+        paragraphs: [
+          'Un menu digital comme MonTablo vous permet de modifier votre carte en temps réel, sans impression et sans frais supplémentaires. Pour le passage de l\'hiver à l\'été, vous désactivez simplement les plats de fondues et raclettes et activez vos plats estivaux. L\'opération prend 5 minutes depuis votre téléphone.',
+          'Vous pouvez aussi gérer des variations intermédiaires : un plat de fondue disponible uniquement le week-end, une tartiflette au menu uniquement dès octobre, un fromage local disponible selon l\'approvisionnement. Ces ajustements qui prenaient un temps considérable avec des menus papier se font désormais en quelques taps.',
+        ],
+      },
+      {
+        heading: 'Présenter les spécialités savoyardes à la clientèle internationale',
+        paragraphs: [
+          'La fondue, la raclette et la tartiflette ne s\'expliquent pas d\'elles-mêmes à un client britannique ou américain qui n\'a jamais visité les Alpes. Un menu digital bien rédigé peut inclure une courte description de chaque spécialité — les ingrédients, le mode de préparation, l\'ambiance — qui donne envie de commander et évite les mauvaises surprises.',
+          'MonTablo vous permet d\'ajouter des descriptions détaillées pour chaque plat, dans les deux langues. Pour un restaurant de Haute-Savoie, c\'est une opportunité de raconter l\'histoire de votre cuisine et de valoriser vos produits locaux auprès d\'une clientèle internationale qui ne les connaît pas encore.',
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'menu-digital-restaurant-haute-savoie',
+    title: 'Restaurant en Haute-Savoie : comment gérer un menu pour touristes internationaux',
+    description:
+      'La Haute-Savoie accueille des millions de touristes étrangers chaque année. Guide pratique pour adapter votre menu digital à cette clientèle internationale.',
+    date: '2026-05-14',
+    readTime: '6 min',
+    category: 'Local',
+    keywords: [
+      'menu digital restaurant haute-savoie',
+      'menu touristes internationaux haute-savoie',
+      'restaurant haute-savoie menu bilingue',
+    ],
+    content: [
+      {
+        heading: 'La Haute-Savoie, carrefour du tourisme alpin européen',
+        paragraphs: [
+          'La Haute-Savoie est le département français le plus visité après Paris, avec plus de 10 millions de nuitées touristiques par an. Annecy, Chamonix, Megève, Thonon-les-Bains, Évian-les-Bains : chaque ville attire une clientèle internationale différente, mais toutes partagent la même réalité — une majorité de visiteurs étrangers pendant les saisons hautes.',
+          'Pour les restaurateurs du département, cette donnée change tout : le menu, le service, et l\'expérience client doivent être pensés pour des personnes qui ne parlent pas nécessairement le français. Cela commence par le menu lui-même.',
+        ],
+      },
+      {
+        heading: 'Pourquoi un menu uniquement en français est un handicap en Haute-Savoie',
+        paragraphs: [
+          'Un client anglophone ou germanophone face à un menu uniquement en français a trois options : appeler le serveur pour une traduction (pénible pour lui et pour vous), sortir son téléphone pour utiliser Google Translate (expérience médiocre), ou choisir un concurrent dont le menu est accessible. La troisième option est plus fréquente qu\'on ne le pense.',
+          'Les avis Google et TripAdvisor des restaurants de Haute-Savoie font régulièrement mention du manque de menu en anglais comme point négatif. À l\'inverse, les restaurants qui proposent un menu bilingue reçoivent souvent des commentaires positifs de la clientèle internationale sur cet aspect.',
+        ],
+      },
+      {
+        heading: 'MonTablo : la solution de menu digital pour les restaurants de Haute-Savoie',
+        paragraphs: [
+          'MonTablo est une solution de menu digital avec QR code conçue pour les restaurants français qui accueillent une clientèle internationale. Le menu est bilingue français / anglais nativement, accessible par QR code sans application à télécharger, et mis à jour en temps réel.',
+          'Pour les restaurants de Haute-Savoie, MonTablo est disponible immédiatement avec un essai gratuit de 14 jours. L\'ensemble de la solution — création du menu, génération du QR code, publication — se gère depuis un navigateur ou un téléphone, sans compétence technique.',
+        ],
+      },
+      {
+        heading: 'Résultats concrets pour les restaurants qui passent au menu digital',
+        paragraphs: [
+          'Les restaurateurs qui adoptent un menu digital rapportent plusieurs bénéfices immédiats : moins d\'erreurs de commande (les clients voient exactement ce qu\'ils commandent), service plus rapide (les clients parcourent la carte pendant que vous les installez), et meilleure satisfaction des clients internationaux.',
+          'Sur le long terme, un menu digital bien géré contribue à améliorer la réputation en ligne du restaurant. Les clients étrangers, qui laissent davantage d\'avis en ligne que la clientèle locale, mentionnent plus souvent l\'accessibilité du menu comme critère de satisfaction.',
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'menu-bilingue-annecy',
+    title: 'Annecy : nos conseils pour digitaliser votre restaurant au bord du lac',
+    description:
+      'Annecy est l\'une des villes les plus touristiques de France. Guide pratique pour les restaurateurs annéciens qui veulent adopter le menu digital.',
+    date: '2026-05-10',
+    readTime: '5 min',
+    category: 'Local',
+    keywords: [
+      'menu digital restaurant annecy',
+      'digitaliser restaurant annecy',
+      'menu qr code annecy',
+    ],
+    content: [
+      {
+        heading: 'Annecy, ville touristique premium : les attentes sont élevées',
+        paragraphs: [
+          'Annecy est régulièrement classée parmi les plus belles villes de France. Son lac, son vieux quartier, ses restaurants gastronomiques et ses brasseries attirent plus de 3 millions de visiteurs par an. Cette clientèle — suisse, italienne, britannique, parisienne — est habituée à un niveau de service élevé et compare votre restaurant avec les meilleurs établissements qu\'elle a fréquentés.',
+          'Dans ce contexte, l\'expérience client commence dès la consultation du menu. Un menu digital propre, bilingue et accessible en deux secondes envoie un signal fort : vous êtes un établissement professionnel qui respecte ses clients. Un menu papier froissé ou une ardoise difficile à lire, c\'est l\'inverse.',
+        ],
+      },
+      {
+        heading: 'Les spécificités des restaurants d\'Annecy à prendre en compte',
+        paragraphs: [
+          'Les restaurants du Vieux-Annecy et des bords du lac font face à des contraintes particulières : terrasses en été avec beaucoup de clients internationaux, menus qui changent selon la saison et les arrivages, et une concurrence intense entre établissements dans un espace géographique réduit. La réactivité et la qualité de l\'expérience sont des facteurs différenciants.',
+          'Un menu digital MonTablo permet de modifier sa carte en temps réel — parfait pour les restaurants qui ajustent leur offre selon les produits frais du marché d\'Annecy ou les arrivages locaux. Le menu bilingue est indispensable pour la clientèle du Vieux-Annecy où les touristes étrangers sont omniprésents en juillet-août.',
+        ],
+      },
+      {
+        heading: 'Comment démarrer avec MonTablo à Annecy',
+        paragraphs: [
+          'Démarrer avec MonTablo prend moins de 5 minutes. Vous créez votre compte, ajoutez vos plats et catégories (entrées, plats, desserts, boissons), personnalisez les couleurs aux couleurs de votre restaurant, et générez votre QR code. Vous pouvez l\'imprimer sur des chevalets de table ou des autocollants et le poser sur vos tables dès le service suivant.',
+          'L\'essai gratuit de 14 jours est sans carte bancaire. Si MonTablo correspond à vos besoins — et pour les restaurants d\'Annecy, il devrait — vous continuez à 29,99 € / mois ou 26,99 € / mois en annuel. Plats illimités, mises à jour illimitées.',
+        ],
+      },
+    ],
+  },
+  {
     slug: 'creer-menu-digital-restaurant',
     title: 'Comment creer un menu digital pour votre restaurant en 5 minutes',
     description:
