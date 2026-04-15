@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { ArrowRight, Check, UtensilsCrossed } from 'lucide-react'
 import { PricingToggle } from '@/components/public/pricing-toggle'
+import { JsonLd, homepageJsonLd } from '@/components/seo/json-ld'
 
 const steps = [
   { num: '01', title: 'Inscrivez-vous', desc: 'Créez votre compte en 30 secondes. Aucune carte de crédit requise.' },
@@ -37,8 +38,13 @@ const menuItems = {
 }
 
 export default function LandingPage() {
+  const schemas = homepageJsonLd()
+
   return (
     <div className="min-h-screen bg-background">
+      {schemas.map((schema, i) => (
+        <JsonLd key={i} data={schema} />
+      ))}
       {/* Nav */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/85 backdrop-blur-xl border-b border-border/50">
         <div className="flex items-center justify-between px-6 py-4 max-w-[1120px] mx-auto">
@@ -47,6 +53,15 @@ export default function LandingPage() {
             <span className="font-serif text-xl text-primary tracking-tight">MonTablo</span>
           </Link>
           <div className="flex items-center gap-6">
+            <Link href="/fonctionnalites" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
+              Fonctionnalites
+            </Link>
+            <Link href="/tarifs" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
+              Tarifs
+            </Link>
+            <Link href="/blog" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
+              Blog
+            </Link>
             <Link
               href="/login"
               className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block"
@@ -230,25 +245,47 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border py-8 px-6">
+      <footer className="border-t border-border py-12 px-6">
         <div className="max-w-[1120px] mx-auto">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4">
-            <div className="flex items-center gap-2">
-              <UtensilsCrossed className="w-[18px] h-[18px] text-primary" />
-              <span className="font-serif text-[15px] text-primary">MonTablo</span>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 mb-10">
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <UtensilsCrossed className="w-[18px] h-[18px] text-primary" />
+                <span className="font-serif text-[15px] text-primary">MonTablo</span>
+              </div>
+              <p className="text-[12px] text-muted/60 leading-relaxed">
+                Le menu digital pour les restaurants exigeants.
+              </p>
             </div>
-            <p className="text-xs text-muted/60">
-              &copy; {new Date().getFullYear()} MonTablo. Tous droits réservés.
-            </p>
+            <div>
+              <p className="text-[12px] font-medium text-foreground mb-3">Produit</p>
+              <div className="space-y-2">
+                <Link href="/fonctionnalites" className="block text-[12px] text-muted/60 hover:text-muted transition-colors">Fonctionnalites</Link>
+                <Link href="/tarifs" className="block text-[12px] text-muted/60 hover:text-muted transition-colors">Tarifs</Link>
+                <Link href="/menu/demo" className="block text-[12px] text-muted/60 hover:text-muted transition-colors">Voir un exemple</Link>
+              </div>
+            </div>
+            <div>
+              <p className="text-[12px] font-medium text-foreground mb-3">Ressources</p>
+              <div className="space-y-2">
+                <Link href="/blog" className="block text-[12px] text-muted/60 hover:text-muted transition-colors">Blog</Link>
+                <Link href="/faq" className="block text-[12px] text-muted/60 hover:text-muted transition-colors">FAQ</Link>
+              </div>
+            </div>
+            <div>
+              <p className="text-[12px] font-medium text-foreground mb-3">Legal</p>
+              <div className="space-y-2">
+                <Link href="/mentions-legales" className="block text-[12px] text-muted/60 hover:text-muted transition-colors">Mentions legales</Link>
+                <Link href="/cgu" className="block text-[12px] text-muted/60 hover:text-muted transition-colors">CGU</Link>
+                <Link href="/confidentialite" className="block text-[12px] text-muted/60 hover:text-muted transition-colors">Confidentialite</Link>
+                <Link href="/cookies" className="block text-[12px] text-muted/60 hover:text-muted transition-colors">Cookies</Link>
+              </div>
+            </div>
           </div>
-          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] text-muted/50">
-            <Link href="/mentions-legales" className="hover:text-muted transition-colors">Mentions légales</Link>
-            <span className="hidden sm:inline">·</span>
-            <Link href="/cgu" className="hover:text-muted transition-colors">CGU</Link>
-            <span className="hidden sm:inline">·</span>
-            <Link href="/confidentialite" className="hover:text-muted transition-colors">Confidentialité</Link>
-            <span className="hidden sm:inline">·</span>
-            <Link href="/cookies" className="hover:text-muted transition-colors">Cookies</Link>
+          <div className="border-t border-border/50 pt-6 text-center">
+            <p className="text-xs text-muted/60">
+              &copy; {new Date().getFullYear()} MonTablo. Tous droits reserves.
+            </p>
           </div>
         </div>
       </footer>
