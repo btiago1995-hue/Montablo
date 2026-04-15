@@ -31,41 +31,47 @@ export async function GET(request: NextRequest) {
             alignItems: 'center',
             justifyContent: 'center',
             flexDirection: 'column',
+            gap: '0px',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-            <div
-              style={{
-                width: '52px',
-                height: '52px',
-                borderRadius: '12px',
-                backgroundColor: ACCENT,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '28px',
-              }}
-            >
-              🍽️
-            </div>
-            <div
-              style={{
-                fontSize: '52px',
-                color: WHITE,
-                fontFamily: 'serif',
-                letterSpacing: '-0.02em',
-                display: 'flex',
-              }}
-            >
-              MonTablo
-            </div>
-          </div>
+          {/* UtensilsCrossed icon as SVG */}
+          <svg
+            width="140"
+            height="140"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke={ACCENT}
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="m16 2-2.3 2.3a3 3 0 0 0 0 4.2l1.8 1.8a3 3 0 0 0 4.2 0L22 8" />
+            <path d="M15 15 3.3 3.3a4.2 4.2 0 0 0 0 6l7.3 7.3c.7.7 2 .7 2.8 0L15 15Zm0 0 7 7" />
+            <path d="m2.1 21.8 6.4-6.3" />
+            <path d="m19 5-7 7" />
+          </svg>
+
+          {/* MonTablo */}
           <div
             style={{
-              fontSize: '18px',
+              fontSize: '56px',
+              color: WHITE,
+              fontFamily: 'serif',
+              letterSpacing: '-0.01em',
+              marginTop: '20px',
+              display: 'flex',
+            }}
+          >
+            MonTablo
+          </div>
+
+          {/* Menu Digital */}
+          <div
+            style={{
+              fontSize: '20px',
               color: ACCENT,
-              letterSpacing: '0.12em',
-              marginTop: '14px',
+              letterSpacing: '0.14em',
+              marginTop: '10px',
               textTransform: 'uppercase',
               display: 'flex',
             }}
