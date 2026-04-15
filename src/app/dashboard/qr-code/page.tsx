@@ -6,7 +6,7 @@ export default async function QRCodePage() {
   const restaurant = await getRestaurant()
   if (!restaurant) redirect('/signup')
 
-  const menuUrl = `${process.env.NEXT_PUBLIC_APP_URL}/menu/${restaurant.slug}`
+  const menuUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.montablo.com'}/menu/${restaurant.slug}`
 
   return (
     <div>

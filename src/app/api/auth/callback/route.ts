@@ -1,6 +1,8 @@
 import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { slugify } from '@/lib/utils'
+import { getResend, EMAIL_FROM } from '@/lib/resend'
+import { welcome } from '@/lib/email-templates'
 import { NextResponse } from 'next/server'
 
 export async function GET(request: Request) {
@@ -32,6 +34,21 @@ export async function GET(request: Request) {
             name: restaurantName,
             slug,
           })
+
+          // Send welcome email
+          const appUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.montablo.com'
+          const email = welcome(restaurantName, `${appUrl}/dashboard`)
+
+          if (user.email) {
+            await getResend().emails.send({
+              from: EMAIL_FROM,
+              to: user.email,
+              subject: email.subject,
+              html: email.html,
+            }).catch(() => {
+              // Non-blocking: don't fail the callback if email fails
+            })
+          }
         }
       }
 

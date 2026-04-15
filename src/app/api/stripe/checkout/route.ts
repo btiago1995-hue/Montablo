@@ -37,8 +37,8 @@ export async function POST(request: Request) {
         quantity: 1,
       },
     ],
-    success_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard?success=true`,
-    cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard/settings`,
+    success_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.montablo.com'}/dashboard?success=true`,
+    cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.montablo.com'}/dashboard/settings`,
     metadata: {
       restaurant_id: restaurant.id,
       user_id: user.id,
