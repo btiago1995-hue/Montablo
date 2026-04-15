@@ -10,14 +10,23 @@ export async function GET(request: Request) {
   const code = searchParams.get('code')
   const next = searchParams.get('next') ?? '/dashboard/import'
 
-  if (code) {
+  if (!code) {
+    return NextResponse.redirect(`${origin}/login?error=auth`)
+  }
+
+  try {
     const supabase = createClient()
     const { error } = await supabase.auth.exchangeCodeForSession(code)
-    if (!error) {
-      // Check if user needs a restaurant created (post email-confirmation signup)
-      const { data: { user } } = await supabase.auth.getUser()
 
-      if (user) {
+    if (error) {
+      console.error('[auth/callback] Exchange error:', error.message)
+      return NextResponse.redirect(`${origin}/login?error=auth`)
+    }
+
+    const { data: { user } } = await supabase.auth.getUser()
+
+    if (user) {
+      try {
         const adminClient = createAdminClient()
         const { data: existingRestaurant } = await adminClient
           .from('restaurants')
@@ -35,26 +44,30 @@ export async function GET(request: Request) {
             slug,
           })
 
-          // Send welcome email
+          // Send welcome email (non-blocking)
           const appUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.montablo.com'
           const email = welcome(restaurantName, `${appUrl}/dashboard`)
 
           if (user.email) {
-            await getResend().emails.send({
+            getResend().emails.send({
               from: EMAIL_FROM,
               to: user.email,
               subject: email.subject,
               html: email.html,
-            }).catch(() => {
-              // Non-blocking: don't fail the callback if email fails
+            }).catch((err) => {
+              console.error('[auth/callback] Welcome email failed:', err)
             })
           }
         }
+      } catch (err) {
+        console.error('[auth/callback] Restaurant creation error:', err)
+        // Don't block login even if restaurant creation fails
       }
-
-      return NextResponse.redirect(`${origin}${next}`)
     }
-  }
 
-  return NextResponse.redirect(`${origin}/login?error=auth`)
+    return NextResponse.redirect(`${origin}${next}`)
+  } catch (err) {
+    console.error('[auth/callback] Unexpected error:', err)
+    return NextResponse.redirect(`${origin}/login?error=auth`)
+  }
 }
