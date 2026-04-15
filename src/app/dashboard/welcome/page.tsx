@@ -4,7 +4,7 @@ import { WelcomeClient } from './welcome-client'
 
 export default async function WelcomePage() {
   const restaurant = await getRestaurant()
-  if (!restaurant) redirect('/signup')
+  if (!restaurant) redirect('/dashboard')
 
   if (restaurant.onboarding_step === 'complete') {
     redirect('/dashboard')

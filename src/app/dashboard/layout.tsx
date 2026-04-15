@@ -2,6 +2,7 @@ import { getUser, getRestaurant } from '@/lib/supabase/cached'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { slugify } from '@/lib/utils'
 import { redirect } from 'next/navigation'
+import { createClient } from '@/lib/supabase/server'
 import { Sidebar } from '@/components/dashboard/sidebar'
 import { PaywallOverlay } from '@/components/dashboard/paywall-overlay'
 import { TrialBanner } from '@/components/dashboard/trial-banner'
@@ -26,7 +27,7 @@ export default async function DashboardLayout({
     const restaurantName = user.user_metadata.restaurant_name as string
     const slug = slugify(restaurantName) + '-' + Math.random().toString(36).slice(2, 6)
 
-    const { data: newRestaurant } = await adminClient
+    const { data: newRestaurant, error: insertError } = await adminClient
       .from('restaurants')
       .insert({
         owner_id: user.id,
@@ -36,10 +37,24 @@ export default async function DashboardLayout({
       .select('*')
       .single()
 
-    restaurant = newRestaurant
+    if (insertError) {
+      // Restaurant may already exist (created in callback) — try fetching again with admin
+      console.error('[dashboard/layout] Restaurant insert failed, retrying fetch:', insertError.message)
+      const { data: retryRestaurant } = await adminClient
+        .from('restaurants')
+        .select('*')
+        .eq('owner_id', user.id)
+        .single()
+      restaurant = retryRestaurant
+    } else {
+      restaurant = newRestaurant
+    }
   }
 
+  // If still no restaurant, sign out and redirect to signup to break redirect loop
   if (!restaurant) {
+    const supabase = createClient()
+    await supabase.auth.signOut()
     redirect('/signup')
   }
 

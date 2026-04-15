@@ -5,7 +5,7 @@ import { ImportPageClient } from './import-client'
 
 export default async function ImportPage() {
   const restaurant = await getRestaurant()
-  if (!restaurant) redirect('/signup')
+  if (!restaurant) redirect('/dashboard')
 
   // If still on welcome step, redirect there
   if (restaurant.onboarding_step === 'welcome') {
