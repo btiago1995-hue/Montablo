@@ -256,6 +256,7 @@ export default function LandingPage() {
               <p className="text-[13px] text-muted/60 leading-relaxed">
                 Le menu digital pour les restaurants exigeants.
               </p>
+              <Link href="/a-propos" className="block text-[13px] text-muted/60 hover:text-muted transition-colors mt-3">A propos</Link>
             </div>
             <div>
               <p className="text-[13px] font-medium text-foreground mb-3">Produit</p>
@@ -263,6 +264,7 @@ export default function LandingPage() {
                 <Link href="/fonctionnalites" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Fonctionnalites</Link>
                 <Link href="/tarifs" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Tarifs</Link>
                 <Link href="/menu/demo" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Voir un exemple</Link>
+                <Link href="/solutions/bistrot" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Solutions</Link>
               </div>
             </div>
             <div>

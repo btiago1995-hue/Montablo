@@ -484,6 +484,220 @@ const posts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: 'importer-menu-ia',
+    title: 'Importer votre carte existante grace a l\'IA',
+    description:
+      'Decouvrez comment l\'import par IA de MonTablo extrait automatiquement vos plats, descriptions et prix a partir d\'une simple photo de votre carte.',
+    date: '2026-05-15',
+    readTime: '4 min',
+    category: 'Fonctionnalite',
+    keywords: ['import menu ia', 'numeriser carte restaurant', 'photo menu restaurant ia'],
+    content: [
+      {
+        heading: 'Pourquoi numeriser votre carte manuellement est une perte de temps',
+        paragraphs: [
+          'Saisir chaque plat un par un, avec sa description et son prix, est la premiere raison pour laquelle beaucoup de restaurateurs repoussent le passage au digital. Quand votre carte comporte 40, 60 ou meme 80 references, la perspective de tout retaper a la main est decourageante.',
+          'C\'est exactement pour resoudre ce probleme que MonTablo a developpe l\'import par intelligence artificielle. L\'idee est simple : vous prenez une photo de votre carte existante, et l\'IA se charge d\'extraire toutes les informations pour vous.',
+        ],
+      },
+      {
+        heading: 'Comment fonctionne l\'import par IA',
+        paragraphs: [
+          'Le processus se deroule en trois etapes. Premierement, vous photographiez votre carte papier depuis votre telephone. Deuxiemement, l\'IA analyse l\'image, identifie les noms de plats, les descriptions et les prix, puis les organise par categorie. Troisiemement, vous relisez le resultat, corrigez les eventuelles erreurs et publiez votre menu digital.',
+          'L\'ensemble du processus prend generalement entre 2 et 5 minutes, contre plusieurs heures de saisie manuelle. C\'est un gain de temps considerable, surtout si vous avez une carte fournie.',
+        ],
+      },
+      {
+        heading: 'La precision de l\'extraction',
+        paragraphs: [
+          'L\'IA est entrainee pour reconnaitre la structure typique d\'une carte de restaurant : categories, noms de plats, descriptions et prix. Elle gere les differents formats de mise en page, les polices variees et meme les cartes manuscrites lisibles.',
+          'Le taux de precision est eleve, mais il n\'est pas parfait a 100 %. C\'est pourquoi MonTablo vous propose toujours une etape de verification avant la publication. Vous pouvez corriger un prix mal lu, ajuster une description tronquee ou reorganiser les categories selon vos preferences.',
+        ],
+      },
+      {
+        heading: 'Conseils pour obtenir les meilleurs resultats',
+        paragraphs: [
+          'Pour maximiser la precision de l\'import, quelques gestes simples font la difference. Posez votre carte a plat sur une surface claire et bien eclairee. Evitez les ombres et les reflets. Assurez-vous que le texte est entierement visible dans le cadre de la photo.',
+          'Si votre carte est plastifiee, inclinez legerement l\'appareil pour eviter les reflets. Pour les cartes de plusieurs pages, prenez une photo par page. L\'IA traitera chaque image separement et regroupera les resultats.',
+          'Enfin, les cartes imprimees en typographie classique donnent de meilleurs resultats que les cartes en ecriture manuscrite fantaisie. Si votre carte est tres stylisee, vous devrez peut-etre corriger quelques elements apres l\'extraction.',
+        ],
+      },
+      {
+        heading: 'Un premier pas vers le digital sans effort',
+        paragraphs: [
+          'L\'import par IA elimine le principal frein a l\'adoption du menu digital : le temps de mise en place. En quelques minutes, votre carte papier devient un menu digital complet, pret a etre publie et partage via QR code.',
+          'C\'est la fonctionnalite ideale pour les restaurateurs qui veulent tester le menu digital sans y consacrer une soiree entiere. Photographiez, verifiez, publiez : votre menu est en ligne.',
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'tendances-restauration-2026',
+    title: 'Les tendances de la restauration en 2026',
+    description:
+      'Technologies, habitudes clients et innovations qui transforment la restauration cette annee. Ce que les restaurateurs doivent savoir.',
+    date: '2026-05-19',
+    readTime: '6 min',
+    category: 'Tendances',
+    keywords: ['tendances restauration 2026', 'innovation restaurant', 'technologie restauration'],
+    content: [
+      {
+        heading: 'Le QR code et le menu digital deviennent la norme',
+        paragraphs: [
+          'Ce qui etait une solution de crise pendant la pandemie s\'est transforme en standard du secteur. En 2026, la majorite des restaurants proposent un QR code sur table. Les clients, toutes generations confondues, ont adopte le reflexe de scanner pour consulter la carte.',
+          'Les etablissements qui ne proposent pas de menu digital commencent a paraitre en retard. Ce n\'est plus un gadget technologique, mais un element de base de l\'experience client, au meme titre que le Wi-Fi gratuit il y a quelques annees.',
+        ],
+      },
+      {
+        heading: 'La durabilite au coeur des choix',
+        paragraphs: [
+          'Les consommateurs sont de plus en plus sensibles a l\'impact environnemental de leur alimentation. Les restaurants qui communiquent sur leurs engagements — reduction du gaspillage, emballages compostables, circuit court — gagnent en attractivite.',
+          'Cette tendance se reflete aussi dans les menus : les clients veulent savoir d\'ou viennent les produits. Afficher la provenance des ingredients sur un menu digital est un moyen simple et efficace de repondre a cette attente.',
+        ],
+      },
+      {
+        heading: 'L\'approvisionnement local comme argument commercial',
+        paragraphs: [
+          'Le "manger local" n\'est plus un simple slogan. En 2026, c\'est un critere de choix majeur pour les clients. Les restaurants qui travaillent avec des producteurs locaux le mettent en avant sur leur carte, leur site et leurs reseaux sociaux.',
+          'Le menu digital facilite cette communication : vous pouvez ajouter des mentions du type "Tomates de la ferme Dupont, a 15 km" directement dans la description de vos plats. C\'est un argument de vente puissant qui renforce la confiance et la fidelite.',
+        ],
+      },
+      {
+        heading: 'L\'experience sans contact se generalise',
+        paragraphs: [
+          'Au-dela du menu, c\'est toute l\'experience restaurant qui evolue vers le sans contact. Paiement par telephone, reservation en ligne, pourboire digital : les interactions physiques entre le client et le personnel se reduisent aux moments essentiels — l\'accueil, le service, le conseil.',
+          'Cette evolution ne signifie pas la fin du contact humain. Au contraire, elle libere les serveurs des taches repetitives (distribuer les cartes, expliquer le menu du jour) pour qu\'ils se concentrent sur ce qui fait la difference : la relation client et le conseil personnalise.',
+        ],
+      },
+      {
+        heading: 'L\'influence des reseaux sociaux sur les menus',
+        paragraphs: [
+          'Instagram et TikTok continuent de faconner les attentes des clients. Un plat photogenique se partage, attire de nouveaux clients et genere du bouche-a-oreille gratuit. Les restaurateurs l\'ont compris : le dressage, la vaisselle et la presentation sont penses pour le partage sur les reseaux.',
+          'Le menu digital joue un role dans cette dynamique. Des photos appetissantes de vos plats sur votre carte digitale donnent envie avant meme la commande. Et quand le plat arrive conforme a la photo, la satisfaction client — et la probabilite de partage — augmentent.',
+        ],
+      },
+      {
+        heading: 'La personnalisation de l\'experience client',
+        paragraphs: [
+          'Les clients s\'attendent de plus en plus a une experience adaptee a leurs preferences. Filtrer les plats par allergenes, afficher les options vegetariennes en premier, ou proposer des recommandations basees sur les plats populaires : la personnalisation transforme la maniere dont les clients interagissent avec la carte.',
+          'Les menus digitaux rendent cette personnalisation possible a moindre cout. Alors qu\'un menu papier est identique pour tous, un menu digital peut s\'adapter au profil du client. C\'est une evolution majeure qui ne fait que commencer et qui redefinira l\'experience de commande dans les annees a venir.',
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'augmenter-panier-moyen-menu-digital',
+    title: 'Comment augmenter le panier moyen avec un menu digital',
+    description:
+      'Strategies concretes pour utiliser votre menu digital comme levier de ventes additionnelles et augmenter le ticket moyen de votre restaurant.',
+    date: '2026-05-22',
+    readTime: '5 min',
+    category: 'Conseils',
+    keywords: ['augmenter panier moyen restaurant', 'ventes additionnelles menu digital', 'ticket moyen restaurant'],
+    content: [
+      {
+        heading: 'Le pouvoir des photos sur les ventes',
+        paragraphs: [
+          'C\'est un fait etabli dans la restauration : un plat accompagne d\'une photo appetissante se vend significativement plus qu\'un plat sans visuel. Les etudes montrent une augmentation des commandes de 25 a 30 % pour les plats illustres.',
+          'Le menu digital rend l\'ajout de photos simple et gratuit, contrairement au papier ou chaque image augmente le cout d\'impression. Photographiez vos plats phares, vos desserts gourmands et vos cocktails signatures. Ce sont ces visuels qui declenchent l\'envie et poussent le client a commander un extra.',
+        ],
+      },
+      {
+        heading: 'L\'ordre des categories compte',
+        paragraphs: [
+          'La maniere dont vous organisez votre menu influence directement les choix de vos clients. Placez les categories a forte marge en debut de carte, quand l\'attention du client est maximale. Les entrees et les boissons, souvent les plus rentables, gagnent a etre visibles en premier.',
+          'Avec un menu digital, vous pouvez reorganiser vos categories en quelques secondes et tester differents ordonnancements. Placez les desserts juste apres les plats principaux plutot qu\'en fin de carte oubliee. Mettez vos formules et menus en evidence des le debut pour orienter le client vers une commande plus complete.',
+        ],
+      },
+      {
+        heading: 'Mettre en avant les plats a forte marge',
+        paragraphs: [
+          'Tous les plats de votre carte ne generent pas la meme marge. Le menu digital vous permet de mettre subtilement en avant ceux qui sont les plus rentables. Ajoutez une photo, une description plus detaillee, ou un badge "Coup de coeur du chef" pour attirer l\'attention.',
+          'Identifiez vos 5 a 10 plats les plus rentables et assurez-vous qu\'ils beneficient du meilleur traitement visuel sur votre carte. C\'est une strategie de merchandising simple mais redoutablement efficace.',
+        ],
+      },
+      {
+        heading: 'Les suggestions du jour comme levier de vente',
+        paragraphs: [
+          'Le plat du jour n\'est pas seulement une tradition : c\'est un outil de vente puissant. Un plat du jour bien presente sur votre menu digital cree un sentiment d\'urgence ("seulement aujourd\'hui") et de rarete qui pousse a la commande.',
+          'Proposez un menu du jour complet — entree + plat ou plat + dessert — a un prix attractif. Cette formule augmente mecaniquement le panier moyen par rapport a un client qui n\'aurait commande qu\'un plat unique. Le menu digital permet de mettre cette offre en avant des l\'ouverture de la carte.',
+        ],
+      },
+      {
+        heading: 'Ne negligez pas les desserts et les boissons',
+        paragraphs: [
+          'Les desserts et les boissons sont les parents pauvres de nombreuses cartes : relegues en fin de menu, sans photos, avec des descriptions minimales. C\'est une erreur car ces categories representent souvent les marges les plus elevees.',
+          'Sur votre menu digital, donnez aux desserts et boissons un traitement a la hauteur de leur potentiel. Photos gourmandes, descriptions evocatrices, mise en avant des cocktails signatures. Un client qui hesite a prendre un dessert sera bien plus tente s\'il voit une photo appetissante que s\'il lit simplement "Moelleux au chocolat — 9 euros".',
+        ],
+      },
+      {
+        heading: 'Les promotions et formules combinees',
+        paragraphs: [
+          'Les formules du type "Entree + Plat + Dessert a 25 euros" ou "2 cocktails achetes = le 3eme offert" sont des classiques du secteur parce qu\'elles fonctionnent. Le client a l\'impression de faire une bonne affaire, et vous augmentez le ticket moyen.',
+          'Le menu digital vous permet de creer des sections dediees a ces promotions, facilement visibles et modifiables. Vous pouvez les activer uniquement le midi, le soir, ou le week-end selon votre strategie. Testez differentes formules et observez lesquelles generent le meilleur panier moyen. Cette flexibilite est impossible avec le papier.',
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'allergenes-menu-digital',
+    title: 'Les allergenes sur votre menu digital : le guide legal',
+    description:
+      'Obligations legales, bonnes pratiques et avantages du menu digital pour la gestion des allergenes dans votre restaurant.',
+    date: '2026-05-26',
+    readTime: '5 min',
+    category: 'Guide',
+    keywords: ['allergenes menu restaurant', 'obligation allergenes restaurant', 'menu digital allergenes'],
+    content: [
+      {
+        heading: 'Ce que dit la loi : le reglement INCO',
+        paragraphs: [
+          'Depuis le 13 decembre 2014, le reglement europeen INCO (n° 1169/2011) impose a tous les etablissements de restauration d\'informer leurs clients sur la presence d\'allergenes dans les plats qu\'ils proposent. Cette obligation s\'applique a tous les restaurants, qu\'ils soient traditionnels, rapides, ou de livraison.',
+          'En France, cette obligation est renforcee par le decret n° 2015-447. Concretement, vous devez etre en mesure d\'informer le client sur les allergenes presents dans chaque plat, soit directement sur la carte, soit par un systeme d\'information accessible (affiche, classeur, ou carte complementaire).',
+          'Le non-respect de cette obligation peut entrainer des sanctions, allant de l\'avertissement a l\'amende. Mais au-dela de l\'aspect legal, c\'est surtout une question de responsabilite : une reaction allergique grave peut mettre en danger la vie d\'un client.',
+        ],
+      },
+      {
+        heading: 'Les 14 allergenes majeurs a connaitre',
+        paragraphs: [
+          'La reglementation identifie 14 allergenes a declaration obligatoire : gluten, crustaces, oeufs, poissons, arachides, soja, lait, fruits a coque, celeri, moutarde, sesame, sulfites, lupin et mollusques. Chacun doit etre signale des qu\'il est present dans un plat, meme en quantite infime.',
+          'La gestion de ces 14 allergenes est un defi au quotidien, surtout quand les recettes changent ou que les fournisseurs modifient leurs produits. Il faut une rigueur constante pour maintenir les informations a jour.',
+        ],
+      },
+      {
+        heading: 'Le casse-tete de la carte papier',
+        paragraphs: [
+          'Sur une carte papier, afficher les allergenes de chaque plat est un exercice d\'equilibre difficile. Ajouter les pictogrammes ou les mentions textuelles alourdit la mise en page, rend la carte plus dense et moins lisible. Beaucoup de restaurants choisissent donc de renvoyer vers un classeur separe "disponible sur demande" — une solution legale mais peu pratique.',
+          'Le probleme est que ce classeur est rarement consulte. Les clients n\'osent pas toujours le demander, et les serveurs oublient parfois de le mentionner. Resultat : l\'information existe mais n\'atteint pas le client, ce qui va a l\'encontre de l\'esprit de la loi.',
+          'De plus, a chaque modification de recette, il faut mettre a jour a la fois la carte et le classeur d\'allergenes — une double maintenance que peu de restaurants gerent rigoureusement.',
+        ],
+      },
+      {
+        heading: 'Comment le menu digital simplifie la gestion des allergenes',
+        paragraphs: [
+          'Le menu digital offre une solution elegante au probleme des allergenes. Les informations peuvent etre integrees directement dans la fiche de chaque plat, accessibles en un clic sans surcharger la vue principale du menu.',
+          'Le client peut consulter les allergenes de chaque plat individuellement, ou filtrer l\'ensemble de la carte pour masquer les plats contenant un allergene specifique. Un client intolerant au gluten, par exemple, peut afficher uniquement les plats sans gluten en une seconde.',
+          'Cote restaurateur, la mise a jour est centralisee. Quand vous modifiez la composition d\'un plat, vous mettez a jour les allergenes au meme endroit. Pas de classeur separe a maintenir, pas de decalage entre la carte et les informations allergenes.',
+        ],
+      },
+      {
+        heading: 'Bonnes pratiques pour l\'affichage des allergenes',
+        paragraphs: [
+          'Meme avec un menu digital, certaines bonnes pratiques s\'imposent. Utilisez les pictogrammes officiels des 14 allergenes pour une identification visuelle rapide. Ajoutez une mention en bas de votre menu invitant les clients a signaler toute allergie au personnel.',
+          'Formez vos equipes pour qu\'elles sachent repondre aux questions sur les allergenes, meme si l\'information est disponible sur le menu digital. Tous les clients ne consulteront pas les details en ligne, et certains prefereront poser la question au serveur.',
+          'Enfin, revoyez regulierement vos fiches allergenes, en particulier lorsque vous changez de fournisseur ou modifiez une recette. La rigueur dans la mise a jour est ce qui garantit la securite de vos clients et votre conformite legale.',
+        ],
+      },
+      {
+        heading: 'Un avantage concurrentiel et un gage de confiance',
+        paragraphs: [
+          'Bien gerer les allergenes sur votre menu digital n\'est pas seulement une obligation legale : c\'est un avantage concurrentiel. Les personnes allergiques ou intolerantes choisissent en priorite les restaurants ou elles se sentent en securite. Un menu digital clair et complet sur les allergenes vous positionne comme un etablissement serieux et attentif.',
+          'Le bouche-a-oreille dans les communautes de personnes allergiques est puissant. Un restaurant bien note pour sa gestion des allergenes attire une clientele fidele et reconnaissante, qui n\'hesite pas a recommander l\'etablissement a son entourage. C\'est un cercle vertueux qui commence par une information claire et accessible sur votre menu.',
+        ],
+      },
+    ],
+  },
 ]
 
 export function getAllPosts(): BlogPost[] {
