@@ -70,7 +70,7 @@ export default function LandingPage() {
             </Link>
             <Link
               href="/signup"
-              className="text-sm font-medium bg-primary text-white px-5 py-2 rounded-full hover:bg-primary-light transition-all hover:shadow-lg hover:shadow-primary/15"
+              className="text-sm font-medium bg-primary text-white px-5 py-2.5 rounded-full hover:bg-primary-light transition-all hover:shadow-lg hover:shadow-primary/15"
             >
               Essai gratuit
             </Link>
@@ -79,28 +79,28 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero */}
-      <section className="max-w-[1120px] mx-auto px-6 pt-[140px] pb-20 sm:pt-[160px] sm:pb-20">
-        <p className="text-[13px] font-medium tracking-[0.08em] uppercase text-accent-dark mb-5">
+      <section className="max-w-[1120px] mx-auto px-6 pt-[120px] pb-16 sm:pt-[160px] sm:pb-20">
+        <p className="text-sm sm:text-[13px] font-medium tracking-[0.08em] uppercase text-accent-dark mb-5">
           Le menu digital pour les restaurants exigeants
         </p>
-        <h1 className="font-serif text-4xl sm:text-5xl lg:text-[60px] text-foreground leading-[1.08] mb-6 max-w-[680px]">
+        <h1 className="font-serif text-[32px] sm:text-5xl lg:text-[60px] text-foreground leading-[1.1] mb-6 max-w-[680px]">
           Votre carte, enfin à la hauteur de votre cuisine.
         </h1>
-        <p className="text-lg text-muted leading-relaxed max-w-[520px] mb-10">
+        <p className="text-lg sm:text-lg text-muted leading-relaxed max-w-[520px] mb-10">
           Un menu digital élégant que vous mettez à jour en temps réel.
           Vos clients scannent, vous gardez le contrôle.
         </p>
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-5">
           <Link
             href="/signup"
-            className="group inline-flex items-center gap-2.5 bg-primary text-white font-medium px-8 py-3.5 rounded-full hover:bg-primary-light transition-all hover:shadow-xl hover:shadow-primary/18 hover:-translate-y-px text-[15px]"
+            className="group inline-flex items-center justify-center gap-2.5 bg-primary text-white font-medium px-8 py-4 sm:py-3.5 rounded-full hover:bg-primary-light transition-all hover:shadow-xl hover:shadow-primary/18 hover:-translate-y-px text-base sm:text-[15px]"
           >
             Essayer 14 jours gratuitement
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
           </Link>
           <Link
             href="/menu/demo"
-            className="group inline-flex items-center gap-2 border border-border text-foreground font-medium px-6 py-3.5 rounded-full hover:border-foreground/30 hover:bg-muted/5 transition-all text-[15px]"
+            className="group inline-flex items-center justify-center gap-2 border border-border text-foreground font-medium px-6 py-4 sm:py-3.5 rounded-full hover:border-foreground/30 hover:bg-muted/5 transition-all text-base sm:text-[15px]"
           >
             Voir un exemple
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
@@ -111,40 +111,40 @@ export default function LandingPage() {
       {/* Proof strip */}
       <div className="border-y border-border bg-white">
         <div className="max-w-[1120px] mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-10">
-          <span className="text-[13px] text-muted/60">Sans engagement</span>
+          <span className="text-sm text-muted/60">Sans engagement</span>
           <span className="hidden sm:block w-1 h-1 rounded-full bg-border" />
-          <span className="text-[13px] text-muted/60">Aucune carte bancaire</span>
+          <span className="text-sm text-muted/60">Aucune carte bancaire</span>
           <span className="hidden sm:block w-1 h-1 rounded-full bg-border" />
-          <span className="text-[13px] text-muted/60">Prêt en 5 minutes</span>
+          <span className="text-sm text-muted/60">Prêt en 5 minutes</span>
         </div>
       </div>
 
       {/* How it works */}
-      <section className="max-w-[1120px] mx-auto px-6 py-24 sm:py-[120px]">
-        <p className="text-[13px] font-medium tracking-[0.08em] uppercase text-accent-dark mb-3">
+      <section className="max-w-[1120px] mx-auto px-6 py-16 sm:py-[120px]">
+        <p className="text-sm sm:text-[13px] font-medium tracking-[0.08em] uppercase text-accent-dark mb-3">
           Comment ça marche
         </p>
-        <h2 className="font-serif text-3xl sm:text-4xl text-foreground mb-16 max-w-lg leading-tight">
+        <h2 className="font-serif text-[28px] sm:text-4xl text-foreground mb-10 sm:mb-16 max-w-lg leading-tight">
           Trois étapes. Cinq minutes. Zéro friction.
         </h2>
         <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
           {steps.map((step) => (
             <div key={step.num} className="group">
-              <span className="font-serif text-[64px] leading-none text-border group-hover:text-accent transition-colors duration-300">
+              <span className="font-serif text-[48px] sm:text-[64px] leading-none text-border group-hover:text-accent transition-colors duration-300">
                 {step.num}
               </span>
               <h3 className="font-serif text-xl text-foreground mt-4 mb-2">{step.title}</h3>
-              <p className="text-[15px] text-muted leading-relaxed">{step.desc}</p>
+              <p className="text-base sm:text-[15px] text-muted leading-relaxed">{step.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* Menu preview */}
-      <section className="max-w-[1120px] mx-auto px-6 pb-24 sm:pb-[120px]">
-        <div className="bg-primary rounded-[20px] p-10 sm:p-16 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <section className="max-w-[1120px] mx-auto px-6 pb-16 sm:pb-[120px]">
+        <div className="bg-primary rounded-[20px] p-8 sm:p-16 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           <div>
-            <h2 className="font-serif text-3xl sm:text-4xl text-white leading-snug mb-4">
+            <h2 className="font-serif text-[28px] sm:text-4xl text-white leading-snug mb-4">
               Un menu que vos clients ont envie de lire.
             </h2>
             <p className="text-white/60 text-base leading-relaxed mb-8">
@@ -153,7 +153,7 @@ export default function LandingPage() {
             </p>
             <Link
               href="/signup"
-              className="group inline-flex items-center gap-2.5 bg-accent text-foreground font-medium px-8 py-3.5 rounded-full hover:bg-accent-light transition-all text-[15px]"
+              className="group inline-flex items-center justify-center gap-2.5 bg-accent text-foreground font-medium px-8 py-4 sm:py-3.5 rounded-full hover:bg-accent-light transition-all text-base sm:text-[15px] w-full sm:w-auto"
             >
               Créer mon menu
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
@@ -186,22 +186,22 @@ export default function LandingPage() {
 
       {/* Benefits */}
       <section className="bg-white border-y border-border/50">
-        <div className="max-w-[1120px] mx-auto px-6 py-24 sm:py-[120px] grid lg:grid-cols-5 gap-12 lg:gap-20">
+        <div className="max-w-[1120px] mx-auto px-6 py-16 sm:py-[120px] grid lg:grid-cols-5 gap-8 lg:gap-20">
           <div className="lg:col-span-2">
-            <p className="text-[13px] font-medium tracking-[0.08em] uppercase text-accent-dark mb-3">
+            <p className="text-sm sm:text-[13px] font-medium tracking-[0.08em] uppercase text-accent-dark mb-3">
               Pourquoi MonTablo
             </p>
-            <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight">
+            <h2 className="font-serif text-[28px] sm:text-4xl text-foreground leading-tight">
               Tout ce qu&apos;il faut. Rien de superflu.
             </h2>
           </div>
-          <div className="lg:col-span-3 grid sm:grid-cols-2 gap-2">
+          <div className="lg:col-span-3 grid sm:grid-cols-2 gap-1">
             {benefits.map((b) => (
               <div key={b} className="flex items-start gap-3 p-4 rounded-xl hover:bg-background transition-colors">
-                <span className="w-5 h-5 rounded-full bg-accent/10 flex items-center justify-center shrink-0 mt-0.5">
-                  <Check className="w-3 h-3 text-accent-dark" />
+                <span className="w-6 h-6 rounded-full bg-accent/10 flex items-center justify-center shrink-0 mt-0.5">
+                  <Check className="w-3.5 h-3.5 text-accent-dark" />
                 </span>
-                <span className="text-[15px] text-foreground leading-relaxed">{b}</span>
+                <span className="text-base sm:text-[15px] text-foreground leading-relaxed">{b}</span>
               </div>
             ))}
           </div>
@@ -209,15 +209,15 @@ export default function LandingPage() {
       </section>
 
       {/* Pricing */}
-      <section className="max-w-[1120px] mx-auto px-6 py-24 sm:py-[120px]">
+      <section className="max-w-[1120px] mx-auto px-6 py-16 sm:py-[120px]">
         <div className="text-center">
-          <p className="text-[13px] font-medium tracking-[0.08em] uppercase text-accent-dark mb-3">
+          <p className="text-sm sm:text-[13px] font-medium tracking-[0.08em] uppercase text-accent-dark mb-3">
             Tarif simple
           </p>
-          <h2 className="font-serif text-3xl sm:text-4xl text-foreground mb-2">
+          <h2 className="font-serif text-[28px] sm:text-4xl text-foreground mb-2">
             Un seul prix. Tout inclus.
           </h2>
-          <p className="text-[17px] text-muted mb-12">
+          <p className="text-base sm:text-[17px] text-muted mb-10 sm:mb-12">
             Pas de paliers, pas de fonctionnalités cachées.
           </p>
           <PricingToggle features={pricingFeatures} />
@@ -225,18 +225,18 @@ export default function LandingPage() {
       </section>
 
       {/* Final CTA */}
-      <section className="max-w-[1120px] mx-auto px-6 pb-24 sm:pb-[120px]">
-        <div className="border border-border rounded-[20px] py-20 sm:py-24 px-8 text-center bg-gradient-to-b from-white to-background">
-          <h2 className="font-serif text-3xl sm:text-4xl text-foreground mb-3 text-balance">
+      <section className="max-w-[1120px] mx-auto px-6 pb-16 sm:pb-[120px]">
+        <div className="border border-border rounded-[20px] py-16 sm:py-24 px-6 sm:px-8 text-center bg-gradient-to-b from-white to-background">
+          <h2 className="font-serif text-[28px] sm:text-4xl text-foreground mb-3 text-balance">
             Vos plats méritent mieux qu&apos;un PDF.
           </h2>
-          <p className="text-[17px] text-muted mb-10 max-w-md mx-auto">
+          <p className="text-base sm:text-[17px] text-muted mb-8 sm:mb-10 max-w-md mx-auto">
             Rejoignez les restaurateurs qui ont remplacé leur carte papier
             par une expérience digitale à leur image.
           </p>
           <Link
             href="/signup"
-            className="group inline-flex items-center gap-2.5 bg-primary text-white font-medium px-10 py-4 rounded-full hover:bg-primary-light transition-all hover:shadow-xl hover:shadow-primary/18 hover:-translate-y-px text-[15px]"
+            className="group inline-flex items-center justify-center gap-2.5 bg-primary text-white font-medium px-10 py-4 rounded-full hover:bg-primary-light transition-all hover:shadow-xl hover:shadow-primary/18 hover:-translate-y-px text-base sm:text-[15px] w-full sm:w-auto"
           >
             Créer mon menu gratuitement
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
@@ -251,39 +251,39 @@ export default function LandingPage() {
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <UtensilsCrossed className="w-[18px] h-[18px] text-primary" />
-                <span className="font-serif text-[15px] text-primary">MonTablo</span>
+                <span className="font-serif text-base text-primary">MonTablo</span>
               </div>
-              <p className="text-[12px] text-muted/60 leading-relaxed">
+              <p className="text-[13px] text-muted/60 leading-relaxed">
                 Le menu digital pour les restaurants exigeants.
               </p>
             </div>
             <div>
-              <p className="text-[12px] font-medium text-foreground mb-3">Produit</p>
-              <div className="space-y-2">
-                <Link href="/fonctionnalites" className="block text-[12px] text-muted/60 hover:text-muted transition-colors">Fonctionnalites</Link>
-                <Link href="/tarifs" className="block text-[12px] text-muted/60 hover:text-muted transition-colors">Tarifs</Link>
-                <Link href="/menu/demo" className="block text-[12px] text-muted/60 hover:text-muted transition-colors">Voir un exemple</Link>
+              <p className="text-[13px] font-medium text-foreground mb-3">Produit</p>
+              <div className="space-y-3">
+                <Link href="/fonctionnalites" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Fonctionnalites</Link>
+                <Link href="/tarifs" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Tarifs</Link>
+                <Link href="/menu/demo" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Voir un exemple</Link>
               </div>
             </div>
             <div>
-              <p className="text-[12px] font-medium text-foreground mb-3">Ressources</p>
-              <div className="space-y-2">
-                <Link href="/blog" className="block text-[12px] text-muted/60 hover:text-muted transition-colors">Blog</Link>
-                <Link href="/faq" className="block text-[12px] text-muted/60 hover:text-muted transition-colors">FAQ</Link>
+              <p className="text-[13px] font-medium text-foreground mb-3">Ressources</p>
+              <div className="space-y-3">
+                <Link href="/blog" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Blog</Link>
+                <Link href="/faq" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">FAQ</Link>
               </div>
             </div>
             <div>
-              <p className="text-[12px] font-medium text-foreground mb-3">Legal</p>
-              <div className="space-y-2">
-                <Link href="/mentions-legales" className="block text-[12px] text-muted/60 hover:text-muted transition-colors">Mentions legales</Link>
-                <Link href="/cgu" className="block text-[12px] text-muted/60 hover:text-muted transition-colors">CGU</Link>
-                <Link href="/confidentialite" className="block text-[12px] text-muted/60 hover:text-muted transition-colors">Confidentialite</Link>
-                <Link href="/cookies" className="block text-[12px] text-muted/60 hover:text-muted transition-colors">Cookies</Link>
+              <p className="text-[13px] font-medium text-foreground mb-3">Legal</p>
+              <div className="space-y-3">
+                <Link href="/mentions-legales" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Mentions legales</Link>
+                <Link href="/cgu" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">CGU</Link>
+                <Link href="/confidentialite" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Confidentialite</Link>
+                <Link href="/cookies" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Cookies</Link>
               </div>
             </div>
           </div>
           <div className="border-t border-border/50 pt-6 text-center">
-            <p className="text-xs text-muted/60">
+            <p className="text-sm text-muted/60">
               &copy; {new Date().getFullYear()} MonTablo. Tous droits reserves.
             </p>
           </div>

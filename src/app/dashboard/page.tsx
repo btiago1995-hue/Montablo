@@ -150,45 +150,45 @@ export default async function DashboardPage() {
         <div className="sm:hidden">
           <div className="grid grid-cols-2 gap-4 mb-4">
             <div>
-              <div className="text-[22px] font-bold tracking-tight text-foreground leading-none">
+              <div className="text-[24px] font-bold tracking-tight text-foreground leading-none">
                 {itemCount ?? 0}
               </div>
-              <div className="text-[11px] text-muted-light mt-0.5">plats actifs</div>
+              <div className="text-xs text-muted-light mt-1">plats actifs</div>
             </div>
             <div>
-              <div className="text-[22px] font-bold tracking-tight text-foreground leading-none">
+              <div className="text-[24px] font-bold tracking-tight text-foreground leading-none">
                 {categoryCount ?? 0}
               </div>
-              <div className="text-[11px] text-muted-light mt-0.5">catégories</div>
+              <div className="text-xs text-muted-light mt-1">catégories</div>
             </div>
             <div>
-              <div className="text-[22px] font-bold tracking-tight text-foreground leading-none">
+              <div className="text-[24px] font-bold tracking-tight text-foreground leading-none">
                 {promoCount ?? 0}
               </div>
-              <div className="text-[11px] text-muted-light mt-0.5">promos</div>
+              <div className="text-xs text-muted-light mt-1">promos</div>
             </div>
             <div>
               <div className="flex items-baseline gap-1">
-                <span className="text-[22px] font-bold tracking-tight text-foreground leading-none">
+                <span className="text-[24px] font-bold tracking-tight text-foreground leading-none">
                   {reviewCount > 0 ? avgRating.toFixed(1) : '—'}
                 </span>
-                <span className="text-[12px] text-[#FBBC04]">★</span>
+                <span className="text-sm text-[#FBBC04]">★</span>
               </div>
-              <div className="text-[11px] text-muted-light mt-0.5">
+              <div className="text-xs text-muted-light mt-1">
                 {reviewCount} avis
               </div>
             </div>
           </div>
-          <div className="flex gap-1.5 pt-3 border-t border-border">
+          <div className="flex gap-2 pt-3 border-t border-border">
             <Link
               href="/dashboard/daily-menu"
-              className="flex-1 text-center bg-background border border-border rounded-lg px-3 py-2 text-xs font-medium text-primary"
+              className="flex-1 text-center bg-background border border-border rounded-lg px-3 py-2.5 text-sm font-medium text-primary"
             >
               Menu du jour
             </Link>
             <Link
               href="/dashboard/qr-code"
-              className="flex-1 text-center bg-background border border-border rounded-lg px-3 py-2 text-xs font-medium text-primary"
+              className="flex-1 text-center bg-background border border-border rounded-lg px-3 py-2.5 text-sm font-medium text-primary"
             >
               QR Code
             </Link>
@@ -215,7 +215,7 @@ export default async function DashboardPage() {
               {recentItems.map((item) => (
                 <div
                   key={item.id}
-                  className={`flex items-center gap-3 px-4 py-3 ${
+                  className={`flex items-center gap-3 px-4 py-3.5 ${
                     !item.is_available ? 'opacity-50' : ''
                   }`}
                 >
@@ -224,21 +224,21 @@ export default async function DashboardPage() {
                     <img
                       src={item.image_url}
                       alt=""
-                      className="w-10 h-10 rounded-lg object-cover bg-background flex-shrink-0"
+                      className="w-11 h-11 rounded-lg object-cover bg-background flex-shrink-0"
                     />
                   ) : (
-                    <div className="w-10 h-10 rounded-lg bg-background flex items-center justify-center text-muted-light text-sm flex-shrink-0">
+                    <div className="w-11 h-11 rounded-lg bg-background flex items-center justify-center text-muted-light text-base flex-shrink-0">
                       🍽️
                     </div>
                   )}
                   <div className="flex-1 min-w-0">
-                    <div className="text-[13px] font-semibold text-foreground truncate">{item.name_fr}</div>
-                    <div className="text-[11px] text-muted-light">
+                    <div className="text-sm font-semibold text-foreground truncate">{item.name_fr}</div>
+                    <div className="text-xs text-muted-light">
                       {item.category_id ? catMap.get(item.category_id) ?? '—' : '—'}
                     </div>
                   </div>
                   <div className="flex flex-col items-end gap-1 flex-shrink-0">
-                    <span className="text-[13px] font-semibold text-foreground">
+                    <span className="text-sm font-semibold text-foreground">
                       {formatPrice(item.price)}
                     </span>
                     <span
