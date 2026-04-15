@@ -102,9 +102,12 @@ export default function SignupPage() {
               <p className="text-muted mb-6">
                 Un email de confirmation a été envoyé à <strong className="text-foreground">{email}</strong>.
               </p>
-              <div className="bg-primary/5 border border-primary/20 text-foreground text-sm px-4 py-4 rounded-lg mb-6">
+              <div className="bg-primary/5 border border-primary/20 text-foreground text-sm px-4 py-4 rounded-lg mb-3">
                 Cliquez sur le lien dans l&apos;email pour activer votre compte et accéder à votre tableau de bord.
               </div>
+              <p className="text-center text-xs text-muted mb-6">
+                Si vous ne le voyez pas, vérifiez votre dossier <strong>spam ou courrier indésirable</strong>.
+              </p>
               <p className="text-center text-sm text-muted">
                 Pas reçu ?{' '}
                 <button
