@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next'
 import { createClient } from '@/lib/supabase/server'
 import { getAllPosts } from '@/lib/blog'
+import { VILLES } from '@/data/haute-savoie'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.montablo.com'
@@ -139,6 +140,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly',
       priority: 0.7,
     },
+    // Haute-Savoie hub
+    {
+      url: `${base}/solutions/haute-savoie`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.9,
+    },
+    // Haute-Savoie spokes
+    ...VILLES.map((ville) => ({
+      url: `${base}/solutions/haute-savoie/${ville.slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    })),
   ]
 
   // Fetch published menus with at least 3 items (quality gate)
