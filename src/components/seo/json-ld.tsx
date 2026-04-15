@@ -167,3 +167,27 @@ export function breadcrumbJsonLd(items: { name: string; url: string }[]) {
     })),
   }
 }
+
+export function localBusinessJsonLd({
+  name,
+  url,
+  areaServed,
+  description,
+}: {
+  name: string
+  url: string
+  areaServed: string
+  description: string
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name,
+    url,
+    areaServed: {
+      '@type': 'AdministrativeArea',
+      name: areaServed,
+    },
+    description,
+  }
+}
