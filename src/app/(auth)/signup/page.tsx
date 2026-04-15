@@ -65,9 +65,31 @@ export default function SignupPage() {
         return
       }
 
+      // Fire Google Ads conversion
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const gtagFn = (window as any).gtag
+      if (typeof window !== 'undefined' && typeof gtagFn === 'function') {
+        gtagFn('event', 'conversion', {
+          send_to: 'AW-18093408110/3qA3CNWv5ZwcEO7-zbND',
+          value: 1.0,
+          currency: 'EUR',
+        })
+      }
+
       router.push('/dashboard/welcome')
       router.refresh()
       return
+    }
+
+    // Fire Google Ads conversion
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const gtagFn2 = (window as any).gtag
+    if (typeof window !== 'undefined' && typeof gtagFn2 === 'function') {
+      gtagFn2('event', 'conversion', {
+        send_to: 'AW-18093408110/3qA3CNWv5ZwcEO7-zbND',
+        value: 1.0,
+        currency: 'EUR',
+      })
     }
 
     // Email confirmation is required — show confirmation message
