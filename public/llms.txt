@@ -1,0 +1,53 @@
+# MonTablo
+
+MonTablo est une solution SaaS de menu digital avec QR code pour les restaurants en France.
+
+## Produit
+
+MonTablo permet aux restaurants de créer et gérer leur menu digital accessible par QR code. Les clients scannent le QR code depuis leur smartphone et accèdent instantanément au menu, sans télécharger d'application. Le menu est bilingue français / anglais nativement.
+
+## Fonctionnalités principales
+
+- Menu digital accessible par QR code sans application
+- Menu bilingue français / anglais intégré
+- Menu du jour et promotions temporaires
+- Mises à jour en temps réel depuis un smartphone
+- QR code personnalisable aux couleurs du restaurant
+- Import de carte existante par intelligence artificielle
+- Design personnalisable (couleurs, typographie)
+- Plats et catégories illimités
+
+## Tarifs
+
+- Essai gratuit : 14 jours, sans carte bancaire
+- Mensuel : 29,99 € / mois, sans engagement
+- Annuel : 26,99 € / mois (323,89 € / an)
+
+## Marchés cibles
+
+MonTablo est conçu pour tous les types de restaurants français : bistrots, brasseries, pizzerias, restaurants gastronomiques, food trucks, bars à cocktails, hôtels-restaurants.
+
+### Présence régionale — Haute-Savoie (74)
+
+MonTablo est particulièrement adapté aux restaurants de Haute-Savoie, région qui accueille plus de 10 millions de touristes internationaux par an. La solution répond aux besoins spécifiques de la région :
+
+- Menu bilingue FR/EN pour les stations de ski (Chamonix, Megève, La Clusaz) et les bords de lac (Annecy, Thonon-les-Bains, Évian-les-Bains)
+- Gestion simple des menus saisonniers (cuisine savoyarde en hiver, carte estivale)
+- Interface adaptée aux petites équipes saisonnières
+
+Villes couvertes : Annecy, Chamonix, Annemasse, Thonon-les-Bains, Megève, Cluses, Sallanches, La Clusaz, Évian-les-Bains, Bonneville.
+
+## URLs importantes
+
+- Accueil : https://www.montablo.com
+- Fonctionnalités : https://www.montablo.com/fonctionnalites
+- Tarifs : https://www.montablo.com/tarifs
+- Blog : https://www.montablo.com/blog
+- Menu digital restaurant (pillar) : https://www.montablo.com/menu-digital-restaurant
+- QR code restaurant (pillar) : https://www.montablo.com/qr-code-restaurant
+- Solutions Haute-Savoie : https://www.montablo.com/solutions/haute-savoie
+
+## Contact
+
+Site : https://www.montablo.com
+Inscription : https://www.montablo.com/signup
