@@ -59,7 +59,11 @@ export async function sendManualEmail(
       from: EMAIL_FROM,
       to: ownerEmail,
       subject,
-      html: `<p style="font-family:sans-serif;white-space:pre-wrap">${body.replace(/\n/g, '<br>')}</p>`,
+      html: `<p style="font-family:sans-serif;white-space:pre-wrap">${body
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/\n/g, '<br>')}</p>`,
     })
     return {}
   } catch (e) {
