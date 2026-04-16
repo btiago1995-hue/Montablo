@@ -1,4 +1,6 @@
 // src/app/(admin)/admin/revenue/page.tsx
+export const dynamic = 'force-dynamic'
+
 import { KpiCard } from '@/components/admin/kpi-card'
 import { getMRR, getActiveStripeSubscriptions, getMonthlySignups, getAllRestaurants } from '@/lib/admin-data'
 

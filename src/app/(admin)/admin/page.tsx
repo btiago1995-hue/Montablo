@@ -1,4 +1,6 @@
 // src/app/(admin)/admin/page.tsx
+export const dynamic = 'force-dynamic'
+
 import { KpiCard } from '@/components/admin/kpi-card'
 import { StatusBadge } from '@/components/admin/status-badge'
 import { getDashboardStats, getMRR, getMonthlySignups } from '@/lib/admin-data'

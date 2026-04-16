@@ -1,4 +1,6 @@
 // src/app/(admin)/admin/restaurants/page.tsx
+export const dynamic = 'force-dynamic'
+
 import { getAllRestaurants } from '@/lib/admin-data'
 import { StatusBadge } from '@/components/admin/status-badge'
 import Link from 'next/link'
