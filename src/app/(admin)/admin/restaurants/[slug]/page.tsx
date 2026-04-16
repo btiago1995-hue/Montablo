@@ -118,11 +118,11 @@ export default async function RestaurantDetailPage({ params }: { params: { slug:
               description={`Vai estender o trial de "${restaurant.name}" por 7 dias a partir de agora.`}
               confirmLabel="Estender"
               icon={<Clock className="w-4 h-4" />}
-              onConfirm={() => extendTrial(restaurant.id, restaurant.slug)}
+              onConfirm={extendTrial.bind(null, restaurant.id, restaurant.slug)}
             />
 
             {ownerEmail && (
-              <EmailModal onSend={(subject, body) => sendManualEmail(ownerEmail, subject, body)} />
+              <EmailModal onSend={sendManualEmail.bind(null, ownerEmail)} />
             )}
 
             <a
@@ -142,7 +142,7 @@ export default async function RestaurantDetailPage({ params }: { params: { slug:
                 confirmLabel="Confirmar cancelamento"
                 variant="danger"
                 icon={<XCircle className="w-4 h-4" />}
-                onConfirm={() => cancelSubscription(restaurant.id, restaurant.stripe_subscription_id!, restaurant.slug)}
+                onConfirm={cancelSubscription.bind(null, restaurant.id, restaurant.stripe_subscription_id!, restaurant.slug)}
               />
             )}
           </div>
