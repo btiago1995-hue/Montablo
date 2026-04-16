@@ -36,6 +36,19 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(url)
   }
 
+  // Admin protection: must be authenticated + correct email
+  if (request.nextUrl.pathname.startsWith('/admin')) {
+    if (!user) {
+      const url = request.nextUrl.clone()
+      url.pathname = '/login'
+      url.searchParams.set('next', '/admin')
+      return NextResponse.redirect(url)
+    }
+    if (user.email !== process.env.ADMIN_EMAIL) {
+      return new NextResponse('Forbidden', { status: 403 })
+    }
+  }
+
   // Redirect authenticated users from auth pages to dashboard
   if (user && (request.nextUrl.pathname === '/login' || request.nextUrl.pathname === '/signup')) {
     const url = request.nextUrl.clone()
