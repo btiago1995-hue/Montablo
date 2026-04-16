@@ -29,7 +29,7 @@ export default async function RestaurantDetailPage({ params }: { params: { slug:
   const timeline = [
     { label: 'Conta criada', date: restaurant.created_at, color: 'bg-blue-500' },
     stats.firstImportAt ? { label: `Menu importado — ${stats.itemCount} itens`, date: stats.firstImportAt, color: 'bg-emerald-500' } : null,
-    restaurant.onboarding_step === 'complete' ? { label: 'Onboarding completo', date: restaurant.created_at, color: 'bg-blue-500' } : null,
+    restaurant.onboarding_step === 'complete' ? { label: 'Onboarding completo', date: restaurant.updated_at, color: 'bg-blue-500' } : null,
     restaurant.subscription_status === 'active' ? { label: 'Subscrição activada', date: restaurant.updated_at, color: 'bg-emerald-500' } : null,
     restaurant.subscription_status === 'canceled' ? { label: 'Subscrição cancelada', date: restaurant.updated_at, color: 'bg-red-500' } : null,
   ].filter(Boolean).sort((a, b) => new Date(a!.date).getTime() - new Date(b!.date).getTime())
