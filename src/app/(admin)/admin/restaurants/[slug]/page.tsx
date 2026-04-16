@@ -1,4 +1,6 @@
 // src/app/(admin)/admin/restaurants/[slug]/page.tsx
+export const dynamic = 'force-dynamic'
+
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { Clock, ExternalLink, XCircle } from 'lucide-react'

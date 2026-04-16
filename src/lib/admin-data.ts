@@ -24,10 +24,20 @@ export async function getRestaurantBySlug(slug: string): Promise<Restaurant | nu
   return data
 }
 
-export async function getRestaurantOwnerEmail(ownerId: string): Promise<string | null> {
-  const supabase = createAdminClient()
-  const { data } = await supabase.auth.admin.getUserById(ownerId)
-  return data.user?.email ?? null
+export async function getRestaurantOwnerEmail(ownerId: string | null): Promise<string | null> {
+  if (!ownerId) return null
+  try {
+    const supabase = createAdminClient()
+    const { data, error } = await supabase.auth.admin.getUserById(ownerId)
+    if (error) {
+      console.error('[admin-data] getUserById error:', error.message)
+      return null
+    }
+    return data.user?.email ?? null
+  } catch (err) {
+    console.error('[admin-data] getUserById threw:', err)
+    return null
+  }
 }
 
 export async function getRestaurantStats(restaurantId: string): Promise<{
@@ -35,27 +45,32 @@ export async function getRestaurantStats(restaurantId: string): Promise<{
   itemCount: number
   firstImportAt: string | null
 }> {
-  const supabase = createAdminClient()
-  const [{ count: categoryCount }, { count: itemCount }, { data: imports }] = await Promise.all([
-    supabase
-      .from('categories')
-      .select('*', { count: 'exact', head: true })
-      .eq('restaurant_id', restaurantId),
-    supabase
-      .from('items')
-      .select('*', { count: 'exact', head: true })
-      .eq('restaurant_id', restaurantId),
-    supabase
-      .from('menu_imports')
-      .select('created_at')
-      .eq('restaurant_id', restaurantId)
-      .order('created_at', { ascending: true })
-      .limit(1),
-  ])
-  return {
-    categoryCount: categoryCount ?? 0,
-    itemCount: itemCount ?? 0,
-    firstImportAt: imports?.[0]?.created_at ?? null,
+  try {
+    const supabase = createAdminClient()
+    const [{ count: categoryCount }, { count: itemCount }, { data: imports }] = await Promise.all([
+      supabase
+        .from('categories')
+        .select('*', { count: 'exact', head: true })
+        .eq('restaurant_id', restaurantId),
+      supabase
+        .from('items')
+        .select('*', { count: 'exact', head: true })
+        .eq('restaurant_id', restaurantId),
+      supabase
+        .from('menu_imports')
+        .select('created_at')
+        .eq('restaurant_id', restaurantId)
+        .order('created_at', { ascending: true })
+        .limit(1),
+    ])
+    return {
+      categoryCount: categoryCount ?? 0,
+      itemCount: itemCount ?? 0,
+      firstImportAt: imports?.[0]?.created_at ?? null,
+    }
+  } catch (err) {
+    console.error('[admin-data] getRestaurantStats threw:', err)
+    return { categoryCount: 0, itemCount: 0, firstImportAt: null }
   }
 }
 
