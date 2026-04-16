@@ -10,7 +10,8 @@ import { EmailModal } from '@/components/admin/email-modal'
 import { ConfirmDialog } from '@/components/admin/confirm-dialog'
 import { extendTrial, sendManualEmail, cancelSubscription } from './actions'
 
-function formatDate(iso: string) {
+function formatDate(iso: string | null | undefined) {
+  if (!iso) return '—'
   return new Date(iso).toLocaleDateString('pt-PT', { day: 'numeric', month: 'long', year: 'numeric' })
 }
 
@@ -59,7 +60,7 @@ export default async function RestaurantDetailPage({ params }: { params: { slug:
           </h1>
           <p className="text-sm text-slate-500 mt-0.5">
             {restaurant.slug} · Criado a {formatDate(restaurant.created_at)}
-            {restaurant.subscription_status === 'trialing' && (
+            {restaurant.subscription_status === 'trialing' && restaurant.trial_ends_at && (
               <> · Trial expira a <span className={new Date(restaurant.trial_ends_at) < new Date() ? 'text-red-400' : 'text-orange-400'}>
                 {formatDate(restaurant.trial_ends_at)}
               </span></>
