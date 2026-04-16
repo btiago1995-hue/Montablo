@@ -449,7 +449,7 @@ export async function GET(request: NextRequest) {
                 <span style={{ display: 'flex' }}>savoyards adoptent</span>
                 <span style={{ color: ACCENT, display: 'flex' }}>MonTablo</span>
               </div>
-              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
                 {['Menu bilingue FR/EN', 'QR Code inclus'].map((pill) => (
                   <div
                     key={pill}
@@ -492,31 +492,33 @@ export async function GET(request: NextRequest) {
                 flexShrink: 0,
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '0px',
+                justifyContent: 'space-between',
               }}
             >
-              <div
-                style={{
-                  fontSize: '48px',
-                  color: ACCENT,
-                  fontFamily: 'serif',
-                  lineHeight: 1,
-                  display: 'flex',
-                  marginBottom: '8px',
-                }}
-              >
-                &quot;
-              </div>
-              <div
-                style={{
-                  fontSize: '18px',
-                  color: '#333',
-                  lineHeight: 1.5,
-                  flex: 1,
-                  display: 'flex',
-                }}
-              >
-                Plus besoin de réimprimer le menu à chaque saison
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <div
+                  style={{
+                    fontSize: '48px',
+                    color: ACCENT,
+                    fontFamily: 'serif',
+                    lineHeight: 1,
+                    display: 'flex',
+                    marginBottom: '8px',
+                  }}
+                >
+                  &quot;
+                </div>
+                <div
+                  style={{
+                    fontSize: '18px',
+                    color: '#333',
+                    lineHeight: 1.5,
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                  }}
+                >
+                  Plus besoin de réimprimer le menu à chaque saison
+                </div>
               </div>
               <div
                 style={{
