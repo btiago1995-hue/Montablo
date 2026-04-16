@@ -2,12 +2,13 @@
 
 import { createClient } from '@/lib/supabase/client'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 import { Eye, EyeOff, UtensilsCrossed } from 'lucide-react'
 
 export default function LoginPage() {
   const router = useRouter()
+  const searchParams = useSearchParams()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
@@ -31,7 +32,9 @@ export default function LoginPage() {
       return
     }
 
-    router.push('/dashboard')
+    const next = searchParams.get('next')
+    const redirectTo = next && next.startsWith('/') ? next : '/dashboard'
+    router.push(redirectTo)
     router.refresh()
   }
 

@@ -41,10 +41,11 @@ export async function updateSession(request: NextRequest) {
     if (!user) {
       const url = request.nextUrl.clone()
       url.pathname = '/login'
-      url.searchParams.set('next', '/admin')
+      url.searchParams.set('next', request.nextUrl.pathname)
       return NextResponse.redirect(url)
     }
-    if (user.email !== process.env.ADMIN_EMAIL) {
+    const adminEmail = process.env.ADMIN_EMAIL
+    if (!adminEmail || user.email !== adminEmail) {
       return new NextResponse('Forbidden', { status: 403 })
     }
   }
