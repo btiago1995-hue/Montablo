@@ -1,4 +1,5 @@
-type SubscriptionStatus = 'trialing' | 'active' | 'past_due' | 'canceled' | 'inactive'
+import type { Restaurant } from '@/types/database'
+type SubscriptionStatus = Restaurant['subscription_status']
 
 const styles: Record<SubscriptionStatus, string> = {
   active: 'bg-emerald-950 text-emerald-400',
@@ -9,11 +10,11 @@ const styles: Record<SubscriptionStatus, string> = {
 }
 
 const labels: Record<SubscriptionStatus, string> = {
-  active: 'Actif',
+  active: 'Ativo',
   trialing: 'Trial',
-  past_due: 'En retard',
-  canceled: 'Annulé',
-  inactive: 'Inactif',
+  past_due: 'Em atraso',
+  canceled: 'Cancelado',
+  inactive: 'Inativo',
 }
 
 export function StatusBadge({ status }: { status: SubscriptionStatus }) {

@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { cn } from '@/lib/utils'
 import { usePathname } from 'next/navigation'
 import {
   LayoutDashboard,
@@ -39,11 +40,12 @@ export function AdminSidebar() {
               <Link
                 key={href}
                 href={href}
-                className={`flex items-center gap-2.5 px-5 py-2.5 text-sm transition-colors ${
+                className={cn(
+                  'flex items-center gap-2.5 px-5 py-2.5 text-sm transition-colors',
                   isActive
                     ? 'bg-blue-700 text-white'
                     : 'text-slate-400 hover:bg-slate-700 hover:text-slate-200'
-                }`}
+                )}
               >
                 <Icon className="w-4 h-4" />
                 {label}
