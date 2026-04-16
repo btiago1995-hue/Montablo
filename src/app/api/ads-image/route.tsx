@@ -4,9 +4,15 @@ import { NextRequest } from 'next/server'
 export const runtime = 'edge'
 
 // Usage:
-// Landscape 1200x628: /api/ads-image?format=landscape&city=Annecy
-// Square 1200x1200:   /api/ads-image?format=square&city=Annecy
-// Logo 1:1 500x500:   /api/ads-image?format=logo
+// Landscape 1200x628:         /api/ads-image?format=landscape&city=Annecy
+// Landscape Economia 1200x628: /api/ads-image?format=landscape-economia
+// Landscape Social 1200x628:   /api/ads-image?format=landscape-social
+// Square 1200x1200:            /api/ads-image?format=square&city=Annecy
+// Square Economia 1200x1200:   /api/ads-image?format=square-economia
+// Square Social 1200x1200:     /api/ads-image?format=square-social
+// Portrait Economia 960x1200:  /api/ads-image?format=portrait-economia
+// Portrait Social 960x1200:    /api/ads-image?format=portrait-social
+// Logo 1:1 500x500:            /api/ads-image?format=logo
 
 export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl
@@ -14,7 +20,9 @@ export async function GET(request: NextRequest) {
   const city = searchParams.get('city') || 'Haute-Savoie'
 
   const PRIMARY = '#2C3E2D'
+  const DARK = '#1a2a1b'
   const ACCENT = '#D4A574'
+  const RED = '#e74c3c'
   const WHITE = '#FFFFFF'
   const WHITE60 = 'rgba(255,255,255,0.6)'
   const WHITE30 = 'rgba(255,255,255,0.15)'
@@ -317,7 +325,7 @@ export async function GET(request: NextRequest) {
                   backgroundColor: 'rgba(231,76,60,0.1)',
                   borderRadius: '16px',
                   padding: '20px 24px',
-                  borderLeft: '4px solid #e74c3c',
+                  borderLeft: `4px solid ${RED}`,
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '4px',
@@ -327,7 +335,7 @@ export async function GET(request: NextRequest) {
                 <div
                   style={{
                     fontSize: '36px',
-                    color: '#e74c3c',
+                    color: RED,
                     fontFamily: 'serif',
                     fontWeight: 700,
                     display: 'flex',
@@ -387,7 +395,6 @@ export async function GET(request: NextRequest) {
   }
 
   if (format === 'landscape-social') {
-    const DARK = '#1a2a1b'
     return new ImageResponse(
       (
         <div
@@ -609,7 +616,7 @@ export async function GET(request: NextRequest) {
                   backgroundColor: 'rgba(231,76,60,0.1)',
                   borderRadius: '16px',
                   padding: '24px',
-                  borderLeft: '4px solid #e74c3c',
+                  borderLeft: `4px solid ${RED}`,
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '4px',
@@ -619,7 +626,7 @@ export async function GET(request: NextRequest) {
                 <div
                   style={{
                     fontSize: '44px',
-                    color: '#e74c3c',
+                    color: RED,
                     fontFamily: 'serif',
                     fontWeight: 700,
                     display: 'flex',
@@ -699,7 +706,6 @@ export async function GET(request: NextRequest) {
   }
 
   if (format === 'square-social') {
-    const DARK = '#1a2a1b'
     return new ImageResponse(
       (
         <div
@@ -912,7 +918,7 @@ export async function GET(request: NextRequest) {
                   backgroundColor: 'rgba(231,76,60,0.1)',
                   borderRadius: '14px',
                   padding: '20px 24px',
-                  borderLeft: '4px solid #e74c3c',
+                  borderLeft: `4px solid ${RED}`,
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
@@ -927,7 +933,7 @@ export async function GET(request: NextRequest) {
                 <div
                   style={{
                     fontSize: '36px',
-                    color: '#e74c3c',
+                    color: RED,
                     fontFamily: 'serif',
                     fontWeight: 700,
                     display: 'flex',
@@ -1001,7 +1007,6 @@ export async function GET(request: NextRequest) {
   }
 
   if (format === 'portrait-social') {
-    const DARK = '#1a2a1b'
     return new ImageResponse(
       (
         <div
