@@ -40,7 +40,8 @@ export function ConfirmDialog({ label, description, confirmLabel, onConfirm, var
   return (
     <>
       <button
-        onClick={() => setOpen(true)}
+        type="button"
+        onClick={() => { setError(null); setOpen(true) }}
         className={`flex items-center gap-2.5 px-3 py-2.5 rounded-lg border text-sm font-medium transition-colors w-full ${triggerClass}`}
       >
         {icon}
@@ -55,12 +56,14 @@ export function ConfirmDialog({ label, description, confirmLabel, onConfirm, var
             {error && <p className="text-xs text-red-400 mb-3">{error}</p>}
             <div className="flex gap-2 justify-end">
               <button
+                type="button"
                 onClick={() => setOpen(false)}
                 className="px-4 py-2 text-sm text-slate-400 hover:text-slate-200"
               >
                 Cancelar
               </button>
               <button
+                type="button"
                 onClick={handleConfirm}
                 disabled={isPending}
                 className={`px-4 py-2 text-sm rounded-lg font-medium disabled:opacity-50 ${btnClass}`}

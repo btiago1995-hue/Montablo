@@ -6,6 +6,14 @@ import type { Restaurant } from '@/types/database'
 
 type SearchParams = { filter?: string }
 
+const filterLabels: Record<'active' | 'trialing' | 'past_due' | 'canceled' | 'inactive', string> = {
+  active: 'Ativos',
+  trialing: 'Trial',
+  past_due: 'Em atraso',
+  canceled: 'Cancelados',
+  inactive: 'Inativos',
+}
+
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString('pt-PT', { day: 'numeric', month: 'short', year: 'numeric' })
 }
@@ -48,7 +56,7 @@ export default async function RestaurantsPage({ searchParams }: { searchParams: 
                 filter === s ? 'bg-blue-700 text-white border-blue-700' : 'border-slate-600 text-slate-400 hover:border-slate-400'
               }`}
             >
-              {s === 'active' ? 'Activos' : s === 'trialing' ? 'Trial' : s === 'past_due' ? 'Em atraso' : s === 'canceled' ? 'Cancelados' : 'Inactivos'} ({count})
+              {filterLabels[s]} ({count})
             </Link>
           )
         })}

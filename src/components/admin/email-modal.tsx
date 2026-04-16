@@ -32,6 +32,7 @@ export function EmailModal({ onSend }: Props) {
   return (
     <>
       <button
+        type="button"
         onClick={() => setOpen(true)}
         className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg bg-emerald-950 border border-emerald-800 text-emerald-300 text-sm font-medium hover:bg-emerald-900 transition-colors w-full"
       >
@@ -44,7 +45,12 @@ export function EmailModal({ onSend }: Props) {
           <div className="bg-slate-800 border border-slate-700 rounded-xl w-full max-w-md">
             <div className="flex items-center justify-between px-5 py-4 border-b border-slate-700">
               <h2 className="text-sm font-semibold text-slate-200">Enviar email</h2>
-              <button onClick={() => setOpen(false)} className="text-slate-500 hover:text-slate-300">
+              <button
+                type="button"
+                aria-label="Fechar"
+                onClick={() => setOpen(false)}
+                className="text-slate-500 hover:text-slate-300"
+              >
                 <X className="w-4 h-4" />
               </button>
             </div>
@@ -68,12 +74,14 @@ export function EmailModal({ onSend }: Props) {
             </div>
             <div className="px-5 pb-5 flex gap-2 justify-end">
               <button
-                onClick={() => setOpen(false)}
+                type="button"
+                onClick={() => { setOpen(false); setStatus('idle') }}
                 className="px-4 py-2 text-sm text-slate-400 hover:text-slate-200"
               >
                 Cancelar
               </button>
               <button
+                type="button"
                 onClick={handleSend}
                 disabled={!subject || !body || isPending}
                 className="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
