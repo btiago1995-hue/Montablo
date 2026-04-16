@@ -1,0 +1,46 @@
+{
+  "date": "2026-04-15",
+  "window": "7d",
+  "note": "Project launched Apr 12 — this retro covers full project history (4 days)",
+  "metrics": {
+    "commits": 42,
+    "contributors": 1,
+    "prs_merged": 0,
+    "insertions": 26068,
+    "deletions": 829,
+    "net_loc": 25239,
+    "test_loc": 0,
+    "test_ratio": 0.0,
+    "active_days": 4,
+    "sessions": 8,
+    "deep_sessions": 3,
+    "avg_session_minutes": 71,
+    "loc_per_session_hour": 2750,
+    "feat_pct": 0.48,
+    "fix_pct": 0.33,
+    "chore_pct": 0.12,
+    "docs_pct": 0.05,
+    "perf_pct": 0.02,
+    "peak_hour": 17,
+    "ai_assisted_commits": 42,
+    "shipping_streak_days": 4
+  },
+  "authors": {
+    "btiago1995-hue": {
+      "commits": 42,
+      "insertions": 26068,
+      "deletions": 829,
+      "test_ratio": 0.0,
+      "top_area": "src/app/(public)/"
+    }
+  },
+  "version_range": null,
+  "streak_days": 4,
+  "tweetable": "Launch week Apr 12-15: 42 commits, 26k LOC, 0 tests, 8 sessions, peak: 5pm | MonTablo from zero to live in 4 days",
+  "skill_usage": {
+    "design-html": 2,
+    "qa": 1,
+    "design-shotgun": 1,
+    "retro": 1
+  }
+}
