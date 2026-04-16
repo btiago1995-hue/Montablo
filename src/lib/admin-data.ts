@@ -30,7 +30,11 @@ export async function getRestaurantOwnerEmail(ownerId: string): Promise<string |
   return data.user?.email ?? null
 }
 
-export async function getRestaurantStats(restaurantId: string) {
+export async function getRestaurantStats(restaurantId: string): Promise<{
+  categoryCount: number
+  itemCount: number
+  firstImportAt: string | null
+}> {
   const supabase = createAdminClient()
   const [{ count: categoryCount }, { count: itemCount }, { data: imports }] = await Promise.all([
     supabase
@@ -57,22 +61,25 @@ export async function getRestaurantStats(restaurantId: string) {
 
 // ─── Dashboard stats ──────────────────────────────────────────
 
-export async function getDashboardStats() {
-  const restaurants = await getAllRestaurants()
+export async function getDashboardStats(restaurants?: Restaurant[]) {
+  const data = restaurants ?? await getAllRestaurants()
 
   const now = new Date()
   const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000)
   const sevenDaysFromNow = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000)
 
-  const active = restaurants.filter(r => r.subscription_status === 'active')
-  const trialing = restaurants.filter(r => r.subscription_status === 'trialing')
-  const trialExpiringThisWeek = trialing.filter(r => new Date(r.trial_ends_at) <= sevenDaysFromNow)
-  const churnedThisMonth = restaurants.filter(
+  const active = data.filter(r => r.subscription_status === 'active')
+  const trialing = data.filter(r => r.subscription_status === 'trialing')
+  const trialExpiringThisWeek = trialing.filter(r => {
+    const end = new Date(r.trial_ends_at)
+    return end >= now && end <= sevenDaysFromNow
+  })
+  const churnedThisMonth = data.filter(
     r => r.subscription_status === 'canceled' && new Date(r.updated_at) >= thirtyDaysAgo
   )
 
   return {
-    totalRestaurants: restaurants.length,
+    totalRestaurants: data.length,
     activeCount: active.length,
     trialingCount: trialing.length,
     trialExpiringCount: trialExpiringThisWeek.length,
@@ -82,8 +89,8 @@ export async function getDashboardStats() {
     statusBreakdown: {
       active: active.length,
       trialing: trialing.length,
-      past_due: restaurants.filter(r => r.subscription_status === 'past_due').length,
-      canceled: restaurants.filter(r => r.subscription_status === 'canceled').length,
+      past_due: data.filter(r => r.subscription_status === 'past_due').length,
+      canceled: data.filter(r => r.subscription_status === 'canceled').length,
     },
   }
 }
@@ -94,7 +101,7 @@ export async function getMRR(): Promise<number> {
   const stripe = getStripe()
   const subscriptions = await stripe.subscriptions.list({
     status: 'active',
-    limit: 100,
+    limit: 100, // TODO: handle pagination when > 100 active subscriptions
     expand: ['data.items.data.price'],
   })
 
@@ -111,8 +118,8 @@ export async function getMRR(): Promise<number> {
 
 // ─── Monthly signups (chart data) ────────────────────────────
 
-export async function getMonthlySignups(months = 6): Promise<Array<{ month: string; count: number }>> {
-  const restaurants = await getAllRestaurants()
+export async function getMonthlySignups(months = 6, restaurants?: Restaurant[]): Promise<Array<{ month: string; count: number }>> {
+  const data = restaurants ?? await getAllRestaurants()
   const result: Record<string, number> = {}
 
   const now = new Date()
@@ -122,7 +129,7 @@ export async function getMonthlySignups(months = 6): Promise<Array<{ month: stri
     result[key] = 0
   }
 
-  for (const r of restaurants) {
+  for (const r of data) {
     const d = new Date(r.created_at)
     const key = d.toLocaleDateString('pt-PT', { month: 'short', year: '2-digit' })
     if (key in result) result[key]++
@@ -162,18 +169,19 @@ export async function getActiveStripeSubscriptions(): Promise<StripeSubRow[]> {
           expand: ['items.data.price'],
         })
         const item = sub.items.data[0]
-        // current_period_end is present at runtime but removed from newer Stripe SDK types
-        const subAny = sub as unknown as { current_period_end: number }
         rows.push({
           restaurantName: r.name,
           slug: r.slug,
           startDate: new Date(sub.start_date * 1000).toLocaleDateString('pt-PT'),
           interval: item?.price?.recurring?.interval === 'year' ? 'Anual' : 'Mensal',
           amountEur: (item?.price?.unit_amount ?? 0) / 100,
-          currentPeriodEnd: new Date(subAny.current_period_end * 1000).toLocaleDateString('pt-PT'),
+          currentPeriodEnd: new Date((item?.current_period_end ?? 0) * 1000).toLocaleDateString('pt-PT'),
         })
-      } catch {
-        // Subscription may have been deleted from Stripe
+      } catch (err) {
+        const isNotFound = err instanceof Error && 'code' in err && (err as { code: string }).code === 'resource_missing'
+        if (!isNotFound) {
+          console.error(`[admin-data] failed to retrieve subscription for ${r.slug}:`, err)
+        }
       }
     })
   )
