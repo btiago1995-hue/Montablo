@@ -207,6 +207,329 @@ export async function GET(request: NextRequest) {
     )
   }
 
+  if (format === 'landscape-economia') {
+    return new ImageResponse(
+      (
+        <div
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: PRIMARY,
+            display: 'flex',
+            flexDirection: 'column',
+            position: 'relative',
+          }}
+        >
+          <div style={{ width: '100%', height: '6px', backgroundColor: ACCENT, display: 'flex' }} />
+          <div
+            style={{
+              flex: 1,
+              display: 'flex',
+              alignItems: 'center',
+              padding: '0 80px',
+              gap: '60px',
+            }}
+          >
+            {/* Left: headline + sub + CTA */}
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0px' }}>
+              <div
+                style={{
+                  fontSize: '16px',
+                  color: ACCENT,
+                  letterSpacing: '3px',
+                  textTransform: 'uppercase',
+                  marginBottom: '20px',
+                  display: 'flex',
+                }}
+              >
+                MonTablo · Menu Digital
+              </div>
+              <div
+                style={{
+                  fontSize: '60px',
+                  color: WHITE,
+                  fontFamily: 'serif',
+                  lineHeight: 1.1,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  marginBottom: '16px',
+                }}
+              >
+                <span style={{ display: 'flex' }}>Fini les menus</span>
+                <span style={{ color: ACCENT, display: 'flex' }}>imprimés</span>
+              </div>
+              <div style={{ fontSize: '22px', color: WHITE60, marginBottom: '28px', display: 'flex' }}>
+                Mettez à jour votre carte en temps réel. Sans impression. Sans frais.
+              </div>
+              <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+                {['QR Code', 'Bilingue FR/EN'].map((item, i) => (
+                  <div key={item} style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                    {i > 0 && (
+                      <div
+                        style={{
+                          width: '4px',
+                          height: '4px',
+                          borderRadius: '50%',
+                          backgroundColor: ACCENT,
+                          display: 'flex',
+                        }}
+                      />
+                    )}
+                    <div style={{ fontSize: '20px', color: WHITE60, display: 'flex' }}>{item}</div>
+                  </div>
+                ))}
+                <div
+                  style={{
+                    width: '4px',
+                    height: '4px',
+                    borderRadius: '50%',
+                    backgroundColor: ACCENT,
+                    display: 'flex',
+                  }}
+                />
+                <div
+                  style={{
+                    backgroundColor: ACCENT,
+                    borderRadius: '100px',
+                    padding: '10px 28px',
+                    fontSize: '20px',
+                    color: PRIMARY,
+                    fontWeight: 700,
+                    display: 'flex',
+                  }}
+                >
+                  14J Gratuit →
+                </div>
+              </div>
+            </div>
+            {/* Right: price comparison */}
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '12px',
+                width: '220px',
+                flexShrink: 0,
+              }}
+            >
+              <div
+                style={{
+                  backgroundColor: 'rgba(231,76,60,0.1)',
+                  borderRadius: '16px',
+                  padding: '20px 24px',
+                  borderLeft: '4px solid #e74c3c',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '4px',
+                }}
+              >
+                <div style={{ fontSize: '14px', color: WHITE60, display: 'flex' }}>Menu papier / an</div>
+                <div
+                  style={{
+                    fontSize: '36px',
+                    color: '#e74c3c',
+                    fontFamily: 'serif',
+                    fontWeight: 700,
+                    display: 'flex',
+                  }}
+                >
+                  ~300€
+                </div>
+                <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.35)', display: 'flex' }}>
+                  impression + design
+                </div>
+              </div>
+              <div
+                style={{
+                  textAlign: 'center',
+                  fontSize: '24px',
+                  color: ACCENT,
+                  display: 'flex',
+                  justifyContent: 'center',
+                }}
+              >
+                ↓
+              </div>
+              <div
+                style={{
+                  backgroundColor: 'rgba(212,165,116,0.12)',
+                  borderRadius: '16px',
+                  padding: '20px 24px',
+                  borderLeft: `4px solid ${ACCENT}`,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '4px',
+                }}
+              >
+                <div style={{ fontSize: '14px', color: WHITE60, display: 'flex' }}>MonTablo</div>
+                <div
+                  style={{
+                    fontSize: '36px',
+                    color: ACCENT,
+                    fontFamily: 'serif',
+                    fontWeight: 700,
+                    display: 'flex',
+                  }}
+                >
+                  14J Gratuit
+                </div>
+                <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.35)', display: 'flex' }}>
+                  puis abonnement mensuel
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style={{ width: '100%', height: '6px', backgroundColor: ACCENT, display: 'flex' }} />
+        </div>
+      ),
+      { width: 1200, height: 628 }
+    )
+  }
+
+  if (format === 'landscape-social') {
+    const DARK = '#1a2a1b'
+    return new ImageResponse(
+      (
+        <div
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: DARK,
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
+          <div style={{ width: '100%', height: '6px', backgroundColor: ACCENT, display: 'flex' }} />
+          <div
+            style={{
+              flex: 1,
+              display: 'flex',
+              alignItems: 'center',
+              padding: '0 80px',
+              gap: '60px',
+            }}
+          >
+            {/* Left */}
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0px' }}>
+              <div
+                style={{
+                  fontSize: '14px',
+                  color: ACCENT,
+                  letterSpacing: '3px',
+                  textTransform: 'uppercase',
+                  marginBottom: '20px',
+                  display: 'flex',
+                }}
+              >
+                Haute-Savoie · Annecy · Chamonix
+              </div>
+              <div
+                style={{
+                  fontSize: '54px',
+                  color: WHITE,
+                  fontFamily: 'serif',
+                  lineHeight: 1.1,
+                  marginBottom: '24px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
+              >
+                <span style={{ display: 'flex' }}>Les restaurants</span>
+                <span style={{ display: 'flex' }}>savoyards adoptent</span>
+                <span style={{ color: ACCENT, display: 'flex' }}>MonTablo</span>
+              </div>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                {['Menu bilingue FR/EN', 'QR Code inclus'].map((pill) => (
+                  <div
+                    key={pill}
+                    style={{
+                      backgroundColor: WHITE30,
+                      borderRadius: '100px',
+                      padding: '8px 20px',
+                      fontSize: '18px',
+                      color: WHITE,
+                      display: 'flex',
+                    }}
+                  >
+                    {pill}
+                  </div>
+                ))}
+                <div
+                  style={{
+                    backgroundColor: ACCENT,
+                    borderRadius: '100px',
+                    padding: '8px 24px',
+                    fontSize: '18px',
+                    color: PRIMARY,
+                    fontWeight: 700,
+                    display: 'flex',
+                  }}
+                >
+                  14J Gratuit →
+                </div>
+              </div>
+            </div>
+            {/* Right: testimonial card */}
+            <div
+              style={{
+                backgroundColor: WHITE,
+                borderRadius: '20px',
+                padding: '32px 28px',
+                width: '240px',
+                flexShrink: 0,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '0px',
+              }}
+            >
+              <div
+                style={{
+                  fontSize: '48px',
+                  color: ACCENT,
+                  fontFamily: 'serif',
+                  lineHeight: 1,
+                  display: 'flex',
+                  marginBottom: '8px',
+                }}
+              >
+                &quot;
+              </div>
+              <div
+                style={{
+                  fontSize: '18px',
+                  color: '#333',
+                  lineHeight: 1.5,
+                  flex: 1,
+                  display: 'flex',
+                }}
+              >
+                Plus besoin de réimprimer le menu à chaque saison
+              </div>
+              <div
+                style={{
+                  borderTop: '1px solid #eee',
+                  paddingTop: '16px',
+                  marginTop: '20px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
+              >
+                <div style={{ fontSize: '15px', fontWeight: 700, color: PRIMARY, display: 'flex' }}>
+                  Le Chalet
+                </div>
+                <div style={{ fontSize: '13px', color: '#999', display: 'flex' }}>
+                  Restaurant · Annecy
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style={{ width: '100%', height: '6px', backgroundColor: ACCENT, display: 'flex' }} />
+        </div>
+      ),
+      { width: 1200, height: 628 }
+    )
+  }
+
   // Default: landscape 1200x628
   return new ImageResponse(
     (
