@@ -569,6 +569,7 @@ export async function GET(request: NextRequest) {
                   fontSize: '42px',
                   color: WHITE,
                   fontFamily: 'serif',
+                  letterSpacing: '-0.01em',
                   display: 'flex',
                 }}
               >
