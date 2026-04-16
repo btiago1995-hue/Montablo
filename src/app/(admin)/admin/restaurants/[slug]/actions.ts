@@ -89,6 +89,7 @@ export async function cancelSubscription(
 
     revalidatePath(`/admin/restaurants/${slug}`)
     revalidatePath('/admin')
+    revalidatePath('/admin/revenue')
     return {}
   } catch (e) {
     return { error: e instanceof Error ? e.message : 'Erro ao cancelar subscrição' }
