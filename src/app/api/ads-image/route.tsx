@@ -122,14 +122,12 @@ export async function GET(request: NextRequest) {
           >
             {/* Logo row */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '56px' }}>
-              <div
-                style={{
-                  fontSize: '32px',
-                  display: 'flex',
-                }}
-              >
-                🍽️
-              </div>
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke={ACCENT} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m16 2-2.3 2.3a3 3 0 0 0 0 4.2l1.8 1.8a3 3 0 0 0 4.2 0L22 8" />
+                <path d="M15 15 3.3 3.3a4.2 4.2 0 0 0 0 6l7.3 7.3c.7.7 2 .7 2.8 0L15 15Zm0 0 7 7" />
+                <path d="m2.1 21.8 6.4-6.3" />
+                <path d="m19 5-7 7" />
+              </svg>
               <div
                 style={{
                   fontSize: '42px',
@@ -240,17 +238,14 @@ export async function GET(request: NextRequest) {
           >
             {/* Left: headline + sub + CTA */}
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0px' }}>
-              <div
-                style={{
-                  fontSize: '16px',
-                  color: ACCENT,
-                  letterSpacing: '3px',
-                  textTransform: 'uppercase',
-                  marginBottom: '20px',
-                  display: 'flex',
-                }}
-              >
-                MonTablo · Menu Digital
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '24px' }}>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={ACCENT} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m16 2-2.3 2.3a3 3 0 0 0 0 4.2l1.8 1.8a3 3 0 0 0 4.2 0L22 8" />
+                  <path d="M15 15 3.3 3.3a4.2 4.2 0 0 0 0 6l7.3 7.3c.7.7 2 .7 2.8 0L15 15Zm0 0 7 7" />
+                  <path d="m2.1 21.8 6.4-6.3" />
+                  <path d="m19 5-7 7" />
+                </svg>
+                <div style={{ fontSize: '22px', color: WHITE60, fontFamily: 'serif', display: 'flex' }}>MonTablo</div>
               </div>
               <div
                 style={{
@@ -417,14 +412,23 @@ export async function GET(request: NextRequest) {
             }}
           >
             {/* Left */}
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0px' }}>
+            <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: '0px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={ACCENT} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m16 2-2.3 2.3a3 3 0 0 0 0 4.2l1.8 1.8a3 3 0 0 0 4.2 0L22 8" />
+                  <path d="M15 15 3.3 3.3a4.2 4.2 0 0 0 0 6l7.3 7.3c.7.7 2 .7 2.8 0L15 15Zm0 0 7 7" />
+                  <path d="m2.1 21.8 6.4-6.3" />
+                  <path d="m19 5-7 7" />
+                </svg>
+                <div style={{ fontSize: '22px', color: WHITE60, fontFamily: 'serif', display: 'flex' }}>MonTablo</div>
+              </div>
               <div
                 style={{
-                  fontSize: '14px',
+                  fontSize: '12px',
                   color: ACCENT,
                   letterSpacing: '3px',
                   textTransform: 'uppercase',
-                  marginBottom: '20px',
+                  marginBottom: '16px',
                   display: 'flex',
                 }}
               >
@@ -432,11 +436,11 @@ export async function GET(request: NextRequest) {
               </div>
               <div
                 style={{
-                  fontSize: '54px',
+                  fontSize: '48px',
                   color: WHITE,
                   fontFamily: 'serif',
                   lineHeight: 1.1,
-                  marginBottom: '24px',
+                  marginBottom: '20px',
                   display: 'flex',
                   flexDirection: 'column',
                 }}
@@ -481,8 +485,10 @@ export async function GET(request: NextRequest) {
               style={{
                 backgroundColor: WHITE,
                 borderRadius: '20px',
-                padding: '32px 28px',
-                width: '240px',
+                padding: '28px 24px',
+                width: '260px',
+                minWidth: '260px',
+                maxWidth: '260px',
                 flexShrink: 0,
                 display: 'flex',
                 flexDirection: 'column',
@@ -570,7 +576,12 @@ export async function GET(request: NextRequest) {
                 marginBottom: '48px',
               }}
             >
-              <div style={{ fontSize: '32px', display: 'flex' }}>🍽️</div>
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke={ACCENT} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m16 2-2.3 2.3a3 3 0 0 0 0 4.2l1.8 1.8a3 3 0 0 0 4.2 0L22 8" />
+                <path d="M15 15 3.3 3.3a4.2 4.2 0 0 0 0 6l7.3 7.3c.7.7 2 .7 2.8 0L15 15Zm0 0 7 7" />
+                <path d="m2.1 21.8 6.4-6.3" />
+                <path d="m19 5-7 7" />
+              </svg>
               <div
                 style={{
                   fontSize: '42px',
@@ -729,14 +740,24 @@ export async function GET(request: NextRequest) {
               gap: '0px',
             }}
           >
+            {/* Logo */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '32px' }}>
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke={ACCENT} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m16 2-2.3 2.3a3 3 0 0 0 0 4.2l1.8 1.8a3 3 0 0 0 4.2 0L22 8" />
+                <path d="M15 15 3.3 3.3a4.2 4.2 0 0 0 0 6l7.3 7.3c.7.7 2 .7 2.8 0L15 15Zm0 0 7 7" />
+                <path d="m2.1 21.8 6.4-6.3" />
+                <path d="m19 5-7 7" />
+              </svg>
+              <div style={{ fontSize: '42px', color: WHITE, fontFamily: 'serif', letterSpacing: '-0.01em', display: 'flex' }}>MonTablo</div>
+            </div>
             {/* Geo tag */}
             <div
               style={{
-                fontSize: '18px',
+                fontSize: '16px',
                 color: ACCENT,
                 letterSpacing: '3px',
                 textTransform: 'uppercase',
-                marginBottom: '32px',
+                marginBottom: '24px',
                 display: 'flex',
               }}
             >
@@ -745,7 +766,7 @@ export async function GET(request: NextRequest) {
             {/* Headline */}
             <div
               style={{
-                fontSize: '62px',
+                fontSize: '58px',
                 color: WHITE,
                 fontFamily: 'serif',
                 textAlign: 'center',
@@ -1189,8 +1210,13 @@ export async function GET(request: NextRequest) {
             }}
           >
             {/* Logo */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '28px' }}>
-              <div style={{ fontSize: '22px', display: 'flex' }}>🍽️</div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '28px' }}>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={ACCENT} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m16 2-2.3 2.3a3 3 0 0 0 0 4.2l1.8 1.8a3 3 0 0 0 4.2 0L22 8" />
+                <path d="M15 15 3.3 3.3a4.2 4.2 0 0 0 0 6l7.3 7.3c.7.7 2 .7 2.8 0L15 15Zm0 0 7 7" />
+                <path d="m2.1 21.8 6.4-6.3" />
+                <path d="m19 5-7 7" />
+              </svg>
               <div
                 style={{
                   fontSize: '28px',
