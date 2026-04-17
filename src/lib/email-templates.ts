@@ -62,6 +62,19 @@ function tip(icon: string, text: string) {
   </div>`
 }
 
+function formatAmount(amountInCents: number, currency: string) {
+  return new Intl.NumberFormat('fr-FR', {
+    style: 'currency',
+    currency: currency.toUpperCase(),
+  }).format(amountInCents / 100)
+}
+
+function formatPeriod(startTs: number, endTs: number) {
+  const opts: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'long', year: 'numeric' }
+  const fmt = (ts: number) => new Date(ts * 1000).toLocaleDateString('fr-FR', opts)
+  return `${fmt(startTs)} → ${fmt(endTs)}`
+}
+
 // ─── 1. Welcome email ───────────────────────────────────────────────
 
 export function welcome(restaurantName: string, dashboardUrl: string) {
@@ -226,6 +239,54 @@ export function subscriptionCanceled(restaurantName: string, dashboardUrl: strin
       ${button('Réactiver mon abonnement', `${dashboardUrl}/settings`)}
       <p style="font-size:13px;color:${BRAND.muted};line-height:1.5;margin:0">
         Si vous avez annulé par erreur ou avez besoin d'aide, répondez simplement à cet email.
+      </p>
+    `),
+  }
+}
+
+// ─── 6. Invoice issued (every payment) ─────────────────────────────────────
+
+export function invoiceIssued(
+  restaurantName: string,
+  amountPaid: number,
+  currency: string,
+  periodStart: number,
+  periodEnd: number,
+  invoiceUrl: string,
+  dashboardUrl: string,
+) {
+  const amount = formatAmount(amountPaid, currency)
+  const period = formatPeriod(periodStart, periodEnd)
+
+  return {
+    subject: `${restaurantName} — Votre facture MonTablo est disponible`,
+    html: layout(`
+      <h2 style="font-family:Georgia,serif;color:${BRAND.primary};margin:0 0 8px;font-size:22px">
+        Votre facture est disponible
+      </h2>
+      <p style="font-size:15px;color:${BRAND.text};line-height:1.6;margin:0 0 24px">
+        Merci pour votre paiement. Voici le récapitulatif de votre abonnement MonTablo
+        pour <strong>${restaurantName}</strong>.
+      </p>
+
+      ${divider()}
+
+      <table style="width:100%;border-collapse:collapse;margin:0 0 24px">
+        <tr>
+          <td style="font-size:14px;color:${BRAND.muted};padding:8px 0">Montant payé</td>
+          <td style="font-size:14px;color:${BRAND.text};font-weight:600;text-align:right;padding:8px 0">${amount}</td>
+        </tr>
+        <tr>
+          <td style="font-size:14px;color:${BRAND.muted};padding:8px 0;border-top:1px solid #E5E5E0">Période couverte</td>
+          <td style="font-size:14px;color:${BRAND.text};text-align:right;padding:8px 0;border-top:1px solid #E5E5E0">${period}</td>
+        </tr>
+      </table>
+
+      ${button('Voir ma facture', invoiceUrl)}
+
+      <p style="font-size:13px;color:${BRAND.muted};line-height:1.5;margin:0;text-align:center">
+        Vous pouvez également accéder à toutes vos factures depuis votre
+        <a href="${dashboardUrl}/settings" style="color:${BRAND.accent};text-decoration:none">tableau de bord</a>.
       </p>
     `),
   }
