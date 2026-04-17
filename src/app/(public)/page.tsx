@@ -2,6 +2,10 @@ import Link from 'next/link'
 import { ArrowRight, Check, UtensilsCrossed } from 'lucide-react'
 import { PricingToggle } from '@/components/public/pricing-toggle'
 import { JsonLd, homepageJsonLd } from '@/components/seo/json-ld'
+import { HeroPhoneAnimation } from '@/components/public/hero-phone-animation'
+import { PainPoints } from '@/components/public/pain-points'
+import { StatsCounter } from '@/components/public/stats-counter'
+import { ProductShowcase } from '@/components/public/product-showcase'
 
 const steps = [
   { num: '01', title: 'Inscrivez-vous', desc: 'Créez votre compte en 30 secondes. Aucune carte de crédit requise.' },
@@ -45,6 +49,7 @@ export default function LandingPage() {
       {schemas.map((schema, i) => (
         <JsonLd key={i} data={schema} />
       ))}
+
       {/* Nav */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/85 backdrop-blur-xl border-b border-border/50">
         <div className="flex items-center justify-between px-6 py-4 max-w-[1120px] mx-auto">
@@ -53,21 +58,10 @@ export default function LandingPage() {
             <span className="font-serif text-xl text-primary tracking-tight">MonTablo</span>
           </Link>
           <div className="flex items-center gap-6">
-            <Link href="/fonctionnalites" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
-              Fonctionnalites
-            </Link>
-            <Link href="/tarifs" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
-              Tarifs
-            </Link>
-            <Link href="/blog" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
-              Blog
-            </Link>
-            <Link
-              href="/login"
-              className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block"
-            >
-              Connexion
-            </Link>
+            <Link href="/fonctionnalites" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">Fonctionnalites</Link>
+            <Link href="/tarifs" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">Tarifs</Link>
+            <Link href="/blog" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">Blog</Link>
+            <Link href="/login" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">Connexion</Link>
             <Link
               href="/signup"
               className="text-sm font-medium bg-primary text-white px-5 py-2.5 rounded-full hover:bg-primary-light transition-all hover:shadow-lg hover:shadow-primary/15"
@@ -78,33 +72,40 @@ export default function LandingPage() {
         </div>
       </nav>
 
-      {/* Hero */}
+      {/* Hero — 2-column with phone animation */}
       <section className="max-w-[1120px] mx-auto px-6 pt-[120px] pb-16 sm:pt-[160px] sm:pb-20">
-        <p className="text-sm sm:text-[13px] font-medium tracking-[0.08em] uppercase text-accent-dark mb-5">
-          Le menu digital pour les restaurants exigeants
-        </p>
-        <h1 className="font-serif text-[32px] sm:text-5xl lg:text-[60px] text-foreground leading-[1.1] mb-6 max-w-[680px]">
-          Votre carte, enfin à la hauteur de votre cuisine.
-        </h1>
-        <p className="text-lg sm:text-lg text-muted leading-relaxed max-w-[520px] mb-10">
-          Un menu digital élégant que vous mettez à jour en temps réel.
-          Vos clients scannent, vous gardez le contrôle.
-        </p>
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-5">
-          <Link
-            href="/signup"
-            className="group inline-flex items-center justify-center gap-2.5 bg-primary text-white font-medium px-8 py-4 sm:py-3.5 rounded-full hover:bg-primary-light transition-all hover:shadow-xl hover:shadow-primary/18 hover:-translate-y-px text-base sm:text-[15px]"
-          >
-            Essayer 14 jours gratuitement
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-          </Link>
-          <Link
-            href="/menu/demo"
-            className="group inline-flex items-center justify-center gap-2 border border-border text-foreground font-medium px-6 py-4 sm:py-3.5 rounded-full hover:border-foreground/30 hover:bg-muted/5 transition-all text-base sm:text-[15px]"
-          >
-            Voir un exemple
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-          </Link>
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div>
+            <p className="text-sm sm:text-[13px] font-medium tracking-[0.08em] uppercase text-accent-dark mb-5">
+              Le menu digital pour les restaurants exigeants
+            </p>
+            <h1 className="font-serif text-[32px] sm:text-5xl lg:text-[56px] text-foreground leading-[1.1] mb-6 max-w-[580px]">
+              Votre carte, enfin à la hauteur de votre cuisine.
+            </h1>
+            <p className="text-lg text-muted leading-relaxed max-w-[480px] mb-10">
+              Un menu digital élégant que vous mettez à jour en temps réel.
+              Vos clients scannent, vous gardez le contrôle.
+            </p>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-5">
+              <Link
+                href="/signup"
+                className="group inline-flex items-center justify-center gap-2.5 bg-primary text-white font-medium px-8 py-4 sm:py-3.5 rounded-full hover:bg-primary-light transition-all shadow-[0_0_24px_rgba(44,62,45,0.2)] hover:shadow-[0_0_32px_rgba(44,62,45,0.35)] hover:-translate-y-px text-base sm:text-[15px]"
+              >
+                Essayer 14 jours gratuitement
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+              </Link>
+              <Link
+                href="/menu/demo"
+                className="group inline-flex items-center justify-center gap-2 border border-border text-foreground font-medium px-6 py-4 sm:py-3.5 rounded-full hover:border-foreground/30 hover:bg-muted/5 transition-all text-base sm:text-[15px]"
+              >
+                Voir un exemple
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+              </Link>
+            </div>
+          </div>
+          <div className="hidden lg:flex justify-end pb-8">
+            <HeroPhoneAnimation />
+          </div>
         </div>
       </section>
 
@@ -118,6 +119,12 @@ export default function LandingPage() {
           <span className="text-sm text-muted/60">Prêt en 5 minutes</span>
         </div>
       </div>
+
+      {/* Pain points */}
+      <PainPoints />
+
+      {/* Stats counter */}
+      <StatsCounter />
 
       {/* How it works */}
       <section className="max-w-[1120px] mx-auto px-6 py-16 sm:py-[120px]">
@@ -140,8 +147,13 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Product showcase */}
+      <div className="bg-white border-y border-border/50">
+        <ProductShowcase />
+      </div>
+
       {/* Menu preview */}
-      <section className="max-w-[1120px] mx-auto px-6 pb-16 sm:pb-[120px]">
+      <section className="max-w-[1120px] mx-auto px-6 py-16 sm:py-[100px]">
         <div className="bg-primary rounded-[20px] p-8 sm:p-16 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           <div>
             <h2 className="font-serif text-[28px] sm:text-4xl text-white leading-snug mb-4">
@@ -153,7 +165,7 @@ export default function LandingPage() {
             </p>
             <Link
               href="/signup"
-              className="group inline-flex items-center justify-center gap-2.5 bg-accent text-foreground font-medium px-8 py-4 sm:py-3.5 rounded-full hover:bg-accent-light transition-all text-base sm:text-[15px] w-full sm:w-auto"
+              className="group inline-flex items-center justify-center gap-2.5 bg-accent text-foreground font-medium px-8 py-4 sm:py-3.5 rounded-full hover:bg-accent-light transition-all text-base sm:text-[15px] w-full sm:w-auto shadow-[0_0_20px_rgba(212,165,116,0.3)] hover:shadow-[0_0_28px_rgba(212,165,116,0.4)]"
             >
               Créer mon menu
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
@@ -236,7 +248,7 @@ export default function LandingPage() {
           </p>
           <Link
             href="/signup"
-            className="group inline-flex items-center justify-center gap-2.5 bg-primary text-white font-medium px-10 py-4 rounded-full hover:bg-primary-light transition-all hover:shadow-xl hover:shadow-primary/18 hover:-translate-y-px text-base sm:text-[15px] w-full sm:w-auto"
+            className="group inline-flex items-center justify-center gap-2.5 bg-primary text-white font-medium px-10 py-4 rounded-full hover:bg-primary-light transition-all shadow-[0_0_24px_rgba(44,62,45,0.2)] hover:shadow-[0_0_32px_rgba(44,62,45,0.35)] hover:-translate-y-px text-base sm:text-[15px] w-full sm:w-auto"
           >
             Créer mon menu gratuitement
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
@@ -253,9 +265,7 @@ export default function LandingPage() {
                 <UtensilsCrossed className="w-[18px] h-[18px] text-primary" />
                 <span className="font-serif text-base text-primary">MonTablo</span>
               </div>
-              <p className="text-[13px] text-muted/60 leading-relaxed">
-                Le menu digital pour les restaurants exigeants.
-              </p>
+              <p className="text-[13px] text-muted/60 leading-relaxed">Le menu digital pour les restaurants exigeants.</p>
               <Link href="/a-propos" className="block text-[13px] text-muted/60 hover:text-muted transition-colors mt-3">A propos</Link>
             </div>
             <div>
@@ -285,9 +295,7 @@ export default function LandingPage() {
             </div>
           </div>
           <div className="border-t border-border/50 pt-6 text-center">
-            <p className="text-sm text-muted/60">
-              &copy; {new Date().getFullYear()} MonTablo. Tous droits reserves.
-            </p>
+            <p className="text-sm text-muted/60">&copy; {new Date().getFullYear()} MonTablo. Tous droits reserves.</p>
           </div>
         </div>
       </footer>
