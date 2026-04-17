@@ -151,7 +151,9 @@ export async function POST(request: Request) {
         to: user.email,
         subject: email.subject,
         html: email.html,
-      }).catch(() => {})
+      }).catch(() => {
+        /* Non-blocking */
+      })
 
       break
     }
