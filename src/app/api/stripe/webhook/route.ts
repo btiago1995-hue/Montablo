@@ -1,7 +1,7 @@
 import { getStripe } from '@/lib/stripe'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { getResend, EMAIL_FROM } from '@/lib/resend'
-import { subscriptionConfirmed, subscriptionCanceled } from '@/lib/email-templates'
+import { subscriptionConfirmed, subscriptionCanceled, invoiceIssued } from '@/lib/email-templates'
 import { NextResponse } from 'next/server'
 import { headers } from 'next/headers'
 import Stripe from 'stripe'
@@ -116,6 +116,43 @@ export async function POST(request: Request) {
       if (restaurant) {
         await sendEmailToRestaurantOwner(restaurant.id, subscriptionCanceled)
       }
+      break
+    }
+    case 'invoice.payment_succeeded': {
+      const invoice = event.data.object as Stripe.Invoice
+      const customerId = invoice.customer as string
+
+      if (!invoice.hosted_invoice_url) break
+
+      const { data: restaurant } = await supabase
+        .from('restaurants')
+        .select('id, name, owner_id')
+        .eq('stripe_customer_id', customerId)
+        .single()
+
+      if (!restaurant) break
+
+      const { data: { user } } = await supabase.auth.admin.getUserById(restaurant.owner_id)
+      if (!user?.email) break
+
+      const appUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.montablo.com'
+      const email = invoiceIssued(
+        restaurant.name,
+        invoice.amount_paid,
+        invoice.currency,
+        invoice.period_start,
+        invoice.period_end,
+        invoice.hosted_invoice_url,
+        `${appUrl}/dashboard`,
+      )
+
+      await getResend().emails.send({
+        from: EMAIL_FROM,
+        to: user.email,
+        subject: email.subject,
+        html: email.html,
+      }).catch(() => {})
+
       break
     }
   }
