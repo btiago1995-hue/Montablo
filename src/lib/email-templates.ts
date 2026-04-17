@@ -8,6 +8,7 @@
  *  3. trialExpired       — trial has ended
  *  4. subscriptionConfirmed — after Stripe checkout completed
  *  5. subscriptionCanceled  — after Stripe subscription canceled
+ *  6. invoiceIssued  — after every successful payment
  */
 
 const BRAND = {
@@ -62,7 +63,8 @@ function tip(icon: string, text: string) {
   </div>`
 }
 
-function formatAmount(amountInCents: number, currency: string) {
+function formatAmount(amountInCents: number | null, currency: string) {
+  if (amountInCents == null) return '—'
   return new Intl.NumberFormat('fr-FR', {
     style: 'currency',
     currency: currency.toUpperCase(),
@@ -212,7 +214,6 @@ export function subscriptionConfirmed(restaurantName: string, dashboardUrl: stri
       ${button('Accéder à mon tableau de bord', dashboardUrl)}
 
       <p style="font-size:13px;color:${BRAND.muted};line-height:1.5;margin:0">
-        Votre facture est disponible par email via Stripe.
         Des questions&nbsp;? Répondez à cet email.
       </p>
     `),
@@ -248,7 +249,7 @@ export function subscriptionCanceled(restaurantName: string, dashboardUrl: strin
 
 export function invoiceIssued(
   restaurantName: string,
-  amountPaid: number,
+  amountPaid: number | null,
   currency: string,
   periodStart: number,
   periodEnd: number,
