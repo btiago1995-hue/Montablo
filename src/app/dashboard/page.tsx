@@ -64,28 +64,28 @@ export default async function DashboardPage() {
   return (
     <div>
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-5">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
         <div>
-          <h1 className="font-serif text-[28px] tracking-tight text-foreground mb-1">
+          <h1 className="font-serif text-[32px] tracking-tight text-foreground mb-1">
             {restaurant!.name}
           </h1>
-          <p className="text-sm text-muted capitalize">{formatFrenchDate()}</p>
+          <p className="text-base text-muted capitalize">{formatFrenchDate()}</p>
         </div>
         <div className="flex gap-2">
           <Link
             href={`/menu/${restaurant!.slug}`}
             target="_blank"
-            className="inline-flex items-center gap-2 px-5 py-3 border-[1.5px] border-border rounded-lg text-sm font-semibold text-foreground hover:bg-white hover:border-muted-light transition-all"
+            className="inline-flex items-center gap-2 px-5 py-3 border-[1.5px] border-border rounded-lg text-base font-semibold text-foreground hover:bg-white hover:border-muted-light transition-all"
           >
-            <ExternalLink className="w-4 h-4" />
+            <ExternalLink className="w-5 h-5" />
             <span className="hidden sm:inline">Voir mon menu</span>
             <span className="sm:hidden">Menu</span>
           </Link>
           <Link
             href="/dashboard/menu"
-            className="inline-flex items-center gap-2 px-5 py-3 bg-primary text-white rounded-lg text-sm font-semibold hover:bg-primary-light transition-all"
+            className="inline-flex items-center gap-2 px-5 py-3 bg-primary text-white rounded-lg text-base font-semibold hover:bg-primary-light transition-all"
           >
-            <Plus className="w-4 h-4" />
+            <Plus className="w-5 h-5" />
             <span className="hidden sm:inline">Ajouter un plat</span>
             <span className="sm:hidden">Plat</span>
           </Link>
@@ -93,53 +93,53 @@ export default async function DashboardPage() {
       </div>
 
       {/* Stat bar */}
-      <div className="bg-white border border-border rounded-xl p-4 sm:px-5 mb-5">
+      <div className="bg-white border border-border rounded-xl p-5 sm:px-6 mb-6">
         {/* Desktop: single row */}
         <div className="hidden sm:flex items-center">
-          <div className="flex items-center gap-5 flex-1">
+          <div className="flex items-center gap-6 flex-1">
             <div>
-              <div className="text-[26px] font-bold tracking-tight text-foreground leading-none">
+              <div className="text-[32px] font-bold tracking-tight text-foreground leading-none">
                 {itemCount ?? 0}
               </div>
-              <div className="text-xs text-muted-light mt-1">plats actifs</div>
+              <div className="text-sm text-muted-light mt-1.5">plats actifs</div>
             </div>
-            <div className="w-px h-10 bg-border" />
+            <div className="w-px h-12 bg-border" />
             <div>
-              <div className="text-[26px] font-bold tracking-tight text-foreground leading-none">
+              <div className="text-[32px] font-bold tracking-tight text-foreground leading-none">
                 {categoryCount ?? 0}
               </div>
-              <div className="text-xs text-muted-light mt-1">catégories</div>
+              <div className="text-sm text-muted-light mt-1.5">catégories</div>
             </div>
-            <div className="w-px h-10 bg-border" />
+            <div className="w-px h-12 bg-border" />
             <div>
-              <div className="text-[26px] font-bold tracking-tight text-foreground leading-none">
+              <div className="text-[32px] font-bold tracking-tight text-foreground leading-none">
                 {promoCount ?? 0}
               </div>
-              <div className="text-xs text-muted-light mt-1">promos</div>
+              <div className="text-sm text-muted-light mt-1.5">promos</div>
             </div>
-            <div className="w-px h-10 bg-border" />
+            <div className="w-px h-12 bg-border" />
             <div>
-              <div className="flex items-baseline gap-1">
-                <span className="text-[26px] font-bold tracking-tight text-foreground leading-none">
+              <div className="flex items-baseline gap-1.5">
+                <span className="text-[32px] font-bold tracking-tight text-foreground leading-none">
                   {reviewCount > 0 ? avgRating.toFixed(1) : '—'}
                 </span>
-                <span className="text-sm text-[#FBBC04]">★</span>
+                <span className="text-base text-[#FBBC04]">★</span>
               </div>
-              <div className="text-xs text-muted-light mt-1">
+              <div className="text-sm text-muted-light mt-1.5">
                 {reviewCount} avis
               </div>
             </div>
           </div>
-          <div className="flex gap-2 ml-4">
+          <div className="flex gap-2 ml-6">
             <Link
               href="/dashboard/daily-menu"
-              className="bg-background border border-border rounded-lg px-4 py-2.5 text-sm font-medium text-primary hover:bg-white transition-colors"
+              className="bg-background border border-border rounded-lg px-5 py-3 text-sm font-medium text-primary hover:bg-white transition-colors"
             >
               Menu du jour
             </Link>
             <Link
               href="/dashboard/qr-code"
-              className="bg-background border border-border rounded-lg px-4 py-2.5 text-sm font-medium text-primary hover:bg-white transition-colors"
+              className="bg-background border border-border rounded-lg px-5 py-3 text-sm font-medium text-primary hover:bg-white transition-colors"
             >
               QR Code
             </Link>
@@ -148,47 +148,47 @@ export default async function DashboardPage() {
 
         {/* Mobile: 2x2 grid + links row */}
         <div className="sm:hidden">
-          <div className="grid grid-cols-2 gap-4 mb-4">
+          <div className="grid grid-cols-2 gap-5 mb-4">
             <div>
-              <div className="text-[24px] font-bold tracking-tight text-foreground leading-none">
+              <div className="text-[28px] font-bold tracking-tight text-foreground leading-none">
                 {itemCount ?? 0}
               </div>
-              <div className="text-xs text-muted-light mt-1">plats actifs</div>
+              <div className="text-sm text-muted-light mt-1.5">plats actifs</div>
             </div>
             <div>
-              <div className="text-[24px] font-bold tracking-tight text-foreground leading-none">
+              <div className="text-[28px] font-bold tracking-tight text-foreground leading-none">
                 {categoryCount ?? 0}
               </div>
-              <div className="text-xs text-muted-light mt-1">catégories</div>
+              <div className="text-sm text-muted-light mt-1.5">catégories</div>
             </div>
             <div>
-              <div className="text-[24px] font-bold tracking-tight text-foreground leading-none">
+              <div className="text-[28px] font-bold tracking-tight text-foreground leading-none">
                 {promoCount ?? 0}
               </div>
-              <div className="text-xs text-muted-light mt-1">promos</div>
+              <div className="text-sm text-muted-light mt-1.5">promos</div>
             </div>
             <div>
               <div className="flex items-baseline gap-1">
-                <span className="text-[24px] font-bold tracking-tight text-foreground leading-none">
+                <span className="text-[28px] font-bold tracking-tight text-foreground leading-none">
                   {reviewCount > 0 ? avgRating.toFixed(1) : '—'}
                 </span>
-                <span className="text-sm text-[#FBBC04]">★</span>
+                <span className="text-base text-[#FBBC04]">★</span>
               </div>
-              <div className="text-xs text-muted-light mt-1">
+              <div className="text-sm text-muted-light mt-1.5">
                 {reviewCount} avis
               </div>
             </div>
           </div>
-          <div className="flex gap-2 pt-3 border-t border-border">
+          <div className="flex gap-2 pt-4 border-t border-border">
             <Link
               href="/dashboard/daily-menu"
-              className="flex-1 text-center bg-background border border-border rounded-lg px-3 py-2.5 text-sm font-medium text-primary"
+              className="flex-1 text-center bg-background border border-border rounded-lg px-3 py-3 text-sm font-medium text-primary"
             >
               Menu du jour
             </Link>
             <Link
               href="/dashboard/qr-code"
-              className="flex-1 text-center bg-background border border-border rounded-lg px-3 py-2.5 text-sm font-medium text-primary"
+              className="flex-1 text-center bg-background border border-border rounded-lg px-3 py-3 text-sm font-medium text-primary"
             >
               QR Code
             </Link>
@@ -198,8 +198,8 @@ export default async function DashboardPage() {
 
       {/* Items section */}
       <div className="bg-white border border-border rounded-xl overflow-hidden">
-        <div className="flex items-center justify-between px-4 sm:px-5 py-4 border-b border-border">
-          <span className="font-serif text-lg font-semibold text-foreground">Mes plats</span>
+        <div className="flex items-center justify-between px-5 sm:px-6 py-4 border-b border-border">
+          <span className="font-serif text-xl font-semibold text-foreground">Mes plats</span>
           <Link
             href="/dashboard/menu"
             className="text-sm font-semibold text-primary hover:underline"
@@ -215,7 +215,7 @@ export default async function DashboardPage() {
               {recentItems.map((item) => (
                 <div
                   key={item.id}
-                  className={`flex items-center gap-3 px-4 py-4 ${
+                  className={`flex items-center gap-4 px-4 py-4 ${
                     !item.is_available ? 'opacity-50' : ''
                   }`}
                 >
@@ -233,7 +233,7 @@ export default async function DashboardPage() {
                   )}
                   <div className="flex-1 min-w-0">
                     <div className="text-base font-semibold text-foreground truncate">{item.name_fr}</div>
-                    <div className="text-sm text-muted-light">
+                    <div className="text-sm text-muted-light mt-0.5">
                       {item.category_id ? catMap.get(item.category_id) ?? '—' : '—'}
                     </div>
                   </div>
@@ -256,16 +256,16 @@ export default async function DashboardPage() {
               <table className="w-full">
                 <thead>
                   <tr className="bg-background">
-                    <th className="text-left px-5 py-3 text-xs uppercase tracking-[0.08em] text-muted-light font-semibold border-b border-border">
+                    <th className="text-left px-6 py-3.5 text-xs uppercase tracking-[0.08em] text-muted-light font-semibold border-b border-border">
                       Plat
                     </th>
-                    <th className="text-left px-5 py-3 text-xs uppercase tracking-[0.08em] text-muted-light font-semibold border-b border-border w-[90px]">
+                    <th className="text-left px-6 py-3.5 text-xs uppercase tracking-[0.08em] text-muted-light font-semibold border-b border-border w-[110px]">
                       Prix
                     </th>
-                    <th className="text-left px-5 py-3 text-xs uppercase tracking-[0.08em] text-muted-light font-semibold border-b border-border w-[90px]">
+                    <th className="text-left px-6 py-3.5 text-xs uppercase tracking-[0.08em] text-muted-light font-semibold border-b border-border w-[110px]">
                       Tags
                     </th>
-                    <th className="text-left px-5 py-3 text-xs uppercase tracking-[0.08em] text-muted-light font-semibold border-b border-border w-[90px]">
+                    <th className="text-left px-6 py-3.5 text-xs uppercase tracking-[0.08em] text-muted-light font-semibold border-b border-border w-[110px]">
                       Statut
                     </th>
                   </tr>
@@ -278,48 +278,48 @@ export default async function DashboardPage() {
                         !item.is_available ? 'opacity-50' : ''
                       }`}
                     >
-                      <td className="px-5 py-4">
-                        <div className="flex items-center gap-3">
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-3.5">
                           {item.image_url ? (
                             // eslint-disable-next-line @next/next/no-img-element
                             <img
                               src={item.image_url}
                               alt=""
-                              className="w-10 h-10 rounded-lg object-cover bg-background"
+                              className="w-11 h-11 rounded-lg object-cover bg-background"
                             />
                           ) : (
-                            <div className="w-10 h-10 rounded-lg bg-background flex items-center justify-center text-muted-light text-base">
+                            <div className="w-11 h-11 rounded-lg bg-background flex items-center justify-center text-muted-light text-lg">
                               🍽️
                             </div>
                           )}
                           <div>
-                            <div className="text-sm font-semibold text-foreground">{item.name_fr}</div>
-                            <div className="text-xs text-muted-light">
+                            <div className="text-[15px] font-semibold text-foreground">{item.name_fr}</div>
+                            <div className="text-sm text-muted-light mt-0.5">
                               {item.category_id ? catMap.get(item.category_id) ?? '—' : '—'}
                             </div>
                           </div>
                         </div>
                       </td>
-                      <td className="px-5 py-4">
-                        <span className="text-sm font-semibold text-foreground">
+                      <td className="px-6 py-4">
+                        <span className="text-[15px] font-semibold text-foreground">
                           {formatPrice(item.price)}
                         </span>
                       </td>
-                      <td className="px-5 py-4">
-                        <div className="flex gap-1 flex-wrap">
+                      <td className="px-6 py-4">
+                        <div className="flex gap-1.5 flex-wrap">
                           {item.tags?.map((tag: string) => (
                             <span
                               key={tag}
-                              className="text-xs font-semibold px-2 py-1 rounded bg-surface text-muted uppercase tracking-wide"
+                              className="text-xs font-semibold px-2.5 py-1 rounded bg-surface text-muted uppercase tracking-wide"
                             >
                               {tag}
                             </span>
                           ))}
                         </div>
                       </td>
-                      <td className="px-5 py-4">
+                      <td className="px-6 py-4">
                         <span
-                          className={`inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full ${
+                          className={`inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full ${
                             item.is_available
                               ? 'bg-[#E8F5E9] text-[#2D6A4F]'
                               : 'bg-background text-muted-light'
@@ -340,7 +340,7 @@ export default async function DashboardPage() {
             </div>
           </>
         ) : (
-          <div className="px-4 sm:px-5 py-8 text-center text-muted-light text-sm">
+          <div className="px-6 py-10 text-center text-muted-light text-base">
             Aucun plat pour l&apos;instant.{' '}
             <Link href="/dashboard/menu" className="text-primary font-semibold hover:underline">
               Ajouter votre premier plat

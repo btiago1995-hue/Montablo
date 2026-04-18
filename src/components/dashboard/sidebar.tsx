@@ -49,13 +49,13 @@ export function Sidebar({ restaurant }: { restaurant: Restaurant }) {
         href={href}
         onClick={() => setOpen(false)}
         className={cn(
-          'flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium transition-all',
+          'flex items-center gap-3 px-3 py-3.5 rounded-lg text-[15px] font-medium transition-all',
           isActive
             ? 'bg-white/[0.12] text-white'
             : 'text-white/65 hover:bg-white/[0.08] hover:text-white'
         )}
       >
-        <Icon className={cn('w-5 h-5', isActive ? 'opacity-100' : 'opacity-70')} />
+        <Icon className={cn('w-[22px] h-[22px]', isActive ? 'opacity-100' : 'opacity-70')} />
         {label}
       </Link>
     )
@@ -88,7 +88,7 @@ export function Sidebar({ restaurant }: { restaurant: Restaurant }) {
       >
         {/* Logo */}
         <div className="px-6 pt-6 pb-2 flex items-center justify-between">
-          <h1 className="font-serif text-[22px] tracking-tight">MonTablo</h1>
+          <h1 className="font-serif text-[26px] tracking-tight">MonTablo</h1>
           <button onClick={() => setOpen(false)} className="lg:hidden text-white/60">
             <X className="w-5 h-5" />
           </button>
@@ -96,7 +96,7 @@ export function Sidebar({ restaurant }: { restaurant: Restaurant }) {
 
         {/* Restaurant name */}
         <div className="px-6 pb-8">
-          <span className="text-sm text-white/60 truncate block">{restaurant.name}</span>
+          <span className="text-base text-white/60 truncate block">{restaurant.name}</span>
         </div>
 
         {/* Nav sections */}
@@ -127,9 +127,9 @@ export function Sidebar({ restaurant }: { restaurant: Restaurant }) {
         <div className="px-3 pb-3">
           <button
             onClick={handleLogout}
-            className="flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/50 hover:text-white/80 hover:bg-white/[0.06] transition-colors w-full"
+            className="flex items-center gap-3 px-3 py-3.5 rounded-lg text-[15px] font-medium text-white/50 hover:text-white/80 hover:bg-white/[0.06] transition-colors w-full"
           >
-            <LogOut className="w-5 h-5 opacity-70" />
+            <LogOut className="w-[22px] h-[22px] opacity-70" />
             Déconnexion
           </button>
         </div>
