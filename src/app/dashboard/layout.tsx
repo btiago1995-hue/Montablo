@@ -61,9 +61,9 @@ export default async function DashboardLayout({
   const subscriptionActive = isSubscriptionActive(restaurant)
 
   return (
-    <div className="min-h-screen bg-[#F5F5F2] flex">
+    <div className="min-h-screen bg-[#F5F5F2]">
       <Sidebar restaurant={restaurant} />
-      <main className="flex-1 px-4 py-6 pt-16 sm:p-6 sm:pt-16 lg:pt-8 lg:p-8 lg:ml-[260px] max-w-[1100px]">
+      <main className="px-4 py-6 pt-16 sm:p-6 sm:pt-16 lg:pt-8 lg:p-8 lg:ml-[260px] max-w-[1100px]">
         <TrialBanner restaurant={restaurant} />
         {children}
       </main>
