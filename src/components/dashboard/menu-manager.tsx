@@ -587,26 +587,26 @@ export function MenuManager({
               <span className="text-[11px] sm:text-xs text-muted bg-background px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full shrink-0">
                 {catItems.length}
               </span>
-              <div className="flex items-center gap-0.5 sm:gap-1 shrink-0" onClick={(e) => e.stopPropagation()}>
+              <div className="flex items-center gap-1 shrink-0" onClick={(e) => e.stopPropagation()}>
                 <button
                   onClick={() => toggleCategoryVisibility(category)}
-                  className="p-1 sm:p-1.5 text-muted hover:text-foreground transition-colors"
+                  className="flex items-center justify-center w-10 h-10 rounded-lg text-muted hover:text-foreground hover:bg-background transition-colors"
                   title={category.is_visible ? 'Masquer' : 'Afficher'}
                 >
-                  {category.is_visible ? <Eye className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <EyeOff className="w-3.5 h-3.5 sm:w-4 sm:h-4" />}
+                  {category.is_visible ? <Eye className="w-5 h-5" /> : <EyeOff className="w-5 h-5" />}
                 </button>
                 <button
                   onClick={() => setCatModal({ open: true, edit: category })}
-                  className="p-1 sm:p-1.5 text-muted hover:text-foreground transition-colors"
+                  className="flex items-center justify-center w-10 h-10 rounded-lg text-muted hover:text-foreground hover:bg-background transition-colors"
                 >
-                  <Pencil className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                  <Pencil className="w-5 h-5" />
                 </button>
                 <button
                   onClick={() => deleteCategory(category.id)}
                   disabled={deleting === category.id}
-                  className="p-1 sm:p-1.5 text-muted hover:text-red-600 transition-colors"
+                  className="flex items-center justify-center w-10 h-10 rounded-lg text-muted hover:text-red-500 hover:bg-red-50 transition-colors"
                 >
-                  <Trash2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                  <Trash2 className="w-5 h-5" />
                 </button>
               </div>
             </div>
@@ -784,26 +784,26 @@ function ItemRow({
         )}
       </div>
       <span className="font-medium text-foreground shrink-0 text-sm sm:text-base">{formatPrice(item.price)}</span>
-      <div className="flex items-center gap-0.5 sm:gap-1 shrink-0">
+      <div className="flex items-center gap-1 shrink-0">
         <button
           onClick={onToggle}
-          className="p-1 sm:p-1.5 text-muted hover:text-foreground transition-colors"
+          className="flex items-center justify-center w-10 h-10 rounded-lg text-muted hover:text-foreground hover:bg-background transition-colors"
           title={item.is_available ? 'Marquer indisponible' : 'Marquer disponible'}
         >
-          {item.is_available ? <Eye className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <EyeOff className="w-3.5 h-3.5 sm:w-4 sm:h-4" />}
+          {item.is_available ? <Eye className="w-5 h-5" /> : <EyeOff className="w-5 h-5" />}
         </button>
         <button
           onClick={onEdit}
-          className="p-1 sm:p-1.5 text-muted hover:text-foreground transition-colors"
+          className="flex items-center justify-center w-10 h-10 rounded-lg text-muted hover:text-foreground hover:bg-background transition-colors"
         >
-          <Pencil className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+          <Pencil className="w-5 h-5" />
         </button>
         <button
           onClick={onDelete}
           disabled={deleting}
-          className="p-1 sm:p-1.5 text-muted hover:text-red-600 transition-colors"
+          className="flex items-center justify-center w-10 h-10 rounded-lg text-muted hover:text-red-500 hover:bg-red-50 transition-colors"
         >
-          <Trash2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+          <Trash2 className="w-5 h-5" />
         </button>
       </div>
     </div>
