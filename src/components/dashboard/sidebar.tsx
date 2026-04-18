@@ -49,13 +49,13 @@ export function Sidebar({ restaurant }: { restaurant: Restaurant }) {
         href={href}
         onClick={() => setOpen(false)}
         className={cn(
-          'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all',
+          'flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium transition-all',
           isActive
             ? 'bg-white/[0.12] text-white'
             : 'text-white/65 hover:bg-white/[0.08] hover:text-white'
         )}
       >
-        <Icon className={cn('w-[18px] h-[18px]', isActive ? 'opacity-100' : 'opacity-70')} />
+        <Icon className={cn('w-5 h-5', isActive ? 'opacity-100' : 'opacity-70')} />
         {label}
       </Link>
     )
@@ -96,13 +96,13 @@ export function Sidebar({ restaurant }: { restaurant: Restaurant }) {
 
         {/* Restaurant name */}
         <div className="px-6 pb-8">
-          <span className="text-[13px] text-white/60 truncate block">{restaurant.name}</span>
+          <span className="text-sm text-white/60 truncate block">{restaurant.name}</span>
         </div>
 
         {/* Nav sections */}
         <nav className="flex-1 px-3">
           <div className="mb-6">
-            <div className="text-[10px] uppercase tracking-[0.12em] text-white/35 font-semibold px-3 mb-2">
+            <div className="text-[11px] uppercase tracking-[0.12em] text-white/35 font-semibold px-3 mb-2">
               Gestion
             </div>
             <div className="space-y-0.5">
@@ -112,7 +112,7 @@ export function Sidebar({ restaurant }: { restaurant: Restaurant }) {
             </div>
           </div>
           <div className="mb-6">
-            <div className="text-[10px] uppercase tracking-[0.12em] text-white/35 font-semibold px-3 mb-2">
+            <div className="text-[11px] uppercase tracking-[0.12em] text-white/35 font-semibold px-3 mb-2">
               Outils
             </div>
             <div className="space-y-0.5">
@@ -127,9 +127,9 @@ export function Sidebar({ restaurant }: { restaurant: Restaurant }) {
         <div className="px-3 pb-3">
           <button
             onClick={handleLogout}
-            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-white/50 hover:text-white/80 hover:bg-white/[0.06] transition-colors w-full"
+            className="flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium text-white/50 hover:text-white/80 hover:bg-white/[0.06] transition-colors w-full"
           >
-            <LogOut className="w-[18px] h-[18px] opacity-70" />
+            <LogOut className="w-5 h-5 opacity-70" />
             Déconnexion
           </button>
         </div>
