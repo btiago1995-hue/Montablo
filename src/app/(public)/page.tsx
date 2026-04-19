@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { ArrowRight, Check, UtensilsCrossed } from 'lucide-react'
 import { PricingToggle } from '@/components/public/pricing-toggle'
 import { JsonLd, homepageJsonLd } from '@/components/seo/json-ld'
+import { CTALink } from '@/components/public/cta-link'
 
 const steps = [
   { num: '01', title: 'Inscrivez-vous', desc: 'Créez votre compte en 30 secondes. Aucune carte de crédit requise.' },
@@ -91,13 +92,14 @@ export default function LandingPage() {
           Vos clients scannent, vous gardez le contrôle.
         </p>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-5">
-          <Link
+          <CTALink
             href="/signup"
+            label="hero_essayer"
             className="group inline-flex items-center justify-center gap-2.5 bg-primary text-white font-medium px-8 py-4 sm:py-3.5 rounded-full hover:bg-primary-light transition-all hover:shadow-xl hover:shadow-primary/18 hover:-translate-y-px text-base sm:text-[15px]"
           >
             Essayer 14 jours gratuitement
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-          </Link>
+          </CTALink>
           <Link
             href="/menu/demo"
             className="group inline-flex items-center justify-center gap-2 border border-border text-foreground font-medium px-6 py-4 sm:py-3.5 rounded-full hover:border-foreground/30 hover:bg-muted/5 transition-all text-base sm:text-[15px]"
@@ -151,13 +153,14 @@ export default function LandingPage() {
               Design soigné, navigation fluide, chargement instantané.
               Le tout aux couleurs de votre restaurant.
             </p>
-            <Link
+            <CTALink
               href="/signup"
+              label="section_creer_menu"
               className="group inline-flex items-center justify-center gap-2.5 bg-accent text-foreground font-medium px-8 py-4 sm:py-3.5 rounded-full hover:bg-accent-light transition-all text-base sm:text-[15px] w-full sm:w-auto"
             >
               Créer mon menu
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-            </Link>
+            </CTALink>
           </div>
           <div className="bg-background rounded-3xl p-8 max-w-[340px] mx-auto shadow-2xl">
             <div className="text-center mb-6 pb-5 border-b border-border/50">
@@ -234,13 +237,14 @@ export default function LandingPage() {
             Rejoignez les restaurateurs qui ont remplacé leur carte papier
             par une expérience digitale à leur image.
           </p>
-          <Link
+          <CTALink
             href="/signup"
+            label="footer_cta"
             className="group inline-flex items-center justify-center gap-2.5 bg-primary text-white font-medium px-10 py-4 rounded-full hover:bg-primary-light transition-all hover:shadow-xl hover:shadow-primary/18 hover:-translate-y-px text-base sm:text-[15px] w-full sm:w-auto"
           >
             Créer mon menu gratuitement
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-          </Link>
+          </CTALink>
         </div>
       </section>
 

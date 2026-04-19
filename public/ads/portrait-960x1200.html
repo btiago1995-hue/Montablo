@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 960px; height: 1200px; overflow: hidden; font-family: 'Georgia', serif; }
+
+  .ad {
+    width: 960px;
+    height: 1200px;
+    background: #1a2e1b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    padding: 60px 64px;
+  }
+
+  .bg-glow {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 500px;
+    background: radial-gradient(ellipse at center top, #2c3e2d 0%, transparent 70%);
+  }
+
+  /* TOP */
+  .top {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 40px;
+  }
+
+  .logo span {
+    font-size: 22px;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 0.02em;
+  }
+
+  .logo-icon {
+    font-size: 20px;
+  }
+
+  .tag {
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #d4af64;
+    background: rgba(212,175,100,0.1);
+    border: 1px solid rgba(212,175,100,0.25);
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+  }
+
+  h1 {
+    font-size: 52px;
+    line-height: 1.1;
+    color: #ffffff;
+    margin-bottom: 16px;
+    max-width: 600px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: #d4af64;
+  }
+
+  .sub {
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.6;
+    max-width: 440px;
+  }
+
+  /* MIDDLE — phone mockup */
+  .middle {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    align-items: center;
+  }
+
+  .phone {
+    width: 340px;
+    background: #ffffff;
+    border-radius: 28px;
+    padding: 28px 24px;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08);
+    position: relative;
+  }
+
+  .phone-notch {
+    width: 60px;
+    height: 4px;
+    background: #e5e7eb;
+    border-radius: 2px;
+    margin: 0 auto 20px;
+  }
+
+  .phone-header {
+    text-align: center;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #f3f4f6;
+    margin-bottom: 14px;
+  }
+
+  .phone-name { font-size: 15px; color: #1a2e1b; }
+  .phone-date {
+    font-family: 'Arial', sans-serif;
+    font-size: 9px;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 3px;
+  }
+
+  .section {
+    font-family: 'Arial', sans-serif;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #8a7340;
+    margin: 12px 0 8px;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 7px 0;
+    border-bottom: 1px solid #f9fafb;
+  }
+
+  .row:last-child { border-bottom: none; }
+
+  .rname {
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: #111;
+    margin-bottom: 1px;
+  }
+
+  .rdesc {
+    font-family: 'Arial', sans-serif;
+    font-size: 9px;
+    color: #9ca3af;
+  }
+
+  .rprice {
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: #1a2e1b;
+  }
+
+  .live-chip {
+    position: absolute;
+    top: -14px;
+    right: -20px;
+    background: linear-gradient(135deg, #d4af64, #b8953e);
+    color: #1a2e1b;
+    font-family: 'Arial', sans-serif;
+    font-size: 9px;
+    font-weight: 800;
+    padding: 5px 12px;
+    border-radius: 100px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    box-shadow: 0 4px 12px rgba(212,175,100,0.4);
+  }
+
+  .qr-chip {
+    position: absolute;
+    bottom: -14px;
+    left: -20px;
+    background: #1a2e1b;
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .qr-text {
+    font-family: 'Arial', sans-serif;
+    font-size: 7px;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 2px;
+  }
+
+  .qr-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 7px);
+    gap: 2px;
+  }
+
+  .qr-cell {
+    width: 7px;
+    height: 7px;
+    border-radius: 1px;
+    background: #d4af64;
+  }
+
+  .qr-cell.e { background: transparent; }
+
+  /* BOTTOM */
+  .bottom {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #d4af64;
+    color: #1a2e1b;
+    font-family: 'Arial', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    padding: 20px 52px;
+    border-radius: 100px;
+    width: 100%;
+    max-width: 460px;
+    box-shadow: 0 8px 32px rgba(212,175,100,0.35);
+    letter-spacing: 0.01em;
+  }
+
+  .trust {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    font-family: 'Arial', sans-serif;
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+  }
+
+  .trust-item::before { content: '✓ '; color: #d4af64; }
+
+  .url {
+    font-family: 'Arial', sans-serif;
+    font-size: 12px;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+<div class="ad">
+  <div class="bg-glow"></div>
+
+  <div class="top">
+    <div class="logo">
+      <span class="logo-icon">🍽</span>
+      <span>MonTablo</span>
+    </div>
+    <div class="tag">Menu digital · Restaurants</div>
+    <h1>Fini les menus<br><em>imprimés.</em></h1>
+    <p class="sub">Mettez à jour votre carte depuis votre téléphone. Vos clients scannent, vous gagnez du temps.</p>
+  </div>
+
+  <div class="middle">
+    <div class="phone">
+      <div class="live-chip">● Mis à jour en direct</div>
+      <div class="qr-chip">
+        <div class="qr-grid">
+          <div class="qr-cell"></div><div class="qr-cell e"></div><div class="qr-cell"></div><div class="qr-cell"></div>
+          <div class="qr-cell e"></div><div class="qr-cell"></div><div class="qr-cell e"></div><div class="qr-cell"></div>
+          <div class="qr-cell"></div><div class="qr-cell"></div><div class="qr-cell e"></div><div class="qr-cell"></div>
+          <div class="qr-cell e"></div><div class="qr-cell"></div><div class="qr-cell"></div><div class="qr-cell e"></div>
+        </div>
+        <div class="qr-text">Scanner</div>
+      </div>
+
+      <div class="phone-notch"></div>
+      <div class="phone-header">
+        <div class="phone-name">Le Chalet des Alpes</div>
+        <div class="phone-date">Menu · Annecy</div>
+      </div>
+
+      <div class="section">Entrées</div>
+      <div class="row">
+        <div>
+          <div class="rname">Soupe à l'oignon gratinée</div>
+          <div class="rdesc">Gruyère fondant, croûtons</div>
+        </div>
+        <div class="rprice">8,50 €</div>
+      </div>
+      <div class="row">
+        <div>
+          <div class="rname">Salade chèvre chaud</div>
+          <div class="rdesc">Miel, noix, mesclun</div>
+        </div>
+        <div class="rprice">11,00 €</div>
+      </div>
+
+      <div class="section">Plats</div>
+      <div class="row">
+        <div>
+          <div class="rname">Tartiflette maison</div>
+          <div class="rdesc">Reblochon AOP, lardons</div>
+        </div>
+        <div class="rprice">18,50 €</div>
+      </div>
+      <div class="row">
+        <div>
+          <div class="rname">Filet de perche du lac</div>
+          <div class="rdesc">Beurre citron, riz sauvage</div>
+        </div>
+        <div class="rprice">22,00 €</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <div class="cta">Essai gratuit 14 jours →</div>
+    <div class="trust">
+      <span class="trust-item">Sans carte bancaire</span>
+      <span class="trust-item">Prêt en 5 minutes</span>
+    </div>
+    <div class="url">montablo.com</div>
+  </div>
+</div>
+</body>
+</html>

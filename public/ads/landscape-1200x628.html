@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1200px; height: 628px; overflow: hidden; font-family: 'Georgia', serif; }
+
+  .ad {
+    width: 1200px;
+    height: 628px;
+    background: #1a2e1b;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Background texture */
+  .ad::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, #2c3e2d 0%, #1a2e1b 60%);
+  }
+
+  /* Decorative circle */
+  .circle {
+    position: absolute;
+    right: -80px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 560px;
+    height: 560px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2c3e2d 0%, #1a2e1b 100%);
+    border: 1px solid rgba(212, 175, 100, 0.15);
+  }
+
+  .left {
+    position: relative;
+    z-index: 2;
+    padding: 64px 56px;
+    max-width: 560px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(212, 175, 100, 0.12);
+    border: 1px solid rgba(212, 175, 100, 0.3);
+    border-radius: 100px;
+    padding: 6px 16px;
+    margin-bottom: 28px;
+  }
+
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #d4af64;
+  }
+
+  .badge span {
+    font-family: 'Arial', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #d4af64;
+  }
+
+  h1 {
+    font-size: 52px;
+    line-height: 1.08;
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-weight: 400;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: #d4af64;
+  }
+
+  .subtitle {
+    font-family: 'Arial', sans-serif;
+    font-size: 17px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.5;
+    margin-bottom: 36px;
+    font-weight: 400;
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #d4af64;
+    color: #1a2e1b;
+    font-family: 'Arial', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 16px 32px;
+    border-radius: 100px;
+    letter-spacing: 0.01em;
+  }
+
+  .arrow {
+    font-size: 18px;
+    font-weight: 400;
+  }
+
+  .right {
+    position: absolute;
+    right: 56px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: 340px;
+  }
+
+  .phone-card {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 28px;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08);
+  }
+
+  .card-header {
+    text-align: center;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #e8e8e8;
+    margin-bottom: 18px;
+  }
+
+  .card-restaurant {
+    font-size: 16px;
+    font-weight: 400;
+    color: #1a2e1b;
+    margin-bottom: 2px;
+  }
+
+  .card-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 10px;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .card-section {
+    font-family: 'Arial', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #8a7340;
+    margin: 14px 0 8px;
+  }
+
+  .card-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 8px 0;
+    border-bottom: 1px solid #f3f4f6;
+  }
+
+  .card-item:last-child { border-bottom: none; }
+
+  .item-name {
+    font-family: 'Arial', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 1px;
+  }
+
+  .item-desc {
+    font-family: 'Arial', sans-serif;
+    font-size: 10px;
+    color: #9ca3af;
+  }
+
+  .item-price {
+    font-family: 'Arial', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #111827;
+    white-space: nowrap;
+    margin-left: 12px;
+  }
+
+  .qr-badge {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    width: 56px;
+    height: 56px;
+    background: #1a2e1b;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+
+  .qr-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 6px);
+    gap: 2px;
+  }
+
+  .qr-cell {
+    width: 6px;
+    height: 6px;
+    border-radius: 1px;
+    background: #d4af64;
+  }
+
+  .qr-cell.empty { background: transparent; }
+
+  .logo-mark {
+    position: absolute;
+    top: 32px;
+    right: 56px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.5;
+  }
+
+  .logo-mark span {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    font-family: 'Arial', sans-serif;
+    letter-spacing: 0.05em;
+  }
+
+  .free-tag {
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .free-tag::before {
+    content: '✓';
+    color: #d4af64;
+    font-size: 14px;
+  }
+</style>
+</head>
+<body>
+<div class="ad">
+  <div class="circle"></div>
+
+  <div class="left">
+    <div class="badge">
+      <div class="badge-dot"></div>
+      <span>Menu digital · Haute-Savoie</span>
+    </div>
+
+    <h1>Votre carte,<br>enfin à la <em>hauteur</em><br>de votre cuisine.</h1>
+
+    <p class="subtitle">Menu digital élégant. Mis à jour en temps réel.<br>Vos clients scannent, vous gardez le contrôle.</p>
+
+    <div class="cta">
+      Essai gratuit 14 jours <span class="arrow">→</span>
+    </div>
+    <div class="free-tag">Sans carte bancaire · Sans engagement</div>
+  </div>
+
+  <div class="right">
+    <div class="phone-card" style="position:relative">
+      <div class="card-header">
+        <div class="card-restaurant">Le Chalet des Alpes</div>
+        <div class="card-label">Menu · Printemps 2026</div>
+      </div>
+
+      <div class="card-section">Entrées</div>
+      <div class="card-item">
+        <div>
+          <div class="item-name">Soupe à l'oignon</div>
+          <div class="item-desc">Gratinée au gruyère</div>
+        </div>
+        <div class="item-price">8,50 €</div>
+      </div>
+      <div class="card-item">
+        <div>
+          <div class="item-name">Salade chèvre chaud</div>
+          <div class="item-desc">Miel, noix, mesclun</div>
+        </div>
+        <div class="item-price">11,00 €</div>
+      </div>
+
+      <div class="card-section">Plats</div>
+      <div class="card-item">
+        <div>
+          <div class="item-name">Tartiflette maison</div>
+          <div class="item-desc">Reblochon, lardons, pommes de terre</div>
+        </div>
+        <div class="item-price">18,50 €</div>
+      </div>
+      <div class="card-item">
+        <div>
+          <div class="item-name">Filet de perche</div>
+          <div class="item-desc">Sauce citron, riz sauvage</div>
+        </div>
+        <div class="item-price">22,00 €</div>
+      </div>
+
+      <div class="qr-badge">
+        <div class="qr-grid">
+          <div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell"></div>
+          <div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell"></div>
+          <div class="qr-cell"></div><div class="qr-cell"></div><div class="qr-cell empty"></div><div class="qr-cell"></div>
+          <div class="qr-cell empty"></div><div class="qr-cell"></div><div class="qr-cell"></div><div class="qr-cell empty"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

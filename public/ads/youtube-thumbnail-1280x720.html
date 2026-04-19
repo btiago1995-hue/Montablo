@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1280px; height: 720px; overflow: hidden; font-family: 'Georgia', serif; }
+
+  .ad {
+    width: 1280px;
+    height: 720px;
+    background: #1a2e1b;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 75% 50%, rgba(44,62,45,0.8) 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 80%, rgba(44,62,45,0.4) 0%, transparent 50%);
+  }
+
+  /* Diagonal accent line */
+  .accent-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 520px;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, rgba(212,175,100,0.2), transparent);
+  }
+
+  .left {
+    position: relative;
+    z-index: 2;
+    padding: 64px 64px;
+    max-width: 540px;
+  }
+
+  .eyebrow {
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #d4af64;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .eyebrow::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #d4af64;
+  }
+
+  h1 {
+    font-size: 64px;
+    line-height: 1.05;
+    color: #ffffff;
+    margin-bottom: 22px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: #d4af64;
+  }
+
+  .points {
+    list-style: none;
+    margin-bottom: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .points li {
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    color: rgba(255,255,255,0.65);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .points li::before {
+    content: '✓';
+    color: #d4af64;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #d4af64;
+    color: #1a2e1b;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    padding: 16px 36px;
+    border-radius: 100px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    box-shadow: 0 6px 24px rgba(212,175,100,0.35);
+  }
+
+  .right {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 680px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+  }
+
+  .screen {
+    background: #ffffff;
+    border-radius: 20px;
+    width: 380px;
+    padding: 28px;
+    box-shadow: -20px 0 80px rgba(0,0,0,0.5), 20px 0 80px rgba(0,0,0,0.2), 0 0 0 1px rgba(255,255,255,0.08);
+    position: relative;
+  }
+
+  .screen-header {
+    text-align: center;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #f3f4f6;
+    margin-bottom: 14px;
+  }
+
+  .screen-title { font-size: 16px; color: #1a2e1b; }
+  .screen-sub {
+    font-family: 'Arial', sans-serif;
+    font-size: 9px;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 3px;
+  }
+
+  .sec {
+    font-family: 'Arial', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #8a7340;
+    margin: 12px 0 8px;
+  }
+
+  .dish {
+    display: flex;
+    justify-content: space-between;
+    padding: 7px 0;
+    border-bottom: 1px solid #f9fafb;
+  }
+
+  .dn {
+    font-family: 'Arial', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #111;
+    margin-bottom: 1px;
+  }
+
+  .dd {
+    font-family: 'Arial', sans-serif;
+    font-size: 9px;
+    color: #9ca3af;
+  }
+
+  .dp {
+    font-family: 'Arial', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #1a2e1b;
+  }
+
+  .floating-badge {
+    position: absolute;
+    top: -16px;
+    right: -16px;
+    background: #d4af64;
+    color: #1a2e1b;
+    font-family: 'Arial', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 6px 14px;
+    border-radius: 100px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    box-shadow: 0 4px 16px rgba(212,175,100,0.45);
+  }
+
+  .floating-time {
+    position: absolute;
+    bottom: -12px;
+    left: -16px;
+    background: #1a2e1b;
+    border: 1px solid rgba(212,175,100,0.3);
+    color: rgba(255,255,255,0.8);
+    font-family: 'Arial', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #4ade80;
+    animation: pulse 2s infinite;
+  }
+
+  .logo-top-right {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    z-index: 10;
+    font-size: 14px;
+    color: rgba(255,255,255,0.35);
+    font-family: 'Arial', sans-serif;
+    letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+<div class="ad">
+  <div class="bg"></div>
+  <div class="accent-line"></div>
+  <div class="logo-top-right">montablo.com</div>
+
+  <div class="left">
+    <div class="eyebrow">Menu digital pour restaurants</div>
+
+    <h1>Votre menu.<br><em>Toujours</em><br>à jour.</h1>
+
+    <ul class="points">
+      <li>Mis à jour depuis votre téléphone</li>
+      <li>Vos clients scannent le QR code</li>
+      <li>Prêt en 5 minutes · 14 jours gratuits</li>
+    </ul>
+
+    <div class="cta">Essayer gratuitement →</div>
+  </div>
+
+  <div class="right">
+    <div class="screen">
+      <div class="floating-badge">✦ En direct</div>
+      <div class="floating-time">
+        <div class="dot"></div>
+        Prêt en 5 min
+      </div>
+
+      <div class="screen-header">
+        <div class="screen-title">Le Chalet des Alpes</div>
+        <div class="screen-sub">Menu · Annecy · Haute-Savoie</div>
+      </div>
+
+      <div class="sec">Entrées</div>
+      <div class="dish">
+        <div>
+          <div class="dn">Soupe à l'oignon gratinée</div>
+          <div class="dd">Gruyère, croûtons maison</div>
+        </div>
+        <div class="dp">8,50 €</div>
+      </div>
+      <div class="dish">
+        <div>
+          <div class="dn">Salade chèvre chaud</div>
+          <div class="dd">Miel, noix, mesclun</div>
+        </div>
+        <div class="dp">11,00 €</div>
+      </div>
+
+      <div class="sec">Plats</div>
+      <div class="dish">
+        <div>
+          <div class="dn">Tartiflette maison</div>
+          <div class="dd">Reblochon AOP, lardons fumés</div>
+        </div>
+        <div class="dp">18,50 €</div>
+      </div>
+      <div class="dish">
+        <div>
+          <div class="dn">Filet de perche du lac</div>
+          <div class="dd">Beurre blanc, riz sauvage</div>
+        </div>
+        <div class="dp">22,00 €</div>
+      </div>
+
+      <div class="sec">Desserts</div>
+      <div class="dish">
+        <div>
+          <div class="dn">Fondant chocolat</div>
+          <div class="dd">Crème anglaise maison</div>
+        </div>
+        <div class="dp">7,50 €</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

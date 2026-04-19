@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { ArrowRight, Check, UtensilsCrossed } from 'lucide-react'
 import { PricingToggle } from '@/components/public/pricing-toggle'
 import { JsonLd, pricingJsonLd, breadcrumbJsonLd } from '@/components/seo/json-ld'
+import { CTALink } from '@/components/public/cta-link'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -75,12 +76,13 @@ export default function TarifsPage() {
             <Link href="/login" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
               Connexion
             </Link>
-            <Link
+            <CTALink
               href="/signup"
+              label="tarifs_nav"
               className="text-sm font-medium bg-primary text-white px-5 py-2 rounded-full hover:bg-primary-light transition-all hover:shadow-lg hover:shadow-primary/15"
             >
               Essai gratuit
-            </Link>
+            </CTALink>
           </div>
         </div>
       </nav>
@@ -153,13 +155,14 @@ export default function TarifsPage() {
           <p className="text-muted mb-8 max-w-md mx-auto">
             14 jours d&apos;essai gratuit. Aucune carte bancaire requise.
           </p>
-          <Link
+          <CTALink
             href="/signup"
+            label="tarifs_cta"
             className="group inline-flex items-center gap-2.5 bg-primary text-white font-medium px-10 py-4 rounded-full hover:bg-primary-light transition-all hover:shadow-xl hover:shadow-primary/18 hover:-translate-y-px text-[15px]"
           >
             Commencer l&apos;essai gratuit
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-          </Link>
+          </CTALink>
         </div>
       </section>
 

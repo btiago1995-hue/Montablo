@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1200px; height: 628px; overflow: hidden; font-family: 'Georgia', serif; }
+
+  .ad {
+    width: 1200px;
+    height: 628px;
+    background: #1a2e1b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Subtle grain texture via radial gradients */
+  .ad::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(44,62,45,0.9) 0%, transparent 60%),
+      radial-gradient(ellipse at 0% 100%, rgba(44,62,45,0.5) 0%, transparent 50%),
+      radial-gradient(ellipse at 100% 100%, rgba(44,62,45,0.4) 0%, transparent 40%);
+  }
+
+  .inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  /* Stats column */
+  .stats {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 340px;
+    flex-shrink: 0;
+    padding: 0 56px;
+    border-right: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .stat {
+    padding: 28px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .stat:last-child { border-bottom: none; }
+
+  .stat-number {
+    font-size: 52px;
+    line-height: 1;
+    color: #d4af64;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.4;
+  }
+
+  /* Main content */
+  .main {
+    flex: 1;
+    padding: 0 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .eyebrow {
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #d4af64;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .eyebrow::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 1px;
+    background: #d4af64;
+  }
+
+  h1 {
+    font-size: 50px;
+    line-height: 1.1;
+    color: #ffffff;
+    margin-bottom: 18px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: #d4af64;
+  }
+
+  .desc {
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.6;
+    margin-bottom: 36px;
+    max-width: 420px;
+  }
+
+  .bottom-row {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #d4af64;
+    color: #1a2e1b;
+    font-family: 'Arial', sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    padding: 16px 32px;
+    border-radius: 100px;
+  }
+
+  .price-note {
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+    color: rgba(255,255,255,0.3);
+    line-height: 1.5;
+  }
+
+  .price-note strong {
+    display: block;
+    color: rgba(255,255,255,0.6);
+    font-size: 15px;
+  }
+
+  /* Features list */
+  .features {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 36px;
+  }
+
+  .feat {
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .feat::before {
+    content: '✓';
+    color: #d4af64;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+<div class="ad">
+  <div class="inner">
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-number">5 min</div>
+        <div class="stat-label">Pour créer votre menu digital complet</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">14 j</div>
+        <div class="stat-label">D'essai gratuit, sans carte bancaire</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">0 €</div>
+        <div class="stat-label">Pour commencer aujourd'hui</div>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="eyebrow">Menu digital · Restaurants</div>
+      <h1>Fini les cartes<br>papier <em>périmées.</em></h1>
+      <p class="desc">Mettez à jour votre menu depuis votre téléphone. Changez un prix, ajoutez un plat, activez le menu du jour — en secondes.</p>
+
+      <div class="features">
+        <div class="feat">Mise à jour instantanée depuis votre téléphone</div>
+        <div class="feat">QR code sur vos tables, bilingue FR / EN</div>
+        <div class="feat">Design aux couleurs de votre restaurant</div>
+      </div>
+
+      <div class="bottom-row">
+        <div class="cta">Essai gratuit →</div>
+        <div class="price-note">
+          <strong>À partir de 26,99 €/mois</strong>
+          Sans engagement · montablo.com
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1200px; height: 1200px; overflow: hidden; font-family: 'Georgia', serif; }
+
+  .ad {
+    width: 1200px;
+    height: 1200px;
+    background: #1a2e1b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bg-circle-1 {
+    position: absolute;
+    top: -200px;
+    right: -200px;
+    width: 700px;
+    height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #2c3e2d 0%, transparent 70%);
+  }
+
+  .bg-circle-2 {
+    position: absolute;
+    bottom: -200px;
+    left: -200px;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #2c3e2d 0%, transparent 70%);
+  }
+
+  .content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 80px;
+    width: 100%;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 60px;
+  }
+
+  .logo-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(212,175,100,0.15);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+  }
+
+  .logo span {
+    font-size: 26px;
+    color: rgba(255,255,255,0.9);
+    letter-spacing: 0.02em;
+  }
+
+  /* Phone mockup */
+  .phone {
+    width: 320px;
+    background: #ffffff;
+    border-radius: 28px;
+    padding: 32px 28px;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1);
+    margin-bottom: 56px;
+    position: relative;
+  }
+
+  .phone::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: #e5e7eb;
+    border-radius: 0 0 4px 4px;
+  }
+
+  .phone-header {
+    text-align: center;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f3f4f6;
+    margin-bottom: 16px;
+  }
+
+  .phone-name { font-size: 15px; color: #1a2e1b; }
+  .phone-sub {
+    font-family: 'Arial', sans-serif;
+    font-size: 9px;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 2px;
+  }
+
+  .section-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #8a7340;
+    margin: 12px 0 8px;
+  }
+
+  .dish {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #f9fafb;
+  }
+
+  .dish-name {
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 1px;
+  }
+
+  .dish-desc {
+    font-family: 'Arial', sans-serif;
+    font-size: 9px;
+    color: #9ca3af;
+  }
+
+  .dish-price {
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: #1a2e1b;
+  }
+
+  .update-badge {
+    position: absolute;
+    top: -16px;
+    right: -16px;
+    background: #d4af64;
+    color: #1a2e1b;
+    font-family: 'Arial', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 100px;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(212,175,100,0.4);
+  }
+
+  h1 {
+    font-size: 56px;
+    line-height: 1.1;
+    color: #ffffff;
+    margin-bottom: 18px;
+    max-width: 700px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: #d4af64;
+  }
+
+  .sub {
+    font-family: 'Arial', sans-serif;
+    font-size: 18px;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 44px;
+    max-width: 560px;
+    line-height: 1.5;
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #d4af64;
+    color: #1a2e1b;
+    font-family: 'Arial', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    padding: 20px 44px;
+    border-radius: 100px;
+    letter-spacing: 0.01em;
+    box-shadow: 0 8px 32px rgba(212,175,100,0.35);
+  }
+
+  .trust {
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+    color: rgba(255,255,255,0.35);
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .trust-item::before { content: '✓ '; color: #d4af64; }
+</style>
+</head>
+<body>
+<div class="ad">
+  <div class="bg-circle-1"></div>
+  <div class="bg-circle-2"></div>
+
+  <div class="content">
+    <div class="logo">
+      <div class="logo-icon">🍽</div>
+      <span>MonTablo</span>
+    </div>
+
+    <div class="phone">
+      <div class="update-badge">✦ Mis à jour en direct</div>
+      <div class="phone-header">
+        <div class="phone-name">Le Chalet des Alpes</div>
+        <div class="phone-sub">Menu · Haute-Savoie</div>
+      </div>
+      <div class="section-label">Entrées</div>
+      <div class="dish">
+        <div>
+          <div class="dish-name">Soupe à l'oignon gratinée</div>
+          <div class="dish-desc">Gruyère, croûtons dorés</div>
+        </div>
+        <div class="dish-price">8,50 €</div>
+      </div>
+      <div class="section-label">Plats</div>
+      <div class="dish">
+        <div>
+          <div class="dish-name">Tartiflette maison</div>
+          <div class="dish-desc">Reblochon, lardons fumés</div>
+        </div>
+        <div class="dish-price">18,50 €</div>
+      </div>
+      <div class="dish">
+        <div>
+          <div class="dish-name">Filet de perche du lac</div>
+          <div class="dish-desc">Beurre blanc, riz sauvage</div>
+        </div>
+        <div class="dish-price">22,00 €</div>
+      </div>
+    </div>
+
+    <h1>Menu digital.<br><em>Résultats réels.</em></h1>
+    <p class="sub">Créez votre menu en 5 minutes. Mettez-le à jour depuis votre téléphone. Aucune réimpression.</p>
+
+    <div class="cta">Essai gratuit 14 jours →</div>
+
+    <div class="trust">
+      <span class="trust-item">Sans carte bancaire</span>
+      <span class="trust-item">Sans engagement</span>
+      <span class="trust-item">Prêt en 5 min</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>
