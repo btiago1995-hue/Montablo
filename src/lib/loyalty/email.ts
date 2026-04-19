@@ -55,13 +55,7 @@ export async function sendLoyaltyCardEmail({
 
       <!-- Google Wallet button -->
       <a href="${googleUrl}" style="display:block;text-decoration:none">
-        <div style="background:#1a73e8;border-radius:10px;padding:12px 20px;display:flex;align-items:center;justify-content:center;gap:12px">
-          <img src="https://www.montablo.com/google-wallet-logo.png" alt="" style="width:32px;height:32px;display:block">
-          <div>
-            <div style="color:rgba(255,255,255,0.8);font-size:10px;line-height:1;margin-bottom:2px">Ajouter à</div>
-            <div style="color:white;font-size:17px;font-weight:600;line-height:1">Google Wallet</div>
-          </div>
-        </div>
+        <img src="https://www.montablo.com/google-wallet-logo.png" alt="Ajouter à Google Wallet" style="width:100%;height:auto;display:block;border-radius:10px">
       </a>
     </div>
 
