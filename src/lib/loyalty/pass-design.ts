@@ -5,6 +5,8 @@ export type PassData = {
   authToken: string
   backgroundColor: string
   foregroundColor: string
+  primaryColor: string
+  logoUrl: string | null
   progressLabel: string
   progressValue: string
   rewardDescription: string
@@ -44,6 +46,8 @@ export function buildPassData(
     authToken: card.apple_auth_token!,
     backgroundColor,
     foregroundColor: 'rgb(255, 255, 255)',
+    primaryColor: restaurant.primary_color,
+    logoUrl: restaurant.logo_url ?? null,
     progressLabel: 'PROGRESSION',
     progressValue: hasReward ? '🎁 Récompense disponible!' : progressLabel,
     rewardDescription: program.reward_description,

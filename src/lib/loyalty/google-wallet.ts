@@ -10,10 +10,29 @@ function getAuth() {
   })
 }
 
-async function ensureLoyaltyClass(classId: string, restaurantName: string, rewardDescription: string) {
+async function ensureLoyaltyClass(
+  classId: string,
+  restaurantName: string,
+  rewardDescription: string,
+  logoUrl: string | null,
+  primaryColor: string,
+) {
   const auth = getAuth()
   const client = await auth.getClient()
   const token = await client.getAccessToken()
+
+  const logoUri = logoUrl ?? 'https://www.montablo.com/logo.png'
+  const classBody = {
+    id: classId,
+    issuerName: restaurantName,
+    programName: rewardDescription,
+    programLogo: {
+      sourceUri: { uri: logoUri },
+      contentDescription: { defaultValue: { language: 'fr', value: restaurantName } },
+    },
+    hexBackgroundColor: primaryColor.startsWith('#') ? primaryColor : `#${primaryColor}`,
+    reviewStatus: 'UNDER_REVIEW',
+  }
 
   const checkRes = await fetch(`${WALLET_API}/loyaltyClass/${classId}`, {
     headers: { Authorization: `Bearer ${token.token}` },
@@ -22,26 +41,26 @@ async function ensureLoyaltyClass(classId: string, restaurantName: string, rewar
   if (checkRes.status === 404) {
     const createRes = await fetch(`${WALLET_API}/loyaltyClass`, {
       method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token.token}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        id: classId,
-        issuerName: restaurantName,
-        programName: rewardDescription,
-        programLogo: {
-          sourceUri: { uri: 'https://www.montablo.com/logo.png' },
-          contentDescription: { defaultValue: { language: 'fr', value: restaurantName } },
-        },
-        reviewStatus: 'UNDER_REVIEW',
-      }),
+      headers: { Authorization: `Bearer ${token.token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify(classBody),
     })
     if (!createRes.ok) {
       const body = await createRes.text()
       throw new Error(`Failed to create loyalty class: ${createRes.status} ${body}`)
     }
-  } else if (!checkRes.ok) {
+  } else if (checkRes.ok) {
+    // Update existing class with latest restaurant branding
+    await fetch(`${WALLET_API}/loyaltyClass/${classId}`, {
+      method: 'PATCH',
+      headers: { Authorization: `Bearer ${token.token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        issuerName: classBody.issuerName,
+        programName: classBody.programName,
+        programLogo: classBody.programLogo,
+        hexBackgroundColor: classBody.hexBackgroundColor,
+      }),
+    })
+  } else {
     const body = await checkRes.text()
     throw new Error(`Failed to check loyalty class: ${checkRes.status} ${body}`)
   }
@@ -55,7 +74,7 @@ export async function generateGoogleWalletUrl(
   const classId = `${issuerId}.program_${programId}`
   const objectId = `${issuerId}.card_${data.serialNumber}`
 
-  await ensureLoyaltyClass(classId, data.restaurantName, data.rewardDescription)
+  await ensureLoyaltyClass(classId, data.restaurantName, data.rewardDescription, data.logoUrl, data.primaryColor)
 
   const loyaltyObject = {
     id: objectId,
@@ -65,14 +84,13 @@ export async function generateGoogleWalletUrl(
     accountName: data.customerName,
     loyaltyPoints: {
       label: data.progressLabel,
-      balance: {
-        string: data.progressValue,
-      },
+      balance: { string: data.progressValue },
     },
     barcode: {
       type: 'QR_CODE',
       value: data.qrMessage,
     },
+    hexBackgroundColor: data.primaryColor.startsWith('#') ? data.primaryColor : `#${data.primaryColor}`,
   }
 
   const auth = getAuth()
