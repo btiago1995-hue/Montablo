@@ -20,7 +20,7 @@ async function ensureLoyaltyClass(classId: string, restaurantName: string, rewar
   })
 
   if (checkRes.status === 404) {
-    await fetch(`${WALLET_API}/loyaltyClass`, {
+    const createRes = await fetch(`${WALLET_API}/loyaltyClass`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token.token}`,
@@ -30,13 +30,16 @@ async function ensureLoyaltyClass(classId: string, restaurantName: string, rewar
         id: classId,
         issuerName: restaurantName,
         programName: rewardDescription,
-        programLogo: {
-          sourceUri: { uri: `${process.env.NEXT_PUBLIC_APP_URL}/logo.png` },
-          contentDescription: { defaultValue: { language: 'fr', value: restaurantName } },
-        },
         reviewStatus: 'UNDER_REVIEW',
       }),
     })
+    if (!createRes.ok) {
+      const body = await createRes.text()
+      throw new Error(`Failed to create loyalty class: ${createRes.status} ${body}`)
+    }
+  } else if (!checkRes.ok) {
+    const body = await checkRes.text()
+    throw new Error(`Failed to check loyalty class: ${checkRes.status} ${body}`)
   }
 }
 
@@ -77,7 +80,7 @@ export async function generateGoogleWalletUrl(
     headers: { Authorization: `Bearer ${token.token}` },
   })
   if (checkRes.status === 404) {
-    await fetch(`${WALLET_API}/loyaltyObject`, {
+    const createRes = await fetch(`${WALLET_API}/loyaltyObject`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token.token}`,
@@ -85,6 +88,10 @@ export async function generateGoogleWalletUrl(
       },
       body: JSON.stringify(loyaltyObject),
     })
+    if (!createRes.ok) {
+      const body = await createRes.text()
+      throw new Error(`Failed to create loyalty object: ${createRes.status} ${body}`)
+    }
   }
 
   // Generate a signed JWT save URL
