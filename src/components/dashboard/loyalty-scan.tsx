@@ -2,11 +2,17 @@
 
 import { useEffect, useRef, useState } from 'react'
 
-type ScanResult = { customer_name: string; current_value: number } | null
+type ScanResult = {
+  customer_name: string
+  current_value: number
+  goal: number
+  program_type: string
+} | null
 
 export function LoyaltyScan() {
   const scannerRef = useRef<{ stop?: () => Promise<void> } | null>(null)
   const [scanning, setScanning] = useState(false)
+  const [fetching, setFetching] = useState(false)
   const [result, setResult] = useState<ScanResult>(null)
   const [error, setError] = useState<string | null>(null)
   const [stamping, setStamping] = useState(false)
@@ -26,9 +32,9 @@ export function LoyaltyScan() {
     setResult(null)
     setDone(false)
     setScannedCardId(null)
+    setFetching(false)
     setScanning(true)
 
-    // Wait for React to render the qr-reader div before initialising the scanner
     await new Promise<void>((resolve) => setTimeout(resolve, 100))
 
     const { Html5Qrcode } = await import('html5-qrcode')
@@ -41,14 +47,17 @@ export function LoyaltyScan() {
       async (decodedText: string) => {
         await scanner.stop()
         setScanning(false)
+        setFetching(true)
         setScannedCardId(decodedText)
 
         const res = await fetch(`/api/loyalty/cards/${decodedText}/info`)
         if (!res.ok) {
+          setFetching(false)
           setError('Carte non reconnue. Vérifiez le QR code.')
           return
         }
         const data = await res.json()
+        setFetching(false)
         setResult(data)
       },
       () => {},
@@ -89,6 +98,8 @@ export function LoyaltyScan() {
     )
   }
 
+  const hasReward = result && result.current_value >= result.goal
+
   return (
     <div className="max-w-sm mx-auto">
       {/* qr-reader must always be in the DOM when scanning=true */}
@@ -97,7 +108,11 @@ export function LoyaltyScan() {
         <p className="text-center text-sm text-muted mt-3">Pointez la caméra vers le QR code du client</p>
       </div>
 
-      {!scanning && !result && (
+      {fetching && (
+        <div className="text-center py-12 text-muted text-sm">Chargement…</div>
+      )}
+
+      {!scanning && !fetching && !result && (
         <div className="text-center py-8">
           {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
           <button
@@ -113,7 +128,14 @@ export function LoyaltyScan() {
         <div className="bg-white border border-[#E8E8E4] rounded-xl p-6 text-center space-y-4">
           <div className="text-4xl">👤</div>
           <h3 className="font-serif text-2xl">{result.customer_name}</h3>
-          <p className="text-sm text-muted">Valeur actuelle : {result.current_value}</p>
+          <p className="text-sm text-muted">
+            {result.program_type === 'visits'
+              ? `${result.current_value} / ${result.goal} visites`
+              : `${(result.current_value / 100).toFixed(2)}€ / ${(result.goal / 100).toFixed(2)}€`}
+          </p>
+          {hasReward && (
+            <p className="text-amber-600 font-medium text-sm">🎁 Récompense disponible !</p>
+          )}
           <div className="flex gap-3">
             <button
               onClick={handleStamp}
@@ -122,13 +144,15 @@ export function LoyaltyScan() {
             >
               {stamping ? '…' : '+ Ajouter un tampon'}
             </button>
-            <button
-              onClick={handleRedeem}
-              disabled={stamping}
-              className="flex-1 bg-amber-500 text-white py-4 rounded-xl text-base font-medium disabled:opacity-50"
-            >
-              🎁 Récompense
-            </button>
+            {hasReward && (
+              <button
+                onClick={handleRedeem}
+                disabled={stamping}
+                className="flex-1 bg-amber-500 text-white py-4 rounded-xl text-base font-medium disabled:opacity-50"
+              >
+                🎁 Récompense
+              </button>
+            )}
           </div>
         </div>
       )}
