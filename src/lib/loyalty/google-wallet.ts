@@ -2,13 +2,16 @@ import { GoogleAuth } from 'google-auth-library'
 import type { PassData } from './pass-design'
 
 const WALLET_API = 'https://walletobjects.googleapis.com/walletobjects/v1'
-const DARK_BG = '#1C1C1E'
 
 function getAuth() {
   return new GoogleAuth({
     credentials: JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_KEY!),
     scopes: ['https://www.googleapis.com/auth/wallet_object.issuer'],
   })
+}
+
+function hexColor(color: string): string {
+  return color.startsWith('#') ? color : `#${color}`
 }
 
 function buildStampGrid(current: number, goal: number): string {
@@ -33,8 +36,8 @@ function buildTextModules(data: PassData) {
   if (data.hasReward) {
     return [
       {
-        header: '🎁 RECOMPENSA DISPONÍVEL',
-        body: 'Mostre este cartão ao restaurante para resgatar o seu prémio!',
+        header: '🎁 RÉCOMPENSE DISPONIBLE',
+        body: 'Montrez cette carte au restaurant pour récupérer votre récompense !',
       },
     ]
   }
@@ -44,49 +47,62 @@ function buildTextModules(data: PassData) {
   if (data.programType === 'visits') {
     return [
       {
-        header: 'CARIMBOS',
+        header: 'TAMPONS',
         body: buildStampGrid(data.currentValue, data.goalValue),
       },
       {
-        header: 'EM FALTA',
-        body: remaining === 1 ? '1 carimbo para a recompensa' : `${remaining} carimbos para a recompensa`,
+        header: 'IL MANQUE',
+        body: remaining === 1
+          ? '1 tampon avant la récompense'
+          : `${remaining} tampons avant la récompense`,
       },
     ]
   } else {
     const remainingEuros = (remaining / 100).toFixed(2)
     return [
       {
-        header: 'PROGRESSO',
+        header: 'PROGRESSION',
         body: buildProgressBar(data.currentValue, data.goalValue),
       },
       {
-        header: 'EM FALTA',
-        body: `${remainingEuros}€ para a recompensa`,
+        header: 'IL MANQUE',
+        body: `${remainingEuros}€ avant la récompense`,
       },
     ]
   }
 }
 
+function buildLoyaltyPoints(data: PassData) {
+  if (data.programType === 'visits') {
+    return {
+      label: 'TAMPONS',
+      balance: { string: `${data.currentValue} / ${data.goalValue}` },
+    }
+  }
+  return {
+    label: 'TOTAL DÉPENSÉ',
+    balance: { string: `${(data.currentValue / 100).toFixed(2)}€` },
+  }
+}
+
 async function ensureLoyaltyClass(
   classId: string,
-  restaurantName: string,
-  rewardDescription: string,
-  logoUrl: string | null,
+  data: PassData,
 ) {
   const auth = getAuth()
   const client = await auth.getClient()
   const token = await client.getAccessToken()
 
-  const logoUri = logoUrl ?? 'https://www.montablo.com/logo.png'
+  const logoUri = data.logoUrl ?? 'https://www.montablo.com/logo.png'
   const classBody = {
     id: classId,
-    issuerName: restaurantName,
-    programName: rewardDescription,
+    issuerName: data.restaurantName,
+    programName: data.tagline,
     programLogo: {
       sourceUri: { uri: logoUri },
-      contentDescription: { defaultValue: { language: 'fr', value: restaurantName } },
+      contentDescription: { defaultValue: { language: 'fr', value: data.restaurantName } },
     },
-    hexBackgroundColor: DARK_BG,
+    hexBackgroundColor: hexColor(data.primaryColor),
     reviewStatus: 'UNDER_REVIEW',
   }
 
@@ -112,7 +128,7 @@ async function ensureLoyaltyClass(
         issuerName: classBody.issuerName,
         programName: classBody.programName,
         programLogo: classBody.programLogo,
-        hexBackgroundColor: DARK_BG,
+        hexBackgroundColor: classBody.hexBackgroundColor,
       }),
     })
   } else {
@@ -129,23 +145,7 @@ export async function generateGoogleWalletUrl(
   const classId = `${issuerId}.program_${programId}`
   const objectId = `${issuerId}.card_${data.serialNumber}`
 
-  await ensureLoyaltyClass(classId, data.restaurantName, data.rewardDescription, data.logoUrl)
-
-  const loyaltyPoints =
-    data.programType === 'visits'
-      ? {
-          label: 'CARIMBOS',
-          balance: { string: `${data.currentValue} / ${data.goalValue}` },
-        }
-      : {
-          label: 'TOTAL GASTO',
-          balance: { string: `${(data.currentValue / 100).toFixed(2)}€` },
-        }
-
-  const secondaryLoyaltyPoints = {
-    label: 'RECOMPENSA',
-    balance: { string: data.rewardDescription },
-  }
+  await ensureLoyaltyClass(classId, data)
 
   const loyaltyObject = {
     id: objectId,
@@ -153,15 +153,18 @@ export async function generateGoogleWalletUrl(
     state: 'ACTIVE',
     accountId: data.serialNumber,
     accountName: data.customerName,
-    loyaltyPoints,
-    secondaryLoyaltyPoints,
+    loyaltyPoints: buildLoyaltyPoints(data),
+    secondaryLoyaltyPoints: {
+      label: 'RÉCOMPENSE',
+      balance: { string: data.rewardDescription },
+    },
     textModulesData: buildTextModules(data),
     barcode: {
       type: 'QR_CODE',
       value: data.qrMessage,
-      alternateText: 'Carimbar cartão',
+      alternateText: 'Scanner la carte',
     },
-    hexBackgroundColor: DARK_BG,
+    hexBackgroundColor: hexColor(data.primaryColor),
   }
 
   const auth = getAuth()
@@ -171,19 +174,29 @@ export async function generateGoogleWalletUrl(
   const checkRes = await fetch(`${WALLET_API}/loyaltyObject/${objectId}`, {
     headers: { Authorization: `Bearer ${token.token}` },
   })
+
   if (checkRes.status === 404) {
     const createRes = await fetch(`${WALLET_API}/loyaltyObject`, {
       method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token.token}`,
-        'Content-Type': 'application/json',
-      },
+      headers: { Authorization: `Bearer ${token.token}`, 'Content-Type': 'application/json' },
       body: JSON.stringify(loyaltyObject),
     })
     if (!createRes.ok) {
       const body = await createRes.text()
       throw new Error(`Failed to create loyalty object: ${createRes.status} ${body}`)
     }
+  } else if (checkRes.ok) {
+    // Update existing object with latest data
+    await fetch(`${WALLET_API}/loyaltyObject/${objectId}`, {
+      method: 'PATCH',
+      headers: { Authorization: `Bearer ${token.token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        loyaltyPoints: buildLoyaltyPoints(data),
+        secondaryLoyaltyPoints: loyaltyObject.secondaryLoyaltyPoints,
+        textModulesData: buildTextModules(data),
+        hexBackgroundColor: hexColor(data.primaryColor),
+      }),
+    })
   }
 
   const claims = {
@@ -209,25 +222,11 @@ export async function updateGoogleWalletCard(data: PassData): Promise<void> {
   const client = await auth.getClient()
   const token = await client.getAccessToken()
 
-  const loyaltyPoints =
-    data.programType === 'visits'
-      ? {
-          label: 'CARIMBOS',
-          balance: { string: `${data.currentValue} / ${data.goalValue}` },
-        }
-      : {
-          label: 'TOTAL GASTO',
-          balance: { string: `${(data.currentValue / 100).toFixed(2)}€` },
-        }
-
   await fetch(`${WALLET_API}/loyaltyObject/${objectId}`, {
     method: 'PATCH',
-    headers: {
-      Authorization: `Bearer ${token.token}`,
-      'Content-Type': 'application/json',
-    },
+    headers: { Authorization: `Bearer ${token.token}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      loyaltyPoints,
+      loyaltyPoints: buildLoyaltyPoints(data),
       textModulesData: buildTextModules(data),
     }),
   })
