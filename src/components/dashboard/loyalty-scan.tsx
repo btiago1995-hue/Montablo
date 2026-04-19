@@ -14,11 +14,11 @@ export function LoyaltyScan() {
   const [scannedCardId, setScannedCardId] = useState<string | null>(null)
 
   useEffect(() => {
+    startScanner()
     return () => {
-      if (scannerRef.current) {
-        scannerRef.current.stop?.()
-      }
+      scannerRef.current?.stop?.()
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   async function startScanner() {
@@ -79,7 +79,7 @@ export function LoyaltyScan() {
         <div className="text-5xl mb-4">✅</div>
         <h2 className="font-serif text-2xl mb-4">Fait !</h2>
         <button
-          onClick={() => { setDone(false); setResult(null); setScannedCardId(null) }}
+          onClick={startScanner}
           className="bg-[#2C3E2D] text-white px-6 py-3 rounded-xl text-sm font-medium"
         >
           Scanner un autre client
@@ -90,18 +90,6 @@ export function LoyaltyScan() {
 
   return (
     <div className="max-w-sm mx-auto">
-      {!result && !scanning && (
-        <div className="text-center py-8">
-          <button
-            onClick={startScanner}
-            className="bg-[#2C3E2D] text-white px-8 py-4 rounded-xl text-base font-medium w-full"
-          >
-            📷 Scanner le QR du client
-          </button>
-          {error && <p className="text-red-500 text-sm mt-4">{error}</p>}
-        </div>
-      )}
-
       {scanning && (
         <div>
           <div id="qr-reader" className="w-full rounded-xl overflow-hidden" />
@@ -109,25 +97,37 @@ export function LoyaltyScan() {
         </div>
       )}
 
+      {!scanning && !result && (
+        <div className="text-center py-8">
+          {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+          <button
+            onClick={startScanner}
+            className="bg-[#2C3E2D] text-white px-8 py-4 rounded-xl text-base font-medium w-full"
+          >
+            📷 Réessayer
+          </button>
+        </div>
+      )}
+
       {result && !done && (
         <div className="bg-white border border-[#E8E8E4] rounded-xl p-6 text-center space-y-4">
           <div className="text-3xl">👤</div>
           <h3 className="font-serif text-xl">{result.customer_name}</h3>
-          <p className="text-sm text-muted">Valeur actuelle: {result.current_value}</p>
+          <p className="text-sm text-muted">Valeur actuelle : {result.current_value}</p>
           <div className="flex gap-3">
             <button
               onClick={handleStamp}
               disabled={stamping}
               className="flex-1 bg-[#2C3E2D] text-white py-3 rounded-lg text-sm font-medium disabled:opacity-50"
             >
-              {stamping ? '...' : '+ Ajouter carimbo'}
+              {stamping ? '...' : '+ Ajouter un tampon'}
             </button>
             <button
               onClick={handleRedeem}
               disabled={stamping}
               className="flex-1 bg-amber-500 text-white py-3 rounded-lg text-sm font-medium disabled:opacity-50"
             >
-              🎁 Resgatar
+              🎁 Utiliser la récompense
             </button>
           </div>
         </div>
