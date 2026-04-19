@@ -32,6 +32,11 @@ export async function GET(
   const program = card.loyalty_programs
   const passData = buildPassData(restaurant, program, card)
 
-  const saveUrl = await generateGoogleWalletUrl(passData, program.id)
-  redirect(saveUrl)
+  try {
+    const saveUrl = await generateGoogleWalletUrl(passData, program.id)
+    redirect(saveUrl)
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err)
+    return new Response(msg, { status: 500 })
+  }
 }
