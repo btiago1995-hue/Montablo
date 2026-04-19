@@ -30,6 +30,10 @@ async function ensureLoyaltyClass(classId: string, restaurantName: string, rewar
         id: classId,
         issuerName: restaurantName,
         programName: rewardDescription,
+        programLogo: {
+          sourceUri: { uri: 'https://www.montablo.com/logo.png' },
+          contentDescription: { defaultValue: { language: 'fr', value: restaurantName } },
+        },
         reviewStatus: 'UNDER_REVIEW',
       }),
     })
