@@ -28,6 +28,9 @@ export function LoyaltyScan() {
     setScannedCardId(null)
     setScanning(true)
 
+    // Wait for React to render the qr-reader div before initialising the scanner
+    await new Promise<void>((resolve) => setTimeout(resolve, 100))
+
     const { Html5Qrcode } = await import('html5-qrcode')
     const scanner = new Html5Qrcode('qr-reader')
     scannerRef.current = scanner
@@ -59,9 +62,7 @@ export function LoyaltyScan() {
     if (!scannedCardId) return
     setStamping(true)
     const res = await fetch(`/api/loyalty/cards/${scannedCardId}/stamp`, { method: 'POST' })
-    if (res.ok) {
-      setDone(true)
-    }
+    if (res.ok) setDone(true)
     setStamping(false)
   }
 
@@ -90,12 +91,11 @@ export function LoyaltyScan() {
 
   return (
     <div className="max-w-sm mx-auto">
-      {scanning && (
-        <div>
-          <div id="qr-reader" className="w-full rounded-xl overflow-hidden" />
-          <p className="text-center text-sm text-muted mt-3">Pointez la caméra vers le QR code du client</p>
-        </div>
-      )}
+      {/* qr-reader must always be in the DOM when scanning=true */}
+      <div className={scanning ? 'block' : 'hidden'}>
+        <div id="qr-reader" className="w-full rounded-xl overflow-hidden" />
+        <p className="text-center text-sm text-muted mt-3">Pointez la caméra vers le QR code du client</p>
+      </div>
 
       {!scanning && !result && (
         <div className="text-center py-8">
@@ -111,23 +111,23 @@ export function LoyaltyScan() {
 
       {result && !done && (
         <div className="bg-white border border-[#E8E8E4] rounded-xl p-6 text-center space-y-4">
-          <div className="text-3xl">👤</div>
-          <h3 className="font-serif text-xl">{result.customer_name}</h3>
+          <div className="text-4xl">👤</div>
+          <h3 className="font-serif text-2xl">{result.customer_name}</h3>
           <p className="text-sm text-muted">Valeur actuelle : {result.current_value}</p>
           <div className="flex gap-3">
             <button
               onClick={handleStamp}
               disabled={stamping}
-              className="flex-1 bg-[#2C3E2D] text-white py-3 rounded-lg text-sm font-medium disabled:opacity-50"
+              className="flex-1 bg-[#2C3E2D] text-white py-4 rounded-xl text-base font-medium disabled:opacity-50"
             >
-              {stamping ? '...' : '+ Ajouter un tampon'}
+              {stamping ? '…' : '+ Ajouter un tampon'}
             </button>
             <button
               onClick={handleRedeem}
               disabled={stamping}
-              className="flex-1 bg-amber-500 text-white py-3 rounded-lg text-sm font-medium disabled:opacity-50"
+              className="flex-1 bg-amber-500 text-white py-4 rounded-xl text-base font-medium disabled:opacity-50"
             >
-              🎁 Utiliser la récompense
+              🎁 Récompense
             </button>
           </div>
         </div>

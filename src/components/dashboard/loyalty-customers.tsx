@@ -57,31 +57,31 @@ export function LoyaltyCustomers({ cards, program }: Props) {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-5">
         <p className="text-sm text-muted">{cards.length} client{cards.length !== 1 ? 's' : ''} inscrits</p>
         <Link
           href="/dashboard/loyalty/customers/new"
-          className="flex items-center gap-2 bg-[#2C3E2D] text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-[#243325] transition-colors"
+          className="flex items-center gap-2 bg-[#2C3E2D] text-white px-5 py-3 rounded-xl text-sm font-medium hover:bg-[#243325] transition-colors"
         >
-          <UserPlus className="w-4 h-4" />
+          <UserPlus className="w-5 h-5" />
           Nouveau client
         </Link>
       </div>
 
       <div className="relative mb-6">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" />
+        <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-muted" />
         <input
           type="text"
           placeholder="Rechercher par nom ou email…"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full pl-9 pr-4 py-2.5 border border-[#E8E8E4] rounded-lg text-sm bg-white focus:outline-none focus:border-[#2C3E2D]"
+          className="w-full pl-11 pr-4 py-3 border border-[#E8E8E4] rounded-xl text-sm bg-white focus:outline-none focus:border-[#2C3E2D]"
         />
       </div>
 
       {cards.length === 0 && (
         <div className="text-center py-16 text-muted">
-          <Gift className="w-10 h-10 mx-auto mb-3 opacity-30" />
+          <Gift className="w-12 h-12 mx-auto mb-3 opacity-30" />
           <p>Aucun client inscrit pour l&apos;instant.</p>
         </div>
       )}
@@ -102,71 +102,71 @@ export function LoyaltyCustomers({ cards, program }: Props) {
           return (
             <div
               key={card.id}
-              className={`bg-white border rounded-xl p-4 ${hasReward ? 'border-amber-300 bg-amber-50' : 'border-[#E8E8E4]'}`}
+              className={`bg-white border rounded-xl p-5 ${hasReward ? 'border-amber-300 bg-amber-50' : 'border-[#E8E8E4]'}`}
             >
-              <div className="flex items-start justify-between gap-3">
+              <div className="flex items-start justify-between gap-4">
                 <div className="flex-1 min-w-0">
-                  <div className="font-medium text-sm text-foreground">{card.customer_name}</div>
+                  <div className="font-medium text-base text-foreground">{card.customer_name}</div>
 
                   {editingEmail === card.id ? (
-                    <div className="flex items-center gap-1.5 mt-1">
+                    <div className="flex items-center gap-2 mt-2">
                       <input
                         type="email"
                         value={emailDraft}
                         onChange={(e) => setEmailDraft(e.target.value)}
-                        className="flex-1 text-xs border border-[#2C3E2D] rounded px-2 py-1 focus:outline-none min-w-0"
+                        className="flex-1 text-sm border border-[#2C3E2D] rounded-lg px-3 py-2 focus:outline-none min-w-0"
                         autoFocus
                       />
                       <button
                         onClick={() => saveEmail(card.id)}
                         disabled={savingEmail}
-                        className="text-[#2C3E2D] hover:text-[#1a2b1b] disabled:opacity-50"
+                        className="text-[#2C3E2D] hover:text-[#1a2b1b] disabled:opacity-50 p-1"
                       >
-                        <Check className="w-3.5 h-3.5" />
+                        <Check className="w-5 h-5" />
                       </button>
                       <button
                         onClick={() => setEditingEmail(null)}
-                        className="text-muted hover:text-foreground"
+                        className="text-muted hover:text-foreground p-1"
                       >
-                        <X className="w-3.5 h-3.5" />
+                        <X className="w-5 h-5" />
                       </button>
                     </div>
                   ) : (
-                    <div className="flex items-center gap-1 mt-0.5">
-                      <span className="text-xs text-muted truncate">{card.customer_email}</span>
+                    <div className="flex items-center gap-2 mt-1">
+                      <span className="text-sm text-muted truncate">{card.customer_email}</span>
                       <button
                         onClick={() => startEditEmail(card)}
-                        className="text-muted hover:text-foreground flex-shrink-0"
+                        className="text-muted hover:text-foreground flex-shrink-0 p-0.5"
                         title="Modifier l'email"
                       >
-                        <Pencil className="w-3 h-3" />
+                        <Pencil className="w-4 h-4" />
                       </button>
                     </div>
                   )}
 
-                  <div className={`text-xs mt-1 font-medium ${hasReward ? 'text-amber-600' : 'text-muted'}`}>
+                  <div className={`text-sm mt-2 font-medium ${hasReward ? 'text-amber-600' : 'text-muted'}`}>
                     {hasReward ? '🎁 Récompense disponible !' : progressText}
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-1.5 flex-shrink-0">
+                <div className="flex flex-col gap-2 flex-shrink-0">
                   {hasReward && (
                     <button
                       onClick={() => handleRedeem(card.id)}
                       disabled={redeeming === card.id}
-                      className="flex items-center gap-1.5 bg-amber-500 text-white px-3 py-2 rounded-lg text-xs font-medium hover:bg-amber-600 disabled:opacity-50 transition-colors"
+                      className="flex items-center gap-2 bg-amber-500 text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-amber-600 disabled:opacity-50 transition-colors"
                     >
-                      <CheckCircle className="w-3.5 h-3.5" />
+                      <CheckCircle className="w-5 h-5" />
                       {redeeming === card.id ? '…' : 'Utiliser'}
                     </button>
                   )}
                   <button
                     onClick={() => handleResend(card.id)}
                     disabled={resending === card.id}
-                    className="flex items-center gap-1.5 border border-[#E8E8E4] text-muted px-3 py-2 rounded-lg text-xs font-medium hover:border-[#2C3E2D] hover:text-foreground disabled:opacity-50 transition-colors"
+                    className="flex items-center gap-2 border border-[#E8E8E4] text-muted px-4 py-2.5 rounded-xl text-sm font-medium hover:border-[#2C3E2D] hover:text-foreground disabled:opacity-50 transition-colors"
                     title="Renvoyer la carte par email"
                   >
-                    <Mail className="w-3.5 h-3.5" />
+                    <Mail className="w-5 h-5" />
                     {resending === card.id ? '…' : 'Renvoyer'}
                   </button>
                 </div>
