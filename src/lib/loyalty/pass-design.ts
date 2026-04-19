@@ -23,17 +23,16 @@ export function buildPassData(
   const hasReward = card.current_value >= program.goal
 
   let progressLabel: string
-  let progressValue: string
 
   if (program.type === 'visits') {
     progressLabel = `${card.current_value} / ${program.goal} visites`
-    progressValue = hasReward ? '🎁 Récompense disponible!' : progressLabel
   } else {
     const current = (card.current_value / 100).toFixed(2)
     const goal = (program.goal / 100).toFixed(2)
     progressLabel = `${current}€ / ${goal}€`
-    progressValue = hasReward ? '🎁 Récompense disponible!' : progressLabel
   }
+
+  const progressValue = hasReward ? '🎁 Récompense disponible!' : progressLabel
 
   // Convert hex color to rgb() string for Apple Wallet
   const hex = restaurant.primary_color.replace('#', '')

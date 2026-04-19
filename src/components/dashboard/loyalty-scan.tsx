@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react'
 type ScanResult = { customer_name: string; current_value: number } | null
 
 export function LoyaltyScan() {
-  const scannerRef = useRef<any>(null)
+  const scannerRef = useRef<{ stop?: () => Promise<void> } | null>(null)
   const [scanning, setScanning] = useState(false)
   const [result, setResult] = useState<ScanResult>(null)
   const [error, setError] = useState<string | null>(null)

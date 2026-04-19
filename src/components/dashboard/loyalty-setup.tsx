@@ -9,7 +9,7 @@ type Props = {
   existing: LoyaltyProgram | null
 }
 
-export function LoyaltySetup({ restaurantId, existing }: Props) {
+export function LoyaltySetup({ restaurantId: _restaurantId, existing }: Props) {
   const router = useRouter()
   const [type, setType] = useState<'visits' | 'spend'>(existing?.type ?? 'visits')
   const [goal, setGoal] = useState(
