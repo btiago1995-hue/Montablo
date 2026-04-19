@@ -70,7 +70,6 @@ export async function generateGoogleWalletUrl(
 
   const auth = getAuth()
   const client = await auth.getClient()
-  const serviceAccountEmail = (auth as any)._cachedProjectId ?? ''
 
   // Create the object if it doesn't exist
   const token = await client.getAccessToken()
