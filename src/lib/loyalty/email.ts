@@ -50,12 +50,12 @@ export async function sendLoyaltyCardEmail({
 
       <!-- Apple Wallet button -->
       <a href="${appleUrl}" style="display:block;text-decoration:none;margin-bottom:12px;border-radius:12px;overflow:hidden;border:1.5px solid #000;height:56px;background:#000;text-align:center;line-height:56px">
-        <img src="https://www.montablo.com/apple-wallet-logo.png" alt="Ajouter à Apple Wallet" style="height:38px;width:auto;vertical-align:middle;display:inline-block">
+        <img src="https://www.montablo.com/apple-wallet-logo.png" alt="Ajouter à Apple Wallet" style="width:75%;max-width:280px;height:auto;vertical-align:middle;display:inline-block">
       </a>
 
       <!-- Google Wallet button -->
       <a href="${googleUrl}" style="display:block;text-decoration:none;border-radius:12px;overflow:hidden;border:1.5px solid #dadce0;height:56px;background:#fff;text-align:center;line-height:56px">
-        <img src="https://www.montablo.com/google-wallet-logo.png" alt="Ajouter à Google Wallet" style="height:38px;width:auto;vertical-align:middle;display:inline-block">
+        <img src="https://www.montablo.com/google-wallet-logo.png" alt="Ajouter à Google Wallet" style="width:75%;max-width:280px;height:auto;vertical-align:middle;display:inline-block">
       </a>
     </div>
 
