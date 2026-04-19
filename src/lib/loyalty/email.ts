@@ -48,14 +48,14 @@ export async function sendLoyaltyCardEmail({
         Plus besoin de carte papier — elle est toujours dans votre téléphone.
       </p>
 
-      <!-- Apple Wallet button -->
-      <a href="${appleUrl}" style="display:block;text-decoration:none;margin-bottom:12px;border-radius:12px;overflow:hidden;border:1.5px solid #000;height:56px;background:#000;text-align:center;line-height:56px">
-        <img src="https://www.montablo.com/apple-wallet-logo.png" alt="Ajouter à Apple Wallet" style="width:75%;max-width:280px;height:auto;vertical-align:middle;display:inline-block">
+      <!-- Apple Wallet badge -->
+      <a href="${appleUrl}" style="display:block;text-decoration:none;margin-bottom:12px;text-align:center">
+        <img src="https://www.montablo.com/apple-wallet-logo.png" alt="Ajouter à l'app Cartes Apple" width="180" height="56" style="display:inline-block;width:180px;height:56px;border:0">
       </a>
 
-      <!-- Google Wallet button -->
-      <a href="${googleUrl}" style="display:block;text-decoration:none;border-radius:12px;overflow:hidden;border:1.5px solid #dadce0;height:56px;background:#fff;text-align:center;line-height:56px">
-        <img src="https://www.montablo.com/google-wallet-logo.png" alt="Ajouter à Google Wallet" style="width:75%;max-width:280px;height:auto;vertical-align:middle;display:inline-block">
+      <!-- Google Wallet badge -->
+      <a href="${googleUrl}" style="display:block;text-decoration:none;text-align:center">
+        <img src="https://www.montablo.com/google-wallet-logo.png" alt="Ajouter au Google Wallet" width="203" height="56" style="display:inline-block;width:203px;height:56px;border:0">
       </a>
     </div>
 
