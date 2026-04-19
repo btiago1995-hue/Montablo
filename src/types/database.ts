@@ -93,6 +93,49 @@ export type ReviewRateLimit = {
   created_at: string
 }
 
+export type LoyaltyProgram = {
+  id: string
+  restaurant_id: string
+  type: 'visits' | 'spend'
+  goal: number // visits: count | spend: cents (e.g. 5000 = 50€)
+  reward_description: string
+  card_tagline: string | null
+  is_active: boolean
+  created_at: string
+}
+
+export type LoyaltyCard = {
+  id: string
+  program_id: string
+  restaurant_id: string
+  customer_name: string
+  customer_email: string
+  customer_phone: string | null
+  current_value: number // visits: count | spend: cents
+  total_redeemed: number
+  apple_pass_serial: string | null
+  apple_auth_token: string | null
+  google_pass_id: string | null
+  created_at: string
+}
+
+export type LoyaltyStamp = {
+  id: string
+  card_id: string
+  amount: number // 1 for visits, cents for spend
+  added_by: string | null
+  created_at: string
+}
+
+export type LoyaltyDeviceRegistration = {
+  id: string
+  card_id: string
+  device_library_id: string
+  push_token: string
+  pass_type_id: string
+  created_at: string
+}
+
 export type Database = {
   public: {
     Tables: {
@@ -142,6 +185,30 @@ export type Database = {
         Row: Review
         Insert: Pick<Review, 'restaurant_id' | 'rating'> & Partial<Omit<Review, 'restaurant_id' | 'rating'>>
         Update: Partial<Review>
+        Relationships: []
+      }
+      loyalty_programs: {
+        Row: LoyaltyProgram
+        Insert: Pick<LoyaltyProgram, 'restaurant_id' | 'type' | 'goal' | 'reward_description'> & Partial<Omit<LoyaltyProgram, 'restaurant_id' | 'type' | 'goal' | 'reward_description'>>
+        Update: Partial<LoyaltyProgram>
+        Relationships: []
+      }
+      loyalty_cards: {
+        Row: LoyaltyCard
+        Insert: Pick<LoyaltyCard, 'program_id' | 'restaurant_id' | 'customer_name' | 'customer_email'> & Partial<Omit<LoyaltyCard, 'program_id' | 'restaurant_id' | 'customer_name' | 'customer_email'>>
+        Update: Partial<LoyaltyCard>
+        Relationships: []
+      }
+      loyalty_stamps: {
+        Row: LoyaltyStamp
+        Insert: Pick<LoyaltyStamp, 'card_id' | 'amount'> & Partial<Omit<LoyaltyStamp, 'card_id' | 'amount'>>
+        Update: Partial<LoyaltyStamp>
+        Relationships: []
+      }
+      loyalty_device_registrations: {
+        Row: LoyaltyDeviceRegistration
+        Insert: Pick<LoyaltyDeviceRegistration, 'card_id' | 'device_library_id' | 'push_token' | 'pass_type_id'> & Partial<Omit<LoyaltyDeviceRegistration, 'card_id' | 'device_library_id' | 'push_token' | 'pass_type_id'>>
+        Update: Partial<LoyaltyDeviceRegistration>
         Relationships: []
       }
     }

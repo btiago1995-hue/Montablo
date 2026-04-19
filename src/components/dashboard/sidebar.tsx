@@ -8,6 +8,7 @@ import {
   FileText,
   Star,
   CalendarDays,
+  Gift,
   QrCode,
   Settings,
   LogOut,
@@ -23,6 +24,7 @@ const gestionItems = [
   { href: '/dashboard/menu', label: 'Mon menu', icon: FileText },
   { href: '/dashboard/promotions', label: 'Promotions', icon: Star },
   { href: '/dashboard/daily-menu', label: 'Menu du jour', icon: CalendarDays },
+  { href: '/dashboard/loyalty', label: 'Fidélité', icon: Gift },
 ]
 
 const outilsItems = [
