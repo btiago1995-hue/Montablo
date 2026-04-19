@@ -93,6 +93,49 @@ export type ReviewRateLimit = {
   created_at: string
 }
 
+export type LoyaltyProgram = {
+  id: string
+  restaurant_id: string
+  type: 'visits' | 'spend'
+  goal: number // visits: count | spend: cents (e.g. 5000 = 50€)
+  reward_description: string
+  card_tagline: string | null
+  is_active: boolean
+  created_at: string
+}
+
+export type LoyaltyCard = {
+  id: string
+  program_id: string
+  restaurant_id: string
+  customer_name: string
+  customer_email: string
+  customer_phone: string | null
+  current_value: number // visits: count | spend: cents
+  total_redeemed: number
+  apple_pass_serial: string | null
+  apple_auth_token: string | null
+  google_pass_id: string | null
+  created_at: string
+}
+
+export type LoyaltyStamp = {
+  id: string
+  card_id: string
+  amount: number // 1 for visits, cents for spend
+  added_by: string | null
+  created_at: string
+}
+
+export type LoyaltyDeviceRegistration = {
+  id: string
+  card_id: string
+  device_library_id: string
+  push_token: string
+  pass_type_id: string
+  created_at: string
+}
+
 export type Database = {
   public: {
     Tables: {
