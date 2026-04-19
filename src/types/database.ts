@@ -187,6 +187,30 @@ export type Database = {
         Update: Partial<Review>
         Relationships: []
       }
+      loyalty_programs: {
+        Row: LoyaltyProgram
+        Insert: Pick<LoyaltyProgram, 'restaurant_id' | 'type' | 'goal' | 'reward_description'> & Partial<Omit<LoyaltyProgram, 'restaurant_id' | 'type' | 'goal' | 'reward_description'>>
+        Update: Partial<LoyaltyProgram>
+        Relationships: []
+      }
+      loyalty_cards: {
+        Row: LoyaltyCard
+        Insert: Pick<LoyaltyCard, 'program_id' | 'restaurant_id' | 'customer_name' | 'customer_email'> & Partial<Omit<LoyaltyCard, 'program_id' | 'restaurant_id' | 'customer_name' | 'customer_email'>>
+        Update: Partial<LoyaltyCard>
+        Relationships: []
+      }
+      loyalty_stamps: {
+        Row: LoyaltyStamp
+        Insert: Pick<LoyaltyStamp, 'card_id' | 'amount'> & Partial<Omit<LoyaltyStamp, 'card_id' | 'amount'>>
+        Update: Partial<LoyaltyStamp>
+        Relationships: []
+      }
+      loyalty_device_registrations: {
+        Row: LoyaltyDeviceRegistration
+        Insert: Pick<LoyaltyDeviceRegistration, 'card_id' | 'device_library_id' | 'push_token' | 'pass_type_id'> & Partial<Omit<LoyaltyDeviceRegistration, 'card_id' | 'device_library_id' | 'push_token' | 'pass_type_id'>>
+        Update: Partial<LoyaltyDeviceRegistration>
+        Relationships: []
+      }
     }
     Views: Record<string, never>
     Functions: Record<string, never>
