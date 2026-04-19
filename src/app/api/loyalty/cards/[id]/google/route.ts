@@ -36,6 +36,7 @@ export async function GET(
     const saveUrl = await generateGoogleWalletUrl(passData, program.id)
     redirect(saveUrl)
   } catch (err) {
+    if ((err as { digest?: string }).digest?.startsWith('NEXT_REDIRECT')) throw err
     const msg = err instanceof Error ? err.message : String(err)
     return new Response(msg, { status: 500 })
   }
