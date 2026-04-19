@@ -61,6 +61,8 @@ export async function POST(request: Request) {
     to: customerEmail,
     customerName,
     restaurantName: restaurant.name,
+    restaurantLogoUrl: restaurant.logo_url ?? null,
+    restaurantColor: restaurant.primary_color,
     cardId: card.id,
     appUrl,
   }).catch(console.error)
