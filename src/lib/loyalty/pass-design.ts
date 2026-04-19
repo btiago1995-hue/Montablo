@@ -15,6 +15,9 @@ export type PassData = {
   restaurantName: string
   qrMessage: string
   hasReward: boolean
+  programType: 'visits' | 'spend'
+  currentValue: number
+  goalValue: number
 }
 
 export function buildPassData(
@@ -56,5 +59,8 @@ export function buildPassData(
     restaurantName: restaurant.name,
     qrMessage: card.id,
     hasReward,
+    programType: program.type as 'visits' | 'spend',
+    currentValue: card.current_value,
+    goalValue: program.goal,
   }
 }
