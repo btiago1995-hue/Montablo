@@ -1,0 +1,57 @@
+{
+  "formatVersion": 1,
+  "passTypeIdentifier": "pass.com.montablo.loyalty",
+  "teamIdentifier": "REPLACE_WITH_TEAM_ID",
+  "organizationName": "MonTablo",
+  "description": "Carte de fidélité",
+  "backgroundColor": "rgb(26, 26, 26)",
+  "foregroundColor": "rgb(255, 255, 255)",
+  "labelColor": "rgb(170, 170, 170)",
+  "storeCard": {
+    "primaryFields": [
+      {
+        "key": "progress",
+        "label": "PROGRESSION",
+        "value": "0 / 10"
+      }
+    ],
+    "secondaryFields": [
+      {
+        "key": "reward",
+        "label": "RÉCOMPENSE",
+        "value": ""
+      }
+    ],
+    "auxiliaryFields": [
+      {
+        "key": "tagline",
+        "label": "",
+        "value": ""
+      }
+    ],
+    "backFields": [
+      {
+        "key": "customer",
+        "label": "CLIENT",
+        "value": ""
+      },
+      {
+        "key": "restaurant",
+        "label": "RESTAURANT",
+        "value": ""
+      }
+    ]
+  },
+  "barcode": {
+    "message": "",
+    "format": "PKBarcodeFormatQR",
+    "messageEncoding": "iso-8859-1"
+  },
+  "barcodes": [
+    {
+      "message": "",
+      "format": "PKBarcodeFormatQR",
+      "messageEncoding": "iso-8859-1"
+    }
+  ]
+}
