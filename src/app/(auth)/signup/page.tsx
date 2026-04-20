@@ -3,13 +3,17 @@
 import { createClient } from '@/lib/supabase/client'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Eye, EyeOff, UtensilsCrossed } from 'lucide-react'
+import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile'
 import { slugify } from '@/lib/utils'
 import { trackSignup } from '@/lib/gtag'
 
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
+
 export default function SignupPage() {
   const router = useRouter()
+  const turnstileRef = useRef<TurnstileInstance | null>(null)
   const [restaurantName, setRestaurantName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -18,6 +22,7 @@ export default function SignupPage() {
   const [loading, setLoading] = useState(false)
   const [emailSent, setEmailSent] = useState(false)
   const [acceptedCGU, setAcceptedCGU] = useState(false)
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null)
 
   async function handleSignup(e: React.FormEvent) {
     e.preventDefault()
@@ -30,6 +35,12 @@ export default function SignupPage() {
       return
     }
 
+    if (TURNSTILE_SITE_KEY && !captchaToken) {
+      setError('Veuillez compléter la vérification anti-robot.')
+      setLoading(false)
+      return
+    }
+
     const supabase = createClient()
 
     // 1. Create user — store restaurant name in metadata for later use
@@ -38,6 +49,7 @@ export default function SignupPage() {
       password,
       options: {
         emailRedirectTo: `${window.location.origin}/api/auth/callback`,
+        captchaToken: captchaToken ?? undefined,
         data: {
           restaurant_name: restaurantName,
         },
@@ -47,6 +59,8 @@ export default function SignupPage() {
     if (authError) {
       setError('Erreur lors de la création du compte. Réessayez.')
       setLoading(false)
+      turnstileRef.current?.reset()
+      setCaptchaToken(null)
       return
     }
 
@@ -205,6 +219,19 @@ export default function SignupPage() {
                   </span>
                 </label>
 
+                {TURNSTILE_SITE_KEY && (
+                  <div className="flex justify-center">
+                    <Turnstile
+                      ref={turnstileRef}
+                      siteKey={TURNSTILE_SITE_KEY}
+                      onSuccess={(token) => setCaptchaToken(token)}
+                      onError={() => setCaptchaToken(null)}
+                      onExpire={() => setCaptchaToken(null)}
+                      options={{ theme: 'light' }}
+                    />
+                  </div>
+                )}
+
                 {error && (
                   <div className="bg-red-50 text-red-600 text-sm px-4 py-3 rounded-lg">
                     {error}
@@ -213,7 +240,7 @@ export default function SignupPage() {
 
                 <button
                   type="submit"
-                  disabled={loading || !acceptedCGU}
+                  disabled={loading || !acceptedCGU || (!!TURNSTILE_SITE_KEY && !captchaToken)}
                   className="w-full bg-primary hover:bg-primary-light text-white font-medium py-3 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading ? 'Création...' : 'Commencer l\'essai gratuit'}

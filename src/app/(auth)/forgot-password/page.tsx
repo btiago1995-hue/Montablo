@@ -2,28 +2,42 @@
 
 import { createClient } from '@/lib/supabase/client'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { UtensilsCrossed } from 'lucide-react'
+import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile'
+
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
 
 export default function ForgotPasswordPage() {
+  const turnstileRef = useRef<TurnstileInstance | null>(null)
   const [email, setEmail] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [emailSent, setEmailSent] = useState(false)
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null)
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setLoading(true)
     setError(null)
 
+    if (TURNSTILE_SITE_KEY && !captchaToken) {
+      setError('Veuillez compléter la vérification anti-robot.')
+      setLoading(false)
+      return
+    }
+
     const supabase = createClient()
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: window.location.origin + '/api/auth/callback?next=/reset-password',
+      captchaToken: captchaToken ?? undefined,
     })
 
     if (error) {
       setError('Une erreur est survenue. Veuillez réessayer.')
       setLoading(false)
+      turnstileRef.current?.reset()
+      setCaptchaToken(null)
       return
     }
 
@@ -90,6 +104,19 @@ export default function ForgotPasswordPage() {
                   />
                 </div>
 
+                {TURNSTILE_SITE_KEY && (
+                  <div className="flex justify-center">
+                    <Turnstile
+                      ref={turnstileRef}
+                      siteKey={TURNSTILE_SITE_KEY}
+                      onSuccess={(token) => setCaptchaToken(token)}
+                      onError={() => setCaptchaToken(null)}
+                      onExpire={() => setCaptchaToken(null)}
+                      options={{ theme: 'light' }}
+                    />
+                  </div>
+                )}
+
                 {error && (
                   <div className="bg-red-50 text-red-600 text-sm px-4 py-3 rounded-lg">
                     {error}
@@ -98,7 +125,7 @@ export default function ForgotPasswordPage() {
 
                 <button
                   type="submit"
-                  disabled={loading}
+                  disabled={loading || (!!TURNSTILE_SITE_KEY && !captchaToken)}
                   className="w-full bg-primary hover:bg-primary-light text-white font-medium py-3 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading ? 'Envoi...' : 'Envoyer le lien'}

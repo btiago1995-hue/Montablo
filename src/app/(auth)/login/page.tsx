@@ -3,32 +3,48 @@
 import { createClient } from '@/lib/supabase/client'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useState, Suspense } from 'react'
+import { useRef, useState, Suspense } from 'react'
 import { Eye, EyeOff, UtensilsCrossed } from 'lucide-react'
+import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile'
+
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
 
 function LoginForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
+  const turnstileRef = useRef<TurnstileInstance | null>(null)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null)
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault()
     setLoading(true)
     setError(null)
 
+    if (TURNSTILE_SITE_KEY && !captchaToken) {
+      setError('Veuillez compléter la vérification anti-robot.')
+      setLoading(false)
+      return
+    }
+
     const supabase = createClient()
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
+      options: {
+        captchaToken: captchaToken ?? undefined,
+      },
     })
 
     if (error) {
       setError('Email ou mot de passe incorrect.')
       setLoading(false)
+      turnstileRef.current?.reset()
+      setCaptchaToken(null)
       return
     }
 
@@ -109,6 +125,19 @@ function LoginForm() {
               </div>
             </div>
 
+            {TURNSTILE_SITE_KEY && (
+              <div className="flex justify-center">
+                <Turnstile
+                  ref={turnstileRef}
+                  siteKey={TURNSTILE_SITE_KEY}
+                  onSuccess={(token) => setCaptchaToken(token)}
+                  onError={() => setCaptchaToken(null)}
+                  onExpire={() => setCaptchaToken(null)}
+                  options={{ theme: 'light' }}
+                />
+              </div>
+            )}
+
             {error && (
               <div className="bg-red-50 text-red-600 text-sm px-4 py-3 rounded-lg">
                 {error}
@@ -117,7 +146,7 @@ function LoginForm() {
 
             <button
               type="submit"
-              disabled={loading}
+              disabled={loading || (!!TURNSTILE_SITE_KEY && !captchaToken)}
               className="w-full bg-primary hover:bg-primary-light text-white font-medium py-3 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? 'Connexion...' : 'Se connecter'}
