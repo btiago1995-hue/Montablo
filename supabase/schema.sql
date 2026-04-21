@@ -121,3 +121,12 @@ CREATE POLICY "Public read" ON promotions FOR SELECT USING (item_id IN (SELECT i
 -- Daily menus policies
 CREATE POLICY "Owner full access" ON daily_menus FOR ALL USING (restaurant_id IN (SELECT id FROM restaurants WHERE owner_id = auth.uid()));
 CREATE POLICY "Public read" ON daily_menus FOR SELECT USING (restaurant_id IN (SELECT id FROM restaurants WHERE subscription_status IN ('trialing', 'active')));
+
+-- 2026-04-21: restaurant address + GPS for Google Wallet hero + locations
+ALTER TABLE restaurants ADD COLUMN IF NOT EXISTS address_line TEXT;
+ALTER TABLE restaurants ADD COLUMN IF NOT EXISTS city TEXT;
+ALTER TABLE restaurants ADD COLUMN IF NOT EXISTS postal_code TEXT;
+ALTER TABLE restaurants ADD COLUMN IF NOT EXISTS country_code TEXT DEFAULT 'FR';
+ALTER TABLE restaurants ADD COLUMN IF NOT EXISTS latitude DOUBLE PRECISION;
+ALTER TABLE restaurants ADD COLUMN IF NOT EXISTS longitude DOUBLE PRECISION;
+ALTER TABLE restaurants ADD COLUMN IF NOT EXISTS geocoded_at TIMESTAMPTZ;
