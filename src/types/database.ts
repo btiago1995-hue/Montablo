@@ -9,6 +9,13 @@ export type Restaurant = {
   secondary_color: string
   unavailable_behavior: 'greyed_out' | 'hidden'
   languages: string[]
+  address_line: string | null
+  city: string | null
+  postal_code: string | null
+  country_code: string | null
+  latitude: number | null
+  longitude: number | null
+  geocoded_at: string | null
   stripe_customer_id: string | null
   stripe_subscription_id: string | null
   subscription_status: 'trialing' | 'active' | 'past_due' | 'canceled' | 'inactive'
