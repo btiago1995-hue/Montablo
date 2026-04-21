@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import type { Restaurant } from '@/types/database'
 import { Button } from '@/components/ui/button'
@@ -23,15 +22,22 @@ export function SettingsForm({ restaurant }: { restaurant: Restaurant }) {
   const [billingLoading, setBillingLoading] = useState(false)
   const [billingPlan, setBillingPlan] = useState<'monthly' | 'annual'>('annual')
   const [deleteLoading, setDeleteLoading] = useState(false)
+  const [addressLine, setAddressLine] = useState(restaurant.address_line ?? '')
+  const [city, setCity] = useState(restaurant.city ?? '')
+  const [postalCode, setPostalCode] = useState(restaurant.postal_code ?? '')
+  const [geocodeStatus, setGeocodeStatus] = useState<'idle' | 'ok' | 'warn'>('idle')
+  const [errorMsg, setErrorMsg] = useState<string | null>(null)
 
   async function handleSave(e: React.FormEvent) {
     e.preventDefault()
     setLoading(true)
+    setErrorMsg(null)
+    setGeocodeStatus('idle')
 
-    const supabase = createClient()
-    await supabase
-      .from('restaurants')
-      .update({
+    const res = await fetch('/api/restaurant/settings', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
         name,
         logo_url: logoUrl,
         cover_url: coverUrl,
@@ -39,12 +45,29 @@ export function SettingsForm({ restaurant }: { restaurant: Restaurant }) {
         secondary_color: secondaryColor,
         unavailable_behavior: behavior,
         google_review_url: googleReviewUrl.trim() || null,
-      })
-      .eq('id', restaurant.id)
+        address_line: addressLine.trim() || null,
+        city: city.trim() || null,
+        postal_code: postalCode.trim() || null,
+        country_code: 'FR',
+      }),
+    })
 
     setLoading(false)
+
+    if (!res.ok) {
+      const data = (await res.json().catch(() => ({}))) as { error?: string }
+      setErrorMsg(data.error ?? 'Erreur lors de l\'enregistrement.')
+      return
+    }
+
+    const data = (await res.json()) as { geocoded: boolean | null }
+    if (data.geocoded === false) {
+      setGeocodeStatus('warn')
+    } else {
+      setGeocodeStatus('ok')
+    }
     setSaved(true)
-    setTimeout(() => setSaved(false), 2000)
+    setTimeout(() => setSaved(false), 3000)
     router.refresh()
   }
 
@@ -178,6 +201,53 @@ export function SettingsForm({ restaurant }: { restaurant: Restaurant }) {
             5 etoiles → redirige vers Google pour un avis public.
             Moins de 5 → remerciement interne.
           </p>
+        </div>
+
+        <div className="pt-4 border-t border-border space-y-4">
+          <div>
+            <h3 className="font-medium text-foreground">Adresse du restaurant</h3>
+            <p className="text-sm text-muted mt-1">
+              La géolocalisation permet à la carte de fidélité d&apos;apparaître automatiquement
+              sur l&apos;écran du téléphone de vos clients quand ils passent près du restaurant.
+            </p>
+          </div>
+
+          <Input
+            label="Adresse"
+            value={addressLine}
+            onChange={(e) => setAddressLine(e.target.value)}
+            placeholder="12 Rue de la République"
+          />
+
+          <div className="grid grid-cols-2 gap-4">
+            <Input
+              label="Ville"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              placeholder="Annecy"
+            />
+            <Input
+              label="Code postal"
+              value={postalCode}
+              onChange={(e) => setPostalCode(e.target.value)}
+              placeholder="74000"
+            />
+          </div>
+
+          {geocodeStatus === 'ok' && saved && (
+            <p className="text-sm text-green-700">
+              📍 Adresse enregistrée — votre restaurant est sur la carte.
+            </p>
+          )}
+          {geocodeStatus === 'warn' && (
+            <p className="text-sm text-amber-700">
+              ⚠️ Adresse enregistrée, mais nous n&apos;avons pas pu la localiser sur la carte.
+              Vérifiez l&apos;orthographe.
+            </p>
+          )}
+          {errorMsg && (
+            <p className="text-sm text-red-700">{errorMsg}</p>
+          )}
         </div>
 
         <Button type="submit" disabled={loading}>
