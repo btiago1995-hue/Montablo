@@ -227,6 +227,15 @@ export async function generateGoogleWalletUrl(
   return `https://pay.google.com/gp/v/save/${token2}`
 }
 
+export async function ensureLoyaltyClassForResync(
+  programId: string,
+  data: PassData,
+): Promise<void> {
+  const issuerId = process.env.GOOGLE_WALLET_ISSUER_ID!
+  const classId = `${issuerId}.program_${programId}`
+  await ensureLoyaltyClass(classId, data)
+}
+
 export async function updateGoogleWalletCard(data: PassData): Promise<void> {
   const issuerId = process.env.GOOGLE_WALLET_ISSUER_ID!
   const objectId = `${issuerId}.card_${data.serialNumber}`
