@@ -9,22 +9,35 @@ import {
   Globe,
   Palette,
   Zap,
+  WalletCards,
 } from 'lucide-react'
 import { JsonLd, breadcrumbJsonLd } from '@/components/seo/json-ld'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Fonctionnalites — MonTablo | Menu digital pour restaurants',
+  title: 'Fonctionnalites — MonTablo | Menu digital et cartes de fidelite pour restaurants',
   description:
-    'Decouvrez toutes les fonctionnalites de MonTablo : menu digital, QR code, menu du jour, promotions, import IA, bilingue FR/EN et plus encore.',
+    'Decouvrez toutes les fonctionnalites de MonTablo : menu digital, QR code, menu du jour, promotions, cartes de fidelite numeriques compatibles Google Wallet et Apple Wallet, import IA et bilingue FR/EN.',
   openGraph: {
     title: 'Fonctionnalites — MonTablo',
     description:
-      'Menu digital, QR code, menu du jour, promotions, import IA, bilingue FR/EN. Tout ce dont votre restaurant a besoin.',
+      'Menu digital, QR code, cartes de fidelite Google Wallet et Apple Wallet, menu du jour, promotions, import IA, bilingue FR/EN.',
   },
 }
 
 const features = [
+  {
+    icon: WalletCards,
+    title: 'Cartes de fidelite numeriques',
+    description:
+      'Offrez a vos clients une carte de fidelite digitale qui s\'ajoute directement a Google Wallet et Apple Wallet. Plus de carte cartonnee a perdre — elle reste toujours dans leur telephone, aux couleurs de votre restaurant. Les tampons et recompenses se mettent a jour en temps reel.',
+    highlights: [
+      'Compatible Google Wallet et Apple Wallet',
+      'Ajout au portefeuille en un tap',
+      'Tampons et recompenses en temps reel',
+      'Aux couleurs de votre restaurant',
+    ],
+  },
   {
     icon: UtensilsCrossed,
     title: 'Menu digital elegant',

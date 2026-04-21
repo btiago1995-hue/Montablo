@@ -14,9 +14,11 @@ const benefits = [
   'Mise à jour instantanée, plus de réimpressions',
   'Menu du jour en un clic',
   'Promotions temporaires automatisées',
+  'Cartes de fidélité Google Wallet & Apple Wallet',
   'Design aux couleurs de votre restaurant',
   'Bilingue français / anglais',
   'QR code personnalisable',
+  'Import de carte par IA',
 ]
 
 const pricingFeatures = [
