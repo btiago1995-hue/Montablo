@@ -94,7 +94,7 @@ async function ensureLoyaltyClass(
   const token = await client.getAccessToken()
 
   const logoUri = data.logoUrl ?? 'https://www.montablo.com/logo.png'
-  const classBody = {
+  const classBody: Record<string, unknown> = {
     id: classId,
     issuerName: data.restaurantName,
     programName: data.tagline,
@@ -104,6 +104,17 @@ async function ensureLoyaltyClass(
     },
     hexBackgroundColor: hexColor(data.primaryColor),
     reviewStatus: 'UNDER_REVIEW',
+  }
+
+  if (data.heroImageUrl) {
+    classBody.heroImage = {
+      sourceUri: { uri: data.heroImageUrl },
+      contentDescription: { defaultValue: { language: 'fr', value: data.restaurantName } },
+    }
+  }
+
+  if (data.latitude !== null && data.longitude !== null) {
+    classBody.locations = [{ latitude: data.latitude, longitude: data.longitude }]
   }
 
   const checkRes = await fetch(`${WALLET_API}/loyaltyClass/${classId}`, {
@@ -129,6 +140,8 @@ async function ensureLoyaltyClass(
         programName: classBody.programName,
         programLogo: classBody.programLogo,
         hexBackgroundColor: classBody.hexBackgroundColor,
+        heroImage: classBody.heroImage ?? null,
+        locations: classBody.locations ?? null,
       }),
     })
   } else {
