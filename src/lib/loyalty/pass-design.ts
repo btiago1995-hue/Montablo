@@ -18,6 +18,9 @@ export type PassData = {
   programType: 'visits' | 'spend'
   currentValue: number
   goalValue: number
+  heroImageUrl: string | null
+  latitude: number | null
+  longitude: number | null
 }
 
 export function buildPassData(
@@ -62,5 +65,8 @@ export function buildPassData(
     programType: program.type as 'visits' | 'spend',
     currentValue: card.current_value,
     goalValue: program.goal,
+    heroImageUrl: restaurant.cover_url,
+    latitude: restaurant.latitude,
+    longitude: restaurant.longitude,
   }
 }
