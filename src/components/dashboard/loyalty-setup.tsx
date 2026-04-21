@@ -2,14 +2,15 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import type { LoyaltyProgram } from '@/types/database'
+import type { LoyaltyProgram, Restaurant } from '@/types/database'
 
 type Props = {
   restaurantId: string
   existing: LoyaltyProgram | null
+  restaurant: Restaurant
 }
 
-export function LoyaltySetup({ existing }: Props) {
+export function LoyaltySetup({ existing, restaurant }: Props) {
   const router = useRouter()
   const [type, setType] = useState<'visits' | 'spend'>(existing?.type ?? 'visits')
   const [goal, setGoal] = useState(
@@ -47,6 +48,27 @@ export function LoyaltySetup({ existing }: Props) {
 
   return (
     <div className="max-w-lg space-y-6">
+      {(!restaurant.cover_url || restaurant.latitude === null) && (
+        <div className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm">
+          <p className="font-medium text-amber-900 mb-2">
+            💡 Pour une carte plus attrayante :
+          </p>
+          <ul className="space-y-1.5 text-amber-900">
+            <li>
+              {restaurant.cover_url ? '✅' : '☐'}{' '}
+              <a href="/dashboard/settings" className="underline">
+                Ajoutez une image de couverture
+              </a>
+            </li>
+            <li>
+              {restaurant.latitude !== null ? '✅' : '☐'}{' '}
+              <a href="/dashboard/settings" className="underline">
+                Ajoutez l&apos;adresse du restaurant
+              </a>
+            </li>
+          </ul>
+        </div>
+      )}
       <div>
         <label className="block text-sm font-medium text-foreground mb-2">Type de programme</label>
         <div className="flex gap-3">

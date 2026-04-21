@@ -18,7 +18,7 @@ export default async function LoyaltySetupPage() {
     <div>
       <h1 className="font-serif text-3xl text-foreground mb-2">Programme de fidélité</h1>
       <p className="text-muted mb-8">Configurez les règles et le design de votre carte.</p>
-      <LoyaltySetup restaurantId={restaurant.id} existing={program ?? null} />
+      <LoyaltySetup restaurantId={restaurant.id} existing={program ?? null} restaurant={restaurant} />
     </div>
   )
 }
