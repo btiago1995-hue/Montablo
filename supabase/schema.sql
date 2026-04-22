@@ -131,3 +131,10 @@ ALTER TABLE restaurants ADD COLUMN IF NOT EXISTS country_code TEXT DEFAULT 'FR';
 ALTER TABLE restaurants ADD COLUMN IF NOT EXISTS latitude DOUBLE PRECISION;
 ALTER TABLE restaurants ADD COLUMN IF NOT EXISTS longitude DOUBLE PRECISION;
 ALTER TABLE restaurants ADD COLUMN IF NOT EXISTS geocoded_at TIMESTAMPTZ;
+
+-- 2026-04-22: pricing 3 tiers
+ALTER TABLE restaurants ADD COLUMN IF NOT EXISTS tier TEXT CHECK (tier IN ('essentiel', 'pro', 'premium'));
+ALTER TABLE restaurants ADD COLUMN IF NOT EXISTS billing_cycle TEXT CHECK (billing_cycle IN ('monthly', 'annual'));
+ALTER TABLE restaurants ADD COLUMN IF NOT EXISTS is_launch_offer BOOLEAN NOT NULL DEFAULT false;
+ALTER TABLE restaurants ADD COLUMN IF NOT EXISTS launch_offer_locked_price NUMERIC(10,2);
+ALTER TABLE restaurants ADD COLUMN IF NOT EXISTS trial_choose_plan_sent BOOLEAN NOT NULL DEFAULT false;
