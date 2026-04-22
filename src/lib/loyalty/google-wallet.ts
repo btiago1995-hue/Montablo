@@ -14,6 +14,14 @@ function hexColor(color: string): string {
   return color.startsWith('#') ? color : `#${color}`
 }
 
+// Google Wallet's heroImage/programLogo accept JPEG/PNG/GIF only.
+// WebP uploads (our default) are silently dropped. Route through
+// images.weserv.nl which converts on-the-fly at no cost.
+function walletCompatImageUrl(url: string): string {
+  if (!/\.webp(\?|$)/i.test(url)) return url
+  return `https://images.weserv.nl/?url=${encodeURIComponent(url)}&output=png`
+}
+
 function buildStampGrid(current: number, goal: number): string {
   const filled = Math.min(current, goal)
   const empty = goal - filled
@@ -93,7 +101,7 @@ async function ensureLoyaltyClass(
   const client = await auth.getClient()
   const token = await client.getAccessToken()
 
-  const logoUri = data.logoUrl ?? 'https://www.montablo.com/logo.png'
+  const logoUri = walletCompatImageUrl(data.logoUrl ?? 'https://www.montablo.com/logo.png')
   const classBody: Record<string, unknown> = {
     id: classId,
     issuerName: data.restaurantName,
@@ -108,7 +116,7 @@ async function ensureLoyaltyClass(
 
   if (data.heroImageUrl) {
     classBody.heroImage = {
-      sourceUri: { uri: data.heroImageUrl },
+      sourceUri: { uri: walletCompatImageUrl(data.heroImageUrl) },
       contentDescription: { defaultValue: { language: 'fr', value: data.restaurantName } },
     }
   }
@@ -132,7 +140,7 @@ async function ensureLoyaltyClass(
       throw new Error(`Failed to create loyalty class: ${createRes.status} ${body}`)
     }
   } else if (checkRes.ok) {
-    await fetch(`${WALLET_API}/loyaltyClass/${classId}`, {
+    const patchRes = await fetch(`${WALLET_API}/loyaltyClass/${classId}`, {
       method: 'PATCH',
       headers: { Authorization: `Bearer ${token.token}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -144,6 +152,10 @@ async function ensureLoyaltyClass(
         locations: classBody.locations ?? null,
       }),
     })
+    if (!patchRes.ok) {
+      const body = await patchRes.text()
+      console.error('[google-wallet] class PATCH failed', classId, patchRes.status, body)
+    }
   } else {
     const body = await checkRes.text()
     throw new Error(`Failed to check loyalty class: ${checkRes.status} ${body}`)
