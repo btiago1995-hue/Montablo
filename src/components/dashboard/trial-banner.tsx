@@ -22,15 +22,15 @@ export function TrialBanner({ restaurant }: { restaurant: Restaurant }) {
         isExpired ? 'text-red-800' : isUrgent ? 'text-amber-800' : 'text-white/80'
       }`}>
         {isExpired ? (
-          <>Votre essai gratuit a expiré</>
+          <>Votre essai Pro a expiré — choisissez une formule pour continuer</>
         ) : isUrgent ? (
-          <>⚠️ Plus que <strong className="text-amber-900">{daysLeft} jour{daysLeft !== 1 ? 's' : ''}</strong> d&apos;essai !</>
+          <>⚠️ Plus que <strong className="text-amber-900">{daysLeft} jour{daysLeft !== 1 ? 's' : ''}</strong> d&apos;essai Pro — choisissez une formule</>
         ) : (
-          <>🕐 Essai gratuit — <strong className="text-accent">{daysLeft} jours restants</strong></>
+          <>🕐 Essai Pro — <strong className="text-accent">{daysLeft} jours restants</strong></>
         )}
       </p>
       <Link
-        href="/dashboard/settings"
+        href="/dashboard/abonnement"
         className={`text-xs font-bold px-4 py-1.5 rounded-md transition-colors ${
           isExpired
             ? 'bg-red-600 text-white hover:bg-red-700'
@@ -39,7 +39,7 @@ export function TrialBanner({ restaurant }: { restaurant: Restaurant }) {
               : 'bg-accent text-foreground hover:bg-accent-light'
         }`}
       >
-        Souscrire maintenant
+        Choisir mon plan
       </Link>
     </div>
   )
