@@ -19,6 +19,11 @@ export type Restaurant = {
   stripe_customer_id: string | null
   stripe_subscription_id: string | null
   subscription_status: 'trialing' | 'active' | 'past_due' | 'canceled' | 'inactive'
+  tier: 'essentiel' | 'pro' | 'premium' | null
+  billing_cycle: 'monthly' | 'annual' | null
+  is_launch_offer: boolean
+  launch_offer_locked_price: number | null
+  trial_choose_plan_sent: boolean
   google_review_url: string | null
   onboarding_step: 'welcome' | 'import' | 'complete' | null
   trial_ends_at: string
