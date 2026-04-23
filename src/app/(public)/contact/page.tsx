@@ -1,30 +1,29 @@
 import Link from 'next/link'
-import { ArrowRight, UtensilsCrossed } from 'lucide-react'
-import { getAllPosts } from '@/lib/blog'
+import { Mail, UtensilsCrossed } from 'lucide-react'
 import { JsonLd, breadcrumbJsonLd } from '@/components/seo/json-ld'
 import type { Metadata } from 'next'
+import { ContactForm } from './contact-form'
 
 export const metadata: Metadata = {
-  title: 'Blog — MonTablo | Conseils pour digitaliser votre restaurant',
+  title: 'Contact — MonTablo | Contactez notre équipe',
   description:
-    'Guides pratiques, conseils et tendances pour les restaurateurs qui veulent digitaliser leur carte avec un menu digital et QR code.',
+    'Une question, un projet, un besoin d\'accompagnement ? Contactez l\'équipe MonTablo et nous vous répondrons rapidement.',
   openGraph: {
-    title: 'Blog — MonTablo',
+    title: 'Contact — MonTablo',
     description:
-      'Guides pratiques et conseils pour digitaliser votre restaurant.',
+      'Contactez l\'équipe MonTablo. Nous vous répondons rapidement.',
   },
 }
 
-export default function BlogPage() {
+export default function ContactPage() {
   const base = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.montablo.com'
-  const posts = getAllPosts()
 
   return (
     <div className="min-h-screen bg-background">
       <JsonLd
         data={breadcrumbJsonLd([
           { name: 'Accueil', url: base },
-          { name: 'Blog', url: `${base}/blog` },
+          { name: 'Contact', url: `${base}/contact` },
         ])}
       />
 
@@ -56,61 +55,47 @@ export default function BlogPage() {
       </nav>
 
       {/* Breadcrumb */}
-      <div className="max-w-[780px] mx-auto px-6 pt-[100px]">
+      <div className="max-w-[720px] mx-auto px-6 pt-[100px]">
         <nav className="text-[13px] text-muted/60">
           <Link href="/" className="hover:text-muted transition-colors">Accueil</Link>
           <span className="mx-2">/</span>
-          <span className="text-foreground">Blog</span>
+          <span className="text-foreground">Contact</span>
         </nav>
       </div>
 
       {/* Hero */}
-      <section className="max-w-[780px] mx-auto px-6 pt-8 pb-12">
-        <h1 className="font-serif text-4xl sm:text-5xl text-foreground mb-4">Blog</h1>
+      <section className="max-w-[720px] mx-auto px-6 pt-8 pb-10">
+        <p className="text-[13px] font-medium tracking-[0.08em] uppercase text-accent-dark mb-3">
+          Contact
+        </p>
+        <h1 className="font-serif text-4xl sm:text-5xl text-foreground mb-4 leading-tight">
+          Parlons de votre projet.
+        </h1>
         <p className="text-lg text-muted leading-relaxed">
-          Guides pratiques et conseils pour digitaliser votre restaurant.
+          Une question sur MonTablo, un besoin d&apos;accompagnement, une demande presse ou
+          partenariat ? Écrivez-nous ci-dessous, nous vous répondons rapidement.
         </p>
       </section>
 
-      {/* Posts */}
-      <section className="max-w-[780px] mx-auto px-6 pb-24">
-        {posts.length === 0 ? (
-          <p className="text-muted text-center py-12">
-            Les premiers articles arrivent bientôt. Revenez vite !
-          </p>
-        ) : (
-          <div className="space-y-8">
-            {posts.map((post) => (
-              <Link
-                key={post.slug}
-                href={`/blog/${post.slug}`}
-                className="block group bg-white border border-border/50 rounded-[16px] p-8 hover:shadow-lg hover:shadow-black/[0.03] transition-shadow duration-300"
-              >
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="text-[12px] font-medium text-accent-dark bg-accent/10 px-2.5 py-0.5 rounded-full">
-                    {post.category}
-                  </span>
-                  <span className="text-[12px] text-muted/60">{post.readTime} de lecture</span>
-                  <span className="text-[12px] text-muted/60">
-                    {new Date(post.date).toLocaleDateString('fr-FR', {
-                      day: 'numeric',
-                      month: 'long',
-                      year: 'numeric',
-                    })}
-                  </span>
-                </div>
-                <h2 className="font-serif text-xl text-foreground mb-2 group-hover:text-primary transition-colors">
-                  {post.title}
-                </h2>
-                <p className="text-[15px] text-muted leading-relaxed mb-4">{post.description}</p>
-                <span className="inline-flex items-center gap-1.5 text-[14px] font-medium text-primary">
-                  Lire l&apos;article
-                  <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
-                </span>
-              </Link>
-            ))}
-          </div>
-        )}
+      {/* Form */}
+      <section className="max-w-[720px] mx-auto px-6 pb-12">
+        <ContactForm />
+      </section>
+
+      {/* Direct contact info */}
+      <section className="max-w-[720px] mx-auto px-6 pb-24">
+        <div className="flex items-center gap-3 text-sm text-muted">
+          <Mail className="w-4 h-4 text-accent-dark" />
+          <span>
+            Vous pouvez aussi nous écrire directement à{' '}
+            <a
+              href="mailto:contact@montablo.com"
+              className="text-primary font-medium hover:underline"
+            >
+              contact@montablo.com
+            </a>
+          </span>
+        </div>
       </section>
 
       {/* Footer */}

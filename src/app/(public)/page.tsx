@@ -30,7 +30,7 @@ const pricingFeatures = [
 ]
 
 const menuItems = {
-  entrees: [
+  entrées: [
     { name: 'Soupe à l\'oignon', desc: 'Gratinée au gruyère', price: '8,50 €' },
     { name: 'Salade de chèvre chaud', desc: 'Miel, noix, mesclun', price: '11,00 €' },
   ],
@@ -57,7 +57,7 @@ export default function LandingPage() {
           </Link>
           <div className="flex items-center gap-6">
             <Link href="/fonctionnalites" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
-              Fonctionnalites
+              Fonctionnalités
             </Link>
             <Link href="/tarifs" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
               Tarifs
@@ -172,7 +172,7 @@ export default function LandingPage() {
             {Object.entries(menuItems).map(([cat, items]) => (
               <div key={cat}>
                 <p className="text-[11px] font-semibold tracking-[0.06em] uppercase text-accent-dark mt-5 mb-3">
-                  {cat === 'entrees' ? 'Entrées' : 'Plats'}
+                  {cat === 'entrées' ? 'Entrées' : 'Plats'}
                 </p>
                 {items.map((item) => (
                   <div key={item.name} className="flex justify-between items-baseline py-2.5 border-b border-border/30 last:border-b-0">
@@ -262,12 +262,12 @@ export default function LandingPage() {
               <p className="text-[13px] text-muted/60 leading-relaxed">
                 Le menu digital pour les restaurants exigeants.
               </p>
-              <Link href="/a-propos" className="block text-[13px] text-muted/60 hover:text-muted transition-colors mt-3">A propos</Link>
+              <Link href="/a-propos" className="block text-[13px] text-muted/60 hover:text-muted transition-colors mt-3">À propos</Link>
             </div>
             <div>
               <p className="text-[13px] font-medium text-foreground mb-3">Produit</p>
               <div className="space-y-3">
-                <Link href="/fonctionnalites" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Fonctionnalites</Link>
+                <Link href="/fonctionnalites" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Fonctionnalités</Link>
                 <Link href="/tarifs" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Tarifs</Link>
                 <Link href="/menu/demo" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Voir un exemple</Link>
                 <Link href="/solutions/bistrot" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Solutions</Link>
@@ -278,21 +278,22 @@ export default function LandingPage() {
               <div className="space-y-3">
                 <Link href="/blog" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Blog</Link>
                 <Link href="/faq" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">FAQ</Link>
+                <Link href="/contact" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Contact</Link>
               </div>
             </div>
             <div>
               <p className="text-[13px] font-medium text-foreground mb-3">Legal</p>
               <div className="space-y-3">
-                <Link href="/mentions-legales" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Mentions legales</Link>
+                <Link href="/mentions-légales" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Mentions légales</Link>
                 <Link href="/cgu" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">CGU</Link>
-                <Link href="/confidentialite" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Confidentialite</Link>
+                <Link href="/confidentialite" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Confidentialité</Link>
                 <Link href="/cookies" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Cookies</Link>
               </div>
             </div>
           </div>
           <div className="border-t border-border/50 pt-6 text-center">
             <p className="text-sm text-muted/60">
-              &copy; {new Date().getFullYear()} MonTablo. Tous droits reserves.
+              &copy; {new Date().getFullYear()} MonTablo. Tous droits réservés.
             </p>
           </div>
         </div>

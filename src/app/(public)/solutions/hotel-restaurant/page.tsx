@@ -13,13 +13,13 @@ import { JsonLd, breadcrumbJsonLd } from '@/components/seo/json-ld'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Menu digital pour hotel-restaurant | MonTablo',
+  title: 'Menu digital pour hôtel-restaurant | MonTablo',
   description:
-    'Creez le menu digital de votre hotel-restaurant. Menus multiples, bilingue FR/EN, QR code en chambre et en salle, room service. La solution complete.',
+    'Créez le menu digital de votre hôtel-restaurant. Menus multiples, bilingue FR/EN, QR code en chambre et en salle, room service. La solution complète.',
   openGraph: {
-    title: 'Menu digital pour hotel-restaurant | MonTablo',
+    title: 'Menu digital pour hôtel-restaurant | MonTablo',
     description:
-      'Menus multiples, bilingue, QR code en chambre et en salle. Ideal pour les hotels-restaurants.',
+      'Menus multiples, bilingue, QR code en chambre et en salle. Idéal pour les hôtels-restaurants.',
   },
 }
 
@@ -28,19 +28,19 @@ const benefits = [
     icon: LayoutList,
     title: 'Plusieurs menus, une seule plateforme',
     description:
-      'Petit-dejeuner, dejeuner, diner, room service : gerez tous vos menus depuis un seul tableau de bord. Changez de carte selon le moment de la journee en un clic.',
+      'Petit-dejeuner, dejeuner, diner, room service : gérez tous vos menus depuis un seul tableau de bord. Changez de carte selon le moment de la journee en un clic.',
   },
   {
     icon: Globe,
     title: 'Bilingue pour vos clients internationaux',
     description:
-      'Vos clients etrangers consultent votre carte en anglais, vos habitues en francais. Le changement de langue se fait en un tap, sans friction.',
+      'Vos clients étrangers consultent votre carte en anglais, vos habitués en français. Le changement de langue se fait en un tap, sans friction.',
   },
   {
     icon: Hotel,
     title: 'QR code en chambre et en salle',
     description:
-      'Placez un QR code dans chaque chambre pour le room service et sur chaque table du restaurant. Vos clients accedent au bon menu, au bon moment.',
+      'Placez un QR code dans chaque chambre pour le room service et sur chaque table du restaurant. Vos clients accèdent au bon menu, au bon moment.',
   },
 ]
 
@@ -48,50 +48,50 @@ const features = [
   {
     icon: LayoutList,
     title: 'Menus multiples',
-    description: 'Creez autant de cartes que necessaire : petit-dejeuner, brunch, carte du soir, menu enfant, room service. Tout est centralise.',
+    description: 'Créez autant de cartes que nécessaire : petit-dejeuner, brunch, carte du soir, menu enfant, room service. Tout est centralise.',
   },
   {
     icon: Globe,
-    title: 'Bilingue francais / anglais',
-    description: 'Chaque plat et chaque description traduits. Vos clients internationaux profitent d\'une experience fluide dans leur langue.',
+    title: 'Bilingue français / anglais',
+    description: 'Chaque plat et chaque description traduits. Vos clients internationaux profitent d\'une expérience fluide dans leur langue.',
   },
   {
     icon: ConciergeBell,
-    title: 'Ideal pour le room service',
-    description: 'Un QR code dans chaque chambre permet a vos clients de consulter la carte du room service depuis leur lit. Simple et elegant.',
+    title: 'Idéal pour le room service',
+    description: 'Un QR code dans chaque chambre permet a vos clients de consulter la carte du room service depuis leur lit. Simple et élégant.',
   },
   {
     icon: Smartphone,
-    title: 'QR code personnalise',
-    description: 'Generez un QR code aux couleurs de votre hotel. Integrez-le a vos supports : chevalets, sets de table, livret d\'accueil en chambre.',
+    title: 'QR code personnalisé',
+    description: 'Générez un QR code aux couleurs de votre hôtel. Integrez-le a vos supports : chevalets, sets de table, livret d\'accueil en chambre.',
   },
   {
     icon: Clock,
-    title: 'Mises a jour en temps reel',
-    description: 'Plat du jour, changement de carte saisonnier, rupture de stock : mettez a jour instantanement sans reimprimer aucun support.',
+    title: 'Mises à jour en temps réel',
+    description: 'Plat du jour, changement de carte saisonnier, rupture de stock : mettez à jour instantanément sans réimprimer aucun support.',
   },
   {
     icon: UtensilsCrossed,
-    title: 'Presentation elegante',
-    description: 'Un design soigne qui s\'integre a l\'image de votre etablissement. Photos, descriptions detaillees et prix affiches avec clarte.',
+    title: 'Presentation élégante',
+    description: 'Un design soigné qui s\'intégré a l\'image de votre établissement. Photos, descriptions détaillées et prix affiches avec clarte.',
   },
 ]
 
 const steps = [
   {
     number: '1',
-    title: 'Creez vos cartes',
-    description: 'Ajoutez vos differents menus : petit-dejeuner, dejeuner, diner, room service. Organisez chaque carte par categories.',
+    title: 'Créez vos cartes',
+    description: 'Ajoutez vos différents menus : petit-dejeuner, dejeuner, diner, room service. Organisez chaque carte par catégories.',
   },
   {
     number: '2',
     title: 'Personnalisez et publiez',
-    description: 'Adaptez le design a l\'identite de votre hotel. Activez le bilingue et publiez vos menus en un clic.',
+    description: 'Adaptez le design a l\'identité de votre hôtel. Activez le bilingue et publiez vos menus en un clic.',
   },
   {
     number: '3',
     title: 'Deployez vos QR codes',
-    description: 'Imprimez vos QR codes pour les chambres et le restaurant. Vos clients accedent au bon menu en un scan.',
+    description: 'Imprimez vos QR codes pour les chambres et le restaurant. Vos clients accèdent au bon menu en un scan.',
   },
 ]
 
@@ -104,7 +104,7 @@ export default function HotelRestaurantPage() {
         data={breadcrumbJsonLd([
           { name: 'Accueil', url: base },
           { name: 'Solutions', url: `${base}/solutions` },
-          { name: 'Hotel-restaurant', url: `${base}/solutions/hotel-restaurant` },
+          { name: 'Hôtel-restaurant', url: `${base}/solutions/hotel-restaurant` },
         ])}
       />
 
@@ -117,7 +117,7 @@ export default function HotelRestaurantPage() {
           </Link>
           <div className="flex items-center gap-6">
             <Link href="/fonctionnalites" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
-              Fonctionnalites
+              Fonctionnalités
             </Link>
             <Link href="/tarifs" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
               Tarifs
@@ -145,21 +145,21 @@ export default function HotelRestaurantPage() {
           <span className="mx-2">/</span>
           <span className="hover:text-muted transition-colors">Solutions</span>
           <span className="mx-2">/</span>
-          <span className="text-foreground">Hotel-restaurant</span>
+          <span className="text-foreground">Hôtel-restaurant</span>
         </nav>
       </div>
 
       {/* Hero */}
       <section className="max-w-[1120px] mx-auto px-6 pt-8 pb-16">
         <p className="text-[13px] font-medium tracking-[0.08em] uppercase text-accent-dark mb-3">
-          Solution hotel-restaurant
+          Solution hôtel-restaurant
         </p>
         <h1 className="font-serif text-4xl sm:text-5xl text-foreground mb-4 max-w-[680px] leading-tight">
-          Le menu digital pense pour les hotels-restaurants.
+          Le menu digital pense pour les hôtels-restaurants.
         </h1>
         <p className="text-lg text-muted max-w-[520px] mb-10 leading-relaxed">
           Gerez tous vos menus en un seul endroit : petit-dejeuner, dejeuner, diner, room service.
-          Bilingue, elegant et accessible par QR code en chambre comme en salle.
+          Bilingue, élégant et accessible par QR code en chambre comme en salle.
         </p>
         <Link
           href="/signup"
@@ -173,7 +173,7 @@ export default function HotelRestaurantPage() {
       {/* Benefits */}
       <section className="max-w-[1120px] mx-auto px-6 pb-24">
         <h2 className="font-serif text-3xl text-foreground mb-10">
-          Pourquoi MonTablo pour votre hotel-restaurant
+          Pourquoi MonTablo pour votre hôtel-restaurant
         </h2>
         <div className="grid md:grid-cols-3 gap-8">
           {benefits.map((benefit) => {
@@ -212,7 +212,7 @@ export default function HotelRestaurantPage() {
       {/* Feature highlights */}
       <section className="max-w-[1120px] mx-auto px-6 pb-24">
         <h2 className="font-serif text-3xl text-foreground mb-10">
-          Les fonctionnalites cles pour votre hotel-restaurant
+          Les fonctionnalités clés pour votre hôtel-restaurant
         </h2>
         <div className="grid md:grid-cols-2 gap-8">
           {features.map((feature) => {
@@ -234,7 +234,7 @@ export default function HotelRestaurantPage() {
       <section className="max-w-[1120px] mx-auto px-6 pb-24">
         <div className="bg-primary rounded-[20px] py-16 px-8 text-center">
           <h2 className="font-serif text-3xl text-white mb-3">
-            Pret a digitaliser les menus de votre hotel ?
+            Prêt a digitaliser les menus de votre hôtel ?
           </h2>
           <p className="text-white/60 mb-8 max-w-md mx-auto">
             14 jours d&apos;essai gratuit. Aucune carte bancaire requise.
@@ -260,7 +260,7 @@ export default function HotelRestaurantPage() {
       {/* Internal links */}
       <section className="max-w-[1120px] mx-auto px-6 pb-16">
         <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[13px] text-muted/60">
-          <Link href="/fonctionnalites" className="hover:text-muted transition-colors">Fonctionnalites</Link>
+          <Link href="/fonctionnalites" className="hover:text-muted transition-colors">Fonctionnalités</Link>
           <Link href="/tarifs" className="hover:text-muted transition-colors">Tarifs</Link>
           <Link href="/menu-digital-restaurant" className="hover:text-muted transition-colors">Menu digital restaurant</Link>
           <Link href="/qr-code-restaurant" className="hover:text-muted transition-colors">QR code restaurant</Link>
@@ -283,7 +283,7 @@ export default function HotelRestaurantPage() {
             <div>
               <p className="text-[13px] font-medium text-foreground mb-3">Produit</p>
               <div className="space-y-3">
-                <Link href="/fonctionnalites" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Fonctionnalites</Link>
+                <Link href="/fonctionnalites" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Fonctionnalités</Link>
                 <Link href="/tarifs" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Tarifs</Link>
                 <Link href="/menu/demo" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Voir un exemple</Link>
               </div>
@@ -298,16 +298,16 @@ export default function HotelRestaurantPage() {
             <div>
               <p className="text-[13px] font-medium text-foreground mb-3">Legal</p>
               <div className="space-y-3">
-                <Link href="/mentions-legales" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Mentions legales</Link>
+                <Link href="/mentions-légales" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Mentions légales</Link>
                 <Link href="/cgu" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">CGU</Link>
-                <Link href="/confidentialite" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Confidentialite</Link>
+                <Link href="/confidentialite" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Confidentialité</Link>
                 <Link href="/cookies" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Cookies</Link>
               </div>
             </div>
           </div>
           <div className="border-t border-border/50 pt-6 text-center">
             <p className="text-sm text-muted/60">
-              &copy; {new Date().getFullYear()} MonTablo. Tous droits reserves.
+              &copy; {new Date().getFullYear()} MonTablo. Tous droits réservés.
             </p>
           </div>
         </div>

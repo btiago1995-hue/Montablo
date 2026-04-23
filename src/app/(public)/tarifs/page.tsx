@@ -68,7 +68,7 @@ export default function TarifsPage() {
           </Link>
           <div className="flex items-center gap-6">
             <Link href="/fonctionnalites" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
-              Fonctionnalites
+              Fonctionnalités
             </Link>
             <Link href="/faq" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
               FAQ
@@ -105,7 +105,7 @@ export default function TarifsPage() {
           Un seul prix. Tout inclus.
         </h1>
         <p className="text-lg text-muted max-w-lg mx-auto mb-12">
-          Pas de paliers, pas de fonctionnalites cachees.
+          Pas de paliers, pas de fonctionnalités cachées.
           Tout ce dont votre restaurant a besoin, dans une seule formule.
         </p>
 
@@ -134,7 +134,7 @@ export default function TarifsPage() {
       {/* FAQ */}
       <section className="max-w-[780px] mx-auto px-6 py-20">
         <h2 className="font-serif text-3xl text-foreground text-center mb-12">
-          Questions frequentes
+          Questions fréquentes
         </h2>
         <div className="space-y-6">
           {faqs.map((faq) => (
@@ -150,7 +150,7 @@ export default function TarifsPage() {
       <section className="max-w-[1120px] mx-auto px-6 pb-20">
         <div className="border border-border rounded-[20px] py-16 px-8 text-center bg-gradient-to-b from-white to-background">
           <h2 className="font-serif text-3xl text-foreground mb-3">
-            Pret a digitaliser votre carte ?
+            Prêt à digitaliser votre carte ?
           </h2>
           <p className="text-muted mb-8 max-w-md mx-auto">
             14 jours d&apos;essai gratuit. Aucune carte bancaire requise.
@@ -175,15 +175,15 @@ export default function TarifsPage() {
               <span className="font-serif text-[15px] text-primary">MonTablo</span>
             </div>
             <p className="text-xs text-muted/60">
-              &copy; {new Date().getFullYear()} MonTablo. Tous droits reserves.
+              &copy; {new Date().getFullYear()} MonTablo. Tous droits réservés.
             </p>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] text-muted/50">
-            <Link href="/mentions-legales" className="hover:text-muted transition-colors">Mentions legales</Link>
+            <Link href="/mentions-légales" className="hover:text-muted transition-colors">Mentions légales</Link>
             <span className="hidden sm:inline">&middot;</span>
             <Link href="/cgu" className="hover:text-muted transition-colors">CGU</Link>
             <span className="hidden sm:inline">&middot;</span>
-            <Link href="/confidentialite" className="hover:text-muted transition-colors">Confidentialite</Link>
+            <Link href="/confidentialite" className="hover:text-muted transition-colors">Confidentialité</Link>
             <span className="hidden sm:inline">&middot;</span>
             <Link href="/cookies" className="hover:text-muted transition-colors">Cookies</Link>
           </div>

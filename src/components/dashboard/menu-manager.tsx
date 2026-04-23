@@ -3,7 +3,8 @@
 import { useState, useRef } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
-import type { Category, Item } from '@/types/database'
+import type { Category, Item, Allergen } from '@/types/database'
+import { ALLERGENS } from '@/lib/allergens'
 import { Button } from '@/components/ui/button'
 import { Modal } from '@/components/ui/modal'
 import { Input, Textarea } from '@/components/ui/input'
@@ -158,10 +159,17 @@ function ItemForm({
   const [price, setPrice] = useState(initial?.price?.toString() ?? '')
   const [categoryId, setCategoryId] = useState(initial?.category_id ?? defaultCategoryId ?? categories[0]?.id ?? '')
   const [tags, setTags] = useState(initial?.tags?.join(', ') ?? '')
+  const [allergens, setAllergens] = useState<Allergen[]>(initial?.allergens ?? [])
   const [imageUrl, setImageUrl] = useState(initial?.image_url ?? null)
   const [showEn, setShowEn] = useState(!!(initial?.name_en || initial?.description_en))
   const [loading, setLoading] = useState(false)
   const router = useRouter()
+
+  function toggleAllergen(code: Allergen) {
+    setAllergens((prev) =>
+      prev.includes(code) ? prev.filter((a) => a !== code) : [...prev, code]
+    )
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -194,6 +202,7 @@ function ItemForm({
         .split(',')
         .map((t) => t.trim())
         .filter(Boolean),
+      allergens,
     }
 
     if (initial) {
@@ -270,6 +279,37 @@ function ItemForm({
         onChange={(e) => setTags(e.target.value)}
         placeholder="Végétarien, Sans gluten, Épicé"
       />
+      <div>
+        <label className="block text-sm font-medium text-foreground mb-1.5">
+          Allergènes présents
+        </label>
+        <p className="text-[11px] text-[#9B9B9B] mb-2">
+          Obligatoire selon le règlement UE n°1169/2011. Cochez tous les allergènes présents dans ce plat.
+        </p>
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
+          {ALLERGENS.map((a) => {
+            const active = allergens.includes(a.code)
+            return (
+              <button
+                key={a.code}
+                type="button"
+                onClick={() => toggleAllergen(a.code)}
+                aria-pressed={active}
+                className={`flex items-center gap-2 px-3 py-2 rounded-lg border text-sm transition-colors text-left ${
+                  active
+                    ? 'bg-primary/10 border-primary text-foreground'
+                    : 'bg-white border-border text-[#6B6B6B] hover:bg-[#F5F5F2]'
+                }`}
+              >
+                <span className="text-base leading-none shrink-0" aria-hidden>
+                  {a.icon}
+                </span>
+                <span className="truncate">{a.label_fr}</span>
+              </button>
+            )
+          })}
+        </div>
+      </div>
       {showEn ? (
         <div className="space-y-3 p-4 bg-[#F5F5F2] rounded-lg">
           <div className="flex items-center justify-between">

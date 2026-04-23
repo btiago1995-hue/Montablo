@@ -15,84 +15,84 @@ import { JsonLd, breadcrumbJsonLd } from '@/components/seo/json-ld'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Fonctionnalites — MonTablo | Menu digital et cartes de fidelite pour restaurants',
+  title: 'Fonctionnalités — MonTablo | Menu digital et cartes de fidélité pour restaurants',
   description:
-    'Decouvrez toutes les fonctionnalites de MonTablo : menu digital, QR code, menu du jour, promotions, cartes de fidelite numeriques compatibles Google Wallet et Apple Wallet, import IA et bilingue FR/EN.',
+    'Découvrez toutes les fonctionnalités de MonTablo : menu digital, QR code, menu du jour, promotions, cartes de fidélité numériques compatibles Google Wallet et Apple Wallet, import IA et bilingue FR/EN.',
   openGraph: {
-    title: 'Fonctionnalites — MonTablo',
+    title: 'Fonctionnalités — MonTablo',
     description:
-      'Menu digital, QR code, cartes de fidelite Google Wallet et Apple Wallet, menu du jour, promotions, import IA, bilingue FR/EN.',
+      'Menu digital, QR code, cartes de fidélité Google Wallet et Apple Wallet, menu du jour, promotions, import IA, bilingue FR/EN.',
   },
 }
 
 const features = [
   {
     icon: WalletCards,
-    title: 'Cartes de fidelite numeriques',
+    title: 'Cartes de fidélité numériques',
     description:
-      'Offrez a vos clients une carte de fidelite digitale qui s\'ajoute directement a Google Wallet et Apple Wallet. Plus de carte cartonnee a perdre — elle reste toujours dans leur telephone, aux couleurs de votre restaurant. Les tampons et recompenses se mettent a jour en temps reel.',
+      'Offrez à vos clients une carte de fidélité digitale qui s\'ajoute directement à Google Wallet et Apple Wallet. Plus de carte cartonnée à perdre — elle reste toujours dans leur téléphone, aux couleurs de votre restaurant. Les tampons et récompenses se mettent à jour en temps réel.',
     highlights: [
       'Compatible Google Wallet et Apple Wallet',
       'Ajout au portefeuille en un tap',
-      'Tampons et recompenses en temps reel',
+      'Tampons et récompenses en temps réel',
       'Aux couleurs de votre restaurant',
     ],
   },
   {
     icon: UtensilsCrossed,
-    title: 'Menu digital elegant',
+    title: 'Menu digital élégant',
     description:
-      'Creez votre carte en quelques minutes. Organisez par categories, ajoutez des photos, descriptions et prix. Design soigne qui met en valeur vos plats.',
-    highlights: ['Plats et categories illimites', 'Photos et descriptions', 'Organisation par categories'],
+      'Créez votre carte en quelques minutes. Organisez par catégories, ajoutez des photos, descriptions et prix. Design soigné qui met en valeur vos plats.',
+    highlights: ['Plats et catégories illimités', 'Photos et descriptions', 'Organisation par catégories'],
   },
   {
     icon: QrCode,
-    title: 'QR code personnalise',
+    title: 'QR code personnalisé',
     description:
-      'Generez un QR code aux couleurs de votre restaurant. Imprimez-le, posez-le sur vos tables. Vos clients accedent a votre menu en un scan.',
-    highlights: ['Couleurs personnalisables', 'Telechargement en haute resolution', 'Pret a imprimer'],
+      'Générez un QR code aux couleurs de votre restaurant. Imprimez-le, posez-le sur vos tables. Vos clients accèdent à votre menu en un scan.',
+    highlights: ['Couleurs personnalisables', 'Téléchargement en haute résolution', 'Prêt à imprimer'],
   },
   {
     icon: CalendarDays,
     title: 'Menu du jour en un clic',
     description:
-      'Mettez a jour votre menu du jour chaque matin en quelques secondes. Vos clients voient toujours ce qui est disponible aujourd\'hui.',
-    highlights: ['Mise a jour instantanee', 'Visible directement sur le menu', 'Historique conserve'],
+      'Mettez à jour votre menu du jour chaque matin en quelques secondes. Vos clients voient toujours ce qui est disponible aujourd\'hui.',
+    highlights: ['Mise à jour instantanée', 'Visible directement sur le menu', 'Historique conservé'],
   },
   {
     icon: Tag,
     title: 'Promotions temporaires',
     description:
-      'Creez des promotions avec dates de debut et de fin. Elles apparaissent et disparaissent automatiquement de votre menu.',
+      'Créez des promotions avec dates de début et de fin. Elles apparaissent et disparaissent automatiquement de votre menu.',
     highlights: ['Programmation automatique', 'Mise en avant visuelle', 'Pas d\'intervention manuelle'],
   },
   {
     icon: Sparkles,
     title: 'Import par IA',
     description:
-      'Photographiez votre carte papier existante. Notre IA extrait automatiquement vos plats, descriptions et prix. Pret en quelques secondes.',
-    highlights: ['Import depuis photo', 'Extraction automatique des prix', 'Verification avant publication'],
+      'Photographiez votre carte papier existante. Notre IA extrait automatiquement vos plats, descriptions et prix. Prêt en quelques secondes.',
+    highlights: ['Import depuis photo', 'Extraction automatique des prix', 'Vérification avant publication'],
   },
   {
     icon: Globe,
-    title: 'Bilingue francais / anglais',
+    title: 'Bilingue français / anglais',
     description:
-      'Votre menu est disponible en francais et en anglais. Ideal pour les zones touristiques et les restaurants qui accueillent une clientele internationale.',
-    highlights: ['Traduction integree', 'Changement de langue en un tap', 'Ideal pour le tourisme'],
+      'Votre menu est disponible en français et en anglais. Idéal pour les zones touristiques et les restaurants qui accueillent une clientèle internationale.',
+    highlights: ['Traduction intégrée', 'Changement de langue en un tap', 'Idéal pour le tourisme'],
   },
   {
     icon: Palette,
     title: 'Design aux couleurs de votre restaurant',
     description:
-      'Personnalisez les couleurs de votre menu pour qu\'il reflète l\'identite visuelle de votre etablissement. Coherent avec votre marque.',
-    highlights: ['Couleur primaire personnalisable', 'Typographie soignee', 'Rendu professionnel'],
+      'Personnalisez les couleurs de votre menu pour qu\'il reflète l\'identité visuelle de votre établissement. Cohérent avec votre marque.',
+    highlights: ['Couleur primaire personnalisable', 'Typographie soignée', 'Rendu professionnel'],
   },
   {
     icon: Zap,
-    title: 'Mises a jour en temps reel',
+    title: 'Mises à jour en temps réel',
     description:
-      'Modifiez un prix, ajoutez un plat, desactivez une categorie — vos clients voient les changements instantanement. Plus jamais de cartes obsoletes.',
-    highlights: ['Changements instantanes', 'Pas de reimpression', 'Toujours a jour'],
+      'Modifiez un prix, ajoutez un plat, désactivez une catégorie — vos clients voient les changements instantanément. Plus jamais de cartes obsolètes.',
+    highlights: ['Changements instantanés', 'Pas de réimpression', 'Toujours à jour'],
   },
 ]
 
@@ -104,7 +104,7 @@ export default function FonctionnalitesPage() {
       <JsonLd
         data={breadcrumbJsonLd([
           { name: 'Accueil', url: base },
-          { name: 'Fonctionnalites', url: `${base}/fonctionnalites` },
+          { name: 'Fonctionnalités', url: `${base}/fonctionnalites` },
         ])}
       />
 
@@ -140,21 +140,21 @@ export default function FonctionnalitesPage() {
         <nav className="text-[13px] text-muted/60">
           <Link href="/" className="hover:text-muted transition-colors">Accueil</Link>
           <span className="mx-2">/</span>
-          <span className="text-foreground">Fonctionnalites</span>
+          <span className="text-foreground">Fonctionnalités</span>
         </nav>
       </div>
 
       {/* Hero */}
       <section className="max-w-[1120px] mx-auto px-6 pt-8 pb-16">
         <p className="text-[13px] font-medium tracking-[0.08em] uppercase text-accent-dark mb-3">
-          Fonctionnalites
+          Fonctionnalités
         </p>
         <h1 className="font-serif text-4xl sm:text-5xl text-foreground mb-4 max-w-[680px] leading-tight">
           Tout ce qu&apos;il faut pour votre menu digital.
         </h1>
         <p className="text-lg text-muted max-w-[520px] mb-10 leading-relaxed">
-          Un outil simple et complet pour creer, gerer et partager votre carte.
-          Concu pour les restaurateurs, pas pour les informaticiens.
+          Un outil simple et complet pour créer, gérer et partager votre carte.
+          Conçu pour les restaurateurs, pas pour les informaticiens.
         </p>
         <Link
           href="/signup"
@@ -198,7 +198,7 @@ export default function FonctionnalitesPage() {
       <section className="max-w-[1120px] mx-auto px-6 pb-24">
         <div className="bg-primary rounded-[20px] py-16 px-8 text-center">
           <h2 className="font-serif text-3xl text-white mb-3">
-            Pret a simplifier votre carte ?
+            Prêt à simplifier votre carte ?
           </h2>
           <p className="text-white/60 mb-8 max-w-md mx-auto">
             14 jours d&apos;essai gratuit. Aucune carte bancaire requise.
@@ -230,15 +230,15 @@ export default function FonctionnalitesPage() {
               <span className="font-serif text-[15px] text-primary">MonTablo</span>
             </div>
             <p className="text-xs text-muted/60">
-              &copy; {new Date().getFullYear()} MonTablo. Tous droits reserves.
+              &copy; {new Date().getFullYear()} MonTablo. Tous droits réservés.
             </p>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] text-muted/50">
-            <Link href="/mentions-legales" className="hover:text-muted transition-colors">Mentions legales</Link>
+            <Link href="/mentions-légales" className="hover:text-muted transition-colors">Mentions légales</Link>
             <span className="hidden sm:inline">&middot;</span>
             <Link href="/cgu" className="hover:text-muted transition-colors">CGU</Link>
             <span className="hidden sm:inline">&middot;</span>
-            <Link href="/confidentialite" className="hover:text-muted transition-colors">Confidentialite</Link>
+            <Link href="/confidentialite" className="hover:text-muted transition-colors">Confidentialité</Link>
             <span className="hidden sm:inline">&middot;</span>
             <Link href="/cookies" className="hover:text-muted transition-colors">Cookies</Link>
           </div>

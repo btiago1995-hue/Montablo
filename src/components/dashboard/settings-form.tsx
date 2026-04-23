@@ -1,12 +1,12 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import type { Restaurant } from '@/types/database'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { ImageUpload } from '@/components/ui/image-upload'
-import { Check, CreditCard, Star, Trash2 } from 'lucide-react'
+import { AlertTriangle, Check, CreditCard, Star, Trash2, X } from 'lucide-react'
 
 export function SettingsForm({ restaurant }: { restaurant: Restaurant }) {
   const router = useRouter()
@@ -22,6 +22,37 @@ export function SettingsForm({ restaurant }: { restaurant: Restaurant }) {
   const [billingLoading, setBillingLoading] = useState(false)
   const [billingPlan, setBillingPlan] = useState<'monthly' | 'annual'>('annual')
   const [deleteLoading, setDeleteLoading] = useState(false)
+  const [dangerExpanded, setDangerExpanded] = useState(false)
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false)
+  const [deleteConfirmText, setDeleteConfirmText] = useState('')
+  const [deleteCountdown, setDeleteCountdown] = useState(5)
+
+  const DELETE_CONFIRM_WORD = 'SUPPRIMER'
+
+  useEffect(() => {
+    if (!deleteModalOpen) return
+    setDeleteCountdown(5)
+    const interval = setInterval(() => {
+      setDeleteCountdown((c) => (c > 0 ? c - 1 : 0))
+    }, 1000)
+    return () => clearInterval(interval)
+  }, [deleteModalOpen])
+
+  async function handleDeleteAccount() {
+    setDeleteLoading(true)
+    try {
+      const res = await fetch('/api/account/delete', { method: 'POST' })
+      if (res.ok) {
+        window.location.href = '/'
+      } else {
+        alert('Une erreur est survenue. Veuillez réessayer.')
+        setDeleteLoading(false)
+      }
+    } catch {
+      alert('Une erreur est survenue. Veuillez réessayer.')
+      setDeleteLoading(false)
+    }
+  }
   const [addressLine, setAddressLine] = useState(restaurant.address_line ?? '')
   const [city, setCity] = useState(restaurant.city ?? '')
   const [postalCode, setPostalCode] = useState(restaurant.postal_code ?? '')
@@ -324,44 +355,121 @@ export function SettingsForm({ restaurant }: { restaurant: Restaurant }) {
         )}
       </div>
 
-      {/* Zone dangereuse */}
-      <div className="rounded-xl border border-red-200 bg-red-50 p-6">
-        <div className="flex items-center gap-2 mb-3">
-          <Trash2 className="w-5 h-5 text-red-600" />
-          <h2 className="font-serif text-xl text-red-900">Zone dangereuse</h2>
-        </div>
-        <p className="text-sm text-red-800 mb-4">
-          La suppression de votre compte est irréversible. Toutes vos données seront définitivement effacées : restaurant, menu, catégories et plats.
-        </p>
-        <Button
+      {/* Zone dangereuse (collapsed by default) */}
+      <div className="rounded-xl border border-border bg-white p-6">
+        <button
           type="button"
-          disabled={deleteLoading}
-          onClick={async () => {
-            const confirmed = window.confirm(
-              'Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible et toutes vos données seront perdues.'
-            )
-            if (!confirmed) return
-
-            setDeleteLoading(true)
-            try {
-              const res = await fetch('/api/account/delete', { method: 'POST' })
-              if (res.ok) {
-                window.location.href = '/'
-              } else {
-                alert('Une erreur est survenue. Veuillez réessayer.')
-                setDeleteLoading(false)
-              }
-            } catch {
-              alert('Une erreur est survenue. Veuillez réessayer.')
-              setDeleteLoading(false)
-            }
-          }}
-          className="bg-red-600 hover:bg-red-700 text-white"
+          onClick={() => setDangerExpanded((v) => !v)}
+          className="flex items-center justify-between w-full text-left"
+          aria-expanded={dangerExpanded}
         >
-          <Trash2 className="w-4 h-4" />
-          {deleteLoading ? 'Suppression...' : 'Supprimer mon compte'}
-        </Button>
+          <div className="flex items-center gap-2">
+            <AlertTriangle className="w-5 h-5 text-muted" />
+            <h2 className="font-serif text-xl text-foreground">Zone dangereuse</h2>
+          </div>
+          <span className="text-sm text-muted">
+            {dangerExpanded ? 'Masquer' : 'Afficher'}
+          </span>
+        </button>
+
+        {dangerExpanded && (
+          <div className="mt-5 pt-5 border-t border-border">
+            <div className="rounded-lg border border-red-200 bg-red-50 p-5">
+              <p className="text-sm text-red-800 mb-4 leading-relaxed">
+                La suppression de votre compte est <strong>irréversible</strong>. Toutes vos données seront définitivement effacées : restaurant, menu, catégories, plats, promotions et fidélité.
+              </p>
+              <Button
+                type="button"
+                onClick={() => {
+                  setDeleteConfirmText('')
+                  setDeleteModalOpen(true)
+                }}
+                className="bg-red-600 hover:bg-red-700 text-white"
+              >
+                <Trash2 className="w-4 h-4" />
+                Supprimer mon compte
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
+
+      {/* Delete confirmation modal */}
+      {deleteModalOpen && (
+        <div
+          className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={() => !deleteLoading && setDeleteModalOpen(false)}
+        >
+          <div
+            className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-start justify-between mb-4">
+              <div className="flex items-center gap-2">
+                <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
+                  <AlertTriangle className="w-5 h-5 text-red-600" />
+                </div>
+                <h3 className="font-serif text-xl text-foreground">Confirmer la suppression</h3>
+              </div>
+              {!deleteLoading && (
+                <button
+                  type="button"
+                  onClick={() => setDeleteModalOpen(false)}
+                  className="text-muted hover:text-foreground"
+                  aria-label="Fermer"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              )}
+            </div>
+
+            <p className="text-sm text-muted mb-4 leading-relaxed">
+              Cette action est <strong className="text-foreground">définitive</strong>. Votre restaurant, votre menu et toutes vos données seront effacés. Les clients qui scannent votre QR code ne verront plus votre menu.
+            </p>
+
+            <label className="block text-sm font-medium text-foreground mb-2">
+              Pour confirmer, tapez <span className="font-mono text-red-600">{DELETE_CONFIRM_WORD}</span> ci-dessous :
+            </label>
+            <Input
+              type="text"
+              value={deleteConfirmText}
+              onChange={(e) => setDeleteConfirmText(e.target.value)}
+              placeholder={DELETE_CONFIRM_WORD}
+              autoFocus
+              disabled={deleteLoading}
+              className="mb-5 font-mono"
+            />
+
+            <div className="flex gap-2">
+              <Button
+                type="button"
+                onClick={() => setDeleteModalOpen(false)}
+                disabled={deleteLoading}
+                className="flex-1 bg-white border border-border text-foreground hover:bg-background"
+              >
+                Annuler
+              </Button>
+              <Button
+                type="button"
+                onClick={handleDeleteAccount}
+                disabled={
+                  deleteLoading ||
+                  deleteConfirmText !== DELETE_CONFIRM_WORD ||
+                  deleteCountdown > 0
+                }
+                className="flex-1 bg-red-600 hover:bg-red-700 text-white disabled:opacity-50"
+              >
+                <Trash2 className="w-4 h-4" />
+                {deleteLoading
+                  ? 'Suppression...'
+                  : deleteCountdown > 0
+                    ? `Supprimer (${deleteCountdown}s)`
+                    : 'Supprimer définitivement'}
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

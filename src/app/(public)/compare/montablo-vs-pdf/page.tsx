@@ -6,11 +6,11 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Menu PDF vs menu digital : pourquoi abandonner le PDF — MonTablo',
   description:
-    'Comparatif entre le menu PDF et le menu digital MonTablo. Experience mobile, mises a jour, SEO, accessibilite : decouvrez pourquoi le PDF n\'est plus adapte.',
+    'Comparatif entre le menu PDF et le menu digital MonTablo. Experience mobile, mises à jour, SEO, accessibilite : découvrez pourquoi le PDF n\'est plus adapte.',
   openGraph: {
     title: 'Menu PDF vs menu digital : pourquoi abandonner le PDF — MonTablo',
     description:
-      'Menu PDF vs menu digital : pourquoi le PDF nuit a l\'experience client de votre restaurant et comment MonTablo resout le probleme.',
+      'Menu PDF vs menu digital : pourquoi le PDF nuit a l\'expérience client de votre restaurant et comment MonTablo resout le problème.',
   },
 }
 
@@ -19,28 +19,28 @@ const comparisonRows = [
     icon: Smartphone,
     criteria: 'Experience mobile',
     competitor: 'Texte minuscule, zoom obligatoire, illisible',
-    montablo: 'Concu mobile-first, navigation fluide',
+    montablo: 'Conçu mobile-first, navigation fluide',
     advantage: 'montablo' as const,
   },
   {
     icon: Zap,
     criteria: 'Vitesse de chargement',
-    competitor: 'Fichier lourd, long a telecharger',
-    montablo: 'Chargement instantane, pages optimisees',
+    competitor: 'Fichier lourd, long a télécharger',
+    montablo: 'Chargement instantané, pages optimisees',
     advantage: 'montablo' as const,
   },
   {
     icon: RefreshCw,
-    criteria: 'Processus de mise a jour',
+    criteria: 'Processus de mise à jour',
     competitor: 'Modifier le fichier, re-exporter, re-uploader',
-    montablo: 'Modification en temps reel depuis votre telephone',
+    montablo: 'Modification en temps réel depuis votre téléphone',
     advantage: 'montablo' as const,
   },
   {
     icon: Search,
     criteria: 'Referencement SEO',
     competitor: 'Invisible pour Google (contenu non indexable)',
-    montablo: 'Pages HTML indexees, schema.org integre',
+    montablo: 'Pages HTML indexees, schema.org intégré',
     advantage: 'montablo' as const,
   },
   {
@@ -52,8 +52,8 @@ const comparisonRows = [
   },
   {
     icon: Palette,
-    criteria: 'Design et presentation',
-    competitor: 'Statique, meme rendu sur tous les ecrans',
+    criteria: 'Design et présentation',
+    competitor: 'Statique, même rendu sur tous les ecrans',
     montablo: 'Design responsive adapte a chaque appareil',
     advantage: 'montablo' as const,
   },
@@ -68,14 +68,14 @@ const comparisonRows = [
     icon: Globe,
     criteria: 'Multilingue',
     competitor: 'Un fichier PDF par langue',
-    montablo: 'Bilingue FR/EN integre, changement en un tap',
+    montablo: 'Bilingue FR/EN intégré, changement en un tap',
     advantage: 'montablo' as const,
   },
   {
     icon: Heart,
     criteria: 'Experience client',
-    competitor: 'Frustration, pinch-to-zoom, abandon frequent',
-    montablo: 'Navigation intuitive, photos, design soigne',
+    competitor: 'Frustration, pinch-to-zoom, abandon fréquent',
+    montablo: 'Navigation intuitive, photos, design soigné',
     advantage: 'montablo' as const,
   },
 ]
@@ -84,27 +84,27 @@ const faqs = [
   {
     question: 'Pourquoi le menu PDF est-il mauvais sur mobile ?',
     answer:
-      'Un fichier PDF est concu pour l\'impression au format A4, pas pour un ecran de smartphone. Le texte est minuscule, le client doit zoomer et faire defiler dans tous les sens pour lire les plats et les prix. Selon plusieurs etudes, plus de 60 % des utilisateurs quittent un PDF avant de l\'avoir lu entierement sur mobile.',
+      'Un fichier PDF est conçu pour l\'impression au format A4, pas pour un ecran de smartphone. Le texte est minuscule, le client doit zoomer et faire defiler dans tous les sens pour lire les plats et les prix. Selon plusieurs études, plus de 60 % des utilisateurs quittent un PDF avant de l\'avoir lu entierement sur mobile.',
   },
   {
     question: 'Le menu PDF est-il vraiment gratuit ?',
     answer:
-      'Le PDF lui-meme ne coute rien a heberger, c\'est vrai. Mais les couts caches sont reels : le temps passe a mettre a jour le fichier a chaque changement de carte, la perte de clients frustres par l\'experience mobile, l\'absence de referencement sur Google, et l\'impossibilite de proposer un menu multilingue facilement. Ces couts invisibles depassent largement les 26,99 euros par mois d\'un menu digital.',
+      'Le PDF lui-même ne coûte rien a heberger, c\'est vrai. Mais les coûts cachés sont reels : le temps passe a mettre à jour le fichier a chaque changement de carte, la perte de clients frustres par l\'expérience mobile, l\'absence de referencement sur Google, et l\'impossibilite de proposer un menu multilingue facilement. Ces coûts invisibles depassent largement les 26,99 euros par mois d\'un menu digital.',
   },
   {
     question: 'Google peut-il indexer un menu PDF ?',
     answer:
-      'Google peut techniquement lire le texte d\'un PDF, mais il le traite comme un document secondaire, pas comme une page web. Le contenu d\'un PDF n\'apparait pratiquement jamais dans les resultats de recherche locaux. Un menu digital HTML avec schema.org integre est beaucoup mieux reference.',
+      'Google peut techniquement lire le texte d\'un PDF, mais il le traite comme un document secondaire, pas comme une page web. Le contenu d\'un PDF n\'apparait pratiquement jamais dans les resultats de recherche locaux. Un menu digital HTML avec schema.org intégré est beaucoup mieux reference.',
   },
   {
     question: 'Comment passer d\'un menu PDF a un menu digital ?',
     answer:
-      'Avec MonTablo, la transition est immediate. Notre import par IA peut extraire automatiquement les plats, descriptions et prix de votre menu existant — qu\'il soit en PDF, en photo ou sur papier. En moins de 5 minutes, votre menu digital est en ligne.',
+      'Avec MonTablo, la transition est immédiate. Notre import par IA peut extraire automatiquement les plats, descriptions et prix de votre menu existant — qu\'il soit en PDF, en photo ou sur papier. En moins de 5 minutes, votre menu digital est en ligne.',
   },
   {
     question: 'Dois-je supprimer mon PDF si je passe au menu digital ?',
     answer:
-      'Non, vous pouvez conserver votre PDF en complement. Mais une fois votre menu digital MonTablo en place, la plupart des restaurateurs abandonnent le PDF naturellement : le menu digital est plus facile a mettre a jour, plus agreable pour les clients et mieux reference.',
+      'Non, vous pouvez conserver votre PDF en complement. Mais une fois votre menu digital MonTablo en place, la plupart des restaurateurs abandonnent le PDF naturellement : le menu digital est plus facile a mettre à jour, plus agreable pour les clients et mieux reference.',
   },
 ]
 
@@ -131,7 +131,7 @@ export default function ComparePdfPage() {
           </Link>
           <div className="flex items-center gap-6">
             <Link href="/fonctionnalites" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
-              Fonctionnalites
+              Fonctionnalités
             </Link>
             <Link href="/tarifs" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
               Tarifs
@@ -173,11 +173,11 @@ export default function ComparePdfPage() {
         </h1>
         <p className="text-lg text-muted max-w-2xl mx-auto leading-relaxed">
           Beaucoup de restaurants utilisent encore un PDF comme menu en ligne.
-          Decouvrez pourquoi c&apos;est une erreur et comment un{' '}
+          Découvrez pourquoi c&apos;est une erreur et comment un{' '}
           <Link href="/fonctionnalites" className="text-primary hover:underline">
             menu digital
           </Link>{' '}
-          transforme l&apos;experience client.
+          transforme l&apos;expérience client.
         </p>
       </section>
 
@@ -230,10 +230,10 @@ export default function ComparePdfPage() {
             Pourquoi le PDF nuit a votre restaurant
           </h2>
 
-          {/* Mobile experience */}
+          {/* Mobile expérience */}
           <div className="mb-14">
             <h3 className="font-serif text-2xl text-foreground mb-4">
-              Une experience mobile desastreuse
+              Une expérience mobile desastreuse
             </h3>
             <p className="text-[15px] text-muted leading-relaxed mb-4">
               Plus de 80 % de vos clients consulteront votre menu depuis un smartphone.
@@ -246,8 +246,8 @@ export default function ComparePdfPage() {
               <Link href="/menu-digital-restaurant" className="text-primary hover:underline">
                 menu digital
               </Link>{' '}
-              comme MonTablo est concu mobile-first : le texte est lisible, la navigation
-              est intuitive, les photos sont optimisees. L&apos;experience est comparable
+              comme MonTablo est conçu mobile-first : le texte est lisible, la navigation
+              est intuitive, les photos sont optimisees. L&apos;expérience est comparable
               a celle d&apos;une application.
             </p>
           </div>
@@ -255,19 +255,19 @@ export default function ComparePdfPage() {
           {/* Updates */}
           <div className="mb-14">
             <h3 className="font-serif text-2xl text-foreground mb-4">
-              Des mises a jour penibles
+              Des mises à jour penibles
             </h3>
             <p className="text-[15px] text-muted leading-relaxed mb-4">
-              Pour mettre a jour un menu PDF, il faut ouvrir le fichier source (Word,
+              Pour mettre à jour un menu PDF, il faut ouvrir le fichier source (Word,
               InDesign, Canva...), effectuer les modifications, re-exporter en PDF,
               puis re-uploader le fichier sur votre site ou l&apos;envoyer a nouveau
-              sur vos reseaux. Beaucoup de restaurateurs repoussent ces mises a jour
-              et gardent des menus obsoletes pendant des semaines.
+              sur vos réseaux. Beaucoup de restaurateurs repoussent ces mises à jour
+              et gardent des menus obsolètes pendant des semaines.
             </p>
             <p className="text-[15px] text-muted leading-relaxed">
               Avec MonTablo, vous modifiez un prix ou ajoutez un plat du jour en
-              30 secondes depuis votre telephone. La modification est visible
-              instantanement.
+              30 secondes depuis votre téléphone. La modification est visible
+              instantanément.
             </p>
           </div>
 
@@ -283,7 +283,7 @@ export default function ComparePdfPage() {
               client cherche &quot;restaurant italien pres de moi&quot;.
             </p>
             <p className="text-[15px] text-muted leading-relaxed">
-              MonTablo genere des pages HTML optimisees avec des donnees structurees
+              MonTablo généré des pages HTML optimisees avec des données structurees
               (schema.org Restaurant et Menu). Votre carte est indexee et peut apparaitre
               directement dans les resultats Google.
             </p>
@@ -292,11 +292,11 @@ export default function ComparePdfPage() {
           {/* Hidden costs */}
           <div>
             <h3 className="font-serif text-2xl text-foreground mb-4">
-              Le vrai cout du &quot;gratuit&quot;
+              Le vrai coût du &quot;gratuit&quot;
             </h3>
             <p className="text-[15px] text-muted leading-relaxed mb-4">
-              Oui, heberger un PDF ne coute rien. Mais les couts caches sont bien
-              reels : le temps perdu a chaque mise a jour, les clients frustres qui
+              Oui, heberger un PDF ne coûte rien. Mais les coûts cachés sont bien
+              reels : le temps perdu a chaque mise à jour, les clients frustres qui
               ne reviennent pas, le manque de visibilite sur Google, l&apos;impossibilite
               de proposer un menu multilingue simplement.
             </p>
@@ -305,7 +305,7 @@ export default function ComparePdfPage() {
               <Link href="/tarifs" className="text-primary hover:underline">
                 26,99 euros par mois
               </Link>
-              , MonTablo vous fait gagner du temps, ameliore l&apos;experience de vos
+              , MonTablo vous fait gagner du temps, amélioré l&apos;expérience de vos
               clients et renforce votre presence en ligne. C&apos;est un investissement
               qui se rentabilise des le premier mois. Et vous pouvez consulter notre{' '}
               <Link href="/blog/menu-papier-vs-menu-digital" className="text-primary hover:underline">
@@ -320,7 +320,7 @@ export default function ComparePdfPage() {
       {/* FAQ */}
       <section className="max-w-[780px] mx-auto px-6 py-20">
         <h2 className="font-serif text-3xl text-foreground text-center mb-12">
-          Questions frequentes
+          Questions fréquentes
         </h2>
         <div className="space-y-6">
           {faqs.map((faq) => (
@@ -336,7 +336,7 @@ export default function ComparePdfPage() {
       <section className="max-w-[1120px] mx-auto px-6 pb-20">
         <div className="border border-border rounded-[20px] py-16 px-8 text-center bg-gradient-to-b from-white to-background">
           <h2 className="font-serif text-3xl text-foreground mb-3">
-            Pret a remplacer votre menu PDF ?
+            Prêt a remplacer votre menu PDF ?
           </h2>
           <p className="text-muted mb-8 max-w-md mx-auto">
             Essayez MonTablo gratuitement pendant 14 jours. Aucune carte bancaire requise.
@@ -349,7 +349,7 @@ export default function ComparePdfPage() {
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
           </Link>
           <p className="text-[13px] text-muted/50 mt-4">
-            Ou decouvrez nos{' '}
+            Ou découvrez nos{' '}
             <Link href="/tarifs" className="text-primary hover:underline">tarifs</Link>
             {' '}et consultez la{' '}
             <Link href="/faq" className="text-primary hover:underline">FAQ</Link>
@@ -373,7 +373,7 @@ export default function ComparePdfPage() {
             <div>
               <p className="text-[13px] font-medium text-foreground mb-3">Produit</p>
               <div className="space-y-3">
-                <Link href="/fonctionnalites" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Fonctionnalites</Link>
+                <Link href="/fonctionnalites" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Fonctionnalités</Link>
                 <Link href="/tarifs" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Tarifs</Link>
                 <Link href="/menu/demo" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Voir un exemple</Link>
               </div>
@@ -388,16 +388,16 @@ export default function ComparePdfPage() {
             <div>
               <p className="text-[13px] font-medium text-foreground mb-3">Legal</p>
               <div className="space-y-3">
-                <Link href="/mentions-legales" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Mentions legales</Link>
+                <Link href="/mentions-légales" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Mentions légales</Link>
                 <Link href="/cgu" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">CGU</Link>
-                <Link href="/confidentialite" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Confidentialite</Link>
+                <Link href="/confidentialite" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Confidentialité</Link>
                 <Link href="/cookies" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Cookies</Link>
               </div>
             </div>
           </div>
           <div className="border-t border-border/50 pt-6 text-center">
             <p className="text-sm text-muted/60">
-              &copy; {new Date().getFullYear()} MonTablo. Tous droits reserves.
+              &copy; {new Date().getFullYear()} MonTablo. Tous droits réservés.
             </p>
           </div>
         </div>

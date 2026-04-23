@@ -45,6 +45,7 @@ CREATE TABLE items (
   price DECIMAL(10,2) NOT NULL,
   image_url TEXT,
   tags TEXT[] DEFAULT '{}',
+  allergens TEXT[] DEFAULT '{}',
   is_available BOOLEAN DEFAULT true,
   sort_order INTEGER DEFAULT 0,
   created_at TIMESTAMPTZ DEFAULT NOW(),

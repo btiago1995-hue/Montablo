@@ -14,6 +14,7 @@ import {
   LogOut,
   Menu,
   X,
+  ExternalLink,
 } from 'lucide-react'
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
@@ -97,8 +98,22 @@ export function Sidebar({ restaurant }: { restaurant: Restaurant }) {
         </div>
 
         {/* Restaurant name */}
-        <div className="px-6 pb-8">
+        <div className="px-6 pb-4">
           <span className="text-base text-white/60 truncate block">{restaurant.name}</span>
+        </div>
+
+        {/* Voir mon menu en direct */}
+        <div className="px-3 pb-6">
+          <a
+            href={`/menu/${restaurant.slug}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setOpen(false)}
+            className="flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg text-[13.5px] font-medium bg-white/[0.08] text-white/85 hover:bg-white/[0.14] hover:text-white transition-colors border border-white/[0.08]"
+          >
+            <ExternalLink className="w-4 h-4" />
+            Voir mon menu en direct
+          </a>
         </div>
 
         {/* Nav sections */}

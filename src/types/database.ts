@@ -48,11 +48,28 @@ export type Item = {
   price: number
   image_url: string | null
   tags: string[]
+  allergens: Allergen[]
   is_available: boolean
   sort_order: number
   created_at: string
   updated_at: string
 }
+
+export type Allergen =
+  | 'gluten'
+  | 'crustaceans'
+  | 'eggs'
+  | 'fish'
+  | 'peanuts'
+  | 'soybeans'
+  | 'milk'
+  | 'nuts'
+  | 'celery'
+  | 'mustard'
+  | 'sesame'
+  | 'sulphites'
+  | 'lupin'
+  | 'molluscs'
 
 export type Promotion = {
   id: string

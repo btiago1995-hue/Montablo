@@ -15,20 +15,20 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Menu digital pour pizzeria | MonTablo',
   description:
-    'Creez le menu digital de votre pizzeria. Photos de pizzas, categories claires, mise a jour des prix instantanee. Ideal pour pizzerias et livraison.',
+    'Créez le menu digital de votre pizzeria. Photos de pizzas, catégories claires, mise à jour des prix instantanée. Idéal pour pizzerias et livraison.',
   openGraph: {
     title: 'Menu digital pour pizzeria | MonTablo',
     description:
-      'Photos, categories claires, prix modifiables en un clic. La solution pour les pizzerias.',
+      'Photos, catégories claires, prix modifiables en un clic. La solution pour les pizzerias.',
   },
 }
 
 const benefits = [
   {
     icon: Layers,
-    title: 'Categories structurees',
+    title: 'Catégories structurees',
     description:
-      'Pizzas, pastas, salades, desserts, boissons. Organisez votre carte avec des categories claires pour que vos clients trouvent tout facilement.',
+      'Pizzas, pastas, salades, desserts, boissons. Organisez votre carte avec des catégories claires pour que vos clients trouvent tout facilement.',
   },
   {
     icon: Camera,
@@ -38,9 +38,9 @@ const benefits = [
   },
   {
     icon: DollarSign,
-    title: 'Prix modifiables instantanement',
+    title: 'Prix modifiables instantanément',
     description:
-      'Le cout des ingredients change ? Mettez a jour vos prix en quelques secondes. Plus besoin de reimprimer toute la carte.',
+      'Le coût des ingredients change ? Mettez à jour vos prix en quelques secondes. Plus besoin de réimprimer toute la carte.',
   },
 ]
 
@@ -52,22 +52,22 @@ const features = [
   },
   {
     icon: Layers,
-    title: 'Categories claires',
+    title: 'Catégories claires',
     description: 'Pizzas classiques, pizzas speciales, pastas, salades, desserts. Chaque plat a sa place, votre carte reste lisible.',
   },
   {
     icon: DollarSign,
-    title: 'Prix mis a jour en un clic',
-    description: 'Le prix de la mozzarella augmente ? Mettez a jour tous vos prix en quelques minutes, sans reimprimer.',
+    title: 'Prix mis à jour en un clic',
+    description: 'Le prix de la mozzarella augmente ? Mettez à jour tous vos prix en quelques minutes, sans réimprimer.',
   },
   {
     icon: Smartphone,
     title: 'QR code pour la salle et la livraison',
-    description: 'Un QR code sur les tables et sur vos emballages de livraison. Vos clients accedent a votre menu partout.',
+    description: 'Un QR code sur les tables et sur vos emballages de livraison. Vos clients accèdent a votre menu partout.',
   },
   {
     icon: Zap,
-    title: 'Mises a jour en temps reel',
+    title: 'Mises à jour en temps réel',
     description: 'Un ingredient est en rupture ? Desactivez le plat en un tap. Vos clients ne commanderont que ce qui est disponible.',
   },
   {
@@ -81,12 +81,12 @@ const steps = [
   {
     number: '1',
     title: 'Ajoutez vos plats',
-    description: 'Creez vos categories, ajoutez vos pizzas avec photos, descriptions et prix.',
+    description: 'Créez vos catégories, ajoutez vos pizzas avec photos, descriptions et prix.',
   },
   {
     number: '2',
     title: 'Personnalisez le design',
-    description: 'Choisissez les couleurs de votre pizzeria. Votre menu reflète votre identite.',
+    description: 'Choisissez les couleurs de votre pizzeria. Votre menu reflète votre identité.',
   },
   {
     number: '3',
@@ -117,7 +117,7 @@ export default function PizzeriaPage() {
           </Link>
           <div className="flex items-center gap-6">
             <Link href="/fonctionnalites" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
-              Fonctionnalites
+              Fonctionnalités
             </Link>
             <Link href="/tarifs" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
               Tarifs
@@ -155,10 +155,10 @@ export default function PizzeriaPage() {
           Solution pizzeria
         </p>
         <h1 className="font-serif text-4xl sm:text-5xl text-foreground mb-4 max-w-[680px] leading-tight">
-          Le menu digital ideal pour les pizzerias.
+          Le menu digital idéal pour les pizzerias.
         </h1>
         <p className="text-lg text-muted max-w-[520px] mb-10 leading-relaxed">
-          Photos appetissantes, categories structurees, prix modifiables en un instant.
+          Photos appétissantes, catégories structurees, prix modifiables en un instant.
           Donnez a vos clients une carte qui donne envie de commander.
         </p>
         <Link
@@ -212,7 +212,7 @@ export default function PizzeriaPage() {
       {/* Feature highlights */}
       <section className="max-w-[1120px] mx-auto px-6 pb-24">
         <h2 className="font-serif text-3xl text-foreground mb-10">
-          Les fonctionnalites cles pour votre pizzeria
+          Les fonctionnalités clés pour votre pizzeria
         </h2>
         <div className="grid md:grid-cols-2 gap-8">
           {features.map((feature) => {
@@ -234,7 +234,7 @@ export default function PizzeriaPage() {
       <section className="max-w-[1120px] mx-auto px-6 pb-24">
         <div className="bg-primary rounded-[20px] py-16 px-8 text-center">
           <h2 className="font-serif text-3xl text-white mb-3">
-            Pret a creer le menu digital de votre pizzeria ?
+            Prêt a créer le menu digital de votre pizzeria ?
           </h2>
           <p className="text-white/60 mb-8 max-w-md mx-auto">
             14 jours d&apos;essai gratuit. Aucune carte bancaire requise.
@@ -260,7 +260,7 @@ export default function PizzeriaPage() {
       {/* Internal links */}
       <section className="max-w-[1120px] mx-auto px-6 pb-16">
         <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[13px] text-muted/60">
-          <Link href="/fonctionnalites" className="hover:text-muted transition-colors">Fonctionnalites</Link>
+          <Link href="/fonctionnalites" className="hover:text-muted transition-colors">Fonctionnalités</Link>
           <Link href="/tarifs" className="hover:text-muted transition-colors">Tarifs</Link>
           <Link href="/menu-digital-restaurant" className="hover:text-muted transition-colors">Menu digital restaurant</Link>
           <Link href="/qr-code-restaurant" className="hover:text-muted transition-colors">QR code restaurant</Link>
@@ -283,7 +283,7 @@ export default function PizzeriaPage() {
             <div>
               <p className="text-[13px] font-medium text-foreground mb-3">Produit</p>
               <div className="space-y-3">
-                <Link href="/fonctionnalites" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Fonctionnalites</Link>
+                <Link href="/fonctionnalites" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Fonctionnalités</Link>
                 <Link href="/tarifs" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Tarifs</Link>
                 <Link href="/menu/demo" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Voir un exemple</Link>
               </div>
@@ -298,16 +298,16 @@ export default function PizzeriaPage() {
             <div>
               <p className="text-[13px] font-medium text-foreground mb-3">Legal</p>
               <div className="space-y-3">
-                <Link href="/mentions-legales" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Mentions legales</Link>
+                <Link href="/mentions-légales" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Mentions légales</Link>
                 <Link href="/cgu" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">CGU</Link>
-                <Link href="/confidentialite" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Confidentialite</Link>
+                <Link href="/confidentialite" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Confidentialité</Link>
                 <Link href="/cookies" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Cookies</Link>
               </div>
             </div>
           </div>
           <div className="border-t border-border/50 pt-6 text-center">
             <p className="text-sm text-muted/60">
-              &copy; {new Date().getFullYear()} MonTablo. Tous droits reserves.
+              &copy; {new Date().getFullYear()} MonTablo. Tous droits réservés.
             </p>
           </div>
         </div>

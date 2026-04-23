@@ -6,11 +6,11 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'MonTablo vs Tastycloud : comparatif menus digitaux — MonTablo',
   description:
-    'Comparatif detaille entre MonTablo et Tastycloud pour votre menu digital de restaurant. Design, prix, simplicite, import IA : decouvrez quelle solution choisir.',
+    'Comparatif détaillé entre MonTablo et Tastycloud pour votre menu digital de restaurant. Design, prix, simplicite, import IA : découvrez quelle solution choisir.',
   openGraph: {
     title: 'MonTablo vs Tastycloud : comparatif menus digitaux — MonTablo',
     description:
-      'MonTablo vs Tastycloud : quel menu digital choisir ? Comparatif complet des fonctionnalites, prix et experience utilisateur.',
+      'MonTablo vs Tastycloud : quel menu digital choisir ? Comparatif complet des fonctionnalités, prix et expérience utilisateur.',
   },
 }
 
@@ -18,7 +18,7 @@ const comparisonRows = [
   {
     icon: Euro,
     criteria: 'Prix',
-    competitor: 'Plusieurs paliers tarifaires, cout variable',
+    competitor: 'Plusieurs paliers tarifaires, coût variable',
     montablo: 'Un seul prix : 26,99 euros/mois (annuel) ou 29,99 euros/mois',
     advantage: 'montablo' as const,
   },
@@ -26,14 +26,14 @@ const comparisonRows = [
     icon: Palette,
     criteria: 'Qualite du design',
     competitor: 'Design fonctionnel mais vieillissant',
-    montablo: 'Design moderne et soigne, adapte a votre identite',
+    montablo: 'Design moderne et soigné, adapte a votre identité',
     advantage: 'montablo' as const,
   },
   {
     icon: MousePointerClick,
     criteria: 'Facilite d\'utilisation',
     competitor: 'Interface riche mais plus complexe a prendre en main',
-    montablo: 'Interface intuitive, prise en main immediate',
+    montablo: 'Interface intuitive, prise en main immédiate',
     advantage: 'montablo' as const,
   },
   {
@@ -46,7 +46,7 @@ const comparisonRows = [
   {
     icon: Megaphone,
     criteria: 'Promotions',
-    competitor: 'Fonctionnalite limitee ou en option',
+    competitor: 'Fonctionnalité limitee ou en option',
     montablo: 'Programmables avec dates de debut et de fin',
     advantage: 'montablo' as const,
   },
@@ -61,7 +61,7 @@ const comparisonRows = [
     icon: Globe,
     criteria: 'Bilingue',
     competitor: 'Multilingue disponible (selon l\'offre)',
-    montablo: 'Bilingue FR/EN integre en standard',
+    montablo: 'Bilingue FR/EN intégré en standard',
     advantage: 'tie' as const,
   },
   {
@@ -75,21 +75,21 @@ const comparisonRows = [
     icon: Smartphone,
     criteria: 'Experience mobile',
     competitor: 'Correcte mais pas toujours optimisee',
-    montablo: 'Concu mobile-first, experience fluide',
+    montablo: 'Conçu mobile-first, expérience fluide',
     advantage: 'montablo' as const,
   },
 ]
 
 const faqs = [
   {
-    question: 'Quelle est la difference entre MonTablo et Tastycloud ?',
+    question: 'Quelle est la différence entre MonTablo et Tastycloud ?',
     answer:
-      'Tastycloud est une solution de menu digital etablie en France avec de nombreuses fonctionnalites et integrations. MonTablo est une alternative plus recente, focalisee sur la simplicite, le design moderne et un prix unique transparent. MonTablo propose aussi l\'import de menu par IA, une fonctionnalite absente chez Tastycloud.',
+      'Tastycloud est une solution de menu digital etablie en France avec de nombreuses fonctionnalités et integrations. MonTablo est une alternative plus recente, focalisee sur la simplicite, le design moderne et un prix unique transparent. MonTablo propose aussi l\'import de menu par IA, une fonctionnalité absente chez Tastycloud.',
   },
   {
     question: 'Tastycloud est-il plus cher que MonTablo ?',
     answer:
-      'Tastycloud propose plusieurs paliers tarifaires selon les fonctionnalites souhaitees, ce qui peut vite faire monter la facture. MonTablo propose un tarif unique a partir de 26,99 euros par mois (annuel) ou 29,99 euros par mois sans engagement, avec toutes les fonctionnalites incluses.',
+      'Tastycloud propose plusieurs paliers tarifaires selon les fonctionnalités souhaitees, ce qui peut vite faire monter la facture. MonTablo propose un tarif unique à partir de 26,99 euros par mois (annuel) ou 29,99 euros par mois sans engagement, avec toutes les fonctionnalités incluses.',
   },
   {
     question: 'Puis-je migrer de Tastycloud vers MonTablo facilement ?',
@@ -97,14 +97,14 @@ const faqs = [
       'Oui. Avec l\'import par IA de MonTablo, il suffit de photographier votre menu actuel ou de copier-coller son contenu. Vos plats, descriptions et prix sont extraits automatiquement. La migration prend moins de 10 minutes.',
   },
   {
-    question: 'Tastycloud propose-t-il des fonctionnalites que MonTablo n\'a pas ?',
+    question: 'Tastycloud propose-t-il des fonctionnalités que MonTablo n\'a pas ?',
     answer:
-      'Tastycloud dispose d\'un historique plus long sur le marche et propose certaines integrations avec des systemes de caisse et des plateformes de commande en ligne. Si ces integrations sont essentielles pour votre activite, Tastycloud peut etre un choix a considerer.',
+      'Tastycloud dispose d\'un historique plus long sur le marche et propose certaines integrations avec des systemes de caisse et des plateformes de commande en ligne. Si ces integrations sont essentielles pour votre activite, Tastycloud peut être un choix a considerer.',
   },
   {
     question: 'Pourquoi choisir MonTablo plutot que Tastycloud ?',
     answer:
-      'MonTablo se distingue par son design plus moderne, sa simplicite d\'utilisation, l\'import de menu par IA, un prix unique sans paliers, et une experience mobile optimisee. C\'est la solution ideale si vous voulez un menu digital elegant et facile a gerer sans complexite inutile.',
+      'MonTablo se distingue par son design plus moderne, sa simplicite d\'utilisation, l\'import de menu par IA, un prix unique sans paliers, et une expérience mobile optimisee. C\'est la solution idéale si vous voulez un menu digital élégant et facile a gérer sans complexite inutile.',
   },
 ]
 
@@ -131,7 +131,7 @@ export default function CompareTastyCloudPage() {
           </Link>
           <div className="flex items-center gap-6">
             <Link href="/fonctionnalites" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
-              Fonctionnalites
+              Fonctionnalités
             </Link>
             <Link href="/tarifs" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
               Tarifs
@@ -176,8 +176,8 @@ export default function CompareTastyCloudPage() {
           <Link href="/menu-digital-restaurant" className="text-primary hover:underline">
             menu digital
           </Link>{' '}
-          pour restaurants, deux approches differentes. Comparez les fonctionnalites,
-          les prix et l&apos;experience utilisateur.
+          pour restaurants, deux approches différentes. Comparez les fonctionnalités,
+          les prix et l&apos;expérience utilisateur.
         </p>
       </section>
 
@@ -241,19 +241,19 @@ export default function CompareTastyCloudPage() {
           {/* Design */}
           <div className="mb-14">
             <h3 className="font-serif text-2xl text-foreground mb-4">
-              Un design moderne et soigne
+              Un design moderne et soigné
             </h3>
             <p className="text-[15px] text-muted leading-relaxed mb-4">
-              Tastycloud est present sur le marche depuis plusieurs annees et propose
-              un design fonctionnel. MonTablo a ete concu plus recemment avec une approche
+              Tastycloud est present sur le marche depuis plusieurs années et propose
+              un design fonctionnel. MonTablo a été conçu plus recemment avec une approche
               design-first : chaque element est pense pour mettre vos plats en valeur
-              avec une esthetique moderne et elegante.
+              avec une esthetique moderne et élégante.
             </p>
             <p className="text-[15px] text-muted leading-relaxed">
-              Le resultat : un menu qui reflete la qualite de votre cuisine et donne
-              envie de commander. Decouvrez nos{' '}
+              Le resultat : un menu qui reflète la qualite de votre cuisine et donne
+              envie de commander. Découvrez nos{' '}
               <Link href="/fonctionnalites" className="text-primary hover:underline">
-                fonctionnalites
+                fonctionnalités
               </Link>{' '}
               de personnalisation.
             </p>
@@ -267,7 +267,7 @@ export default function CompareTastyCloudPage() {
             <p className="text-[15px] text-muted leading-relaxed mb-4">
               Tastycloud propose de nombreuses options et integrations, ce qui peut
               rendre la prise en main plus longue. MonTablo fait le choix de la
-              simplicite : vous creez votre menu en quelques minutes, sans formation
+              simplicite : vous créez votre menu en quelques minutes, sans formation
               ni configuration complexe.
             </p>
             <p className="text-[15px] text-muted leading-relaxed">
@@ -287,17 +287,17 @@ export default function CompareTastyCloudPage() {
               Un prix unique et transparent
             </h3>
             <p className="text-[15px] text-muted leading-relaxed mb-4">
-              Tastycloud propose plusieurs paliers tarifaires avec des fonctionnalites
-              differentes selon l&apos;offre choisie. Il faut souvent monter en gamme
-              pour acceder a certaines options.
+              Tastycloud propose plusieurs paliers tarifaires avec des fonctionnalités
+              différentes selon l&apos;offre choisie. Il faut souvent monter en gamme
+              pour accéder a certaines options.
             </p>
             <p className="text-[15px] text-muted leading-relaxed">
               MonTablo propose un{' '}
               <Link href="/tarifs" className="text-primary hover:underline">
                 tarif unique
               </Link>{' '}
-              avec toutes les fonctionnalites incluses : menu du jour, promotions,
-              bilingue, import IA, QR code personnalise. Pas de paliers, pas de
+              avec toutes les fonctionnalités incluses : menu du jour, promotions,
+              bilingue, import IA, QR code personnalisé. Pas de paliers, pas de
               surprises.
             </p>
           </div>
@@ -305,18 +305,18 @@ export default function CompareTastyCloudPage() {
           {/* Honesty */}
           <div>
             <h3 className="font-serif text-2xl text-foreground mb-4">
-              Quand Tastycloud peut etre un meilleur choix
+              Quand Tastycloud peut être un meilleur choix
             </h3>
             <p className="text-[15px] text-muted leading-relaxed mb-4">
-              Tastycloud dispose d&apos;un historique plus long sur le marche francais
+              Tastycloud dispose d&apos;un historique plus long sur le marche français
               et propose des integrations avec certains systemes de caisse et plateformes
               de commande en ligne. Si ces integrations specifiques sont essentielles
-              pour votre activite, Tastycloud merite d&apos;etre considere.
+              pour votre activite, Tastycloud merite d&apos;être considere.
             </p>
             <p className="text-[15px] text-muted leading-relaxed">
               Pour la majorite des restaurants qui cherchent un menu digital simple,
-              elegant et abordable, MonTablo offre un meilleur rapport qualite-prix
-              avec une experience utilisateur plus fluide.
+              élégant et abordable, MonTablo offre un meilleur rapport qualite-prix
+              avec une expérience utilisateur plus fluide.
             </p>
           </div>
         </div>
@@ -325,7 +325,7 @@ export default function CompareTastyCloudPage() {
       {/* FAQ */}
       <section className="max-w-[780px] mx-auto px-6 py-20">
         <h2 className="font-serif text-3xl text-foreground text-center mb-12">
-          Questions frequentes
+          Questions fréquentes
         </h2>
         <div className="space-y-6">
           {faqs.map((faq) => (
@@ -341,7 +341,7 @@ export default function CompareTastyCloudPage() {
       <section className="max-w-[1120px] mx-auto px-6 pb-20">
         <div className="border border-border rounded-[20px] py-16 px-8 text-center bg-gradient-to-b from-white to-background">
           <h2 className="font-serif text-3xl text-foreground mb-3">
-            Pret a decouvrir MonTablo ?
+            Prêt a découvrir MonTablo ?
           </h2>
           <p className="text-muted mb-8 max-w-md mx-auto">
             Essayez MonTablo gratuitement pendant 14 jours. Aucune carte bancaire requise.
@@ -354,7 +354,7 @@ export default function CompareTastyCloudPage() {
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
           </Link>
           <p className="text-[13px] text-muted/50 mt-4">
-            Ou decouvrez nos{' '}
+            Ou découvrez nos{' '}
             <Link href="/tarifs" className="text-primary hover:underline">tarifs</Link>
             {' '}et consultez la{' '}
             <Link href="/faq" className="text-primary hover:underline">FAQ</Link>
@@ -378,7 +378,7 @@ export default function CompareTastyCloudPage() {
             <div>
               <p className="text-[13px] font-medium text-foreground mb-3">Produit</p>
               <div className="space-y-3">
-                <Link href="/fonctionnalites" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Fonctionnalites</Link>
+                <Link href="/fonctionnalites" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Fonctionnalités</Link>
                 <Link href="/tarifs" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Tarifs</Link>
                 <Link href="/menu/demo" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Voir un exemple</Link>
               </div>
@@ -393,16 +393,16 @@ export default function CompareTastyCloudPage() {
             <div>
               <p className="text-[13px] font-medium text-foreground mb-3">Legal</p>
               <div className="space-y-3">
-                <Link href="/mentions-legales" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Mentions legales</Link>
+                <Link href="/mentions-légales" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Mentions légales</Link>
                 <Link href="/cgu" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">CGU</Link>
-                <Link href="/confidentialite" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Confidentialite</Link>
+                <Link href="/confidentialite" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Confidentialité</Link>
                 <Link href="/cookies" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Cookies</Link>
               </div>
             </div>
           </div>
           <div className="border-t border-border/50 pt-6 text-center">
             <p className="text-sm text-muted/60">
-              &copy; {new Date().getFullYear()} MonTablo. Tous droits reserves.
+              &copy; {new Date().getFullYear()} MonTablo. Tous droits réservés.
             </p>
           </div>
         </div>

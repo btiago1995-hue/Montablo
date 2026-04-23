@@ -166,6 +166,7 @@ export default async function PublicMenuPage({ params }: Props) {
         dailyMenu={dailyMenu}
         unavailableBehavior={restaurant.unavailable_behavior}
         primaryColor={primaryColor}
+        languages={restaurant.languages ?? ['fr', 'en']}
       />
 
       {/* Review popup */}

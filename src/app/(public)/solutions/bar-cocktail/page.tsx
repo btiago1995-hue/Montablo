@@ -15,11 +15,11 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Menu digital pour bar et cocktails | MonTablo',
   description:
-    'Creez la carte digitale de votre bar. Cocktails, happy hour, carte saisonniere. Design elegant et mises a jour en temps reel.',
+    'Créez la carte digitale de votre bar. Cocktails, happy hour, carte saisonnière. Design élégant et mises à jour en temps réel.',
   openGraph: {
     title: 'Menu digital pour bar et cocktails | MonTablo',
     description:
-      'Cocktails, happy hour, carte saisonniere. La solution elegante pour les bars.',
+      'Cocktails, happy hour, carte saisonnière. La solution élégante pour les bars.',
   },
 }
 
@@ -32,23 +32,23 @@ const benefits = [
   },
   {
     icon: RefreshCw,
-    title: 'Carte saisonniere facile',
+    title: 'Carte saisonnière facile',
     description:
-      'Vos cocktails changent avec les saisons ? Mettez a jour votre carte en quelques minutes, sans reimprimer ni plastifier.',
+      'Vos cocktails changent avec les saisons ? Mettez à jour votre carte en quelques minutes, sans réimprimer ni plastifier.',
   },
   {
     icon: Palette,
-    title: 'Design elegant pour vos cocktails',
+    title: 'Design élégant pour vos cocktails',
     description:
-      'Un menu digital soigne qui met en valeur vos creations. Couleurs personnalisables pour refleter l\'ambiance de votre bar.',
+      'Un menu digital soigné qui met en valeur vos creations. Couleurs personnalisables pour refleter l\'ambiance de votre bar.',
   },
 ]
 
 const features = [
   {
     icon: Wine,
-    title: 'Carte de cocktails elegante',
-    description: 'Presentez vos cocktails avec style. Photos, descriptions des ingredients, et prix clairement affiches.',
+    title: 'Carte de cocktails élégante',
+    description: 'Présentez vos cocktails avec style. Photos, descriptions des ingredients, et prix clairement affiches.',
   },
   {
     icon: Tag,
@@ -57,13 +57,13 @@ const features = [
   },
   {
     icon: RefreshCw,
-    title: 'Rotations saisonnieres',
+    title: 'Rotations saisonnières',
     description: 'Changez votre carte de cocktails a chaque saison en quelques clics. Gardez vos classiques, ajoutez les nouveautes.',
   },
   {
     icon: Palette,
     title: 'Design aux couleurs de votre bar',
-    description: 'Personnalisez les couleurs pour que votre menu reflète l\'ambiance de votre etablissement. Rendu professionnel garanti.',
+    description: 'Personnalisez les couleurs pour que votre menu reflète l\'ambiance de votre établissement. Rendu professionnel garanti.',
   },
   {
     icon: Smartphone,
@@ -72,7 +72,7 @@ const features = [
   },
   {
     icon: Clock,
-    title: 'Mises a jour en temps reel',
+    title: 'Mises à jour en temps réel',
     description: 'Un cocktail en rupture d\'ingredient ? Desactivez-le en un tap. Vos clients voient toujours ce qui est disponible.',
   },
 ]
@@ -80,7 +80,7 @@ const features = [
 const steps = [
   {
     number: '1',
-    title: 'Creez votre carte',
+    title: 'Créez votre carte',
     description: 'Ajoutez vos cocktails, bieres, vins et soft drinks avec photos et descriptions.',
   },
   {
@@ -91,7 +91,7 @@ const steps = [
   {
     number: '3',
     title: 'Partagez avec un QR code',
-    description: 'Generez votre QR code, placez-le au comptoir et sur les tables. Pret en quelques minutes.',
+    description: 'Générez votre QR code, placez-le au comptoir et sur les tables. Prêt en quelques minutes.',
   },
 ]
 
@@ -117,7 +117,7 @@ export default function BarCocktailPage() {
           </Link>
           <div className="flex items-center gap-6">
             <Link href="/fonctionnalites" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
-              Fonctionnalites
+              Fonctionnalités
             </Link>
             <Link href="/tarifs" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
               Tarifs
@@ -155,10 +155,10 @@ export default function BarCocktailPage() {
           Solution bar &amp; cocktails
         </p>
         <h1 className="font-serif text-4xl sm:text-5xl text-foreground mb-4 max-w-[680px] leading-tight">
-          La carte digitale elegante pour votre bar.
+          La carte digitale élégante pour votre bar.
         </h1>
         <p className="text-lg text-muted max-w-[520px] mb-10 leading-relaxed">
-          Cocktails saisonniers, happy hour, rotations de carte. Gerez tout depuis votre telephone
+          Cocktails saisonniers, happy hour, rotations de carte. Gerez tout depuis votre téléphone
           avec un design qui reflète l&apos;ambiance de votre bar.
         </p>
         <Link
@@ -212,7 +212,7 @@ export default function BarCocktailPage() {
       {/* Feature highlights */}
       <section className="max-w-[1120px] mx-auto px-6 pb-24">
         <h2 className="font-serif text-3xl text-foreground mb-10">
-          Les fonctionnalites cles pour votre bar
+          Les fonctionnalités clés pour votre bar
         </h2>
         <div className="grid md:grid-cols-2 gap-8">
           {features.map((feature) => {
@@ -234,7 +234,7 @@ export default function BarCocktailPage() {
       <section className="max-w-[1120px] mx-auto px-6 pb-24">
         <div className="bg-primary rounded-[20px] py-16 px-8 text-center">
           <h2 className="font-serif text-3xl text-white mb-3">
-            Pret a digitaliser la carte de votre bar ?
+            Prêt a digitaliser la carte de votre bar ?
           </h2>
           <p className="text-white/60 mb-8 max-w-md mx-auto">
             14 jours d&apos;essai gratuit. Aucune carte bancaire requise.
@@ -260,7 +260,7 @@ export default function BarCocktailPage() {
       {/* Internal links */}
       <section className="max-w-[1120px] mx-auto px-6 pb-16">
         <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[13px] text-muted/60">
-          <Link href="/fonctionnalites" className="hover:text-muted transition-colors">Fonctionnalites</Link>
+          <Link href="/fonctionnalites" className="hover:text-muted transition-colors">Fonctionnalités</Link>
           <Link href="/tarifs" className="hover:text-muted transition-colors">Tarifs</Link>
           <Link href="/menu-digital-restaurant" className="hover:text-muted transition-colors">Menu digital restaurant</Link>
           <Link href="/qr-code-restaurant" className="hover:text-muted transition-colors">QR code restaurant</Link>
@@ -283,7 +283,7 @@ export default function BarCocktailPage() {
             <div>
               <p className="text-[13px] font-medium text-foreground mb-3">Produit</p>
               <div className="space-y-3">
-                <Link href="/fonctionnalites" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Fonctionnalites</Link>
+                <Link href="/fonctionnalites" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Fonctionnalités</Link>
                 <Link href="/tarifs" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Tarifs</Link>
                 <Link href="/menu/demo" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Voir un exemple</Link>
               </div>
@@ -298,16 +298,16 @@ export default function BarCocktailPage() {
             <div>
               <p className="text-[13px] font-medium text-foreground mb-3">Legal</p>
               <div className="space-y-3">
-                <Link href="/mentions-legales" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Mentions legales</Link>
+                <Link href="/mentions-légales" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Mentions légales</Link>
                 <Link href="/cgu" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">CGU</Link>
-                <Link href="/confidentialite" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Confidentialite</Link>
+                <Link href="/confidentialite" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Confidentialité</Link>
                 <Link href="/cookies" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Cookies</Link>
               </div>
             </div>
           </div>
           <div className="border-t border-border/50 pt-6 text-center">
             <p className="text-sm text-muted/60">
-              &copy; {new Date().getFullYear()} MonTablo. Tous droits reserves.
+              &copy; {new Date().getFullYear()} MonTablo. Tous droits réservés.
             </p>
           </div>
         </div>
