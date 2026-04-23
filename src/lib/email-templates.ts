@@ -164,25 +164,24 @@ export function trialExpiryWarning(restaurantName: string, daysLeft: number, das
 // ─── 3. Trial expired ───────────────────────────────────────────────
 
 export function trialExpired(restaurantName: string, dashboardUrl: string) {
+  const content = `
+    <p style="font-size:16px;color:${BRAND.text};margin:0 0 16px">Bonjour,</p>
+    <p style="font-size:15px;color:${BRAND.text};line-height:1.6;margin:0 0 16px">
+      Votre essai gratuit pour <strong>${restaurantName}</strong> est terminé.
+      Votre menu est toujours visible par vos clients, mais l'édition est désactivée.
+    </p>
+    <p style="font-size:15px;color:${BRAND.text};line-height:1.6;margin:0 0 16px">
+      Choisissez une formule pour retrouver l'accès complet :
+    </p>
+    <ul style="font-size:15px;color:${BRAND.text};line-height:1.8;margin:0 0 24px;padding-left:20px">
+      <li><strong>Essentiel</strong> — 19€ HT/mois</li>
+      <li><strong>Pro</strong> — 39€ HT/mois</li>
+    </ul>
+    ${button('Choisir ma formule', `${dashboardUrl}/abonnement`)}
+  `
   return {
-    subject: `${restaurantName} — Votre essai gratuit a expiré`,
-    html: layout(`
-      <h2 style="font-family:Georgia,serif;color:${BRAND.primary};margin:0 0 16px;font-size:22px">
-        Votre essai est terminé
-      </h2>
-      <p style="font-size:15px;color:${BRAND.text};line-height:1.6;margin:0 0 16px">
-        L'essai gratuit de <strong>${restaurantName}</strong> a pris fin.
-        Votre menu digital n'est plus visible par vos clients.
-      </p>
-      <p style="font-size:15px;color:${BRAND.text};line-height:1.6;margin:0 0 16px">
-        Bonne nouvelle&nbsp;: <strong>toutes vos données sont intactes</strong>. Activez votre abonnement
-        pour remettre votre menu en ligne immédiatement.
-      </p>
-      ${button('Réactiver mon menu', `${dashboardUrl}/settings`)}
-      <p style="font-size:13px;color:${BRAND.muted};line-height:1.5;margin:0">
-        Besoin d'aide&nbsp;? Répondez à cet email.
-      </p>
-    `),
+    subject: `Votre essai MonTablo est terminé — choisissez votre formule`,
+    html: layout(content),
   }
 }
 
@@ -294,5 +293,31 @@ export function invoiceIssued(
         <a href="${dashboardUrl}/settings" style="color:${BRAND.accent};text-decoration:none">tableau de bord</a>.
       </p>
     `),
+  }
+}
+
+// ─── 7. Trial — choose plan (J+10) ──────────────────────────────────
+
+export function trialChoosePlan(restaurantName: string, dashboardUrl: string) {
+  const content = `
+    <p style="font-size:16px;color:${BRAND.text};margin:0 0 16px">Bonjour,</p>
+    <p style="font-size:15px;color:${BRAND.text};line-height:1.6;margin:0 0 16px">
+      Plus que <strong>4 jours</strong> avant la fin de votre essai gratuit pour <strong>${restaurantName}</strong>.
+    </p>
+    <p style="font-size:15px;color:${BRAND.text};line-height:1.6;margin:0 0 16px">
+      C'est le moment de choisir la formule qui vous convient :
+    </p>
+    <ul style="font-size:15px;color:${BRAND.text};line-height:1.8;margin:0 0 16px;padding-left:20px">
+      <li><strong>Essentiel — 19€ HT/mois</strong> : menu digital + QR code + allergènes INCO</li>
+      <li><strong>Pro — 39€ HT/mois</strong> : Essentiel + avis Google filtrés + cartes fidélité Wallet</li>
+    </ul>
+    <p style="font-size:14px;color:${BRAND.muted};line-height:1.6;margin:0 0 16px">
+      Besoin de multi-établissements ou géolocalisation ? Répondez à cet email pour un devis Premium.
+    </p>
+    ${button('Choisir mon plan', `${dashboardUrl}/abonnement`)}
+  `
+  return {
+    subject: `Plus que 4 jours pour choisir votre formule MonTablo`,
+    html: layout(content),
   }
 }
