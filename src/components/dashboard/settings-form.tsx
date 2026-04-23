@@ -1,12 +1,13 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import type { Restaurant } from '@/types/database'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { ImageUpload } from '@/components/ui/image-upload'
-import { AlertTriangle, Check, CreditCard, Star, Trash2, X } from 'lucide-react'
+import { AlertTriangle, Check, Star, Trash2, X } from 'lucide-react'
 
 export function SettingsForm({ restaurant }: { restaurant: Restaurant }) {
   const router = useRouter()
@@ -19,8 +20,6 @@ export function SettingsForm({ restaurant }: { restaurant: Restaurant }) {
   const [googleReviewUrl, setGoogleReviewUrl] = useState(restaurant.google_review_url ?? '')
   const [loading, setLoading] = useState(false)
   const [saved, setSaved] = useState(false)
-  const [billingLoading, setBillingLoading] = useState(false)
-  const [billingPlan, setBillingPlan] = useState<'monthly' | 'annual'>('annual')
   const [deleteLoading, setDeleteLoading] = useState(false)
   const [dangerExpanded, setDangerExpanded] = useState(false)
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
@@ -102,27 +101,21 @@ export function SettingsForm({ restaurant }: { restaurant: Restaurant }) {
     router.refresh()
   }
 
-  async function handleSubscribe() {
-    setBillingLoading(true)
-    try {
-      const res = await fetch('/api/stripe/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ plan: billingPlan }),
-      })
-      const { url } = await res.json()
-      if (url) window.location.href = url
-    } catch {
-      setBillingLoading(false)
-    }
-  }
-
-  const trialDaysLeft = restaurant.trial_ends_at
-    ? Math.max(0, Math.ceil((new Date(restaurant.trial_ends_at).getTime() - Date.now()) / 86400000))
-    : 0
-
   return (
     <div className="max-w-2xl space-y-8">
+      {/* Lien vers /dashboard/abonnement */}
+      <div className="bg-white rounded-xl border border-border p-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="font-medium text-foreground">Abonnement</p>
+            <p className="text-sm text-muted">Gérez votre formule depuis la page dédiée.</p>
+          </div>
+          <Link href="/dashboard/abonnement" className="text-sm font-medium text-primary hover:underline">
+            Voir mon abonnement →
+          </Link>
+        </div>
+      </div>
+
       {/* Restaurant info */}
       <form onSubmit={handleSave} className="bg-white rounded-xl border border-border p-6 space-y-5">
         <h2 className="font-serif text-xl text-foreground">Informations</h2>
@@ -294,66 +287,6 @@ export function SettingsForm({ restaurant }: { restaurant: Restaurant }) {
           )}
         </Button>
       </form>
-
-      {/* Subscription */}
-      <div className="bg-white rounded-xl border border-border p-6">
-        <h2 className="font-serif text-xl text-foreground mb-4">Abonnement</h2>
-
-        <div className="flex items-center gap-3 mb-4">
-          <span
-            className={`text-xs font-medium px-3 py-1 rounded-full ${
-              restaurant.subscription_status === 'active'
-                ? 'bg-green-50 text-green-700'
-                : restaurant.subscription_status === 'trialing'
-                ? 'bg-blue-50 text-blue-700'
-                : 'bg-red-50 text-red-700'
-            }`}
-          >
-            {restaurant.subscription_status === 'active' && 'Actif'}
-            {restaurant.subscription_status === 'trialing' && `Essai gratuit — ${trialDaysLeft} jour${trialDaysLeft !== 1 ? 's' : ''} restant${trialDaysLeft !== 1 ? 's' : ''}`}
-            {restaurant.subscription_status === 'past_due' && 'Paiement en retard'}
-            {restaurant.subscription_status === 'canceled' && 'Annulé'}
-            {restaurant.subscription_status === 'inactive' && 'Inactif'}
-          </span>
-        </div>
-
-        {restaurant.subscription_status !== 'active' && (
-          <div className="space-y-4">
-            <div className="flex gap-2">
-              <button
-                type="button"
-                onClick={() => setBillingPlan('monthly')}
-                className={`flex-1 p-3 rounded-lg border-2 text-left transition-all ${
-                  billingPlan === 'monthly'
-                    ? 'border-primary bg-primary/5'
-                    : 'border-border hover:border-primary/30'
-                }`}
-              >
-                <div className="text-sm font-semibold text-foreground">Mensuel</div>
-                <div className="text-lg font-bold text-foreground">29,99 &euro;<span className="text-xs font-normal text-muted">/mois</span></div>
-              </button>
-              <button
-                type="button"
-                onClick={() => setBillingPlan('annual')}
-                className={`flex-1 p-3 rounded-lg border-2 text-left transition-all relative ${
-                  billingPlan === 'annual'
-                    ? 'border-primary bg-primary/5'
-                    : 'border-border hover:border-primary/30'
-                }`}
-              >
-                <span className="absolute -top-2.5 right-2 text-[10px] font-bold bg-green-600 text-white px-2 py-0.5 rounded-full">-10%</span>
-                <div className="text-sm font-semibold text-foreground">Annuel</div>
-                <div className="text-lg font-bold text-foreground">26,99 &euro;<span className="text-xs font-normal text-muted">/mois</span></div>
-                <div className="text-[11px] text-muted">323,89 &euro;/an</div>
-              </button>
-            </div>
-            <Button onClick={handleSubscribe} disabled={billingLoading} className="w-full">
-              <CreditCard className="w-4 h-4" />
-              {billingLoading ? 'Redirection...' : 'Souscrire un abonnement'}
-            </Button>
-          </div>
-        )}
-      </div>
 
       {/* Zone dangereuse (collapsed by default) */}
       <div className="rounded-xl border border-border bg-white p-6">
