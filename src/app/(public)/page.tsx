@@ -1,327 +1,437 @@
 import Link from 'next/link'
-import { ArrowRight, Check, UtensilsCrossed } from 'lucide-react'
-import { TIERS } from '@/lib/pricing'
+import { UtensilsCrossed } from 'lucide-react'
 import { JsonLd, homepageJsonLd } from '@/components/seo/json-ld'
 import { CTALink } from '@/components/public/cta-link'
+import { MenuPreview } from '@/components/public/homepage/menu-preview'
+import { PricingToggle } from '@/components/public/homepage/pricing-toggle'
+import './homepage.css'
 
 const steps = [
-  { num: '01', title: 'Inscrivez-vous', desc: 'Créez votre compte en 30 secondes. Aucune carte de crédit requise.' },
-  { num: '02', title: 'Ajoutez vos plats', desc: 'Noms, descriptions, prix. Organisez par catégories, ajoutez des photos si vous voulez.' },
-  { num: '03', title: 'Partagez le QR code', desc: 'Imprimez-le, posez-le sur vos tables. Vos clients y accèdent en un scan.' },
+  {
+    num: '01',
+    title: 'Inscrivez-vous',
+    desc: "Créez votre compte en 30 secondes. Aucune carte de crédit, aucun engagement — juste votre email.",
+  },
+  {
+    num: '02',
+    title: 'Ajoutez vos plats',
+    desc: "Noms, descriptions, prix. Organisez par catégories, ajoutez des photos. Ou importez votre carte avec l'IA.",
+  },
+  {
+    num: '03',
+    title: 'Partagez le QR',
+    desc: "Imprimez-le, posez-le sur vos tables. Vos clients y accèdent en un scan — sans app, sans friction.",
+  },
 ]
-
-const benefits = [
-  'Mise à jour instantanée, plus de réimpressions',
-  'Menu du jour en un clic',
-  'Promotions temporaires automatisées',
-  'Cartes de fidélité Google Wallet & Apple Wallet',
-  'Design aux couleurs de votre restaurant',
-  'Bilingue français / anglais',
-  'QR code personnalisable',
-  'Import de carte par IA',
-]
-
-const menuItems = {
-  entrées: [
-    { name: 'Soupe à l\'oignon', desc: 'Gratinée au gruyère', price: '8,50 €' },
-    { name: 'Salade de chèvre chaud', desc: 'Miel, noix, mesclun', price: '11,00 €' },
-  ],
-  plats: [
-    { name: 'Confit de canard', desc: 'Pommes sarladaises', price: '19,50 €' },
-    { name: 'Bœuf bourguignon', desc: 'Carottes, champignons', price: '18,00 €' },
-  ],
-}
 
 export default function LandingPage() {
   const schemas = homepageJsonLd()
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="mt-redesign">
       {schemas.map((schema, i) => (
         <JsonLd key={i} data={schema} />
       ))}
-      {/* Nav */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/85 backdrop-blur-xl border-b border-border/50">
-        <div className="flex items-center justify-between px-6 py-4 max-w-[1120px] mx-auto">
-          <Link href="/" className="flex items-center gap-2">
-            <UtensilsCrossed className="w-6 h-6 text-primary" />
-            <span className="font-serif text-xl text-primary tracking-tight">MonTablo</span>
+
+      {/* Fraunces (editorial serif) + Work Sans (humanist sans) — scoped to this page */}
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Work+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+      />
+
+      {/* ===== NAV ===== */}
+      <nav className="mt-nav">
+        <div className="mt-container mt-nav-inner">
+          <Link href="/" className="mt-logo" aria-label="MonTablo — accueil">
+            <UtensilsCrossed width={26} height={26} strokeWidth={1.6} />
+            <span>MonTablo</span>
           </Link>
-          <div className="flex items-center gap-6">
-            <Link href="/fonctionnalites" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
-              Fonctionnalités
-            </Link>
-            <Link href="/tarifs" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
-              Tarifs
-            </Link>
-            <Link href="/blog" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
-              Blog
-            </Link>
-            <Link
-              href="/login"
-              className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block"
-            >
+          <div className="mt-nav-links">
+            <Link href="/fonctionnalites">Fonctionnalités</Link>
+            <Link href="/tarifs">Tarifs</Link>
+            <Link href="#preview">Exemple</Link>
+            <Link href="/blog">Blog</Link>
+          </div>
+          <div className="mt-nav-actions">
+            <Link href="/login" className="mt-btn mt-btn-ghost mt-btn-sm">
               Connexion
             </Link>
-            <Link
+            <CTALink
               href="/signup"
-              className="text-sm font-medium bg-primary text-white px-5 py-2.5 rounded-full hover:bg-primary-light transition-all hover:shadow-lg hover:shadow-primary/15"
+              label="nav_essai"
+              className="mt-btn mt-btn-primary mt-btn-sm"
             >
               Essai gratuit
-            </Link>
+            </CTALink>
           </div>
         </div>
       </nav>
 
-      {/* Hero */}
-      <section className="max-w-[1120px] mx-auto px-6 pt-[120px] pb-16 sm:pt-[160px] sm:pb-20">
-        <p className="text-sm sm:text-[13px] font-medium tracking-[0.08em] uppercase text-accent-dark mb-5">
-          Le menu digital pour les restaurants exigeants
-        </p>
-        <h1 className="font-serif text-[32px] sm:text-5xl lg:text-[60px] text-foreground leading-[1.1] mb-6 max-w-[680px]">
-          Votre carte, enfin à la hauteur de votre cuisine.
-        </h1>
-        <p className="text-lg sm:text-lg text-muted leading-relaxed max-w-[520px] mb-10">
-          Un menu digital élégant que vous mettez à jour en temps réel.
-          Vos clients scannent, vous gardez le contrôle.
-        </p>
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-5">
-          <CTALink
-            href="/signup"
-            label="hero_essayer"
-            className="group inline-flex items-center justify-center gap-2.5 bg-primary text-white font-medium px-8 py-4 sm:py-3.5 rounded-full hover:bg-primary-light transition-all hover:shadow-xl hover:shadow-primary/18 hover:-translate-y-px text-base sm:text-[15px]"
-          >
-            Essayer 14 jours gratuitement
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-          </CTALink>
-          <Link
-            href="/menu/demo"
-            className="group inline-flex items-center justify-center gap-2 border border-border text-foreground font-medium px-6 py-4 sm:py-3.5 rounded-full hover:border-foreground/30 hover:bg-muted/5 transition-all text-base sm:text-[15px]"
-          >
-            Voir un exemple
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-          </Link>
+      {/* ===== HERO ===== */}
+      <section className="mt-hero">
+        <div className="mt-hero-deco" aria-hidden="true">
+          <div className="mt-circle mt-c1" />
+          <div className="mt-circle mt-c2" />
         </div>
-      </section>
-
-      {/* Proof strip */}
-      <div className="border-y border-border bg-white">
-        <div className="max-w-[1120px] mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-10">
-          <span className="text-sm text-muted/60">Sans engagement</span>
-          <span className="hidden sm:block w-1 h-1 rounded-full bg-border" />
-          <span className="text-sm text-muted/60">Aucune carte bancaire</span>
-          <span className="hidden sm:block w-1 h-1 rounded-full bg-border" />
-          <span className="text-sm text-muted/60">Prêt en 5 minutes</span>
-        </div>
-      </div>
-
-      {/* How it works */}
-      <section className="max-w-[1120px] mx-auto px-6 py-16 sm:py-[120px]">
-        <p className="text-sm sm:text-[13px] font-medium tracking-[0.08em] uppercase text-accent-dark mb-3">
-          Comment ça marche
-        </p>
-        <h2 className="font-serif text-[28px] sm:text-4xl text-foreground mb-10 sm:mb-16 max-w-lg leading-tight">
-          Trois étapes. Cinq minutes. Zéro friction.
-        </h2>
-        <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
-          {steps.map((step) => (
-            <div key={step.num} className="group">
-              <span className="font-serif text-[48px] sm:text-[64px] leading-none text-border group-hover:text-accent transition-colors duration-300">
-                {step.num}
-              </span>
-              <h3 className="font-serif text-xl text-foreground mt-4 mb-2">{step.title}</h3>
-              <p className="text-base sm:text-[15px] text-muted leading-relaxed">{step.desc}</p>
+        <div className="mt-container mt-hero-grid">
+          <div className="mt-hero-copy">
+            <span className="mt-eyebrow">Menu digital · Restaurants</span>
+            <h1>
+              Votre carte,<br />
+              enfin <em>à la hauteur</em><br />
+              de votre cuisine.
+            </h1>
+            <p className="mt-hero-sub">
+              Un menu digital élégant, mis à jour en temps réel. Vos clients scannent —
+              vous gardez le contrôle, jusqu&apos;au moindre détail.
+            </p>
+            <div className="mt-hero-ctas">
+              <CTALink
+                href="/signup"
+                label="hero_essayer"
+                className="mt-btn mt-btn-primary"
+              >
+                Essayer 14 jours gratuitement
+              </CTALink>
+              <Link href="#preview" className="mt-btn mt-btn-secondary">
+                Voir un exemple
+              </Link>
             </div>
-          ))}
+            <div className="mt-hero-meta">
+              <span><span className="mt-dot" />Sans engagement</span>
+              <span><span className="mt-dot" />Aucune carte bancaire</span>
+              <span><span className="mt-dot" />Prêt en 5 minutes</span>
+            </div>
+          </div>
+
+          <div className="mt-hero-art">
+            <div className="mt-qr-badge" aria-hidden="true">
+              <div className="mt-qr" />
+              <p>Scanner · Déguster</p>
+            </div>
+
+            <div className="mt-phone" aria-hidden="true">
+              <div className="mt-phone-screen">
+                <div className="mt-phone-brand">
+                  <h4>Le Petit Bistrot</h4>
+                  <div className="mt-tag">Menu · Carte</div>
+                </div>
+                <div className="mt-phone-cat">— Entrées —</div>
+                <div className="mt-phone-item">
+                  <div className="mt-phone-item-name">Soupe à l&apos;oignon</div>
+                  <div className="mt-phone-item-price">8,50 €</div>
+                  <div className="mt-phone-item-desc">Gratinée au gruyère, pain de campagne</div>
+                </div>
+                <div className="mt-phone-item">
+                  <div className="mt-phone-item-name">Chèvre chaud</div>
+                  <div className="mt-phone-item-price">11,00 €</div>
+                  <div className="mt-phone-item-desc">Miel, noix, mesclun du potager</div>
+                </div>
+                <div className="mt-phone-cat">— Plats —</div>
+                <div className="mt-phone-item">
+                  <div className="mt-phone-item-name">Confit de canard</div>
+                  <div className="mt-phone-item-price">19,50 €</div>
+                  <div className="mt-phone-item-desc">Pommes sarladaises, jus corsé</div>
+                </div>
+                <div className="mt-phone-item">
+                  <div className="mt-phone-item-name">Bœuf bourguignon</div>
+                  <div className="mt-phone-item-price">18,00 €</div>
+                  <div className="mt-phone-item-desc">Carottes fondantes, champignons</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-review-badge">
+              <div>
+                <div className="mt-stars">★★★★★</div>
+                <p>« Un menu qui donne faim rien qu&apos;à le regarder. »</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Menu preview */}
-      <section className="max-w-[1120px] mx-auto px-6 pb-16 sm:pb-[120px]">
-        <div className="bg-primary rounded-[20px] p-8 sm:p-16 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-          <div>
-            <h2 className="font-serif text-[28px] sm:text-4xl text-white leading-snug mb-4">
-              Un menu que vos clients ont envie de lire.
+      {/* ===== STEPS ===== */}
+      <section className="mt-section mt-steps">
+        <div className="mt-container">
+          <div className="mt-steps-header">
+            <span className="mt-eyebrow">Comment ça marche</span>
+            <h2>Trois étapes. Cinq minutes.<br />Zéro friction.</h2>
+          </div>
+          <div className="mt-steps-grid">
+            {steps.map((s) => (
+              <div key={s.num} className="mt-step">
+                <div className="mt-step-num">{s.num}</div>
+                <h3>{s.title}</h3>
+                <p>{s.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== INTERACTIVE MENU PREVIEW ===== */}
+      <section className="mt-section mt-preview" id="preview">
+        <div className="mt-container mt-preview-grid">
+          <div className="mt-preview-copy">
+            <span className="mt-eyebrow">Aperçu client</span>
+            <h2>
+              Un menu que vos clients <em>ont envie</em> de lire.
             </h2>
-            <p className="text-white/60 text-base leading-relaxed mb-8">
-              Design soigné, navigation fluide, chargement instantané.
-              Le tout aux couleurs de votre restaurant.
+            <p>
+              Design soigné, navigation fluide, chargement instantané. Le tout aux couleurs
+              de votre restaurant — et adaptable à chaque saison.
             </p>
             <CTALink
               href="/signup"
-              label="section_creer_menu"
-              className="group inline-flex items-center justify-center gap-2.5 bg-accent text-foreground font-medium px-8 py-4 sm:py-3.5 rounded-full hover:bg-accent-light transition-all text-base sm:text-[15px] w-full sm:w-auto"
+              label="preview_creer_menu"
+              className="mt-btn mt-btn-primary"
             >
               Créer mon menu
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
             </CTALink>
           </div>
-          <div className="bg-background rounded-3xl p-8 max-w-[340px] mx-auto shadow-2xl">
-            <div className="text-center mb-6 pb-5 border-b border-border/50">
-              <h3 className="font-serif text-lg text-foreground">Le Petit Bistrot</h3>
-              <span className="text-xs text-muted/60 block mt-1">Menu</span>
+
+          <MenuPreview />
+        </div>
+      </section>
+
+      {/* ===== FEATURES BENTO ===== */}
+      <section className="mt-section mt-features" id="features">
+        <div className="mt-container">
+          <div className="mt-features-head">
+            <div>
+              <span className="mt-eyebrow">Pourquoi MonTablo</span>
+              <h2>Tout ce qu&apos;il faut.<br />Rien de superflu.</h2>
             </div>
-            {Object.entries(menuItems).map(([cat, items]) => (
-              <div key={cat}>
-                <p className="text-[11px] font-semibold tracking-[0.06em] uppercase text-accent-dark mt-5 mb-3">
-                  {cat === 'entrées' ? 'Entrées' : 'Plats'}
-                </p>
-                {items.map((item) => (
-                  <div key={item.name} className="flex justify-between items-baseline py-2.5 border-b border-border/30 last:border-b-0">
-                    <div>
-                      <p className="text-sm font-medium text-foreground">{item.name}</p>
-                      <p className="text-xs text-muted mt-0.5">{item.desc}</p>
-                    </div>
-                    <span className="text-sm font-semibold text-foreground whitespace-nowrap ml-4">{item.price}</span>
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Benefits */}
-      <section className="bg-white border-y border-border/50">
-        <div className="max-w-[1120px] mx-auto px-6 py-16 sm:py-[120px] grid lg:grid-cols-5 gap-8 lg:gap-20">
-          <div className="lg:col-span-2">
-            <p className="text-sm sm:text-[13px] font-medium tracking-[0.08em] uppercase text-accent-dark mb-3">
-              Pourquoi MonTablo
+            <p>
+              Chaque fonctionnalité a sa raison d&apos;être. Nous avons conçu MonTablo
+              avec des restaurateurs, pour des restaurateurs.
             </p>
-            <h2 className="font-serif text-[28px] sm:text-4xl text-foreground leading-tight">
-              Tout ce qu&apos;il faut. Rien de superflu.
-            </h2>
           </div>
-          <div className="lg:col-span-3 grid sm:grid-cols-2 gap-1">
-            {benefits.map((b) => (
-              <div key={b} className="flex items-start gap-3 p-4 rounded-xl hover:bg-background transition-colors">
-                <span className="w-6 h-6 rounded-full bg-accent/10 flex items-center justify-center shrink-0 mt-0.5">
-                  <Check className="w-3.5 h-3.5 text-accent-dark" />
-                </span>
-                <span className="text-base sm:text-[15px] text-foreground leading-relaxed">{b}</span>
+
+          <div className="mt-features-grid">
+            <div className="mt-feature mt-tall">
+              <div>
+                <div className="mt-feature-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+                  </svg>
+                </div>
+                <h3>Mises à jour en temps réel</h3>
+                <p>
+                  Changez un prix, ajoutez un plat du jour, retirez une rupture — vos clients
+                  voient l&apos;update instantanément. Plus jamais de réimpressions le lundi matin.
+                </p>
               </div>
-            ))}
+              <div className="mt-feature-quote">
+                « J&apos;ai retiré la truite à 11h02.<br />
+                À 11h03, elle n&apos;était plus sur la carte. »
+              </div>
+            </div>
+
+            <div className="mt-feature">
+              <div className="mt-feature-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M4 7h16M4 12h10M4 17h16" />
+                </svg>
+              </div>
+              <h3>Menu du jour</h3>
+              <p>Publié en un clic, visible toute la journée, archivé automatiquement.</p>
+            </div>
+
+            <div className="mt-feature">
+              <div className="mt-feature-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M12 7v5l3 2" />
+                </svg>
+              </div>
+              <h3>Promotions programmables</h3>
+              <p>Happy hours, offres week-end : programmées à l&apos;avance, publiées toutes seules.</p>
+            </div>
+
+            <div className="mt-feature mt-wide">
+              <div className="mt-feature-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M4 4h16v12H4zM4 20l4-4h8" />
+                </svg>
+              </div>
+              <h3>Cartes de fidélité intégrées</h3>
+              <p>
+                Google Wallet &amp; Apple Wallet. Vos clients ajoutent leur carte en un tap —
+                vous gardez le lien, même après la visite.
+              </p>
+            </div>
+
+            <div className="mt-feature">
+              <div className="mt-feature-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="4" />
+                  <path d="M3 12h2M19 12h2M12 3v2M12 19v2" />
+                </svg>
+              </div>
+              <h3>Vos couleurs</h3>
+              <p>Logo, palette, typographie — votre identité, pixel près.</p>
+            </div>
+
+            <div className="mt-feature">
+              <div className="mt-feature-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 8l7-5 7 5v10a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2z" />
+                  <path d="M9 13h6" />
+                </svg>
+              </div>
+              <h3>Bilingue FR / EN</h3>
+              <p>Une carte, deux langues, zéro traduction manquée.</p>
+            </div>
+
+            <div className="mt-feature">
+              <div className="mt-feature-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="4" y="4" width="7" height="7" />
+                  <rect x="13" y="4" width="7" height="7" />
+                  <rect x="4" y="13" width="7" height="7" />
+                  <path d="M13 13h3M20 13v3M13 20h7" />
+                </svg>
+              </div>
+              <h3>QR personnalisé</h3>
+              <p>Votre logo au centre, vos couleurs. Imprimable en haute définition.</p>
+            </div>
+
+            <div className="mt-feature">
+              <div className="mt-feature-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 2l2.39 4.84L20 8l-4 3.9.94 5.5L12 14.8 7.06 17.4 8 11.9 4 8l5.61-1.16z" />
+                </svg>
+              </div>
+              <h3>Import IA</h3>
+              <p>Photographiez votre carte papier. On s&apos;occupe du reste en 10 secondes.</p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Pricing mini */}
-      <section className="max-w-[1120px] mx-auto px-6 py-20">
-        <div className="text-center mb-12">
-          <h2 className="font-serif text-3xl sm:text-4xl text-foreground mb-3">
-            3 formules, sans engagement
-          </h2>
-          <p className="text-muted max-w-md mx-auto">
-            À partir de 39€/mois HT pour la formule Pro recommandée.
+      {/* ===== PRICING ===== */}
+      <section className="mt-section mt-pricing" id="pricing">
+        <div className="mt-container">
+          <div className="mt-pricing-head">
+            <span className="mt-eyebrow">Tarifs</span>
+            <h2>Trois formules.<br />Aucune surprise.</h2>
+            <p>
+              Essentiel pour démarrer, Pro pour fidéliser, Premium pour les groupes.
+              Essai gratuit de 14 jours sur Essentiel et Pro — sans carte bancaire.
+            </p>
+          </div>
+
+          <PricingToggle />
+
+          <p className="mt-price-note" style={{ marginTop: 32 }}>
+            <Link href="/tarifs" style={{ color: 'var(--mt-green-core)', fontWeight: 600 }}>
+              Voir la comparaison complète →
+            </Link>
           </p>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
-          {(['essentiel', 'pro', 'premium'] as const).map((key) => {
-            const t = TIERS[key]
-            return (
-              <div
-                key={t.id}
-                className={`bg-white rounded-2xl p-6 border ${
-                  t.highlighted ? 'border-primary shadow-lg shadow-primary/10' : 'border-border'
-                }`}
-              >
-                <h3 className="font-serif text-xl text-foreground mb-1">{t.name}</h3>
-                <p className="text-xs text-muted mb-3">{t.tagline}</p>
-                {t.priceMonthlyHt === null ? (
-                  <p className="font-serif text-2xl text-foreground mb-0">Sur devis</p>
-                ) : (
-                  <p className="mb-0">
-                    <span className="font-serif text-3xl text-foreground">
-                      {t.priceMonthlyHt}€
-                    </span>
-                    <span className="text-sm text-muted"> HT/mois</span>
-                  </p>
-                )}
-              </div>
-            )
-          })}
-        </div>
-
-        <div className="text-center mt-10">
-          <Link
-            href="/tarifs"
-            className="inline-flex items-center gap-2 text-primary font-medium hover:underline"
-          >
-            Voir tous les détails <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="max-w-[1120px] mx-auto px-6 pb-16 sm:pb-[120px]">
-        <div className="border border-border rounded-[20px] py-16 sm:py-24 px-6 sm:px-8 text-center bg-gradient-to-b from-white to-background">
-          <h2 className="font-serif text-[28px] sm:text-4xl text-foreground mb-3 text-balance">
-            Vos plats méritent mieux qu&apos;un PDF.
+      {/* ===== FINAL CTA ===== */}
+      <section className="mt-final-cta">
+        <div className="mt-container">
+          <h2>
+            Vos plats méritent <em>mieux</em><br />qu&apos;un PDF.
           </h2>
-          <p className="text-base sm:text-[17px] text-muted mb-8 sm:mb-10 max-w-md mx-auto">
-            Rejoignez les restaurateurs qui ont remplacé leur carte papier
-            par une expérience digitale à leur image.
+          <p>
+            Rejoignez les restaurateurs qui ont remplacé leur carte papier par
+            une expérience digitale à leur image.
           </p>
           <CTALink
             href="/signup"
             label="footer_cta"
-            className="group inline-flex items-center justify-center gap-2.5 bg-primary text-white font-medium px-10 py-4 rounded-full hover:bg-primary-light transition-all hover:shadow-xl hover:shadow-primary/18 hover:-translate-y-px text-base sm:text-[15px] w-full sm:w-auto"
+            className="mt-btn mt-btn-primary"
           >
             Créer mon menu gratuitement
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
           </CTALink>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-border py-12 px-6">
-        <div className="max-w-[1120px] mx-auto">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 mb-10">
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <UtensilsCrossed className="w-[18px] h-[18px] text-primary" />
-                <span className="font-serif text-base text-primary">MonTablo</span>
-              </div>
-              <p className="text-[13px] text-muted/60 leading-relaxed">
-                Le menu digital pour les restaurants exigeants.
+      {/* ===== FOOTER ===== */}
+      <footer className="mt-footer">
+        <div className="mt-container">
+          <div className="mt-foot-grid">
+            <div className="mt-foot-brand">
+              <Link
+                href="/"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 10, marginBottom: 4, color: 'var(--mt-cream)' }}
+                aria-label="MonTablo — accueil"
+              >
+                <UtensilsCrossed width={26} height={26} strokeWidth={1.6} />
+                <h4 style={{ margin: 0 }}>MonTablo</h4>
+              </Link>
+              <p>
+                Le menu digital pour les restaurants exigeants. Conçu en Haute-Savoie,
+                mitonné avec soin.
               </p>
-              <Link href="/a-propos" className="block text-[13px] text-muted/60 hover:text-muted transition-colors mt-3">À propos</Link>
             </div>
-            <div>
-              <p className="text-[13px] font-medium text-foreground mb-3">Produit</p>
-              <div className="space-y-3">
-                <Link href="/fonctionnalites" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Fonctionnalités</Link>
-                <Link href="/tarifs" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Tarifs</Link>
-                <Link href="/menu/demo" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Voir un exemple</Link>
-                <Link href="/solutions/bistrot" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Solutions</Link>
-              </div>
+            <div className="mt-foot-col">
+              <h5>Produit</h5>
+              <Link href="/fonctionnalites">Fonctionnalités</Link>
+              <Link href="/tarifs">Tarifs</Link>
+              <Link href="/menu/demo">Voir un exemple</Link>
+              <Link href="/solutions/bistrot">Solutions</Link>
             </div>
-            <div>
-              <p className="text-[13px] font-medium text-foreground mb-3">Ressources</p>
-              <div className="space-y-3">
-                <Link href="/blog" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Blog</Link>
-                <Link href="/faq" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">FAQ</Link>
-                <Link href="/contact" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Contact</Link>
-              </div>
+            <div className="mt-foot-col">
+              <h5>Ressources</h5>
+              <Link href="/blog">Blog</Link>
+              <Link href="/faq">FAQ</Link>
+              <Link href="/a-propos">À propos</Link>
+              <Link href="/contact">Contact</Link>
             </div>
-            <div>
-              <p className="text-[13px] font-medium text-foreground mb-3">Legal</p>
-              <div className="space-y-3">
-                <Link href="/mentions-légales" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Mentions légales</Link>
-                <Link href="/cgu" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">CGU</Link>
-                <Link href="/confidentialite" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Confidentialité</Link>
-                <Link href="/cookies" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Cookies</Link>
-              </div>
+            <div className="mt-foot-col">
+              <h5>Legal</h5>
+              <Link href="/mentions-legales">Mentions légales</Link>
+              <Link href="/cgu">CGU</Link>
+              <Link href="/confidentialite">Confidentialité</Link>
+              <Link href="/cookies">Cookies</Link>
             </div>
           </div>
-          <div className="border-t border-border/50 pt-6 text-center">
-            <p className="text-sm text-muted/60">
-              &copy; {new Date().getFullYear()} MonTablo. Tous droits réservés.
-            </p>
+          <div className="mt-foot-bottom">
+            <span>© {new Date().getFullYear()} MonTablo. Tous droits réservés.</span>
+            <span>Fait avec soin en Haute-Savoie 🍷</span>
           </div>
         </div>
       </footer>
+
+      {/* ===== FLOATING CIRCULAR CTA ===== */}
+      <CTALink
+        href="/signup"
+        label="float_cta"
+        className="mt-float-cta"
+      >
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <defs>
+            <path
+              id="mt-circle-text"
+              d="M 50,50 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0"
+            />
+          </defs>
+          <text
+            fill="rgba(212, 233, 226, 0.55)"
+            fontFamily="Fraunces, serif"
+            fontStyle="italic"
+            fontSize="10"
+            letterSpacing="2"
+          >
+            <textPath href="#mt-circle-text">
+              · Essayer gratuitement · 14 jours offerts
+            </textPath>
+          </text>
+        </svg>
+        <div className="mt-inner">
+          <strong>Scan</strong>
+          <span>Commencer</span>
+        </div>
+      </CTALink>
     </div>
   )
 }
