@@ -1,11 +1,74 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import { formatPrice } from '@/lib/utils'
 import { UtensilsCrossed, Info, X } from 'lucide-react'
-import type { Category, Item, Promotion, DailyMenu } from '@/types/database'
+import type { Category, Item, Promotion, DailyMenu, Allergen } from '@/types/database'
+import {
+  ALLERGENS,
+  getAllergen,
+  getAllergenLabel,
+  ALLERGEN_FOOTER,
+  ALLERGEN_LEGEND_TITLE,
+} from '@/lib/allergens'
 
-type Lang = 'fr' | 'en'
+type Lang = 'fr' | 'en' | 'de'
+
+const LANG_LABELS: Record<Lang, { flag: string; code: string; name: string }> = {
+  fr: { flag: '🇫🇷', code: 'FR', name: 'Français' },
+  en: { flag: '🇬🇧', code: 'EN', name: 'English' },
+  de: { flag: '🇩🇪', code: 'DE', name: 'Deutsch' },
+}
+
+const UI_STRINGS: Record<Lang, Record<string, string>> = {
+  fr: {
+    dailyMenu: 'Menu du jour',
+    perPerson: 'personne',
+    article: 'article',
+    articles: 'articles',
+    unavailable: 'Indisponible',
+    menuComing: 'Ce menu est en cours de préparation.',
+    allergenNotice: 'Pour toute information sur les allergènes, veuillez consulter notre équipe.',
+  },
+  en: {
+    dailyMenu: "Today's menu",
+    perPerson: 'person',
+    article: 'item',
+    articles: 'items',
+    unavailable: 'Unavailable',
+    menuComing: 'This menu is being prepared.',
+    allergenNotice: 'For allergen information, please ask our staff.',
+  },
+  de: {
+    dailyMenu: 'Tagesmenü',
+    perPerson: 'Person',
+    article: 'Artikel',
+    articles: 'Artikel',
+    unavailable: 'Nicht verfügbar',
+    menuComing: 'Dieses Menü wird gerade vorbereitet.',
+    allergenNotice: 'Für Informationen zu Allergenen wenden Sie sich bitte an unser Personal.',
+  },
+}
+
+function t(lang: Lang, key: string): string {
+  return UI_STRINGS[lang][key] ?? UI_STRINGS.fr[key] ?? key
+}
+
+function localized<T extends { name_fr: string; name_en: string | null }>(
+  entity: T,
+  lang: Lang
+): string {
+  if (lang === 'en' && entity.name_en) return entity.name_en
+  return entity.name_fr
+}
+
+function localizedDesc(
+  entity: { description_fr: string | null; description_en: string | null },
+  lang: Lang
+): string | null {
+  if (lang === 'en' && entity.description_en) return entity.description_en
+  return entity.description_fr
+}
 
 function ItemDetail({
   item,
@@ -19,8 +82,10 @@ function ItemDetail({
   onClose: () => void
 }) {
   const [visible, setVisible] = useState(false)
-  const name = lang === 'en' && item.name_en ? item.name_en : item.name_fr
-  const desc = lang === 'en' ? (item.description_en || item.description_fr) : item.description_fr
+  const name = localized(item, lang)
+  const desc = localizedDesc(item, lang)
+  const allergens = item.allergens ?? []
+  const allergenLocale = lang === 'de' ? 'de' : lang === 'en' ? 'en' : 'fr'
 
   useEffect(() => {
     requestAnimationFrame(() => setVisible(true))
@@ -78,6 +143,27 @@ function ItemDetail({
               ))}
             </div>
           )}
+          {allergens.length > 0 && (
+            <div className="mb-4 p-3 bg-[#FFF8E1] rounded-lg">
+              <p className="text-[10.5px] uppercase tracking-wide font-semibold text-[#8D6E00] mb-2">
+                {ALLERGEN_LEGEND_TITLE[allergenLocale]}
+              </p>
+              <div className="flex gap-1.5 flex-wrap">
+                {allergens.map((code) => {
+                  const def = getAllergen(code)
+                  return (
+                    <span
+                      key={code}
+                      className="inline-flex items-center gap-1 text-[11.5px] text-[#8D6E00] bg-white/60 px-2 py-1 rounded"
+                    >
+                      <span aria-hidden>{def.icon}</span>
+                      {getAllergenLabel(code, allergenLocale)}
+                    </span>
+                  )
+                })}
+              </div>
+            </div>
+          )}
           <div className="text-2xl font-bold text-[#2C3E2D]">
             {promo ? (
               <>
@@ -120,6 +206,7 @@ export function MenuContent({
   dailyMenu,
   unavailableBehavior,
   primaryColor,
+  languages,
 }: {
   categories: Category[]
   items: Item[]
@@ -127,8 +214,15 @@ export function MenuContent({
   dailyMenu: DailyMenu | null
   unavailableBehavior: string
   primaryColor: string
+  languages?: string[]
 }) {
-  const [lang, setLang] = useState<Lang>('fr')
+  const enabledLangs = useMemo<Lang[]>(() => {
+    const known: Lang[] = ['fr', 'en', 'de']
+    const filtered = (languages ?? ['fr', 'en']).filter((l): l is Lang => known.includes(l as Lang))
+    return filtered.length > 0 ? filtered : ['fr']
+  }, [languages])
+
+  const [lang, setLang] = useState<Lang>(enabledLangs[0] ?? 'fr')
   const [activeCategory, setActiveCategory] = useState<string | null>(categories[0]?.id ?? null)
   const [selectedItem, setSelectedItem] = useState<Item | null>(null)
 
@@ -137,6 +231,16 @@ export function MenuContent({
   const filteredItems = unavailableBehavior === 'hidden'
     ? items.filter((item) => item.is_available)
     : items
+
+  const allergenLocale = lang === 'de' ? 'de' : lang === 'en' ? 'en' : 'fr'
+
+  const usedAllergens = useMemo<Allergen[]>(() => {
+    const set = new Set<Allergen>()
+    for (const it of filteredItems) {
+      for (const a of it.allergens ?? []) set.add(a)
+    }
+    return ALLERGENS.filter((a) => set.has(a.code)).map((a) => a.code)
+  }, [filteredItems])
 
   // Track which category is in view on scroll
   useEffect(() => {
@@ -167,24 +271,23 @@ export function MenuContent({
   return (
     <>
       {/* Language toggle (fixed over cover area) */}
-      <div className="fixed top-4 right-4 z-30 flex gap-0.5 bg-black/20 backdrop-blur-xl rounded-lg p-[3px]">
-        <button
-          onClick={() => setLang('fr')}
-          className={`px-3 py-1 rounded-md text-xs font-semibold tracking-wide transition-all ${
-            lang === 'fr' ? 'bg-white/95 text-[#1A1A1A]' : 'text-white/70'
-          }`}
-        >
-          FR
-        </button>
-        <button
-          onClick={() => setLang('en')}
-          className={`px-3 py-1 rounded-md text-xs font-semibold tracking-wide transition-all ${
-            lang === 'en' ? 'bg-white/95 text-[#1A1A1A]' : 'text-white/70'
-          }`}
-        >
-          EN
-        </button>
-      </div>
+      {enabledLangs.length > 1 && (
+        <div className="fixed top-4 right-4 z-30 flex gap-0.5 bg-black/20 backdrop-blur-xl rounded-lg p-[3px]">
+          {enabledLangs.map((l) => (
+            <button
+              key={l}
+              onClick={() => setLang(l)}
+              aria-label={LANG_LABELS[l].name}
+              className={`px-2.5 py-1 rounded-md text-xs font-semibold tracking-wide transition-all flex items-center gap-1 ${
+                lang === l ? 'bg-white/95 text-[#1A1A1A]' : 'text-white/70'
+              }`}
+            >
+              <span aria-hidden>{LANG_LABELS[l].flag}</span>
+              {LANG_LABELS[l].code}
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* Daily menu banner */}
       {dailyMenu && (
@@ -194,38 +297,36 @@ export function MenuContent({
         >
           <div className="absolute -top-5 -right-5 w-20 h-20 bg-white/[0.06] rounded-full" />
           <div className="text-[11px] uppercase tracking-[0.1em] font-semibold opacity-75 mb-2">
-            {lang === 'fr' ? 'Menu du jour' : "Today's menu"}
+            {t(lang, 'dailyMenu')}
           </div>
           <div className="font-serif text-[19px] leading-snug mb-1.5">
             {lang === 'en' && dailyMenu.title_en ? dailyMenu.title_en : dailyMenu.title_fr}
           </div>
           {(lang === 'en' ? dailyMenu.description_en || dailyMenu.description_fr : dailyMenu.description_fr) && (
             <div className="text-[13px] opacity-80 leading-relaxed mb-3">
-              {lang === 'en' ? dailyMenu.description_en : dailyMenu.description_fr}
+              {lang === 'en' && dailyMenu.description_en ? dailyMenu.description_en : dailyMenu.description_fr}
             </div>
           )}
           {(lang === 'en' ? dailyMenu.items_description_en : dailyMenu.items_description_fr) && (
             <div className="text-[13px] opacity-80 leading-relaxed mb-3 whitespace-pre-line">
-              {lang === 'en' ? dailyMenu.items_description_en : dailyMenu.items_description_fr}
+              {lang === 'en' && dailyMenu.items_description_en ? dailyMenu.items_description_en : dailyMenu.items_description_fr}
             </div>
           )}
           {dailyMenu.price && (
             <div className="text-[22px] font-bold tracking-tight">
               {formatPrice(dailyMenu.price)}
               <span className="text-sm font-normal opacity-70 ml-1">
-                / {lang === 'fr' ? 'personne' : 'person'}
+                / {t(lang, 'perPerson')}
               </span>
             </div>
           )}
         </div>
       )}
 
-      {/* Allergen notice */}
+      {/* Allergen notice (INCO) */}
       <div className="mx-4 mt-3 px-4 py-3 bg-[#FFF8E1] rounded-lg flex items-start gap-2 text-[12px] text-[#8D6E00] leading-relaxed">
         <Info className="w-4 h-4 shrink-0 mt-0.5" />
-        {lang === 'fr'
-          ? 'Pour toute information sur les allergènes, veuillez consulter notre équipe.'
-          : 'For allergen information, please ask our staff.'}
+        <span>{t(lang, 'allergenNotice')}</span>
       </div>
 
       {/* Category tabs - sticky */}
@@ -267,9 +368,7 @@ export function MenuContent({
                   {lang === 'en' && category.name_en ? category.name_en : category.name_fr}
                 </h2>
                 <p className="text-[12px] text-[#9B9B9B] mb-4">
-                  {categoryItems.length} {categoryItems.length === 1
-                    ? (lang === 'fr' ? 'article' : 'item')
-                    : (lang === 'fr' ? 'articles' : 'items')}
+                  {categoryItems.length} {categoryItems.length === 1 ? t(lang, 'article') : t(lang, 'articles')}
                 </p>
 
                 <div className="space-y-2.5">
@@ -304,7 +403,7 @@ export function MenuContent({
                             {isUnavailable && (
                               <div className="absolute inset-0 bg-black/45 flex items-center justify-center">
                                 <span className="text-white text-[10px] font-semibold uppercase tracking-wide">
-                                  {lang === 'fr' ? 'Indisponible' : 'Unavailable'}
+                                  {t(lang, 'unavailable')}
                                 </span>
                               </div>
                             )}
@@ -320,6 +419,23 @@ export function MenuContent({
                               <p className="text-[12.5px] text-[#6B6B6B] leading-relaxed line-clamp-2">
                                 {desc}
                               </p>
+                            )}
+                            {item.allergens && item.allergens.length > 0 && (
+                              <div className="flex gap-0.5 mt-1" aria-label={ALLERGEN_LEGEND_TITLE[allergenLocale]}>
+                                {item.allergens.map((code) => {
+                                  const def = getAllergen(code)
+                                  return (
+                                    <span
+                                      key={code}
+                                      title={getAllergenLabel(code, allergenLocale)}
+                                      className="text-[12px] leading-none"
+                                      aria-hidden
+                                    >
+                                      {def.icon}
+                                    </span>
+                                  )
+                                })}
+                              </div>
                             )}
                           </div>
                           <div className="flex items-center justify-between mt-2">
@@ -359,11 +475,35 @@ export function MenuContent({
         ) : (
           <div className="text-center py-16">
             <UtensilsCrossed className="w-12 h-12 text-[#9B9B9B]/30 mx-auto mb-4" />
-            <p className="text-[#9B9B9B]">
-              {lang === 'fr' ? 'Ce menu est en cours de préparation.' : 'This menu is being prepared.'}
-            </p>
+            <p className="text-[#9B9B9B]">{t(lang, 'menuComing')}</p>
           </div>
         )}
+
+        {/* Allergen legend + INCO legal footer */}
+        {usedAllergens.length > 0 && (
+          <div className="mx-4 mt-6 p-4 bg-white border border-[#E8E8E4] rounded-xl">
+            <p className="text-[11px] uppercase tracking-[0.08em] font-semibold text-[#6B6B6B] mb-3">
+              {ALLERGEN_LEGEND_TITLE[allergenLocale]}
+            </p>
+            <div className="flex gap-1.5 flex-wrap">
+              {usedAllergens.map((code) => {
+                const def = getAllergen(code)
+                return (
+                  <span
+                    key={code}
+                    className="inline-flex items-center gap-1 text-[11.5px] text-[#4B4B4B] bg-[#FAFAF7] px-2 py-1 rounded border border-[#E8E8E4]"
+                  >
+                    <span aria-hidden>{def.icon}</span>
+                    {getAllergenLabel(code, allergenLocale)}
+                  </span>
+                )
+              })}
+            </div>
+          </div>
+        )}
+        <p className="mx-4 mt-4 text-[10.5px] text-[#9B9B9B] leading-relaxed">
+          {ALLERGEN_FOOTER[allergenLocale]}
+        </p>
       </div>
 
       {/* Item detail overlay */}
