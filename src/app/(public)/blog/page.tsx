@@ -37,7 +37,7 @@ export default function BlogPage() {
           </Link>
           <div className="flex items-center gap-6">
             <Link href="/fonctionnalites" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
-              Fonctionnalites
+              Fonctionnalités
             </Link>
             <Link href="/tarifs" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
               Tarifs
@@ -76,7 +76,7 @@ export default function BlogPage() {
       <section className="max-w-[780px] mx-auto px-6 pb-24">
         {posts.length === 0 ? (
           <p className="text-muted text-center py-12">
-            Les premiers articles arrivent bientot. Revenez vite !
+            Les premiers articles arrivent bientôt. Revenez vite !
           </p>
         ) : (
           <div className="space-y-8">
@@ -122,15 +122,15 @@ export default function BlogPage() {
               <span className="font-serif text-[15px] text-primary">MonTablo</span>
             </div>
             <p className="text-xs text-muted/60">
-              &copy; {new Date().getFullYear()} MonTablo. Tous droits reserves.
+              &copy; {new Date().getFullYear()} MonTablo. Tous droits réservés.
             </p>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] text-muted/50">
-            <Link href="/mentions-legales" className="hover:text-muted transition-colors">Mentions legales</Link>
+            <Link href="/mentions-légales" className="hover:text-muted transition-colors">Mentions légales</Link>
             <span className="hidden sm:inline">&middot;</span>
             <Link href="/cgu" className="hover:text-muted transition-colors">CGU</Link>
             <span className="hidden sm:inline">&middot;</span>
-            <Link href="/confidentialite" className="hover:text-muted transition-colors">Confidentialite</Link>
+            <Link href="/confidentialite" className="hover:text-muted transition-colors">Confidentialité</Link>
             <span className="hidden sm:inline">&middot;</span>
             <Link href="/cookies" className="hover:text-muted transition-colors">Cookies</Link>
           </div>

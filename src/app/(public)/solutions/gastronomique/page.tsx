@@ -15,7 +15,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Menu digital pour restaurant gastronomique | MonTablo',
   description:
-    'Creez le menu digital de votre restaurant gastronomique. Design premium, bilingue, accords mets-vins, menus degustation. Sublimez votre carte en ligne.',
+    'Créez le menu digital de votre restaurant gastronomique. Design premium, bilingue, accords mets-vins, menus dégustation. Sublimez votre carte en ligne.',
   openGraph: {
     title: 'Menu digital pour restaurant gastronomique | MonTablo',
     description:
@@ -28,19 +28,19 @@ const benefits = [
     icon: Gem,
     title: 'Un ecrin digital pour votre cuisine',
     description:
-      'Votre menu digital reflete l\'excellence de votre etablissement. Design epure, typographies elegantes et mise en page soignee pour une experience a la hauteur de votre gastronomie.',
+      'Votre menu digital reflète l\'excellence de votre établissement. Design epure, typographies élégantes et mise en page soignée pour une expérience a la hauteur de votre gastronomie.',
   },
   {
     icon: Globe,
-    title: 'Bilingue pour une clientele internationale',
+    title: 'Bilingue pour une clientèle internationale',
     description:
-      'Accueillez vos convives du monde entier. Votre carte est disponible en francais et en anglais, accessible en un tap. Ideal pour les tables etoilees et les destinations gastronomiques.',
+      'Accueillez vos convives du monde entier. Votre carte est disponible en français et en anglais, accessible en un tap. Idéal pour les tables étoilées et les destinations gastronomiques.',
   },
   {
     icon: Palette,
     title: 'Personnalisation aux couleurs de votre maison',
     description:
-      'Couleurs, logo, identite visuelle : votre menu digital s\'integre parfaitement a l\'univers de votre restaurant. Un complement elegant a votre carte physique.',
+      'Couleurs, logo, identité visuelle : votre menu digital s\'intégré parfaitement a l\'univers de votre restaurant. Un complement élégant a votre carte physique.',
   },
 ]
 
@@ -48,50 +48,50 @@ const features = [
   {
     icon: Wine,
     title: 'Accords mets et vins',
-    description: 'Suggerez des accords pour chaque plat. Vos convives decouvrent vos recommandations directement depuis le menu digital.',
+    description: 'Suggerez des accords pour chaque plat. Vos convives découvrent vos recommandations directement depuis le menu digital.',
   },
   {
     icon: Star,
-    title: 'Menus degustation',
-    description: 'Presentez vos menus degustation avec elegance. Nombre de services, descriptions detaillees et prix affiches clairement.',
+    title: 'Menus dégustation',
+    description: 'Présentez vos menus dégustation avec elegance. Nombre de services, descriptions détaillées et prix affiches clairement.',
   },
   {
     icon: Globe,
-    title: 'Traduction francais / anglais',
-    description: 'Chaque plat, chaque description traduite. Vos clients internationaux profitent de la meme experience que vos habitues.',
+    title: 'Traduction français / anglais',
+    description: 'Chaque plat, chaque description traduite. Vos clients internationaux profitent de la même expérience que vos habitués.',
   },
   {
     icon: Palette,
     title: 'Design premium personnalisable',
-    description: 'Choisissez les couleurs et le style qui correspondent a votre identite. Un menu digital aussi raffine que votre cuisine.',
+    description: 'Choisissez les couleurs et le style qui correspondent a votre identité. Un menu digital aussi raffine que votre cuisine.',
   },
   {
     icon: Smartphone,
     title: 'QR code discret sur table',
-    description: 'Un QR code elegant, aux couleurs de votre maison, qui s\'integre discretement a votre mise en place sans denaturer l\'experience.',
+    description: 'Un QR code élégant, aux couleurs de votre maison, qui s\'intégré discretement a votre mise en place sans denaturer l\'expérience.',
   },
   {
     icon: UtensilsCrossed,
-    title: 'Mise a jour instantanee',
-    description: 'Changement de saison, nouveau menu degustation, plat du marche : mettez a jour votre carte en quelques secondes, sans reimprimer.',
+    title: 'Mise à jour instantanée',
+    description: 'Changement de saison, nouveau menu dégustation, plat du marche : mettez à jour votre carte en quelques secondes, sans réimprimer.',
   },
 ]
 
 const steps = [
   {
     number: '1',
-    title: 'Creez votre carte',
-    description: 'Ajoutez vos plats, descriptions, prix et accords mets-vins. Organisez par menus et categories.',
+    title: 'Créez votre carte',
+    description: 'Ajoutez vos plats, descriptions, prix et accords mets-vins. Organisez par menus et catégories.',
   },
   {
     number: '2',
     title: 'Personnalisez le design',
-    description: 'Adaptez les couleurs et le style a l\'identite de votre maison. Publiez en un clic.',
+    description: 'Adaptez les couleurs et le style a l\'identité de votre maison. Publiez en un clic.',
   },
   {
     number: '3',
     title: 'Partagez avec elegance',
-    description: 'Generez un QR code aux couleurs de votre etablissement. Vos convives accedent a votre carte en un scan.',
+    description: 'Générez un QR code aux couleurs de votre établissement. Vos convives accèdent a votre carte en un scan.',
   },
 ]
 
@@ -117,7 +117,7 @@ export default function GastronomiquePage() {
           </Link>
           <div className="flex items-center gap-6">
             <Link href="/fonctionnalites" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
-              Fonctionnalites
+              Fonctionnalités
             </Link>
             <Link href="/tarifs" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
               Tarifs
@@ -158,8 +158,8 @@ export default function GastronomiquePage() {
           Le menu digital a la hauteur de votre gastronomie.
         </h1>
         <p className="text-lg text-muted max-w-[520px] mb-10 leading-relaxed">
-          Un complement elegant a votre carte physique. Design premium, bilingue, accords mets-vins :
-          offrez a vos convives une experience digitale aussi raffinee que votre cuisine.
+          Un complement élégant a votre carte physique. Design premium, bilingue, accords mets-vins :
+          offrez a vos convives une expérience digitale aussi raffinee que votre cuisine.
         </p>
         <Link
           href="/signup"
@@ -212,7 +212,7 @@ export default function GastronomiquePage() {
       {/* Feature highlights */}
       <section className="max-w-[1120px] mx-auto px-6 pb-24">
         <h2 className="font-serif text-3xl text-foreground mb-10">
-          Les fonctionnalites cles pour votre table gastronomique
+          Les fonctionnalités clés pour votre table gastronomique
         </h2>
         <div className="grid md:grid-cols-2 gap-8">
           {features.map((feature) => {
@@ -234,7 +234,7 @@ export default function GastronomiquePage() {
       <section className="max-w-[1120px] mx-auto px-6 pb-24">
         <div className="bg-primary rounded-[20px] py-16 px-8 text-center">
           <h2 className="font-serif text-3xl text-white mb-3">
-            Pret a sublimer votre carte en ligne ?
+            Prêt a sublimer votre carte en ligne ?
           </h2>
           <p className="text-white/60 mb-8 max-w-md mx-auto">
             14 jours d&apos;essai gratuit. Aucune carte bancaire requise.
@@ -260,7 +260,7 @@ export default function GastronomiquePage() {
       {/* Internal links */}
       <section className="max-w-[1120px] mx-auto px-6 pb-16">
         <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[13px] text-muted/60">
-          <Link href="/fonctionnalites" className="hover:text-muted transition-colors">Fonctionnalites</Link>
+          <Link href="/fonctionnalites" className="hover:text-muted transition-colors">Fonctionnalités</Link>
           <Link href="/tarifs" className="hover:text-muted transition-colors">Tarifs</Link>
           <Link href="/menu-digital-restaurant" className="hover:text-muted transition-colors">Menu digital restaurant</Link>
           <Link href="/qr-code-restaurant" className="hover:text-muted transition-colors">QR code restaurant</Link>
@@ -283,7 +283,7 @@ export default function GastronomiquePage() {
             <div>
               <p className="text-[13px] font-medium text-foreground mb-3">Produit</p>
               <div className="space-y-3">
-                <Link href="/fonctionnalites" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Fonctionnalites</Link>
+                <Link href="/fonctionnalites" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Fonctionnalités</Link>
                 <Link href="/tarifs" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Tarifs</Link>
                 <Link href="/menu/demo" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Voir un exemple</Link>
               </div>
@@ -298,16 +298,16 @@ export default function GastronomiquePage() {
             <div>
               <p className="text-[13px] font-medium text-foreground mb-3">Legal</p>
               <div className="space-y-3">
-                <Link href="/mentions-legales" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Mentions legales</Link>
+                <Link href="/mentions-légales" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Mentions légales</Link>
                 <Link href="/cgu" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">CGU</Link>
-                <Link href="/confidentialite" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Confidentialite</Link>
+                <Link href="/confidentialite" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Confidentialité</Link>
                 <Link href="/cookies" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Cookies</Link>
               </div>
             </div>
           </div>
           <div className="border-t border-border/50 pt-6 text-center">
             <p className="text-sm text-muted/60">
-              &copy; {new Date().getFullYear()} MonTablo. Tous droits reserves.
+              &copy; {new Date().getFullYear()} MonTablo. Tous droits réservés.
             </p>
           </div>
         </div>

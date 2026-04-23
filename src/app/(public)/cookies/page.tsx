@@ -20,33 +20,33 @@ export default function CookiesPage() {
 
       <main className="max-w-[780px] mx-auto px-6 py-16">
         <h1 className="font-serif text-3xl text-foreground mb-2">Politique de cookies</h1>
-        <p className="text-sm text-muted mb-8">Derniere mise a jour : 13 avril 2026</p>
+        <p className="text-sm text-muted mb-8">Dernière mise à jour : 13 avril 2026</p>
 
         <div className="prose prose-sm text-muted leading-relaxed space-y-6">
           <section>
             <h2 className="font-serif text-lg text-foreground mt-8 mb-3">1. Qu&apos;est-ce qu&apos;un cookie ?</h2>
             <p>
-              Un cookie est un petit fichier texte depose sur votre navigateur lors de la visite
-              d&apos;un site web. Il permet au site de se souvenir de vos actions et preferences
-              pendant une periode donnee.
+              Un cookie est un petit fichier texte déposé sur votre navigateur lors de la visite
+              d&apos;un site web. Il permet au site de se souvenir de vos actions et préférences
+              pendant une période donnée.
             </p>
           </section>
 
           <section>
-            <h2 className="font-serif text-lg text-foreground mt-8 mb-3">2. Cookies utilises par MonTablo</h2>
+            <h2 className="font-serif text-lg text-foreground mt-8 mb-3">2. Cookies utilisés par MonTablo</h2>
             <table className="w-full text-sm border border-border rounded-lg overflow-hidden mt-3">
               <thead>
                 <tr className="bg-white">
                   <th className="text-left px-4 py-2 border-b border-border text-foreground">Cookie</th>
                   <th className="text-left px-4 py-2 border-b border-border text-foreground">Type</th>
-                  <th className="text-left px-4 py-2 border-b border-border text-foreground">Finalite</th>
-                  <th className="text-left px-4 py-2 border-b border-border text-foreground">Duree</th>
+                  <th className="text-left px-4 py-2 border-b border-border text-foreground">Finalité</th>
+                  <th className="text-left px-4 py-2 border-b border-border text-foreground">Durée</th>
                 </tr>
               </thead>
               <tbody>
                 <tr className="border-b border-border/30">
                   <td className="px-4 py-2 text-foreground">sb-*-auth-token</td>
-                  <td className="px-4 py-2">Strictement necessaire</td>
+                  <td className="px-4 py-2">Strictement nécessaire</td>
                   <td className="px-4 py-2">Authentification de session (Supabase)</td>
                   <td className="px-4 py-2">Session / 1 an</td>
                 </tr>
@@ -59,33 +59,33 @@ export default function CookiesPage() {
             <p>
               MonTablo <strong className="text-foreground">n&apos;utilise aucun cookie de tracking,
               publicitaire ou analytique</strong>. Aucun cookie Google Analytics, Facebook Pixel
-              ou equivalent n&apos;est depose.
+              ou équivalent n&apos;est déposé.
             </p>
             <p>
-              Le service de paiement Stripe peut deposer ses propres cookies strictement
-              necessaires lors du processus de paiement. Consultez la{' '}
+              Le service de paiement Stripe peut déposer ses propres cookies strictement
+              nécessaires lors du processus de paiement. Consultez la{' '}
               <span className="text-foreground">politique de cookies de Stripe</span> pour plus
-              de details.
+              de détails.
             </p>
           </section>
 
           <section>
             <h2 className="font-serif text-lg text-foreground mt-8 mb-3">4. Gestion des cookies</h2>
             <p>
-              Les cookies strictement necessaires ne requierent pas de consentement car ils sont
+              Les cookies strictement nécessaires ne requièrent pas de consentement car ils sont
               indispensables au fonctionnement du service (article 82 de la loi Informatique et
-              Libertes, transposant la directive ePrivacy).
+              Libertés, transposant la directive ePrivacy).
             </p>
             <p>
-              Vous pouvez neanmoins configurer votre navigateur pour bloquer les cookies, mais
-              cela empechera l&apos;utilisation du tableau de bord MonTablo.
+              Vous pouvez néanmoins configurer votre navigateur pour bloquer les cookies, mais
+              cela empêchera l&apos;utilisation du tableau de bord MonTablo.
             </p>
           </section>
 
           <section>
             <h2 className="font-serif text-lg text-foreground mt-8 mb-3">5. Contact</h2>
             <p>
-              Pour toute question relative aux cookies, contactez-nous a :{' '}
+              Pour toute question relative aux cookies, contactez-nous à :{' '}
               <strong className="text-foreground">contact@montablo.com</strong>
             </p>
           </section>

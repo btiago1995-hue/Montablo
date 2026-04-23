@@ -4,13 +4,13 @@ import { JsonLd, faqJsonLd, breadcrumbJsonLd } from '@/components/seo/json-ld'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'FAQ — MonTablo | Questions frequentes sur le menu digital',
+  title: 'FAQ — MonTablo | Questions fréquentes sur le menu digital',
   description:
-    'Trouvez les reponses a toutes vos questions sur MonTablo : prix, essai gratuit, fonctionnalites, QR code, menu du jour et plus.',
+    'Trouvez les réponses à toutes vos questions sur MonTablo : prix, essai gratuit, fonctionnalités, QR code, menu du jour et plus.',
   openGraph: {
-    title: 'FAQ — MonTablo | Questions frequentes',
+    title: 'FAQ — MonTablo | Questions fréquentes',
     description:
-      'Trouvez les reponses a toutes vos questions sur MonTablo.',
+      'Trouvez les réponses à toutes vos questions sur MonTablo.',
   },
 }
 
@@ -21,22 +21,22 @@ const faqCategories = [
       {
         question: 'Qu\'est-ce que MonTablo ?',
         answer:
-          'MonTablo est un service en ligne qui permet aux restaurants de creer un menu digital elegant, accessible via QR code. Vos clients scannent le code sur la table et consultent votre carte sur leur telephone.',
+          'MonTablo est un service en ligne qui permet aux restaurants de créer un menu digital élégant, accessible via QR code. Vos clients scannent le code sur la table et consultent votre carte sur leur téléphone.',
       },
       {
-        question: 'Comment creer mon menu digital ?',
+        question: 'Comment créer mon menu digital ?',
         answer:
-          'Inscrivez-vous gratuitement, ajoutez vos plats avec noms, descriptions et prix, organisez-les par categories, puis generez votre QR code. Le tout prend moins de 5 minutes.',
+          'Inscrivez-vous gratuitement, ajoutez vos plats avec noms, descriptions et prix, organisez-les par catégories, puis générez votre QR code. Le tout prend moins de 5 minutes.',
       },
       {
-        question: 'Faut-il des competences techniques ?',
+        question: 'Faut-il des compétences techniques ?',
         answer:
-          'Non. MonTablo est concu pour les restaurateurs, pas pour les informaticiens. L\'interface est simple et intuitive. Si vous savez utiliser un smartphone, vous savez utiliser MonTablo.',
+          'Non. MonTablo est conçu pour les restaurateurs, pas pour les informaticiens. L\'interface est simple et intuitive. Si vous savez utiliser un smartphone, vous savez utiliser MonTablo.',
       },
       {
         question: 'Puis-je importer ma carte existante ?',
         answer:
-          'Oui. Notre fonctionnalite d\'import par IA vous permet de photographier votre carte papier. L\'IA extrait automatiquement vos plats, descriptions et prix.',
+          'Oui. Notre fonctionnalité d\'import par IA vous permet de photographier votre carte papier. L\'IA extrait automatiquement vos plats, descriptions et prix.',
       },
     ],
   },
@@ -44,34 +44,34 @@ const faqCategories = [
     title: 'Tarifs et essai',
     faqs: [
       {
-        question: 'Combien coute MonTablo ?',
+        question: 'Combien coûte MonTablo ?',
         answer:
-          'MonTablo coute 29,99 euros par mois en abonnement mensuel, ou 26,99 euros par mois en abonnement annuel (soit 323,89 euros par an). Toutes les fonctionnalites sont incluses, sans frais caches.',
+          'MonTablo coûte 29,99 euros par mois en abonnement mensuel, ou 26,99 euros par mois en abonnement annuel (soit 323,89 euros par an). Toutes les fonctionnalités sont incluses, sans frais cachés.',
       },
       {
         question: 'L\'essai gratuit est-il vraiment sans carte bancaire ?',
         answer:
-          'Oui. Vous beneficiez de 14 jours d\'essai gratuit sans aucune carte bancaire requise. Vous ne serez jamais debite sans votre accord explicite.',
+          'Oui. Vous bénéficiez de 14 jours d\'essai gratuit sans aucune carte bancaire requise. Vous ne serez jamais débité sans votre accord explicite.',
       },
       {
-        question: 'Que se passe-t-il a la fin de l\'essai ?',
+        question: 'Que se passe-t-il à la fin de l\'essai ?',
         answer:
-          'Votre menu reste accessible en lecture seule pour vos clients. Vous ne perdez aucune donnee. Pour retrouver l\'acces a l\'edition, il vous suffit de vous abonner.',
+          'Votre menu reste accessible en lecture seule pour vos clients. Vous ne perdez aucune donnée. Pour retrouver l\'accès à l\'édition, il vous suffit de vous abonner.',
       },
       {
         question: 'Y a-t-il un engagement ?',
         answer:
-          'Non. L\'abonnement mensuel est sans engagement, resiliable a tout moment. L\'abonnement annuel est facture en une fois mais vous pouvez ne pas le renouveler.',
+          'Non. L\'abonnement mensuel est sans engagement, résiliable à tout moment. L\'abonnement annuel est facturé en une fois mais vous pouvez ne pas le renouveler.',
       },
     ],
   },
   {
-    title: 'Fonctionnalites',
+    title: 'Fonctionnalités',
     faqs: [
       {
-        question: 'Puis-je mettre a jour mon menu en temps reel ?',
+        question: 'Puis-je mettre à jour mon menu en temps réel ?',
         answer:
-          'Oui. Chaque modification (prix, ajout de plat, desactivation d\'une categorie) est visible instantanement par vos clients. Plus besoin de reimprimer quoi que ce soit.',
+          'Oui. Chaque modification (prix, ajout de plat, désactivation d\'une catégorie) est visible instantanément par vos clients. Plus besoin de réimprimer quoi que ce soit.',
       },
       {
         question: 'Comment fonctionne le menu du jour ?',
@@ -79,19 +79,19 @@ const faqCategories = [
           'Depuis votre tableau de bord, ajoutez vos plats du jour en quelques secondes chaque matin. Ils apparaissent automatiquement sur votre menu digital et disparaissent le lendemain.',
       },
       {
-        question: 'Mon menu peut-il etre bilingue ?',
+        question: 'Mon menu peut-il être bilingue ?',
         answer:
-          'Oui. MonTablo supporte le francais et l\'anglais. Vos clients peuvent changer de langue en un tap. Ideal pour les zones touristiques.',
+          'Oui. MonTablo supporte le français et l\'anglais. Vos clients peuvent changer de langue en un tap. Idéal pour les zones touristiques.',
       },
       {
-        question: 'Puis-je ajouter des photos a mes plats ?',
+        question: 'Puis-je ajouter des photos à mes plats ?',
         answer:
-          'Oui. Vous pouvez ajouter une photo pour chaque plat. Les images sont optimisees automatiquement pour un chargement rapide sur mobile.',
+          'Oui. Vous pouvez ajouter une photo pour chaque plat. Les images sont optimisées automatiquement pour un chargement rapide sur mobile.',
       },
       {
         question: 'Comment fonctionnent les promotions ?',
         answer:
-          'Creez une promotion avec une date de debut et de fin. Elle apparait automatiquement sur votre menu aux dates prevues et disparait ensuite. Aucune intervention manuelle necessaire.',
+          'Créez une promotion avec une date de début et de fin. Elle apparaît automatiquement sur votre menu aux dates prévues et disparaît ensuite. Aucune intervention manuelle nécessaire.',
       },
     ],
   },
@@ -101,17 +101,17 @@ const faqCategories = [
       {
         question: 'Comment obtenir mon QR code ?',
         answer:
-          'Votre QR code est genere automatiquement avec votre compte. Vous pouvez le personnaliser aux couleurs de votre restaurant et le telecharger en haute resolution pour l\'impression.',
+          'Votre QR code est généré automatiquement avec votre compte. Vous pouvez le personnaliser aux couleurs de votre restaurant et le télécharger en haute résolution pour l\'impression.',
       },
       {
-        question: 'Ou placer le QR code dans mon restaurant ?',
+        question: 'Où placer le QR code dans mon restaurant ?',
         answer:
-          'Sur chaque table (autocollant, chevalet, ou integre au set de table), a l\'entree du restaurant, sur la vitrine, et sur vos supports marketing (carte de visite, flyers).',
+          'Sur chaque table (autocollant, chevalet, ou intégré au set de table), à l\'entrée du restaurant, sur la vitrine, et sur vos supports marketing (carte de visite, flyers).',
       },
       {
         question: 'Mes clients ont-ils besoin d\'une application ?',
         answer:
-          'Non. Le menu s\'ouvre directement dans le navigateur du telephone. Aucun telechargement ni application necessaire. Compatible avec tous les smartphones.',
+          'Non. Le menu s\'ouvre directement dans le navigateur du téléphone. Aucun téléchargement ni application nécessaire. Compatible avec tous les smartphones.',
       },
     ],
   },
@@ -141,7 +141,7 @@ export default function FaqPage() {
           </Link>
           <div className="flex items-center gap-6">
             <Link href="/fonctionnalites" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
-              Fonctionnalites
+              Fonctionnalités
             </Link>
             <Link href="/tarifs" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
               Tarifs
@@ -171,7 +171,7 @@ export default function FaqPage() {
       {/* Hero */}
       <section className="max-w-[780px] mx-auto px-6 pt-8 pb-12">
         <h1 className="font-serif text-4xl sm:text-5xl text-foreground mb-4">
-          Questions frequentes
+          Questions fréquentes
         </h1>
         <p className="text-lg text-muted leading-relaxed">
           Tout ce que vous devez savoir sur MonTablo et le menu digital pour votre restaurant.
@@ -202,7 +202,7 @@ export default function FaqPage() {
             Vous avez d&apos;autres questions ?
           </h2>
           <p className="text-muted mb-8">
-            Essayez MonTablo gratuitement pendant 14 jours et decouvrez par vous-meme.
+            Essayez MonTablo gratuitement pendant 14 jours et découvrez par vous-même.
           </p>
           <Link
             href="/signup"
@@ -223,15 +223,15 @@ export default function FaqPage() {
               <span className="font-serif text-[15px] text-primary">MonTablo</span>
             </div>
             <p className="text-xs text-muted/60">
-              &copy; {new Date().getFullYear()} MonTablo. Tous droits reserves.
+              &copy; {new Date().getFullYear()} MonTablo. Tous droits réservés.
             </p>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] text-muted/50">
-            <Link href="/mentions-legales" className="hover:text-muted transition-colors">Mentions legales</Link>
+            <Link href="/mentions-légales" className="hover:text-muted transition-colors">Mentions légales</Link>
             <span className="hidden sm:inline">&middot;</span>
             <Link href="/cgu" className="hover:text-muted transition-colors">CGU</Link>
             <span className="hidden sm:inline">&middot;</span>
-            <Link href="/confidentialite" className="hover:text-muted transition-colors">Confidentialite</Link>
+            <Link href="/confidentialite" className="hover:text-muted transition-colors">Confidentialité</Link>
             <span className="hidden sm:inline">&middot;</span>
             <Link href="/cookies" className="hover:text-muted transition-colors">Cookies</Link>
           </div>

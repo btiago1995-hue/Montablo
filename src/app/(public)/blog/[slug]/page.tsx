@@ -140,7 +140,7 @@ export default function BlogPostPage({ params }: Props) {
         {/* CTA */}
         <div className="mt-16 border border-border rounded-[16px] py-10 px-8 text-center bg-gradient-to-b from-white to-background">
           <h3 className="font-serif text-2xl text-foreground mb-2">
-            Pret a creer votre menu digital ?
+            Prêt à créer votre menu digital ?
           </h3>
           <p className="text-muted mb-6">
             Essayez MonTablo gratuitement pendant 14 jours.
@@ -172,10 +172,10 @@ export default function BlogPostPage({ params }: Props) {
 
         {/* Internal links */}
         <div className="mt-12 pt-8 border-t border-border/50">
-          <p className="text-[13px] font-medium text-muted/60 mb-3">A lire aussi</p>
+          <p className="text-[13px] font-medium text-muted/60 mb-3">À lire aussi</p>
           <div className="flex flex-wrap gap-3">
             <Link href="/fonctionnalites" className="text-[14px] text-primary hover:underline">
-              Toutes les fonctionnalites
+              Toutes les fonctionnalités
             </Link>
             <span className="text-border">|</span>
             <Link href="/tarifs" className="text-[14px] text-primary hover:underline">
@@ -183,7 +183,7 @@ export default function BlogPostPage({ params }: Props) {
             </Link>
             <span className="text-border">|</span>
             <Link href="/faq" className="text-[14px] text-primary hover:underline">
-              Questions frequentes
+              Questions fréquentes
             </Link>
           </div>
         </div>
@@ -198,15 +198,15 @@ export default function BlogPostPage({ params }: Props) {
               <span className="font-serif text-[15px] text-primary">MonTablo</span>
             </div>
             <p className="text-xs text-muted/60">
-              &copy; {new Date().getFullYear()} MonTablo. Tous droits reserves.
+              &copy; {new Date().getFullYear()} MonTablo. Tous droits réservés.
             </p>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] text-muted/50">
-            <Link href="/mentions-legales" className="hover:text-muted transition-colors">Mentions legales</Link>
+            <Link href="/mentions-légales" className="hover:text-muted transition-colors">Mentions légales</Link>
             <span className="hidden sm:inline">&middot;</span>
             <Link href="/cgu" className="hover:text-muted transition-colors">CGU</Link>
             <span className="hidden sm:inline">&middot;</span>
-            <Link href="/confidentialite" className="hover:text-muted transition-colors">Confidentialite</Link>
+            <Link href="/confidentialite" className="hover:text-muted transition-colors">Confidentialité</Link>
             <span className="hidden sm:inline">&middot;</span>
             <Link href="/cookies" className="hover:text-muted transition-colors">Cookies</Link>
           </div>

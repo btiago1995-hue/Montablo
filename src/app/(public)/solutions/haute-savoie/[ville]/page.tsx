@@ -90,7 +90,7 @@ export default function VillePage({ params }: Props) {
           </Link>
           <div className="flex items-center gap-6">
             <Link href="/fonctionnalites" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
-              Fonctionnalites
+              Fonctionnalités
             </Link>
             <Link href="/tarifs" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
               Tarifs
@@ -249,7 +249,7 @@ export default function VillePage({ params }: Props) {
             <div>
               <p className="text-[13px] font-medium text-foreground mb-3">Produit</p>
               <div className="space-y-3">
-                <Link href="/fonctionnalites" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Fonctionnalites</Link>
+                <Link href="/fonctionnalites" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Fonctionnalités</Link>
                 <Link href="/tarifs" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Tarifs</Link>
                 <Link href="/menu/demo" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Voir un exemple</Link>
               </div>
@@ -264,16 +264,16 @@ export default function VillePage({ params }: Props) {
             <div>
               <p className="text-[13px] font-medium text-foreground mb-3">Legal</p>
               <div className="space-y-3">
-                <Link href="/mentions-legales" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Mentions legales</Link>
+                <Link href="/mentions-légales" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Mentions légales</Link>
                 <Link href="/cgu" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">CGU</Link>
-                <Link href="/confidentialite" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Confidentialite</Link>
+                <Link href="/confidentialite" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Confidentialité</Link>
                 <Link href="/cookies" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Cookies</Link>
               </div>
             </div>
           </div>
           <div className="border-t border-border/50 pt-6 text-center">
             <p className="text-sm text-muted/60">
-              &copy; {new Date().getFullYear()} MonTablo. Tous droits reserves.
+              &copy; {new Date().getFullYear()} MonTablo. Tous droits réservés.
             </p>
           </div>
         </div>

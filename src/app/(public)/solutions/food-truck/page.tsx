@@ -15,11 +15,11 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Menu digital pour food truck | MonTablo',
   description:
-    'Le menu digital parfait pour les food trucks. QR code sur le camion, mises a jour instantanees, fonctionne partout. Sans carte physique.',
+    'Le menu digital parfait pour les food trucks. QR code sur le camion, mises à jour instantanées, fonctionne partout. Sans carte physique.',
   openGraph: {
     title: 'Menu digital pour food truck | MonTablo',
     description:
-      'QR code sur le camion, mises a jour instantanees, fonctionne partout. La solution food truck.',
+      'QR code sur le camion, mises à jour instantanées, fonctionne partout. La solution food truck.',
   },
 }
 
@@ -28,13 +28,13 @@ const benefits = [
     icon: QrCode,
     title: 'QR code sur votre camion',
     description:
-      'Collez votre QR code directement sur le camion. Vos clients scannent et decouvrent votre menu sans attendre, meme dans la file.',
+      'Collez votre QR code directement sur le camion. Vos clients scannent et découvrent votre menu sans attendre, même dans la file.',
   },
   {
     icon: Zap,
-    title: 'Mises a jour instantanees',
+    title: 'Mises à jour instantanées',
     description:
-      'Votre menu change d\'un emplacement a l\'autre ? Modifiez vos plats et prix en quelques secondes depuis votre telephone.',
+      'Votre menu change d\'un emplacement a l\'autre ? Modifiez vos plats et prix en quelques secondes depuis votre téléphone.',
   },
   {
     icon: MapPin,
@@ -47,23 +47,23 @@ const benefits = [
 const features = [
   {
     icon: QrCode,
-    title: 'QR code pret a coller',
-    description: 'Generez un QR code haute resolution aux couleurs de votre food truck. Collez-le sur le camion, le comptoir ou un panneau.',
+    title: 'QR code prêt a coller',
+    description: 'Générez un QR code haute résolution aux couleurs de votre food truck. Collez-le sur le camion, le comptoir ou un panneau.',
   },
   {
     icon: Smartphone,
     title: '100% mobile',
-    description: 'Gerez votre menu entierement depuis votre telephone. Ajoutez, modifiez ou desactivez un plat en plein service.',
+    description: 'Gerez votre menu entierement depuis votre téléphone. Ajoutez, modifiez ou désactivez un plat en plein service.',
   },
   {
     icon: Zap,
-    title: 'Changements en temps reel',
+    title: 'Changements en temps réel',
     description: 'Un plat est epuise ? Desactivez-le en un tap. Vos clients voient toujours ce qui est disponible.',
   },
   {
     icon: RefreshCw,
     title: 'Menu adaptable',
-    description: 'Changez votre carte selon l\'emplacement ou la saison. Pas besoin de reimprimer, tout se fait en ligne.',
+    description: 'Changez votre carte selon l\'emplacement ou la saison. Pas besoin de réimprimer, tout se fait en ligne.',
   },
   {
     icon: Truck,
@@ -72,7 +72,7 @@ const features = [
   },
   {
     icon: MapPin,
-    title: 'Partage sur les reseaux',
+    title: 'Partage sur les réseaux',
     description: 'Partagez le lien de votre menu sur Instagram, Facebook ou Google. Vos clients consultent votre carte avant de venir.',
   },
 ]
@@ -80,13 +80,13 @@ const features = [
 const steps = [
   {
     number: '1',
-    title: 'Creez votre menu',
-    description: 'Ajoutez vos plats, prix et photos depuis votre telephone en quelques minutes.',
+    title: 'Créez votre menu',
+    description: 'Ajoutez vos plats, prix et photos depuis votre téléphone en quelques minutes.',
   },
   {
     number: '2',
-    title: 'Generez votre QR code',
-    description: 'Personnalisez les couleurs et telechargez votre QR code en haute resolution.',
+    title: 'Générez votre QR code',
+    description: 'Personnalisez les couleurs et téléchargez votre QR code en haute résolution.',
   },
   {
     number: '3',
@@ -117,7 +117,7 @@ export default function FoodTruckPage() {
           </Link>
           <div className="flex items-center gap-6">
             <Link href="/fonctionnalites" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
-              Fonctionnalites
+              Fonctionnalités
             </Link>
             <Link href="/tarifs" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
               Tarifs
@@ -158,8 +158,8 @@ export default function FoodTruckPage() {
           Le menu digital qui roule avec votre food truck.
         </h1>
         <p className="text-lg text-muted max-w-[520px] mb-10 leading-relaxed">
-          Vous changez d&apos;emplacement, votre menu suit. QR code sur le camion, mises a jour
-          depuis votre telephone, zero carte physique.
+          Vous changez d&apos;emplacement, votre menu suit. QR code sur le camion, mises à jour
+          depuis votre téléphone, zéro carte physique.
         </p>
         <Link
           href="/signup"
@@ -212,7 +212,7 @@ export default function FoodTruckPage() {
       {/* Feature highlights */}
       <section className="max-w-[1120px] mx-auto px-6 pb-24">
         <h2 className="font-serif text-3xl text-foreground mb-10">
-          Les fonctionnalites cles pour votre food truck
+          Les fonctionnalités clés pour votre food truck
         </h2>
         <div className="grid md:grid-cols-2 gap-8">
           {features.map((feature) => {
@@ -234,7 +234,7 @@ export default function FoodTruckPage() {
       <section className="max-w-[1120px] mx-auto px-6 pb-24">
         <div className="bg-primary rounded-[20px] py-16 px-8 text-center">
           <h2 className="font-serif text-3xl text-white mb-3">
-            Pret a equiper votre food truck d&apos;un menu digital ?
+            Prêt a equiper votre food truck d&apos;un menu digital ?
           </h2>
           <p className="text-white/60 mb-8 max-w-md mx-auto">
             14 jours d&apos;essai gratuit. Aucune carte bancaire requise.
@@ -260,7 +260,7 @@ export default function FoodTruckPage() {
       {/* Internal links */}
       <section className="max-w-[1120px] mx-auto px-6 pb-16">
         <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[13px] text-muted/60">
-          <Link href="/fonctionnalites" className="hover:text-muted transition-colors">Fonctionnalites</Link>
+          <Link href="/fonctionnalites" className="hover:text-muted transition-colors">Fonctionnalités</Link>
           <Link href="/tarifs" className="hover:text-muted transition-colors">Tarifs</Link>
           <Link href="/menu-digital-restaurant" className="hover:text-muted transition-colors">Menu digital restaurant</Link>
           <Link href="/qr-code-restaurant" className="hover:text-muted transition-colors">QR code restaurant</Link>
@@ -283,7 +283,7 @@ export default function FoodTruckPage() {
             <div>
               <p className="text-[13px] font-medium text-foreground mb-3">Produit</p>
               <div className="space-y-3">
-                <Link href="/fonctionnalites" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Fonctionnalites</Link>
+                <Link href="/fonctionnalites" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Fonctionnalités</Link>
                 <Link href="/tarifs" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Tarifs</Link>
                 <Link href="/menu/demo" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Voir un exemple</Link>
               </div>
@@ -298,16 +298,16 @@ export default function FoodTruckPage() {
             <div>
               <p className="text-[13px] font-medium text-foreground mb-3">Legal</p>
               <div className="space-y-3">
-                <Link href="/mentions-legales" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Mentions legales</Link>
+                <Link href="/mentions-légales" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Mentions légales</Link>
                 <Link href="/cgu" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">CGU</Link>
-                <Link href="/confidentialite" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Confidentialite</Link>
+                <Link href="/confidentialite" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Confidentialité</Link>
                 <Link href="/cookies" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Cookies</Link>
               </div>
             </div>
           </div>
           <div className="border-t border-border/50 pt-6 text-center">
             <p className="text-sm text-muted/60">
-              &copy; {new Date().getFullYear()} MonTablo. Tous droits reserves.
+              &copy; {new Date().getFullYear()} MonTablo. Tous droits réservés.
             </p>
           </div>
         </div>

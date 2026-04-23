@@ -23,17 +23,17 @@ export default function MentionsLegalesPage() {
 
         <div className="prose prose-sm text-muted leading-relaxed space-y-6">
           <section>
-            <h2 className="font-serif text-lg text-foreground mt-8 mb-3">1. Editeur du site</h2>
+            <h2 className="font-serif text-lg text-foreground mt-8 mb-3">1. Éditeur du site</h2>
             <p>
               Le site <strong className="text-foreground">montablo.vercel.app</strong> est
-              edite par :
+              édité par :
             </p>
             <ul className="list-none pl-0 space-y-1 mt-3">
               <li><strong className="text-foreground">Nom :</strong> ROCHA DE BARROS TAVARES SEMEDO Tiago</li>
               <li><strong className="text-foreground">Statut :</strong> Entrepreneur individuel</li>
               <li><strong className="text-foreground">SIREN :</strong> 908 728 942</li>
               <li>
-                <strong className="text-foreground">Adresse :</strong> 17 rue Amedee VIII de Savoie, APP 16,
+                <strong className="text-foreground">Adresse :</strong> 17 rue Amédée VIII de Savoie, APP 16,
                 74160 Saint-Julien-en-Genevois, France
               </li>
               <li><strong className="text-foreground">Email :</strong> contact@montablo.com</li>
@@ -46,38 +46,38 @@ export default function MentionsLegalesPage() {
           </section>
 
           <section>
-            <h2 className="font-serif text-lg text-foreground mt-8 mb-3">3. Hebergement</h2>
+            <h2 className="font-serif text-lg text-foreground mt-8 mb-3">3. Hébergement</h2>
             <ul className="list-none pl-0 space-y-1 mt-3">
-              <li><strong className="text-foreground">Hebergeur :</strong> Vercel Inc.</li>
-              <li><strong className="text-foreground">Adresse :</strong> 440 N Barranca Ave #4133, Covina, CA 91723, Etats-Unis</li>
+              <li><strong className="text-foreground">Hébergeur :</strong> Vercel Inc.</li>
+              <li><strong className="text-foreground">Adresse :</strong> 440 N Barranca Ave #4133, Covina, CA 91723, États-Unis</li>
               <li><strong className="text-foreground">Site :</strong> vercel.com</li>
             </ul>
             <p className="mt-3">
-              Les donnees sont stockees par Supabase Inc. (serveurs situes dans l&apos;Union
-              europeenne, region eu-west).
+              Les données sont stockées par Supabase Inc. (serveurs situés dans l&apos;Union
+              européenne, région eu-west).
             </p>
           </section>
 
           <section>
-            <h2 className="font-serif text-lg text-foreground mt-8 mb-3">4. Propriete intellectuelle</h2>
+            <h2 className="font-serif text-lg text-foreground mt-8 mb-3">4. Propriété intellectuelle</h2>
             <p>
-              L&apos;ensemble du contenu du site MonTablo (textes, graphismes, logos, icones, images,
-              logiciels) est la propriete exclusive de l&apos;editeur ou de ses partenaires et est protege
-              par les lois francaises et internationales relatives a la propriete intellectuelle.
+              L&apos;ensemble du contenu du site MonTablo (textes, graphismes, logos, icônes, images,
+              logiciels) est la propriété exclusive de l&apos;éditeur ou de ses partenaires et est protégé
+              par les lois françaises et internationales relatives à la propriété intellectuelle.
             </p>
             <p>
-              Toute reproduction, representation, modification ou adaptation, totale ou partielle,
-              est interdite sans autorisation prealable ecrite de l&apos;editeur.
+              Toute reproduction, représentation, modification ou adaptation, totale ou partielle,
+              est interdite sans autorisation préalable écrite de l&apos;éditeur.
             </p>
           </section>
 
           <section>
-            <h2 className="font-serif text-lg text-foreground mt-8 mb-3">5. Donnees personnelles</h2>
+            <h2 className="font-serif text-lg text-foreground mt-8 mb-3">5. Données personnelles</h2>
             <p>
-              Pour toute information relative au traitement de vos donnees personnelles,
+              Pour toute information relative au traitement de vos données personnelles,
               consultez notre{' '}
               <Link href="/confidentialite" className="text-primary hover:underline">
-                Politique de confidentialite
+                Politique de confidentialité
               </Link>.
             </p>
           </section>
@@ -85,8 +85,8 @@ export default function MentionsLegalesPage() {
           <section>
             <h2 className="font-serif text-lg text-foreground mt-8 mb-3">6. Droit applicable</h2>
             <p>
-              Les presentes mentions legales sont soumises au droit francais. En cas de litige,
-              les tribunaux francais seront seuls competents.
+              Les présentes mentions légales sont soumises au droit français. En cas de litige,
+              les tribunaux français seront seuls compétents.
             </p>
           </section>
         </div>

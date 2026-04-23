@@ -15,11 +15,11 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Menu digital pour bistrot | MonTablo',
   description:
-    'Creez le menu digital de votre bistrot en minutes. Menu du jour, mise a jour instantanee, QR code. Ideal pour les bistrots et petites equipes.',
+    'Créez le menu digital de votre bistrot en minutes. Menu du jour, mise à jour instantanée, QR code. Idéal pour les bistrots et petites equipes.',
   openGraph: {
     title: 'Menu digital pour bistrot | MonTablo',
     description:
-      'Menu du jour, mise a jour instantanee, QR code. La solution simple pour les bistrots.',
+      'Menu du jour, mise à jour instantanée, QR code. La solution simple pour les bistrots.',
   },
 }
 
@@ -28,42 +28,42 @@ const benefits = [
     icon: CalendarDays,
     title: 'Menu du jour en un clic',
     description:
-      'Changez votre ardoise chaque matin en quelques secondes. Vos clients voient immediatement les plats du jour depuis leur telephone.',
+      'Changez votre ardoise chaque matin en quelques secondes. Vos clients voient immédiatement les plats du jour depuis leur téléphone.',
   },
   {
     icon: Zap,
-    title: 'Rapide et sans competences techniques',
+    title: 'Rapide et sans compétences techniques',
     description:
-      'Pas besoin d\'etre informaticien. Ajoutez, modifiez ou supprimez un plat en quelques taps. Ideal pour les petites equipes pressees.',
+      'Pas besoin d\'être informaticien. Ajoutez, modifiez ou supprimez un plat en quelques taps. Idéal pour les petites equipes pressees.',
   },
   {
     icon: Clock,
     title: 'Gagnez du temps chaque jour',
     description:
-      'Plus besoin de reecrire l\'ardoise ou de reimprimer la carte. Mettez a jour votre menu depuis votre telephone, meme en plein service.',
+      'Plus besoin de reecrire l\'ardoise ou de réimprimer la carte. Mettez à jour votre menu depuis votre téléphone, même en plein service.',
   },
 ]
 
 const features = [
   {
     icon: CalendarDays,
-    title: 'Menu du jour instantane',
+    title: 'Menu du jour instantané',
     description: 'Publiez votre menu du jour en quelques secondes. Vos clients voient toujours ce qui est disponible aujourd\'hui.',
   },
   {
     icon: Zap,
-    title: 'Mises a jour en temps reel',
+    title: 'Mises à jour en temps réel',
     description: 'Un plat est epuise ? Desactivez-le en un tap. Vos clients ne commanderont jamais un plat indisponible.',
   },
   {
     icon: ChefHat,
     title: 'Simplicite absolue',
-    description: 'Interface intuitive pensee pour les restaurateurs. Aucune formation necessaire, prise en main en 5 minutes.',
+    description: 'Interface intuitive pensee pour les restaurateurs. Aucune formation nécessaire, prise en main en 5 minutes.',
   },
   {
     icon: Smartphone,
     title: 'QR code sur chaque table',
-    description: 'Generez un QR code aux couleurs de votre bistrot. Vos clients scannent et decouvrent votre carte instantanement.',
+    description: 'Générez un QR code aux couleurs de votre bistrot. Vos clients scannent et découvrent votre carte instantanément.',
   },
   {
     icon: Tag,
@@ -72,16 +72,16 @@ const features = [
   },
   {
     icon: UtensilsCrossed,
-    title: 'Categories flexibles',
-    description: 'Organisez votre carte comme vous le souhaitez : entrees, plats, desserts, formules, boissons... sans limite.',
+    title: 'Catégories flexibles',
+    description: 'Organisez votre carte comme vous le souhaitez : entrées, plats, desserts, formules, boissons... sans limite.',
   },
 ]
 
 const steps = [
   {
     number: '1',
-    title: 'Creez votre carte',
-    description: 'Ajoutez vos plats, descriptions et prix. Organisez par categories en quelques minutes.',
+    title: 'Créez votre carte',
+    description: 'Ajoutez vos plats, descriptions et prix. Organisez par catégories en quelques minutes.',
   },
   {
     number: '2',
@@ -91,7 +91,7 @@ const steps = [
   {
     number: '3',
     title: 'Partagez avec un QR code',
-    description: 'Imprimez votre QR code, posez-le sur vos tables. Vos clients accedent a votre menu en un scan.',
+    description: 'Imprimez votre QR code, posez-le sur vos tables. Vos clients accèdent a votre menu en un scan.',
   },
 ]
 
@@ -117,7 +117,7 @@ export default function BistrotPage() {
           </Link>
           <div className="flex items-center gap-6">
             <Link href="/fonctionnalites" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
-              Fonctionnalites
+              Fonctionnalités
             </Link>
             <Link href="/tarifs" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
               Tarifs
@@ -158,8 +158,8 @@ export default function BistrotPage() {
           Le menu digital pense pour les bistrots.
         </h1>
         <p className="text-lg text-muted max-w-[520px] mb-10 leading-relaxed">
-          Votre carte change tous les jours ? Mettez a jour votre menu du jour en quelques secondes,
-          sans competences techniques. Simple, rapide, efficace.
+          Votre carte change tous les jours ? Mettez à jour votre menu du jour en quelques secondes,
+          sans compétences techniques. Simple, rapide, efficace.
         </p>
         <Link
           href="/signup"
@@ -212,7 +212,7 @@ export default function BistrotPage() {
       {/* Feature highlights */}
       <section className="max-w-[1120px] mx-auto px-6 pb-24">
         <h2 className="font-serif text-3xl text-foreground mb-10">
-          Les fonctionnalites cles pour votre bistrot
+          Les fonctionnalités clés pour votre bistrot
         </h2>
         <div className="grid md:grid-cols-2 gap-8">
           {features.map((feature) => {
@@ -234,7 +234,7 @@ export default function BistrotPage() {
       <section className="max-w-[1120px] mx-auto px-6 pb-24">
         <div className="bg-primary rounded-[20px] py-16 px-8 text-center">
           <h2 className="font-serif text-3xl text-white mb-3">
-            Pret a digitaliser la carte de votre bistrot ?
+            Prêt a digitaliser la carte de votre bistrot ?
           </h2>
           <p className="text-white/60 mb-8 max-w-md mx-auto">
             14 jours d&apos;essai gratuit. Aucune carte bancaire requise.
@@ -260,7 +260,7 @@ export default function BistrotPage() {
       {/* Internal links */}
       <section className="max-w-[1120px] mx-auto px-6 pb-16">
         <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[13px] text-muted/60">
-          <Link href="/fonctionnalites" className="hover:text-muted transition-colors">Fonctionnalites</Link>
+          <Link href="/fonctionnalites" className="hover:text-muted transition-colors">Fonctionnalités</Link>
           <Link href="/tarifs" className="hover:text-muted transition-colors">Tarifs</Link>
           <Link href="/menu-digital-restaurant" className="hover:text-muted transition-colors">Menu digital restaurant</Link>
           <Link href="/qr-code-restaurant" className="hover:text-muted transition-colors">QR code restaurant</Link>
@@ -283,7 +283,7 @@ export default function BistrotPage() {
             <div>
               <p className="text-[13px] font-medium text-foreground mb-3">Produit</p>
               <div className="space-y-3">
-                <Link href="/fonctionnalites" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Fonctionnalites</Link>
+                <Link href="/fonctionnalites" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Fonctionnalités</Link>
                 <Link href="/tarifs" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Tarifs</Link>
                 <Link href="/menu/demo" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Voir un exemple</Link>
               </div>
@@ -298,16 +298,16 @@ export default function BistrotPage() {
             <div>
               <p className="text-[13px] font-medium text-foreground mb-3">Legal</p>
               <div className="space-y-3">
-                <Link href="/mentions-legales" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Mentions legales</Link>
+                <Link href="/mentions-légales" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Mentions légales</Link>
                 <Link href="/cgu" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">CGU</Link>
-                <Link href="/confidentialite" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Confidentialite</Link>
+                <Link href="/confidentialite" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Confidentialité</Link>
                 <Link href="/cookies" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Cookies</Link>
               </div>
             </div>
           </div>
           <div className="border-t border-border/50 pt-6 text-center">
             <p className="text-sm text-muted/60">
-              &copy; {new Date().getFullYear()} MonTablo. Tous droits reserves.
+              &copy; {new Date().getFullYear()} MonTablo. Tous droits réservés.
             </p>
           </div>
         </div>

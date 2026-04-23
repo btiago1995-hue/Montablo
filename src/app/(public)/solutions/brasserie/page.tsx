@@ -15,20 +15,20 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Menu digital pour brasserie | MonTablo',
   description:
-    'Gerez le menu digital de votre brasserie facilement. Categories illimitees, promotions happy hour, carte organisee pour le service continu.',
+    'Gerez le menu digital de votre brasserie facilement. Catégories illimitées, promotions happy hour, carte organisee pour le service continu.',
   openGraph: {
     title: 'Menu digital pour brasserie | MonTablo',
     description:
-      'Categories illimitees, promotions happy hour, carte organisee. La solution pour les brasseries.',
+      'Catégories illimitées, promotions happy hour, carte organisee. La solution pour les brasseries.',
   },
 }
 
 const benefits = [
   {
     icon: LayoutGrid,
-    title: 'Categories illimitees',
+    title: 'Catégories illimitées',
     description:
-      'Entrees, plats, grillades, poissons, desserts, boissons, vins... Organisez votre carte en autant de categories que necessaire, sans aucune limite.',
+      'Entrées, plats, grillades, poissons, desserts, boissons, vins... Organisez votre carte en autant de catégories que nécessaire, sans aucune limite.',
   },
   {
     icon: Tag,
@@ -40,15 +40,15 @@ const benefits = [
     icon: Clock,
     title: 'Service continu, carte adaptee',
     description:
-      'Activez ou desactivez des categories selon le moment de la journee. Carte du midi, carte du soir, tout se gere en quelques taps.',
+      'Activez ou désactivez des catégories selon le moment de la journee. Carte du midi, carte du soir, tout se géré en quelques taps.',
   },
 ]
 
 const features = [
   {
     icon: Layers,
-    title: 'Organisation par categories',
-    description: 'Creez autant de categories et sous-groupes que vous le souhaitez. Votre carte reste claire meme avec 100 plats.',
+    title: 'Organisation par catégories',
+    description: 'Créez autant de catégories et sous-groupes que vous le souhaitez. Votre carte reste claire même avec 100 plats.',
   },
   {
     icon: Tag,
@@ -57,23 +57,23 @@ const features = [
   },
   {
     icon: Clock,
-    title: 'Mises a jour instantanees',
-    description: 'Changez un prix, ajoutez un plat, desactivez une categorie. Vos clients voient les modifications en temps reel.',
+    title: 'Mises à jour instantanées',
+    description: 'Changez un prix, ajoutez un plat, désactivez une catégorie. Vos clients voient les modifications en temps réel.',
   },
   {
     icon: Smartphone,
-    title: 'QR code personnalise',
-    description: 'Un QR code aux couleurs de votre brasserie, pret a imprimer et a poser sur vos tables ou au comptoir.',
+    title: 'QR code personnalisé',
+    description: 'Un QR code aux couleurs de votre brasserie, prêt a imprimer et a poser sur vos tables ou au comptoir.',
   },
   {
     icon: Globe,
-    title: 'Bilingue francais / anglais',
-    description: 'Accueillez une clientele internationale avec un menu disponible en francais et en anglais.',
+    title: 'Bilingue français / anglais',
+    description: 'Accueillez une clientèle internationale avec un menu disponible en français et en anglais.',
   },
   {
     icon: UtensilsCrossed,
     title: 'Design professionnel',
-    description: 'Un menu digital elegant qui reflète l\'image de votre brasserie. Couleurs personnalisables, typographie soignee.',
+    description: 'Un menu digital élégant qui reflète l\'image de votre brasserie. Couleurs personnalisables, typographie soignée.',
   },
 ]
 
@@ -85,13 +85,13 @@ const steps = [
   },
   {
     number: '2',
-    title: 'Organisez par categories',
-    description: 'Creez vos categories, ordonnez vos plats, ajoutez photos et descriptions.',
+    title: 'Organisez par catégories',
+    description: 'Créez vos catégories, ordonnez vos plats, ajoutez photos et descriptions.',
   },
   {
     number: '3',
     title: 'Publiez et partagez',
-    description: 'Generez votre QR code, posez-le sur les tables. Votre brasserie a son menu digital.',
+    description: 'Générez votre QR code, posez-le sur les tables. Votre brasserie a son menu digital.',
   },
 ]
 
@@ -117,7 +117,7 @@ export default function BrasseriePage() {
           </Link>
           <div className="flex items-center gap-6">
             <Link href="/fonctionnalites" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
-              Fonctionnalites
+              Fonctionnalités
             </Link>
             <Link href="/tarifs" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
               Tarifs
@@ -158,7 +158,7 @@ export default function BrasseriePage() {
           Le menu digital taille pour les brasseries.
         </h1>
         <p className="text-lg text-muted max-w-[520px] mb-10 leading-relaxed">
-          Une carte longue avec de nombreuses categories, un service continu du matin au soir.
+          Une carte longue avec de nombreuses catégories, un service continu du matin au soir.
           MonTablo organise tout clairement pour vos clients.
         </p>
         <Link
@@ -212,7 +212,7 @@ export default function BrasseriePage() {
       {/* Feature highlights */}
       <section className="max-w-[1120px] mx-auto px-6 pb-24">
         <h2 className="font-serif text-3xl text-foreground mb-10">
-          Les fonctionnalites cles pour votre brasserie
+          Les fonctionnalités clés pour votre brasserie
         </h2>
         <div className="grid md:grid-cols-2 gap-8">
           {features.map((feature) => {
@@ -234,7 +234,7 @@ export default function BrasseriePage() {
       <section className="max-w-[1120px] mx-auto px-6 pb-24">
         <div className="bg-primary rounded-[20px] py-16 px-8 text-center">
           <h2 className="font-serif text-3xl text-white mb-3">
-            Pret a moderniser la carte de votre brasserie ?
+            Prêt a moderniser la carte de votre brasserie ?
           </h2>
           <p className="text-white/60 mb-8 max-w-md mx-auto">
             14 jours d&apos;essai gratuit. Aucune carte bancaire requise.
@@ -260,7 +260,7 @@ export default function BrasseriePage() {
       {/* Internal links */}
       <section className="max-w-[1120px] mx-auto px-6 pb-16">
         <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[13px] text-muted/60">
-          <Link href="/fonctionnalites" className="hover:text-muted transition-colors">Fonctionnalites</Link>
+          <Link href="/fonctionnalites" className="hover:text-muted transition-colors">Fonctionnalités</Link>
           <Link href="/tarifs" className="hover:text-muted transition-colors">Tarifs</Link>
           <Link href="/menu-digital-restaurant" className="hover:text-muted transition-colors">Menu digital restaurant</Link>
           <Link href="/qr-code-restaurant" className="hover:text-muted transition-colors">QR code restaurant</Link>
@@ -283,7 +283,7 @@ export default function BrasseriePage() {
             <div>
               <p className="text-[13px] font-medium text-foreground mb-3">Produit</p>
               <div className="space-y-3">
-                <Link href="/fonctionnalites" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Fonctionnalites</Link>
+                <Link href="/fonctionnalites" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Fonctionnalités</Link>
                 <Link href="/tarifs" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Tarifs</Link>
                 <Link href="/menu/demo" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Voir un exemple</Link>
               </div>
@@ -298,16 +298,16 @@ export default function BrasseriePage() {
             <div>
               <p className="text-[13px] font-medium text-foreground mb-3">Legal</p>
               <div className="space-y-3">
-                <Link href="/mentions-legales" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Mentions legales</Link>
+                <Link href="/mentions-légales" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Mentions légales</Link>
                 <Link href="/cgu" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">CGU</Link>
-                <Link href="/confidentialite" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Confidentialite</Link>
+                <Link href="/confidentialite" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Confidentialité</Link>
                 <Link href="/cookies" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Cookies</Link>
               </div>
             </div>
           </div>
           <div className="border-t border-border/50 pt-6 text-center">
             <p className="text-sm text-muted/60">
-              &copy; {new Date().getFullYear()} MonTablo. Tous droits reserves.
+              &copy; {new Date().getFullYear()} MonTablo. Tous droits réservés.
             </p>
           </div>
         </div>

@@ -17,57 +17,57 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Menu Digital Restaurant — Guide Complet 2026',
   description:
-    'Tout savoir sur le menu digital pour restaurant : avantages, fonctionnement, cout et mise en place. Modernisez votre carte des aujourd\'hui.',
+    'Tout savoir sur le menu digital pour restaurant : avantages, fonctionnement, coût et mise en place. Modernisez votre carte des aujourd\'hui.',
   openGraph: {
     title: 'Menu Digital Restaurant — Guide Complet 2026',
     description:
-      'Tout savoir sur le menu digital pour restaurant : avantages, fonctionnement, cout et mise en place.',
+      'Tout savoir sur le menu digital pour restaurant : avantages, fonctionnement, coût et mise en place.',
   },
 }
 
 const benefits = [
   {
     icon: Zap,
-    title: 'Mise a jour instantanee',
+    title: 'Mise à jour instantanée',
     description:
-      'Modifiez un prix, ajoutez un plat ou desactivez une categorie en quelques secondes. Vos clients voient les changements immediatement, sans aucune reimpression.',
+      'Modifiez un prix, ajoutez un plat ou désactivez une catégorie en quelques secondes. Vos clients voient les changements immédiatement, sans aucune réimpression.',
   },
   {
     icon: Euro,
     title: 'Economies considerables',
     description:
-      'Fini les couts d\'impression a chaque changement de prix ou de saison. Un menu digital s\'amortit en quelques semaines seulement.',
+      'Fini les coûts d\'impression a chaque changement de prix ou de saison. Un menu digital s\'amortit en quelques semaines seulement.',
   },
   {
     icon: Leaf,
     title: 'Demarche eco-responsable',
     description:
-      'Reduisez votre consommation de papier et d\'encre. Un argument de plus en plus apprecie par vos clients soucieux de l\'environnement.',
+      'Reduisez votre consommation de papier et d\'encre. Un argument de plus en plus apprécié par vos clients soucieux de l\'environnement.',
   },
   {
     icon: Smartphone,
     title: 'Experience client moderne',
     description:
-      'Offrez a vos clients une experience fluide sur leur propre telephone. Photos des plats, descriptions detaillees, allergenes — tout est accessible en un scan.',
+      'Offrez a vos clients une expérience fluide sur leur propre téléphone. Photos des plats, descriptions détaillées, allergènes — tout est accessible en un scan.',
   },
   {
     icon: Clock,
     title: 'Gain de temps au quotidien',
     description:
-      'Le menu du jour se met a jour en quelques secondes chaque matin. Les promotions apparaissent et disparaissent automatiquement aux dates prevues.',
+      'Le menu du jour se met à jour en quelques secondes chaque matin. Les promotions apparaissent et disparaissent automatiquement aux dates prévues.',
   },
   {
     icon: TrendingUp,
     title: 'Image professionnelle',
     description:
-      'Un menu digital soigne renvoie une image moderne et professionnelle. Vos clients savent que votre etablissement est a la pointe.',
+      'Un menu digital soigné renvoie une image moderne et professionnelle. Vos clients savent que votre établissement est a la pointe.',
   },
 ]
 
 const steps = [
   {
     number: '01',
-    title: 'Creez votre compte',
+    title: 'Créez votre compte',
     description:
       'Inscrivez-vous gratuitement en moins d\'une minute. Aucune carte bancaire n\'est requise pour l\'essai de 14 jours.',
   },
@@ -81,23 +81,23 @@ const steps = [
     number: '03',
     title: 'Personnalisez votre menu',
     description:
-      'Choisissez les couleurs de votre restaurant, organisez vos categories, ajoutez des photos de vos plats.',
+      'Choisissez les couleurs de votre restaurant, organisez vos catégories, ajoutez des photos de vos plats.',
   },
   {
     number: '04',
-    title: 'Generez votre QR code',
+    title: 'Générez votre QR code',
     description:
-      'Telechargez votre QR code personnalise en haute resolution. Imprimez-le et placez-le sur vos tables.',
+      'Telechargez votre QR code personnalisé en haute résolution. Imprimez-le et placez-le sur vos tables.',
   },
 ]
 
 const comparisons = [
-  { feature: 'Cout par modification', paper: 'Reimpression complete', digital: 'Gratuit et instantane' },
-  { feature: 'Mise a jour', paper: 'Plusieurs jours', digital: 'Quelques secondes' },
-  { feature: 'Photos des plats', paper: 'Cout d\'impression eleve', digital: 'Incluses sans surcout' },
-  { feature: 'Menu du jour', paper: 'Ardoise ou feuille volante', digital: 'Integre et automatise' },
+  { feature: 'Coût par modification', paper: 'Reimpression complète', digital: 'Gratuit et instantané' },
+  { feature: 'Mise à jour', paper: 'Plusieurs jours', digital: 'Quelques secondes' },
+  { feature: 'Photos des plats', paper: 'Coût d\'impression élevé', digital: 'Incluses sans surcout' },
+  { feature: 'Menu du jour', paper: 'Ardoise ou feuille volante', digital: 'Integre et automatisé' },
   { feature: 'Langues', paper: 'Un menu par langue', digital: 'Bilingue FR/EN en un tap' },
-  { feature: 'Impact ecologique', paper: 'Papier et encre', digital: 'Zero dechet' },
+  { feature: 'Impact ecologique', paper: 'Papier et encre', digital: 'Zéro déchet' },
   { feature: 'Hygiene', paper: 'Manipule par tous', digital: 'Sans contact' },
 ]
 
@@ -122,7 +122,7 @@ export default function MenuDigitalRestaurantPage() {
           </Link>
           <div className="flex items-center gap-6">
             <Link href="/fonctionnalites" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
-              Fonctionnalites
+              Fonctionnalités
             </Link>
             <Link href="/tarifs" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
               Tarifs
@@ -162,14 +162,14 @@ export default function MenuDigitalRestaurantPage() {
         </h1>
         <p className="text-lg text-muted leading-relaxed mb-8">
           Le menu digital est devenu un outil incontournable pour les restaurants modernes.
-          Decouvrez comment il fonctionne, pourquoi l&apos;adopter et comment le mettre en
-          place dans votre etablissement en quelques minutes.
+          Découvrez comment il fonctionne, pourquoi l&apos;adopter et comment le mettre en
+          place dans votre établissement en quelques minutes.
         </p>
         <Link
           href="/signup"
           className="group inline-flex items-center gap-2.5 bg-primary text-white font-medium px-8 py-3.5 rounded-full hover:bg-primary-light transition-all hover:shadow-xl hover:shadow-primary/18 hover:-translate-y-px text-[15px]"
         >
-          Creer mon menu digital gratuitement
+          Créer mon menu digital gratuitement
           <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
         </Link>
       </section>
@@ -181,25 +181,25 @@ export default function MenuDigitalRestaurantPage() {
         </h2>
         <div className="space-y-4 text-[15px] text-muted leading-relaxed">
           <p>
-            Un menu digital restaurant est une version numerique de votre carte, accessible
-            depuis le telephone de vos clients. Au lieu de distribuer des menus papier, vous
+            Un menu digital restaurant est une version numérique de votre carte, accessible
+            depuis le téléphone de vos clients. Au lieu de distribuer des menus papier, vous
             placez un{' '}
             <Link href="/qr-code-restaurant" className="text-primary hover:underline">
               QR code sur chaque table
             </Link>
-            . Vos clients le scannent avec leur telephone et accedent instantanement a votre
-            carte complete : plats, descriptions, prix, photos et allergenes.
+            . Vos clients le scannent avec leur téléphone et accèdent instantanément a votre
+            carte complète : plats, descriptions, prix, photos et allergènes.
           </p>
           <p>
             Contrairement a une simple photo de votre carte en PDF, un vrai menu digital est
-            interactif, mis a jour en temps reel et optimise pour la lecture sur mobile. Il se
-            charge en moins de deux secondes, s&apos;adapte a tous les ecrans et ne necessite
-            aucune application a telecharger.
+            interactif, mis à jour en temps réel et optimise pour la lecture sur mobile. Il se
+            charge en moins de deux secondes, s&apos;adapte a tous les ecrans et ne nécessite
+            aucune application a télécharger.
           </p>
           <p>
             En France, l&apos;adoption du menu digital a explose depuis 2020. Aujourd&apos;hui,
-            plus de 40 % des restaurants proposent une version numerique de leur carte. Les
-            clients, habitues aux usages digitaux, apprecient la simplicite et la rapidite de
+            plus de 40 % des restaurants proposent une version numérique de leur carte. Les
+            clients, habitués aux usages digitaux, apprécient la simplicite et la rapidite de
             consultation.
           </p>
         </div>
@@ -212,20 +212,20 @@ export default function MenuDigitalRestaurantPage() {
         </h2>
         <div className="space-y-4 text-[15px] text-muted leading-relaxed">
           <p>
-            Les attentes de vos clients evoluent. Ils veulent consulter votre carte rapidement,
-            voir des photos appetissantes et connaitre les allergenes sans avoir a demander au
-            serveur. Un menu digital repond a toutes ces attentes de maniere fluide.
+            Les attentes de vos clients évoluent. Ils veulent consulter votre carte rapidement,
+            voir des photos appétissantes et connaître les allergènes sans avoir a demander au
+            serveur. Un menu digital répond a toutes ces attentes de maniere fluide.
           </p>
           <p>
-            Mais les benefices vont bien au-dela de l&apos;experience client. Pour le
+            Mais les bénéfices vont bien au-dela de l&apos;expérience client. Pour le
             restaurateur, le menu digital est un outil de gestion quotidien : modifier un prix
             prend 10 secondes, ajouter le menu du jour se fait chaque matin en quelques clics,
             et les promotions se programment a l&apos;avance.
           </p>
           <p>
-            Selon une etude de TheFork, les restaurants qui proposent un menu avec photos voient
+            Selon une étude de TheFork, les restaurants qui proposent un menu avec photos voient
             leurs ventes augmenter de 15 a 30 %. Les clients commandent davantage lorsqu&apos;ils
-            visualisent les plats, ce qui se traduit par un ticket moyen plus eleve.
+            visualisent les plats, ce qui se traduit par un ticket moyen plus élevé.
           </p>
         </div>
       </section>
@@ -233,7 +233,7 @@ export default function MenuDigitalRestaurantPage() {
       {/* Benefits grid */}
       <section className="max-w-[1120px] mx-auto px-6 pb-16">
         <h2 className="font-serif text-2xl sm:text-3xl text-foreground mb-8 max-w-[780px] mx-auto">
-          Les 6 avantages cles du menu digital
+          Les 6 avantages clés du menu digital
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {benefits.map((benefit) => {
@@ -264,8 +264,8 @@ export default function MenuDigitalRestaurantPage() {
           <Link href="/fonctionnalites" className="text-primary hover:underline">
             MonTablo
           </Link>
-          , la mise en place prend moins de 10 minutes. Aucune competence technique n&apos;est
-          requise. Voici les etapes :
+          , la mise en place prend moins de 10 minutes. Aucune compétence technique n&apos;est
+          requise. Voici les étapes :
         </p>
         <div className="space-y-6">
           {steps.map((step) => (
@@ -282,12 +282,12 @@ export default function MenuDigitalRestaurantPage() {
         </div>
         <p className="text-[15px] text-muted leading-relaxed mt-8">
           C&apos;est tout. Votre menu digital est en ligne et accessible a vos clients. Vous
-          pouvez le modifier a tout moment depuis votre telephone ou votre ordinateur.
+          pouvez le modifier a tout moment depuis votre téléphone ou votre ordinateur.
           Consultez notre{' '}
           <Link href="/faq" className="text-primary hover:underline">
             FAQ
           </Link>{' '}
-          pour plus de details.
+          pour plus de détails.
         </p>
       </section>
 
@@ -297,7 +297,7 @@ export default function MenuDigitalRestaurantPage() {
           Menu papier vs menu digital : la comparaison
         </h2>
         <p className="text-[15px] text-muted leading-relaxed mb-8">
-          Le menu papier a ses qualites, mais il presente des limites de plus en plus evidentes
+          Le menu papier a ses qualites, mais il présente des limites de plus en plus évidentes
           face aux attentes modernes. Voici un comparatif objectif :
         </p>
         <div className="border border-border/50 rounded-[16px] overflow-hidden">
@@ -325,12 +325,12 @@ export default function MenuDigitalRestaurantPage() {
       {/* Cost overview */}
       <section className="max-w-[780px] mx-auto px-6 pb-16">
         <h2 className="font-serif text-2xl sm:text-3xl text-foreground mb-4">
-          Combien coute un menu digital pour restaurant ?
+          Combien coûte un menu digital pour restaurant ?
         </h2>
         <div className="space-y-4 text-[15px] text-muted leading-relaxed">
           <p>
-            Le cout d&apos;un menu digital varie selon la solution choisie. Les options gratuites
-            sont souvent limitees (pas de personnalisation, publicite, fonctionnalites restreintes).
+            Le coût d&apos;un menu digital varie selon la solution choisie. Les options gratuites
+            sont souvent limitees (pas de personnalisation, publicite, fonctionnalités restreintes).
             Les solutions professionnelles se situent generalement entre 20 et 80 euros par mois.
           </p>
           <p>
@@ -338,17 +338,17 @@ export default function MenuDigitalRestaurantPage() {
               MonTablo propose un tarif simple et transparent
             </Link>{' '}
             : 29,99 euros par mois (ou 26,99 euros/mois en abonnement annuel). Toutes les
-            fonctionnalites sont incluses, sans frais caches : plats illimites, QR code
-            personnalise, menu du jour, promotions, import IA, bilingue FR/EN.
+            fonctionnalités sont incluses, sans frais cachés : plats illimités, QR code
+            personnalisé, menu du jour, promotions, import IA, bilingue FR/EN.
           </p>
           <p>
-            Pour mettre ce cout en perspective : une seule reimpression de 50 menus papier coute
-            entre 150 et 300 euros. Avec un menu digital, vous economisez des la premiere
+            Pour mettre ce coût en perspective : une seule réimpression de 50 menus papier coûte
+            entre 150 et 300 euros. Avec un menu digital, vous économisez des la première
             modification de prix. L&apos;investissement est rentabilise en quelques semaines.
           </p>
           <p>
             De plus, MonTablo offre un essai gratuit de 14 jours, sans carte bancaire. Vous
-            pouvez tester toutes les fonctionnalites avant de vous engager.
+            pouvez tester toutes les fonctionnalités avant de vous engager.
           </p>
         </div>
       </section>
@@ -356,17 +356,17 @@ export default function MenuDigitalRestaurantPage() {
       {/* QR code section - link to sibling page */}
       <section className="max-w-[780px] mx-auto px-6 pb-16">
         <h2 className="font-serif text-2xl sm:text-3xl text-foreground mb-4">
-          Le QR code : la cle d&apos;acces a votre menu digital
+          Le QR code : la clé d&apos;accès a votre menu digital
         </h2>
         <div className="space-y-4 text-[15px] text-muted leading-relaxed">
           <p>
-            Le menu digital fonctionne grace a un QR code que vos clients scannent avec la camera
-            de leur telephone. Ce QR code est unique a votre restaurant et renvoie directement
-            vers votre carte en ligne. Aucune application a telecharger, aucune inscription
-            necessaire.
+            Le menu digital fonctionne grace a un QR code que vos clients scannent avec la caméra
+            de leur téléphone. Ce QR code est unique a votre restaurant et renvoie directement
+            vers votre carte en ligne. Aucune application a télécharger, aucune inscription
+            nécessaire.
           </p>
           <p>
-            L&apos;emplacement du QR code est strategique : sur les tables, a l&apos;entree, en
+            L&apos;emplacement du QR code est stratégique : sur les tables, a l&apos;entrée, en
             vitrine, sur vos cartes de visite. Pour tout savoir sur l&apos;utilisation optimale
             du QR code dans votre restaurant, consultez notre{' '}
             <Link href="/qr-code-restaurant" className="text-primary hover:underline">
@@ -384,7 +384,7 @@ export default function MenuDigitalRestaurantPage() {
         </h2>
         <div className="space-y-4 text-[15px] text-muted leading-relaxed">
           <p>
-            Le menu digital s&apos;adapte a tous les types d&apos;etablissements de restauration :
+            Le menu digital s&apos;adapte a tous les types d&apos;établissements de restauration :
           </p>
           <ul className="space-y-2.5 ml-1">
             {[
@@ -392,9 +392,9 @@ export default function MenuDigitalRestaurantPage() {
               'Bistrots et brasseries',
               'Restaurants rapides et fast-casual',
               'Cafes, salons de the et bars',
-              'Food trucks et restaurants ephemeres',
-              'Hotels et restaurants d\'hotel',
-              'Restaurants de plage et terrasses saisonnieres',
+              'Food trucks et restaurants éphémères',
+              'Hôtels et restaurants d\'hôtel',
+              'Restaurants de plage et terrasses saisonnières',
             ].map((item) => (
               <li key={item} className="flex items-start gap-2.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-accent-dark shrink-0 mt-2" />
@@ -406,7 +406,7 @@ export default function MenuDigitalRestaurantPage() {
             Que vous ayez 10 plats ou 200, que votre carte change tous les jours ou une fois par
             saison, le menu digital s&apos;adapte a votre rythme. C&apos;est particulierement
             utile pour les restaurants qui ont un menu du jour, des plats saisonniers ou des
-            promotions regulieres.
+            promotions régulières.
           </p>
         </div>
       </section>
@@ -414,21 +414,21 @@ export default function MenuDigitalRestaurantPage() {
       {/* FAQ mini section */}
       <section className="max-w-[780px] mx-auto px-6 pb-16">
         <h2 className="font-serif text-2xl sm:text-3xl text-foreground mb-6">
-          Questions frequentes sur le menu digital
+          Questions fréquentes sur le menu digital
         </h2>
         <div className="space-y-5">
           {[
             {
               q: 'Mes clients ont-ils besoin d\'une application ?',
-              a: 'Non. Le menu s\'ouvre directement dans le navigateur du telephone, sans aucun telechargement. Compatible avec tous les smartphones iOS et Android.',
+              a: 'Non. Le menu s\'ouvre directement dans le navigateur du téléphone, sans aucun téléchargement. Compatible avec tous les smartphones iOS et Android.',
             },
             {
               q: 'Puis-je garder mon menu papier en complement ?',
-              a: 'Bien sur. Beaucoup de restaurants proposent les deux. Le menu digital ne remplace pas forcement le papier — il le complete. Certains clients prefereront toujours le papier, et c\'est parfaitement normal.',
+              a: 'Bien sur. Beaucoup de restaurants proposent les deux. Le menu digital ne remplace pas forcement le papier — il le complète. Certains clients prefereront toujours le papier, et c\'est parfaitement normal.',
             },
             {
               q: 'Le menu digital fonctionne-t-il sans connexion internet ?',
-              a: 'Vos clients ont besoin d\'une connexion internet (WiFi ou 4G/5G) pour acceder au menu. Aujourd\'hui, la quasi-totalite des clients disposent d\'un forfait mobile suffisant.',
+              a: 'Vos clients ont besoin d\'une connexion internet (WiFi ou 4G/5G) pour accéder au menu. Aujourd\'hui, la quasi-totalite des clients disposent d\'un forfait mobile suffisant.',
             },
             {
               q: 'Est-ce que cela remplace les serveurs ?',
@@ -444,7 +444,7 @@ export default function MenuDigitalRestaurantPage() {
         <p className="text-[14px] text-muted mt-6">
           D&apos;autres questions ? Consultez notre{' '}
           <Link href="/faq" className="text-primary hover:underline">
-            FAQ complete
+            FAQ complète
           </Link>
           .
         </p>
@@ -455,11 +455,11 @@ export default function MenuDigitalRestaurantPage() {
         <div className="bg-primary rounded-[20px] py-16 px-8 text-center">
           <QrCode className="w-10 h-10 text-white/40 mx-auto mb-4" />
           <h2 className="font-serif text-3xl text-white mb-3">
-            Creez votre menu digital en 5 minutes
+            Créez votre menu digital en 5 minutes
           </h2>
           <p className="text-white/60 mb-8 max-w-md mx-auto">
             14 jours d&apos;essai gratuit. Aucune carte bancaire requise.
-            Toutes les fonctionnalites incluses.
+            Toutes les fonctionnalités incluses.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
@@ -495,7 +495,7 @@ export default function MenuDigitalRestaurantPage() {
             <div>
               <p className="text-[13px] font-medium text-foreground mb-3">Produit</p>
               <div className="space-y-3">
-                <Link href="/fonctionnalites" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Fonctionnalites</Link>
+                <Link href="/fonctionnalites" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Fonctionnalités</Link>
                 <Link href="/tarifs" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Tarifs</Link>
                 <Link href="/menu/demo" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Voir un exemple</Link>
               </div>
@@ -510,16 +510,16 @@ export default function MenuDigitalRestaurantPage() {
             <div>
               <p className="text-[13px] font-medium text-foreground mb-3">Legal</p>
               <div className="space-y-3">
-                <Link href="/mentions-legales" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Mentions legales</Link>
+                <Link href="/mentions-légales" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Mentions légales</Link>
                 <Link href="/cgu" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">CGU</Link>
-                <Link href="/confidentialite" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Confidentialite</Link>
+                <Link href="/confidentialite" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Confidentialité</Link>
                 <Link href="/cookies" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Cookies</Link>
               </div>
             </div>
           </div>
           <div className="border-t border-border/50 pt-6 text-center">
             <p className="text-sm text-muted/60">
-              &copy; {new Date().getFullYear()} MonTablo. Tous droits reserves.
+              &copy; {new Date().getFullYear()} MonTablo. Tous droits réservés.
             </p>
           </div>
         </div>

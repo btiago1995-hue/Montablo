@@ -24,6 +24,7 @@ function build(limit: number, window: `${number} ${'s' | 'm' | 'h'}`, prefix: st
 export const signupLimiter = build(5, '1 h', 'signup')
 export const loginLimiter = build(10, '15 m', 'login')
 export const forgotPasswordLimiter = build(3, '1 h', 'forgot')
+export const contactLimiter = build(5, '1 h', 'contact')
 
 export function getClientIp(request: Request): string {
   const forwarded = request.headers.get('x-forwarded-for')

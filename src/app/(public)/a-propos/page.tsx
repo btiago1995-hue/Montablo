@@ -12,40 +12,40 @@ import { JsonLd, breadcrumbJsonLd, homepageJsonLd } from '@/components/seo/json-
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'A propos de MonTablo | Notre mission',
+  title: 'À propos de MonTablo | Notre mission',
   description:
-    'Decouvrez MonTablo : notre mission, nos valeurs et pourquoi nous avons cree la solution de menu digital la plus simple pour les restaurants.',
+    'Découvrez MonTablo : notre mission, nos valeurs et pourquoi nous avons créé la solution de menu digital la plus simple pour les restaurants.',
   openGraph: {
-    title: 'A propos de MonTablo',
+    title: 'À propos de MonTablo',
     description:
-      'Notre mission : simplifier la gestion des menus de restaurant avec des outils digitaux elegants.',
+      'Notre mission : simplifier la gestion des menus de restaurant avec des outils digitaux élégants.',
   },
 }
 
 const values = [
   {
     icon: Sparkles,
-    title: 'Simplicite',
+    title: 'Simplicité',
     description:
-      'Un restaurateur doit pouvoir mettre a jour son menu en quelques secondes, sans formation ni competences techniques. La simplicite n\'est pas une option, c\'est notre obsession.',
+      'Un restaurateur doit pouvoir mettre à jour son menu en quelques secondes, sans formation ni compétences techniques. La simplicité n\'est pas une option, c\'est notre obsession.',
   },
   {
     icon: Palette,
-    title: 'Qualite du design',
+    title: 'Qualité du design',
     description:
-      'Un menu digital doit etre aussi soigne que la cuisine qu\'il presente. Nous investissons dans le design pour que chaque restaurant soit fier de sa carte en ligne.',
+      'Un menu digital doit être aussi soigné que la cuisine qu\'il présente. Nous investissons dans le design pour que chaque restaurant soit fier de sa carte en ligne.',
   },
   {
     icon: Eye,
     title: 'Transparence',
     description:
-      'Un seul prix, toutes les fonctionnalites incluses, sans frais caches. Nous croyons qu\'un tarif clair et honnete est le fondement d\'une relation de confiance.',
+      'Un seul prix, toutes les fonctionnalités incluses, sans frais cachés. Nous croyons qu\'un tarif clair et honnête est le fondement d\'une relation de confiance.',
   },
   {
     icon: Heart,
     title: 'Soutenir les petits restaurants',
     description:
-      'Les bistrots, brasseries et restaurants de quartier meritent les memes outils que les grandes chaines. MonTablo est concu pour eux, a un prix accessible.',
+      'Les bistrots, brasseries et restaurants de quartier méritent les mêmes outils que les grandes chaînes. MonTablo est conçu pour eux, à un prix accessible.',
   },
 ]
 
@@ -63,7 +63,7 @@ export default function AProposPage() {
       <JsonLd
         data={breadcrumbJsonLd([
           { name: 'Accueil', url: base },
-          { name: 'A propos', url: `${base}/a-propos` },
+          { name: 'À propos', url: `${base}/a-propos` },
         ])}
       />
       {organizationSchema && <JsonLd data={organizationSchema} />}
@@ -77,7 +77,7 @@ export default function AProposPage() {
           </Link>
           <div className="flex items-center gap-6">
             <Link href="/fonctionnalites" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
-              Fonctionnalites
+              Fonctionnalités
             </Link>
             <Link href="/tarifs" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
               Tarifs
@@ -103,17 +103,17 @@ export default function AProposPage() {
         <nav className="text-[13px] text-muted/60">
           <Link href="/" className="hover:text-muted transition-colors">Accueil</Link>
           <span className="mx-2">/</span>
-          <span className="text-foreground">A propos</span>
+          <span className="text-foreground">À propos</span>
         </nav>
       </div>
 
       {/* Hero */}
       <section className="max-w-[780px] mx-auto px-6 pt-8 pb-12">
         <h1 className="font-serif text-4xl sm:text-5xl text-foreground mb-4">
-          A propos de MonTablo
+          À propos de MonTablo
         </h1>
         <p className="text-lg text-muted leading-relaxed">
-          Nous simplifions la gestion des menus de restaurant avec des outils digitaux elegants et accessibles.
+          Nous simplifions la gestion des menus de restaurant avec des outils digitaux élégants et accessibles.
         </p>
       </section>
 
@@ -121,14 +121,14 @@ export default function AProposPage() {
       <section className="max-w-[780px] mx-auto px-6 pb-16">
         <h2 className="font-serif text-2xl text-foreground mb-4">Notre mission</h2>
         <p className="text-[15px] text-muted leading-relaxed mb-4">
-          MonTablo a une mission simple : permettre a chaque restaurant de proposer un menu digital elegant,
-          facile a gerer et toujours a jour. Nous croyons que la technologie doit simplifier le quotidien
+          MonTablo a une mission simple : permettre à chaque restaurant de proposer un menu digital élégant,
+          facile à gérer et toujours à jour. Nous croyons que la technologie doit simplifier le quotidien
           des restaurateurs, pas le compliquer.
         </p>
         <p className="text-[15px] text-muted leading-relaxed">
           Que vous soyez un bistrot de quartier, une brasserie familiale ou un restaurant gastronomique,
-          votre carte merite d&apos;etre presentee avec soin. MonTablo vous donne les outils pour le faire
-          en quelques minutes, sans competences techniques.
+          votre carte mérite d&apos;être présentée avec soin. MonTablo vous donne les outils pour le faire
+          en quelques minutes, sans compétences techniques.
         </p>
       </section>
 
@@ -136,13 +136,13 @@ export default function AProposPage() {
       <section className="max-w-[780px] mx-auto px-6 pb-16">
         <h2 className="font-serif text-2xl text-foreground mb-4">Pourquoi MonTablo existe</h2>
         <p className="text-[15px] text-muted leading-relaxed mb-4">
-          Chaque jour, des milliers de restaurateurs perdent du temps et de l&apos;argent a reimprimer
-          leurs menus papier. Un plat du jour qui change, un prix a ajuster, un allergene a ajouter :
-          a chaque modification, c&apos;est une nouvelle impression, un nouveau cout.
+          Chaque jour, des milliers de restaurateurs perdent du temps et de l&apos;argent à réimprimer
+          leurs menus papier. Un plat du jour qui change, un prix à ajuster, un allergène à ajouter :
+          à chaque modification, c&apos;est une nouvelle impression, un nouveau coût.
         </p>
         <p className="text-[15px] text-muted leading-relaxed">
-          Nous avons cree MonTablo pour resoudre ce probleme. Un menu digital que vous mettez a jour
-          en quelques secondes depuis votre telephone, accessible par vos clients via un simple QR code.
+          Nous avons créé MonTablo pour résoudre ce problème. Un menu digital que vous mettez à jour
+          en quelques secondes depuis votre téléphone, accessible par vos clients via un simple QR code.
           Plus d&apos;impressions, plus de gaspillage, plus de stress.
         </p>
       </section>
@@ -170,14 +170,14 @@ export default function AProposPage() {
       <section className="max-w-[780px] mx-auto px-6 pb-16">
         <h2 className="font-serif text-2xl text-foreground mb-4">Ce que fait MonTablo</h2>
         <p className="text-[15px] text-muted leading-relaxed mb-4">
-          MonTablo est une plateforme en ligne qui permet aux restaurants de creer, gerer et partager
-          leur menu digital. En quelques minutes, vous creez votre carte avec vos plats, descriptions,
-          prix et photos. Vous generez un QR code personnalise aux couleurs de votre etablissement.
+          MonTablo est une plateforme en ligne qui permet aux restaurants de créer, gérer et partager
+          leur menu digital. En quelques minutes, vous créez votre carte avec vos plats, descriptions,
+          prix et photos. Vous générez un QR code personnalisé aux couleurs de votre établissement.
         </p>
         <p className="text-[15px] text-muted leading-relaxed">
-          Vos clients scannent le QR code sur la table et decouvrent votre menu sur leur telephone.
-          Mises a jour en temps reel, menu du jour, promotions, bilingue francais-anglais, import
-          de carte par IA : tout est inclus dans un abonnement unique a partir de 26,99 euros par mois.
+          Vos clients scannent le QR code sur la table et découvrent votre menu sur leur téléphone.
+          Mises à jour en temps réel, menu du jour, promotions, bilingue français-anglais, import
+          de carte par IA : tout est inclus dans un abonnement unique à partir de 26,99 euros par mois.
         </p>
       </section>
 
@@ -191,7 +191,7 @@ export default function AProposPage() {
             Une question ? Contactez-nous.
           </h2>
           <p className="text-muted mb-6 max-w-md mx-auto">
-            Notre equipe est disponible pour repondre a toutes vos questions sur MonTablo.
+            Notre équipe est disponible pour répondre à toutes vos questions sur MonTablo.
           </p>
           <a
             href="mailto:contact@montablo.com"
@@ -219,7 +219,7 @@ export default function AProposPage() {
             <div>
               <p className="text-[13px] font-medium text-foreground mb-3">Produit</p>
               <div className="space-y-3">
-                <Link href="/fonctionnalites" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Fonctionnalites</Link>
+                <Link href="/fonctionnalites" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Fonctionnalités</Link>
                 <Link href="/tarifs" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Tarifs</Link>
                 <Link href="/menu/demo" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Voir un exemple</Link>
               </div>
@@ -234,16 +234,16 @@ export default function AProposPage() {
             <div>
               <p className="text-[13px] font-medium text-foreground mb-3">Legal</p>
               <div className="space-y-3">
-                <Link href="/mentions-legales" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Mentions legales</Link>
+                <Link href="/mentions-légales" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Mentions légales</Link>
                 <Link href="/cgu" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">CGU</Link>
-                <Link href="/confidentialite" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Confidentialite</Link>
+                <Link href="/confidentialite" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Confidentialité</Link>
                 <Link href="/cookies" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Cookies</Link>
               </div>
             </div>
           </div>
           <div className="border-t border-border/50 pt-6 text-center">
             <p className="text-sm text-muted/60">
-              &copy; {new Date().getFullYear()} MonTablo. Tous droits reserves.
+              &copy; {new Date().getFullYear()} MonTablo. Tous droits réservés.
             </p>
           </div>
         </div>
