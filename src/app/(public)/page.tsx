@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { ArrowRight, Check, UtensilsCrossed } from 'lucide-react'
-import { PricingToggle } from '@/components/public/pricing-toggle'
+import { TIERS } from '@/lib/pricing'
 import { JsonLd, homepageJsonLd } from '@/components/seo/json-ld'
 import { CTALink } from '@/components/public/cta-link'
 
@@ -19,14 +19,6 @@ const benefits = [
   'Bilingue français / anglais',
   'QR code personnalisable',
   'Import de carte par IA',
-]
-
-const pricingFeatures = [
-  'Plats et catégories illimités',
-  'Menu du jour et promotions',
-  'QR code personnalisé',
-  'Bilingue FR / EN',
-  'Mises à jour en temps réel',
 ]
 
 const menuItems = {
@@ -213,19 +205,51 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Pricing */}
-      <section className="max-w-[1120px] mx-auto px-6 py-16 sm:py-[120px]">
-        <div className="text-center">
-          <p className="text-sm sm:text-[13px] font-medium tracking-[0.08em] uppercase text-accent-dark mb-3">
-            Tarif simple
-          </p>
-          <h2 className="font-serif text-[28px] sm:text-4xl text-foreground mb-2">
-            Un seul prix. Tout inclus.
+      {/* Pricing mini */}
+      <section className="max-w-[1120px] mx-auto px-6 py-20">
+        <div className="text-center mb-12">
+          <h2 className="font-serif text-3xl sm:text-4xl text-foreground mb-3">
+            3 formules, sans engagement
           </h2>
-          <p className="text-base sm:text-[17px] text-muted mb-10 sm:mb-12">
-            Pas de paliers, pas de fonctionnalités cachées.
+          <p className="text-muted max-w-md mx-auto">
+            À partir de 39€/mois HT pour la formule Pro recommandée.
           </p>
-          <PricingToggle features={pricingFeatures} />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+          {(['essentiel', 'pro', 'premium'] as const).map((key) => {
+            const t = TIERS[key]
+            return (
+              <div
+                key={t.id}
+                className={`bg-white rounded-2xl p-6 border ${
+                  t.highlighted ? 'border-primary shadow-lg shadow-primary/10' : 'border-border'
+                }`}
+              >
+                <h3 className="font-serif text-xl text-foreground mb-1">{t.name}</h3>
+                <p className="text-xs text-muted mb-3">{t.tagline}</p>
+                {t.priceMonthlyHt === null ? (
+                  <p className="font-serif text-2xl text-foreground mb-0">Sur devis</p>
+                ) : (
+                  <p className="mb-0">
+                    <span className="font-serif text-3xl text-foreground">
+                      {t.priceMonthlyHt}€
+                    </span>
+                    <span className="text-sm text-muted"> HT/mois</span>
+                  </p>
+                )}
+              </div>
+            )
+          })}
+        </div>
+
+        <div className="text-center mt-10">
+          <Link
+            href="/tarifs"
+            className="inline-flex items-center gap-2 text-primary font-medium hover:underline"
+          >
+            Voir tous les détails <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </section>
 
