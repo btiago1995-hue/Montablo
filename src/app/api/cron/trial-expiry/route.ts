@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server'
 export const dynamic = 'force-dynamic'
 import { createClient } from '@supabase/supabase-js'
 import { getResend, EMAIL_FROM } from '@/lib/resend'
-import { trialExpiryWarning, trialExpired } from '@/lib/email-templates'
+import { trialExpiryWarning, trialExpired, trialChoosePlan } from '@/lib/email-templates'
 
 // Use service role to access auth.users emails
 function getAdminClient() {
@@ -27,7 +27,7 @@ export async function GET(request: Request) {
   // Get all trialing restaurants
   const { data: restaurants, error } = await supabase
     .from('restaurants')
-    .select('id, name, owner_id, trial_ends_at, trial_reminder_3d_sent, trial_reminder_1d_sent, trial_expired_sent')
+    .select('id, name, owner_id, trial_ends_at, trial_reminder_3d_sent, trial_reminder_1d_sent, trial_expired_sent, trial_choose_plan_sent')
     .eq('subscription_status', 'trialing')
 
   if (error || !restaurants) {
@@ -42,7 +42,7 @@ export async function GET(request: Request) {
     const daysLeft = Math.ceil((trialEnd.getTime() - now.getTime()) / 86400000)
 
     // Determine which email to send
-    let emailType: '3d' | '1d' | 'expired' | null = null
+    let emailType: 'choose_plan' | '3d' | '1d' | 'expired' | null = null
 
     if (daysLeft <= 0 && !r.trial_expired_sent) {
       emailType = 'expired'
@@ -50,6 +50,8 @@ export async function GET(request: Request) {
       emailType = '1d'
     } else if (daysLeft <= 3 && daysLeft > 1 && !r.trial_reminder_3d_sent) {
       emailType = '3d'
+    } else if (daysLeft === 4 && !r.trial_choose_plan_sent) {
+      emailType = 'choose_plan'
     }
 
     if (!emailType) continue
@@ -59,9 +61,12 @@ export async function GET(request: Request) {
     if (!user?.email) continue
 
     // Build email
-    const email = emailType === 'expired'
-      ? trialExpired(r.name, dashboardUrl)
-      : trialExpiryWarning(r.name, daysLeft, dashboardUrl)
+    const email =
+      emailType === 'expired'
+        ? trialExpired(r.name, dashboardUrl)
+        : emailType === 'choose_plan'
+          ? trialChoosePlan(r.name, dashboardUrl)
+          : trialExpiryWarning(r.name, daysLeft, dashboardUrl)
 
     // Send via Resend (individual send per CLAUDE.md)
     const { error: sendError } = await getResend().emails.send({
@@ -77,11 +82,14 @@ export async function GET(request: Request) {
     }
 
     // Mark as sent
-    const updateField = emailType === 'expired'
-      ? { trial_expired_sent: true }
-      : emailType === '1d'
-        ? { trial_reminder_1d_sent: true }
-        : { trial_reminder_3d_sent: true }
+    const updateField =
+      emailType === 'expired'
+        ? { trial_expired_sent: true }
+        : emailType === '1d'
+          ? { trial_reminder_1d_sent: true }
+          : emailType === '3d'
+            ? { trial_reminder_3d_sent: true }
+            : { trial_choose_plan_sent: true }
 
     await supabase.from('restaurants').update(updateField).eq('id', r.id)
     results.push(`OK: ${r.name} (${emailType})`)
