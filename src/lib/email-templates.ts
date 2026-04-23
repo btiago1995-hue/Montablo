@@ -88,7 +88,7 @@ export function welcome(restaurantName: string, dashboardUrl: string) {
       </h2>
       <p style="font-size:15px;color:${BRAND.text};line-height:1.6;margin:0 0 16px">
         Votre compte pour <strong>${restaurantName}</strong> est prêt.
-        Vous avez <strong>14 jours d'essai gratuit</strong> pour découvrir toutes les fonctionnalités.
+        Vous avez <strong>14 jours d'essai Pro offerts</strong> pour découvrir toutes les fonctionnalités.
       </p>
 
       ${divider()}
@@ -99,6 +99,10 @@ export function welcome(restaurantName: string, dashboardUrl: string) {
       ${tip('1&#xFE0F;&#x20E3;', '<strong>Importez votre carte</strong> — envoyez une photo de votre menu, notre IA fait le reste.')}
       ${tip('2&#xFE0F;&#x20E3;', '<strong>Personnalisez</strong> — ajustez les couleurs, ajoutez vos photos de plats.')}
       ${tip('3&#xFE0F;&#x20E3;', '<strong>Partagez</strong> — générez votre QR code et posez-le sur vos tables.')}
+
+      <p style="font-size:14px;color:${BRAND.text};line-height:1.6;margin:0 0 16px">
+        À la fin de l'essai, vous choisissez <strong>Essentiel</strong> (19€/mois HT) ou <strong>Pro</strong> (39€/mois HT), ou vous pouvez tout simplement arrêter — sans engagement.
+      </p>
 
       ${button('Accéder à mon tableau de bord', dashboardUrl)}
 
