@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1200px; height: 1200px; overflow: hidden; font-family: 'Georgia', serif; }
+
+  .ad {
+    width: 1200px;
+    height: 1200px;
+    background: #1a2e1b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 72px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 100% 0%, rgba(44,62,45,0.8) 0%, transparent 50%),
+      radial-gradient(ellipse at 0% 100%, rgba(44,62,45,0.6) 0%, transparent 50%);
+  }
+
+  .top {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    font-family: 'Arial', sans-serif;
+    font-size: 20px;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.05em;
+  }
+
+  .trial-badge {
+    background: rgba(212,175,100,0.12);
+    border: 1px solid rgba(212,175,100,0.3);
+    border-radius: 100px;
+    padding: 8px 20px;
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #d4af64;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* Before/After comparison */
+  .comparison {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    flex: 1;
+    margin: 48px 0;
+    align-items: center;
+  }
+
+  .card {
+    border-radius: 20px;
+    padding: 40px 36px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .card-before {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .card-after {
+    background: rgba(212,175,100,0.08);
+    border: 1px solid rgba(212,175,100,0.25);
+  }
+
+  .card-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .label-before { color: rgba(255,255,255,0.3); }
+  .label-after { color: #d4af64; }
+
+  .card-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .card-item:last-child { margin-bottom: 0; }
+
+  .item-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .icon-before {
+    background: rgba(239,68,68,0.1);
+  }
+
+  .icon-after {
+    background: rgba(212,175,100,0.15);
+  }
+
+  .item-text {
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  .text-before { color: rgba(255,255,255,0.4); }
+  .text-after { color: rgba(255,255,255,0.85); }
+
+  .divider {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px;
+    height: 48px;
+    background: #1a2e1b;
+    border: 2px solid rgba(212,175,100,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Arial', sans-serif;
+    font-size: 18px;
+    color: #d4af64;
+    font-weight: 700;
+    z-index: 3;
+  }
+
+  .bottom {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  h2 {
+    font-size: 48px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 1.1;
+  }
+
+  h2 em {
+    font-style: italic;
+    color: #d4af64;
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #d4af64;
+    color: #1a2e1b;
+    font-family: 'Arial', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    padding: 22px 52px;
+    border-radius: 100px;
+    box-shadow: 0 8px 32px rgba(212,175,100,0.3);
+  }
+
+  .sub {
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    color: rgba(255,255,255,0.3);
+    display: flex;
+    gap: 20px;
+  }
+
+  .sub span::before { content: '✓ '; color: #d4af64; }
+</style>
+</head>
+<body>
+<div class="ad">
+  <div class="bg"></div>
+
+  <div class="top">
+    <div class="logo">🍽 MonTablo</div>
+    <div class="trial-badge">14 jours gratuits</div>
+  </div>
+
+  <div class="comparison">
+    <div class="card card-before">
+      <div class="card-label label-before">Avant</div>
+      <div class="card-item">
+        <div class="item-icon icon-before">🖨</div>
+        <div class="item-text text-before">Réimpression à chaque changement de prix</div>
+      </div>
+      <div class="card-item">
+        <div class="item-icon icon-before">⏳</div>
+        <div class="item-text text-before">Attendre l'imprimeur pour une mise à jour</div>
+      </div>
+      <div class="card-item">
+        <div class="item-icon icon-before">💶</div>
+        <div class="item-text text-before">Coût d'impression répété chaque saison</div>
+      </div>
+    </div>
+
+    <div class="divider">→</div>
+
+    <div class="card card-after">
+      <div class="card-label label-after">Avec MonTablo</div>
+      <div class="card-item">
+        <div class="item-icon icon-after">📱</div>
+        <div class="item-text text-after">Mise à jour depuis votre téléphone en secondes</div>
+      </div>
+      <div class="card-item">
+        <div class="item-icon icon-after">⚡</div>
+        <div class="item-text text-after">Changement visible immédiatement sur les tables</div>
+      </div>
+      <div class="card-item">
+        <div class="item-icon icon-after">✓</div>
+        <div class="item-text text-after">Un seul abonnement, zéro coût d'impression</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <h2>Passez au menu<br><em>digital aujourd'hui.</em></h2>
+    <div class="cta">Commencer gratuitement →</div>
+    <div class="sub">
+      <span>Sans carte bancaire</span>
+      <span>Sans engagement</span>
+      <span>Prêt en 5 min</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>

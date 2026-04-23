@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1200px; height: 1200px; overflow: hidden; font-family: 'Georgia', serif; }
+
+  .ad {
+    width: 1200px;
+    height: 1200px;
+    background: #f7f4ef;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Top dark half */
+  .top {
+    background: #1a2e1b;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .top::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, #2c3e2d 0%, transparent 70%);
+  }
+
+  .logo {
+    position: absolute;
+    top: 48px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 2;
+  }
+
+  .logo span {
+    font-size: 20px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.05em;
+    font-family: 'Arial', sans-serif;
+  }
+
+  .big-text {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+  }
+
+  .big-number {
+    font-size: 180px;
+    line-height: 1;
+    color: rgba(212,175,100,0.15);
+    font-weight: 400;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    font-family: 'Arial', sans-serif;
+    font-weight: 700;
+  }
+
+  .stat-value {
+    font-size: 96px;
+    line-height: 1;
+    color: #d4af64;
+    position: relative;
+    z-index: 2;
+  }
+
+  .stat-unit {
+    font-family: 'Arial', sans-serif;
+    font-size: 28px;
+    color: rgba(255,255,255,0.4);
+    margin-top: 8px;
+    letter-spacing: 0.05em;
+  }
+
+  .stat-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 22px;
+    color: rgba(255,255,255,0.7);
+    margin-top: 16px;
+    max-width: 400px;
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  /* Bottom light half */
+  .bottom {
+    background: #f7f4ef;
+    padding: 64px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+  }
+
+  h2 {
+    font-size: 52px;
+    color: #1a2e1b;
+    text-align: center;
+    line-height: 1.1;
+  }
+
+  h2 em {
+    font-style: italic;
+    color: #8a7340;
+  }
+
+  .features {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .feat {
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    color: #4b5563;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .feat::before {
+    content: '✓';
+    color: #1a2e1b;
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #1a2e1b;
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 22px 52px;
+    border-radius: 100px;
+  }
+</style>
+</head>
+<body>
+<div class="ad">
+  <div class="top">
+    <div class="logo"><span>🍽 MonTablo</span></div>
+    <div class="big-text">
+      <div class="stat-value">5 min</div>
+      <div class="stat-unit">POUR CRÉER VOTRE MENU DIGITAL</div>
+      <div class="stat-label">De l'inscription à votre QR code sur les tables</div>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <h2>Votre restaurant,<br><em>enfin digitalisé.</em></h2>
+    <div class="features">
+      <div class="feat">Mise à jour en temps réel</div>
+      <div class="feat">QR code inclus</div>
+      <div class="feat">Bilingue FR / EN</div>
+      <div class="feat">Sans engagement</div>
+    </div>
+    <div class="cta">Essai gratuit 14 jours →</div>
+  </div>
+</div>
+</body>
+</html>
