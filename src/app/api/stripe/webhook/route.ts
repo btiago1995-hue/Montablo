@@ -61,20 +61,44 @@ export async function POST(request: Request) {
     case 'checkout.session.completed': {
       const session = event.data.object as Stripe.Checkout.Session
       const restaurantId = session.metadata?.restaurant_id
+      const tier = session.metadata?.tier as 'essentiel' | 'pro' | undefined
+      const billingCycle = session.metadata?.billing_cycle as 'monthly' | 'annual' | undefined
 
-      if (restaurantId) {
-        await supabase
-          .from('restaurants')
-          .update({
-            stripe_customer_id: session.customer as string,
-            stripe_subscription_id: session.subscription as string,
-            subscription_status: 'active',
-          })
-          .eq('id', restaurantId)
+      if (!restaurantId) break
 
-        // Send subscription confirmed email
-        await sendEmailToRestaurantOwner(restaurantId, subscriptionConfirmed)
+      // Détecter si le coupon LANCEMENT_GENEVOIS a été appliqué
+      let isLaunchOffer = false
+      let lockedPrice: number | null = null
+      if (session.subscription) {
+        const sub = await stripe.subscriptions.retrieve(
+          session.subscription as string,
+          { expand: ['discounts'] },
+        )
+        const firstDiscount = sub.discounts?.[0]
+        const coupon = typeof firstDiscount === 'object' && firstDiscount !== null
+          ? firstDiscount.source?.coupon
+          : null
+        const couponId = typeof coupon === 'object' && coupon !== null ? coupon.id : coupon
+        if (couponId === 'LANCEMENT_GENEVOIS') {
+          isLaunchOffer = true
+          lockedPrice = 24.0
+        }
       }
+
+      await supabase
+        .from('restaurants')
+        .update({
+          stripe_customer_id: session.customer as string,
+          stripe_subscription_id: session.subscription as string,
+          subscription_status: 'active',
+          tier: tier ?? 'pro',
+          billing_cycle: billingCycle ?? 'monthly',
+          is_launch_offer: isLaunchOffer,
+          launch_offer_locked_price: lockedPrice,
+        })
+        .eq('id', restaurantId)
+
+      await sendEmailToRestaurantOwner(restaurantId, subscriptionConfirmed)
       break
     }
     case 'customer.subscription.updated': {
@@ -88,10 +112,16 @@ export async function POST(request: Request) {
         unpaid: 'inactive',
       }
 
+      // Lire le premier price ID pour savoir quel tier / cycle
+      const priceId = subscription.items.data[0]?.price.id
+      const { priceIdToTier } = await import('@/lib/pricing')
+      const mapped = priceId ? priceIdToTier(priceId) : null
+
       await supabase
         .from('restaurants')
         .update({
           subscription_status: statusMap[subscription.status] || 'inactive',
+          ...(mapped ? { tier: mapped.tier, billing_cycle: mapped.cycle } : {}),
         })
         .eq('stripe_customer_id', customerId)
       break
