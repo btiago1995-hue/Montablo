@@ -22,6 +22,26 @@ function walletCompatImageUrl(url: string): string {
   return `https://images.weserv.nl/?url=${encodeURIComponent(url)}&output=png`
 }
 
+function localized(value: string) {
+  return {
+    defaultValue: { language: 'fr', value },
+    translatedValues: [
+      { language: 'en', value },
+      { language: 'de', value },
+    ],
+  }
+}
+
+function localizedTriple(fr: string, en: string, de: string) {
+  return {
+    defaultValue: { language: 'fr', value: fr },
+    translatedValues: [
+      { language: 'en', value: en },
+      { language: 'de', value: de },
+    ],
+  }
+}
+
 function buildStampGrid(current: number, goal: number): string {
   const filled = Math.min(current, goal)
   const empty = goal - filled
@@ -44,8 +64,19 @@ function buildTextModules(data: PassData) {
   if (data.hasReward) {
     return [
       {
+        id: 'reward_available',
         header: '🎁 RÉCOMPENSE DISPONIBLE',
         body: 'Montrez cette carte au restaurant pour récupérer votre récompense !',
+        localizedHeader: localizedTriple(
+          '🎁 RÉCOMPENSE DISPONIBLE',
+          '🎁 REWARD AVAILABLE',
+          '🎁 BELOHNUNG VERFÜGBAR',
+        ),
+        localizedBody: localizedTriple(
+          'Montrez cette carte au restaurant pour récupérer votre récompense !',
+          'Show this card at the restaurant to claim your reward!',
+          'Zeigen Sie diese Karte im Restaurant, um Ihre Belohnung einzulösen!',
+        ),
       },
     ]
   }
@@ -55,26 +86,44 @@ function buildTextModules(data: PassData) {
   if (data.programType === 'visits') {
     return [
       {
+        id: 'stamps',
         header: 'TAMPONS',
         body: buildStampGrid(data.currentValue, data.goalValue),
+        localizedHeader: localizedTriple('TAMPONS', 'STAMPS', 'STEMPEL'),
       },
       {
+        id: 'remaining',
         header: 'IL MANQUE',
         body: remaining === 1
           ? '1 tampon avant la récompense'
           : `${remaining} tampons avant la récompense`,
+        localizedHeader: localizedTriple('IL MANQUE', 'REMAINING', 'NOCH'),
+        localizedBody: localizedTriple(
+          remaining === 1 ? '1 tampon avant la récompense' : `${remaining} tampons avant la récompense`,
+          remaining === 1 ? '1 stamp until reward' : `${remaining} stamps until reward`,
+          remaining === 1 ? '1 Stempel bis zur Belohnung' : `${remaining} Stempel bis zur Belohnung`,
+        ),
       },
     ]
   } else {
     const remainingEuros = (remaining / 100).toFixed(2)
     return [
       {
+        id: 'progress',
         header: 'PROGRESSION',
         body: buildProgressBar(data.currentValue, data.goalValue),
+        localizedHeader: localizedTriple('PROGRESSION', 'PROGRESS', 'FORTSCHRITT'),
       },
       {
+        id: 'remaining',
         header: 'IL MANQUE',
         body: `${remainingEuros}€ avant la récompense`,
+        localizedHeader: localizedTriple('IL MANQUE', 'REMAINING', 'NOCH'),
+        localizedBody: localizedTriple(
+          `${remainingEuros}€ avant la récompense`,
+          `€${remainingEuros} until reward`,
+          `${remainingEuros}€ bis zur Belohnung`,
+        ),
       },
     ]
   }
@@ -84,13 +133,52 @@ function buildLoyaltyPoints(data: PassData) {
   if (data.programType === 'visits') {
     return {
       label: 'TAMPONS',
+      localizedLabel: localizedTriple('TAMPONS', 'STAMPS', 'STEMPEL'),
       balance: { string: `${data.currentValue} / ${data.goalValue}` },
     }
   }
   return {
     label: 'TOTAL DÉPENSÉ',
+    localizedLabel: localizedTriple('TOTAL DÉPENSÉ', 'TOTAL SPENT', 'GESAMTAUSGABEN'),
     balance: { string: `${(data.currentValue / 100).toFixed(2)}€` },
   }
+}
+
+function buildLinksModule(data: PassData) {
+  const uris: Array<{ id: string; uri: string; description: string; localizedDescription: ReturnType<typeof localizedTriple> }> = []
+
+  // Restaurant menu (always present)
+  uris.push({
+    id: 'menu',
+    uri: `https://www.montablo.com/r/${data.restaurantSlug}`,
+    description: 'Voir le menu',
+    localizedDescription: localizedTriple('Voir le menu', 'View menu', 'Speisekarte ansehen'),
+  })
+
+  // Maps directions (if GPS available)
+  if (data.latitude !== null && data.longitude !== null) {
+    const query = data.addressLine
+      ? encodeURIComponent(`${data.addressLine}, ${data.postalCode ?? ''} ${data.city ?? ''}`.trim())
+      : `${data.latitude},${data.longitude}`
+    uris.push({
+      id: 'directions',
+      uri: `https://www.google.com/maps/search/?api=1&query=${query}`,
+      description: 'Itinéraire',
+      localizedDescription: localizedTriple('Itinéraire', 'Directions', 'Wegbeschreibung'),
+    })
+  }
+
+  // Google review (if set)
+  if (data.googleReviewUrl) {
+    uris.push({
+      id: 'review',
+      uri: data.googleReviewUrl,
+      description: 'Laisser un avis',
+      localizedDescription: localizedTriple('Laisser un avis', 'Leave a review', 'Bewertung abgeben'),
+    })
+  }
+
+  return uris.length > 0 ? { uris } : undefined
 }
 
 async function ensureLoyaltyClass(
@@ -105,13 +193,22 @@ async function ensureLoyaltyClass(
   const classBody: Record<string, unknown> = {
     id: classId,
     issuerName: data.restaurantName,
+    localizedIssuerName: localized(data.restaurantName),
     programName: data.tagline,
+    localizedProgramName: localized(data.tagline),
     programLogo: {
       sourceUri: { uri: logoUri },
       contentDescription: { defaultValue: { language: 'fr', value: data.restaurantName } },
     },
     hexBackgroundColor: hexColor(data.primaryColor),
+    countryCode: 'FR',
+    // Google API only accepts DRAFT or UNDER_REVIEW from issuers; backend
+    // auto-promotes to APPROVED for approved issuer accounts.
     reviewStatus: 'UNDER_REVIEW',
+    accountIdLabel: 'ID de membre',
+    localizedAccountIdLabel: localizedTriple('ID de membre', 'Member ID', 'Mitgliedsnr.'),
+    accountNameLabel: 'Nom de membre',
+    localizedAccountNameLabel: localizedTriple('Nom de membre', 'Member name', 'Mitgliedsname'),
   }
 
   if (data.heroImageUrl) {
@@ -123,6 +220,11 @@ async function ensureLoyaltyClass(
 
   if (data.latitude !== null && data.longitude !== null) {
     classBody.locations = [{ latitude: data.latitude, longitude: data.longitude }]
+  }
+
+  const linksModuleData = buildLinksModule(data)
+  if (linksModuleData) {
+    classBody.linksModuleData = linksModuleData
   }
 
   const checkRes = await fetch(`${WALLET_API}/loyaltyClass/${classId}`, {
@@ -145,11 +247,22 @@ async function ensureLoyaltyClass(
       headers: { Authorization: `Bearer ${token.token}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
         issuerName: classBody.issuerName,
+        localizedIssuerName: classBody.localizedIssuerName,
         programName: classBody.programName,
+        localizedProgramName: classBody.localizedProgramName,
         programLogo: classBody.programLogo,
         hexBackgroundColor: classBody.hexBackgroundColor,
         heroImage: classBody.heroImage ?? null,
         locations: classBody.locations ?? null,
+        linksModuleData: classBody.linksModuleData ?? null,
+        accountIdLabel: classBody.accountIdLabel,
+        localizedAccountIdLabel: classBody.localizedAccountIdLabel,
+        accountNameLabel: classBody.accountNameLabel,
+        localizedAccountNameLabel: classBody.localizedAccountNameLabel,
+        // Required when patching an already-approved class:
+        // Google rejects edits unless we explicitly demote it for review.
+        // The backend re-approves automatically since the issuer is approved.
+        reviewStatus: 'UNDER_REVIEW',
       }),
     })
     if (!patchRes.ok) {
@@ -176,18 +289,19 @@ export async function generateGoogleWalletUrl(
     id: objectId,
     classId,
     state: 'ACTIVE',
-    accountId: data.serialNumber,
+    accountId: data.shortCode,
     accountName: data.customerName,
     loyaltyPoints: buildLoyaltyPoints(data),
     secondaryLoyaltyPoints: {
       label: 'RÉCOMPENSE',
+      localizedLabel: localizedTriple('RÉCOMPENSE', 'REWARD', 'BELOHNUNG'),
       balance: { string: data.rewardDescription },
     },
     textModulesData: buildTextModules(data),
     barcode: {
       type: 'QR_CODE',
       value: data.qrMessage,
-      alternateText: 'Scanner la carte',
+      alternateText: data.shortCode,
     },
     hexBackgroundColor: hexColor(data.primaryColor),
   }
@@ -216,9 +330,12 @@ export async function generateGoogleWalletUrl(
       method: 'PATCH',
       headers: { Authorization: `Bearer ${token.token}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
+        accountId: data.shortCode,
+        accountName: data.customerName,
         loyaltyPoints: buildLoyaltyPoints(data),
         secondaryLoyaltyPoints: loyaltyObject.secondaryLoyaltyPoints,
         textModulesData: buildTextModules(data),
+        barcode: loyaltyObject.barcode,
         hexBackgroundColor: hexColor(data.primaryColor),
       }),
     })

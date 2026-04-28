@@ -13,7 +13,9 @@ export type PassData = {
   tagline: string
   customerName: string
   restaurantName: string
+  restaurantSlug: string
   qrMessage: string
+  shortCode: string
   hasReward: boolean
   programType: 'visits' | 'spend'
   currentValue: number
@@ -21,6 +23,10 @@ export type PassData = {
   heroImageUrl: string | null
   latitude: number | null
   longitude: number | null
+  addressLine: string | null
+  city: string | null
+  postalCode: string | null
+  googleReviewUrl: string | null
 }
 
 export function buildPassData(
@@ -47,6 +53,8 @@ export function buildPassData(
   const b = parseInt(hex.slice(4, 6), 16)
   const backgroundColor = `rgb(${r}, ${g}, ${b})`
 
+  const shortCode = `MTB-${card.id.slice(-6).toUpperCase()}`
+
   return {
     serialNumber: card.id,
     authToken: card.apple_auth_token!,
@@ -60,7 +68,9 @@ export function buildPassData(
     tagline: program.card_tagline ?? restaurant.name,
     customerName: card.customer_name,
     restaurantName: restaurant.name,
+    restaurantSlug: restaurant.slug,
     qrMessage: card.id,
+    shortCode,
     hasReward,
     programType: program.type as 'visits' | 'spend',
     currentValue: card.current_value,
@@ -68,5 +78,9 @@ export function buildPassData(
     heroImageUrl: restaurant.cover_url,
     latitude: restaurant.latitude,
     longitude: restaurant.longitude,
+    addressLine: restaurant.address_line,
+    city: restaurant.city,
+    postalCode: restaurant.postal_code,
+    googleReviewUrl: restaurant.google_review_url,
   }
 }
