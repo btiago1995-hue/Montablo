@@ -1,68 +1,166 @@
 import Link from 'next/link'
-import { UtensilsCrossed } from 'lucide-react'
+import QRCode from 'qrcode'
+import {
+  UtensilsCrossed,
+  ShieldCheck,
+  Wallet,
+  Languages,
+  Wine,
+  Pizza,
+  Mountain,
+  Sandwich,
+  ArrowRight,
+} from 'lucide-react'
+import type { Metadata } from 'next'
 import { JsonLd, homepageJsonLd } from '@/components/seo/json-ld'
 import { CTALink } from '@/components/public/cta-link'
+import { ManageCookiesButton } from '@/components/public/manage-cookies-button'
 import { MenuPreview } from '@/components/public/homepage/menu-preview'
-import { PricingToggle } from '@/components/public/homepage/pricing-toggle'
-import './homepage.css'
 
-const steps = [
+export const metadata: Metadata = {
+  title:
+    'MonTablo — Le menu digital qui filtre vos avis Google et fidélise vos clients',
+  description:
+    'Menu digital QR pour restaurants. Filtrage automatique des avis Google, cartes de fidélité Apple/Google Wallet, multilingue FR/EN/DE. 14 jours d’essai gratuits. À partir de 19€/mois HT.',
+  alternates: { canonical: '/' },
+}
+
+const DEMO_MENU_URL = 'https://www.montablo.com/menu/demo'
+
+const BTN_BASE =
+  'inline-flex items-center justify-center gap-2.5 h-[50px] px-7 rounded-full font-semibold text-[15px] whitespace-nowrap border-[1.5px] border-transparent transition hover:-translate-y-px'
+const BTN_PRIMARY = `${BTN_BASE} bg-primary text-background hover:bg-green-classic`
+const BTN_SECONDARY = `${BTN_BASE} bg-transparent text-primary border-primary hover:bg-primary hover:text-background`
+const BTN_GHOST_SM =
+  'inline-flex items-center justify-center gap-2 h-10 px-5 rounded-full font-semibold text-sm text-primary hover:bg-green-mist transition whitespace-nowrap'
+const BTN_PRIMARY_SM =
+  'inline-flex items-center justify-center gap-2 h-10 px-5 rounded-full font-semibold text-sm bg-primary text-background hover:bg-green-classic transition whitespace-nowrap'
+const EYEBROW =
+  'inline-block font-sans text-[12px] tracking-[0.22em] uppercase text-primary-light font-semibold mb-5'
+
+const personas = [
   {
-    num: '01',
-    title: 'Inscrivez-vous',
-    desc: "Créez votre compte en 30 secondes. Aucune carte de crédit, aucun engagement — juste votre email.",
+    icon: Wine,
+    title: 'Bistrots & brasseries',
+    desc: 'Pour ceux qui changent leur ardoise tous les jours.',
+    href: '/solutions/bistrot',
   },
   {
-    num: '02',
-    title: 'Ajoutez vos plats',
-    desc: "Noms, descriptions, prix. Organisez par catégories, ajoutez des photos. Ou importez votre carte avec l'IA.",
+    icon: Sandwich,
+    title: 'Crêperies & restaurants régionaux',
+    desc: 'Pour ceux qui veulent expliquer la fondue aux Anglais sans s’épuiser.',
+    href: '/solutions/brasserie',
   },
   {
-    num: '03',
-    title: 'Partagez le QR',
-    desc: "Imprimez-le, posez-le sur vos tables. Vos clients y accèdent en un scan — sans app, sans friction.",
+    icon: Pizza,
+    title: 'Pizzerias & trattorias',
+    desc: 'Pour ceux qui veulent afficher leurs photos de plats sans réimprimer.',
+    href: '/solutions/pizzeria',
+  },
+  {
+    icon: Mountain,
+    title: 'Restaurants de station',
+    desc: 'Pour ceux dont la clientèle change de pays toutes les 2 semaines.',
+    href: '/solutions/haute-savoie',
   },
 ]
 
-export default function LandingPage() {
+const faq = [
+  {
+    q: 'Et mes clients âgés qui ne savent pas utiliser un QR code ?',
+    a: 'Vous gardez 2-3 cartes papier en réserve pour eux. Le QR code est pour la majorité de votre clientèle qui a un smartphone, y compris les retraités. Et tous nos menus sont optimisés pour les yeux qui n’ont plus 20 ans : grandes typos, contraste fort, photos lisibles.',
+  },
+  {
+    q: 'Je n’ai pas le temps de tout configurer.',
+    a: 'Vous prenez une photo de votre carte actuelle avec votre téléphone. Notre IA extrait tous les plats, prix et descriptions en 2 minutes. Vous corrigez ce qu’il faut, et c’est en ligne. Pour les 20 premiers restaurants du Genevois, je viens personnellement faire le setup chez vous.',
+  },
+  {
+    q: 'Les allergènes, c’est obligatoire ?',
+    a: 'Oui, depuis 2015 (règlement UE 1169/2011). Beaucoup de restaurants sont en infraction sans le savoir. MonTablo affiche automatiquement les 14 allergènes majeurs sur chaque plat, conformément à la loi. Vous êtes en règle sans y penser.',
+  },
+]
+
+const tiers = [
+  {
+    name: 'Essentiel',
+    price: '19€',
+    priceSuffix: '/mois HT',
+    desc: 'Pour digitaliser votre carte, sans plus.',
+    highlighted: false,
+  },
+  {
+    name: 'Pro',
+    price: '39€',
+    priceSuffix: '/mois HT',
+    desc: 'La formule complète. Avis Google, fidélité, multilingue.',
+    highlighted: true,
+  },
+  {
+    name: 'Premium',
+    price: 'Sur devis',
+    priceSuffix: '',
+    desc: 'Pour les groupes multi-établissements.',
+    highlighted: false,
+  },
+]
+
+export default async function LandingPage() {
   const schemas = homepageJsonLd()
+  const qrSvg = await QRCode.toString(DEMO_MENU_URL, {
+    type: 'svg',
+    errorCorrectionLevel: 'M',
+    margin: 0,
+    color: { dark: '#1E3932', light: '#0000' },
+  })
 
   return (
-    <div className="mt-redesign">
+    <div className="bg-background min-h-screen text-foreground font-sans text-[17px] leading-[1.55] antialiased overflow-x-hidden">
       {schemas.map((schema, i) => (
         <JsonLd key={i} data={schema} />
       ))}
 
-      {/* Fraunces (editorial serif) + Work Sans (humanist sans) — scoped to this page */}
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Work+Sans:wght@400;500;600;700&display=swap"
-        rel="stylesheet"
-      />
-
       {/* ===== NAV ===== */}
-      <nav className="mt-nav">
-        <div className="mt-container mt-nav-inner">
-          <Link href="/" className="mt-logo" aria-label="MonTablo — accueil">
+      <nav className="sticky top-0 z-50 backdrop-blur-[14px] bg-background/80 border-b border-primary/5">
+        <div className="max-w-[1240px] mx-auto px-8 flex items-center justify-between h-[76px]">
+          <Link
+            href="/"
+            className="flex items-center gap-2.5 font-serif text-2xl font-semibold text-primary tracking-tight"
+            aria-label="MonTablo — accueil"
+          >
             <UtensilsCrossed width={26} height={26} strokeWidth={1.6} />
             <span>MonTablo</span>
           </Link>
-          <div className="mt-nav-links">
-            <Link href="/fonctionnalites">Fonctionnalités</Link>
-            <Link href="/tarifs">Tarifs</Link>
-            <Link href="#preview">Exemple</Link>
-            <Link href="/blog">Blog</Link>
+          <div className="hidden md:flex items-center gap-1.5">
+            <Link
+              href="/fonctionnalites"
+              className="px-4 py-2.5 text-[15px] text-primary font-medium rounded-full hover:bg-green-mist transition"
+            >
+              Fonctionnalités
+            </Link>
+            <Link
+              href="/tarifs"
+              className="px-4 py-2.5 text-[15px] text-primary font-medium rounded-full hover:bg-green-mist transition"
+            >
+              Tarifs
+            </Link>
+            <Link
+              href="#exemple"
+              className="px-4 py-2.5 text-[15px] text-primary font-medium rounded-full hover:bg-green-mist transition"
+            >
+              Exemple
+            </Link>
+            <Link
+              href="/blog"
+              className="px-4 py-2.5 text-[15px] text-primary font-medium rounded-full hover:bg-green-mist transition"
+            >
+              Blog
+            </Link>
           </div>
-          <div className="mt-nav-actions">
-            <Link href="/login" className="mt-btn mt-btn-ghost mt-btn-sm">
+          <div className="flex items-center gap-2.5">
+            <Link href="/login" className={`${BTN_GHOST_SM} hidden sm:inline-flex`}>
               Connexion
             </Link>
-            <CTALink
-              href="/signup"
-              label="nav_essai"
-              className="mt-btn mt-btn-primary mt-btn-sm"
-            >
+            <CTALink href="/signup" label="nav_essai" className={BTN_PRIMARY_SM}>
               Essai gratuit
             </CTALink>
           </div>
@@ -70,368 +168,550 @@ export default function LandingPage() {
       </nav>
 
       {/* ===== HERO ===== */}
-      <section className="mt-hero">
-        <div className="mt-hero-deco" aria-hidden="true">
-          <div className="mt-circle mt-c1" />
-          <div className="mt-circle mt-c2" />
+      <section className="relative overflow-hidden pt-[70px] pb-20">
+        <div className="absolute inset-0 pointer-events-none z-0" aria-hidden="true">
+          <div className="absolute -top-[120px] -right-[120px] w-[420px] h-[420px] rounded-full bg-green-mist" />
+          <div className="absolute bottom-10 -left-[100px] w-[220px] h-[220px] rounded-full bg-surface" />
         </div>
-        <div className="mt-container mt-hero-grid">
-          <div className="mt-hero-copy">
-            <span className="mt-eyebrow">Menu digital · Restaurants</span>
-            <h1>
-              Votre carte,<br />
-              enfin <em>à la hauteur</em><br />
-              de votre cuisine.
+        <div className="relative z-10 max-w-[1240px] mx-auto px-8 grid md:grid-cols-[1.1fr_0.9fr] gap-[60px] md:gap-20 items-center">
+          <div className="min-w-0">
+            <span className={EYEBROW}>Menu digital · Genevois français</span>
+            <h1 className="font-serif font-medium text-primary text-[clamp(40px,5.6vw,76px)] leading-[1.04] tracking-[-0.022em] text-balance">
+              Le menu digital qui{' '}
+              <em className="italic font-medium text-primary-light">filtre vos avis Google</em>,
+              fidélise vos clients et parle 3 langues.
             </h1>
-            <p className="mt-hero-sub">
-              Un menu digital élégant, mis à jour en temps réel. Vos clients scannent —
-              vous gardez le contrôle, jusqu&apos;au moindre détail.
+            <p className="text-[19px] text-muted max-w-[560px] my-6 mb-8 leading-[1.5]">
+              Conçu pour les restaurants du Genevois français qui servent une clientèle locale,
+              frontalière et internationale toute l’année.
             </p>
-            <div className="mt-hero-ctas">
-              <CTALink
-                href="/signup"
-                label="hero_essayer"
-                className="mt-btn mt-btn-primary"
-              >
-                Essayer 14 jours gratuitement
+            <ul className="flex flex-col gap-2.5 text-[15px] text-foreground mb-9">
+              <li className="inline-flex items-center gap-3">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary-light" />
+                <strong className="font-semibold">Prêt en 5 minutes</strong>
+                <span className="text-muted">— Import IA de votre carte actuelle</span>
+              </li>
+              <li className="inline-flex items-center gap-3">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary-light" />
+                <strong className="font-semibold">14 jours d’essai</strong>
+                <span className="text-muted">— Sans carte bancaire</span>
+              </li>
+              <li className="inline-flex items-center gap-3">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary-light" />
+                <strong className="font-semibold">Sans engagement</strong>
+                <span className="text-muted">— Résiliable à tout moment</span>
+              </li>
+            </ul>
+            <div className="flex flex-wrap gap-3">
+              <CTALink href="/signup" label="hero_pro_essai" className={BTN_PRIMARY}>
+                Essayer Pro 14 jours gratuitement
               </CTALink>
-              <Link href="#preview" className="mt-btn mt-btn-secondary">
-                Voir un exemple
+              <Link href="#exemple" className={BTN_SECONDARY}>
+                Voir un menu en exemple
+                <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
-            <div className="mt-hero-meta">
-              <span><span className="mt-dot" />Sans engagement</span>
-              <span><span className="mt-dot" />Aucune carte bancaire</span>
-              <span><span className="mt-dot" />Prêt en 5 minutes</span>
-            </div>
           </div>
 
-          <div className="mt-hero-art">
-            <div className="mt-qr-badge" aria-hidden="true">
-              <div className="mt-qr" />
-              <p>Scanner · Déguster</p>
-            </div>
+          {/* Phone + QR */}
+          <div className="relative flex justify-center items-center min-h-[560px] md:min-h-[680px]">
+            <a
+              href={DEMO_MENU_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute -right-[8%] top-[2%] z-30 w-[140px] bg-white rounded-[20px] shadow-[0_10px_30px_rgba(30,57,50,0.10),0_2px_6px_rgba(30,57,50,0.05)] p-3.5 text-center rotate-[6deg] hover:[transform:rotate(6deg)_translateY(-2px)] hover:shadow-[0_30px_60px_rgba(30,57,50,0.18),0_10px_20px_rgba(30,57,50,0.08)] transition no-underline text-foreground"
+              aria-label="Voir un exemple de menu MonTablo"
+            >
+              <span
+                className="block w-full aspect-square rounded-lg overflow-hidden bg-white [&_svg]:w-full [&_svg]:h-full [&_svg]:block"
+                role="img"
+                aria-label="QR code du menu démo"
+                dangerouslySetInnerHTML={{ __html: qrSvg }}
+              />
+              <p className="mt-2.5 text-[11px] font-semibold text-primary tracking-[0.1em] uppercase">
+                Scanner · Déguster
+              </p>
+            </a>
 
-            <div className="mt-phone" aria-hidden="true">
-              <div className="mt-phone-screen">
-                <div className="mt-phone-brand">
-                  <h4>Le Petit Bistrot</h4>
-                  <div className="mt-tag">Menu · Carte</div>
+            <div
+              className="relative w-[340px] h-[680px] bg-white rounded-[46px] shadow-[0_30px_60px_rgba(30,57,50,0.18),0_10px_20px_rgba(30,57,50,0.08)] border-[10px] border-primary overflow-hidden -rotate-[4deg] max-sm:[transform:rotate(-2deg)_scale(0.88)]"
+              aria-hidden="true"
+            >
+              {/* notch */}
+              <div className="absolute top-3 left-1/2 -translate-x-1/2 w-[90px] h-6 bg-primary rounded-xl z-[2]" />
+              <div className="h-full bg-background pt-[50px] px-[22px] pb-[22px] overflow-hidden">
+                <div className="text-center pb-5 border-b border-border">
+                  <h4 className="font-serif text-[22px] italic text-primary font-medium">Le Petit Bistrot</h4>
+                  <div className="text-[10px] tracking-[0.25em] uppercase text-primary-light mt-1.5 font-semibold">
+                    Menu · Carte
+                  </div>
                 </div>
-                <div className="mt-phone-cat">— Entrées —</div>
-                <div className="mt-phone-item">
-                  <div className="mt-phone-item-name">Soupe à l&apos;oignon</div>
-                  <div className="mt-phone-item-price">8,50 €</div>
-                  <div className="mt-phone-item-desc">Gratinée au gruyère, pain de campagne</div>
+                <div className="font-serif italic text-[14px] text-primary-light mt-[18px] mb-2.5 tracking-[0.08em] uppercase font-medium">
+                  — Entrées —
                 </div>
-                <div className="mt-phone-item">
-                  <div className="mt-phone-item-name">Chèvre chaud</div>
-                  <div className="mt-phone-item-price">11,00 €</div>
-                  <div className="mt-phone-item-desc">Miel, noix, mesclun du potager</div>
+                <PhoneItem
+                  img="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=200&h=200&fit=crop"
+                  name="Soupe à l'oignon"
+                  desc="Gratinée au gruyère, croûtons dorés"
+                  price="8,50 €"
+                />
+                <PhoneItem
+                  img="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=200&h=200&fit=crop"
+                  name="Salade de chèvre chaud"
+                  desc="Miel, noix, mesclun de saison"
+                  price="11,00 €"
+                />
+                <div className="font-serif italic text-[14px] text-primary-light mt-[18px] mb-2.5 tracking-[0.08em] uppercase font-medium">
+                  — Plats —
                 </div>
-                <div className="mt-phone-cat">— Plats —</div>
-                <div className="mt-phone-item">
-                  <div className="mt-phone-item-name">Confit de canard</div>
-                  <div className="mt-phone-item-price">19,50 €</div>
-                  <div className="mt-phone-item-desc">Pommes sarladaises, jus corsé</div>
-                </div>
-                <div className="mt-phone-item">
-                  <div className="mt-phone-item-name">Bœuf bourguignon</div>
-                  <div className="mt-phone-item-price">18,00 €</div>
-                  <div className="mt-phone-item-desc">Carottes fondantes, champignons</div>
-                </div>
+                <PhoneItem
+                  img="https://images.unsplash.com/photo-1518492104633-130d0cc84637?w=200&h=200&fit=crop"
+                  name="Confit de canard"
+                  desc="Pommes sarladaises, salade verte"
+                  price="19,50 €"
+                />
+                <PhoneItem
+                  img="https://images.unsplash.com/photo-1534939561126-855b8675edd7?w=200&h=200&fit=crop"
+                  name="Bœuf bourguignon"
+                  desc="Carottes, champignons, purée maison"
+                  price="18,00 €"
+                />
               </div>
             </div>
 
-            <div className="mt-review-badge">
+            <div className="absolute left-[2%] bottom-[6%] z-30 max-w-[220px] bg-white rounded-[20px] shadow-[0_10px_30px_rgba(30,57,50,0.10),0_2px_6px_rgba(30,57,50,0.05)] px-[18px] py-4 -rotate-[5deg]">
               <div>
-                <div className="mt-stars">★★★★★</div>
-                <p>« Un menu qui donne faim rien qu&apos;à le regarder. »</p>
+                <div className="text-accent text-sm tracking-[2px]">★★★★★</div>
+                <p className="text-xs mt-1 text-muted italic">
+                  « Un menu qui donne faim rien qu&apos;à le regarder. »
+                </p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ===== STEPS ===== */}
-      <section className="mt-section mt-steps">
-        <div className="mt-container">
-          <div className="mt-steps-header">
-            <span className="mt-eyebrow">Comment ça marche</span>
-            <h2>Trois étapes. Cinq minutes.<br />Zéro friction.</h2>
+      {/* ===== 3 DIFFÉRENCIATEURS ===== */}
+      <section className="bg-white border-y border-border">
+        <div className="max-w-[1240px] mx-auto px-8 py-20 sm:py-[100px]">
+          <div className="text-center max-w-[640px] mx-auto mb-14">
+            <span className={EYEBROW}>Ce qui nous distingue</span>
+            <h2 className="font-serif text-[clamp(32px,4vw,48px)] leading-[1.1] tracking-tight text-primary text-balance">
+              Pas qu’un simple <em className="italic">menu digital</em>.
+            </h2>
+            <p className="text-muted text-[18px] mt-4">
+              MonTablo fait 3 choses que les autres ne font pas.
+            </p>
           </div>
-          <div className="mt-steps-grid">
-            {steps.map((s) => (
-              <div key={s.num} className="mt-step">
-                <div className="mt-step-num">{s.num}</div>
-                <h3>{s.title}</h3>
-                <p>{s.desc}</p>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {/* Carte 1 */}
+            <Link
+              href="/fonctionnalites#avis-google"
+              className="group bg-background border border-border rounded-3xl p-8 flex flex-col hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(30,57,50,0.10),0_2px_6px_rgba(30,57,50,0.05)] transition"
+            >
+              <div className="w-12 h-12 rounded-2xl bg-green-soft flex items-center justify-center mb-6">
+                <ShieldCheck className="w-6 h-6 text-primary" strokeWidth={1.8} />
               </div>
-            ))}
+              <h3 className="font-serif text-[24px] text-primary leading-tight mb-3 font-medium">
+                Vos avis Google, sous contrôle
+              </h3>
+              <p className="text-[15px] text-muted leading-relaxed mb-5">
+                Les clients très satisfaits (5 étoiles) sont redirigés vers votre fiche Google.
+                Les avis moins bons restent en interne : vous êtes notifié et vous pouvez
+                réagir avant qu’ils ne deviennent publics.
+              </p>
+              <div className="mt-auto pt-5 border-t border-border">
+                <p className="text-[14px] font-semibold text-primary-light leading-snug inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-all">
+                  Voir comment ça marche
+                  <ArrowRight className="w-4 h-4" />
+                </p>
+              </div>
+            </Link>
+
+            {/* Carte 2 */}
+            <Link
+              href="/fonctionnalites#wallet"
+              className="group bg-background border border-border rounded-3xl p-8 flex flex-col hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(30,57,50,0.10),0_2px_6px_rgba(30,57,50,0.05)] transition"
+            >
+              <div className="w-12 h-12 rounded-2xl bg-green-soft flex items-center justify-center mb-6">
+                <Wallet className="w-6 h-6 text-primary" strokeWidth={1.8} />
+              </div>
+              <h3 className="font-serif text-[24px] text-primary leading-tight mb-3 font-medium">
+                Une carte de fidélité dans Apple Wallet et Google Wallet
+              </h3>
+              <p className="text-[15px] text-muted leading-relaxed mb-5">
+                Vos clients ajoutent leur carte au Wallet en un scan. Sur Android, elle
+                apparaît automatiquement quand ils passent près du restaurant. Sans
+                application à télécharger.
+              </p>
+              <div className="mt-auto pt-5 border-t border-border">
+                <p className="text-[14px] font-semibold text-primary-light leading-snug inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-all">
+                  Voir comment ça marche
+                  <ArrowRight className="w-4 h-4" />
+                </p>
+              </div>
+            </Link>
+
+            {/* Carte 3 */}
+            <Link
+              href="/fonctionnalites#multilingue"
+              className="group bg-background border border-border rounded-3xl p-8 flex flex-col hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(30,57,50,0.10),0_2px_6px_rgba(30,57,50,0.05)] transition"
+            >
+              <div className="w-12 h-12 rounded-2xl bg-green-soft flex items-center justify-center mb-6">
+                <Languages className="w-6 h-6 text-primary" strokeWidth={1.8} />
+              </div>
+              <h3 className="font-serif text-[24px] text-primary leading-tight mb-3 font-medium">
+                Multilingue pour vos clients frontaliers et internationaux
+              </h3>
+              <p className="text-[15px] text-muted leading-relaxed mb-5">
+                Français, anglais, allemand — traduction automatique. Vos clients suisses,
+                allemands ou britanniques lisent votre carte dans leur langue, sans
+                télécharger d’application.
+              </p>
+              <div className="mt-auto pt-5 border-t border-border">
+                <p className="text-[14px] font-semibold text-primary-light leading-snug inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-all">
+                  Voir comment ça marche
+                  <ArrowRight className="w-4 h-4" />
+                </p>
+              </div>
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* ===== INTERACTIVE MENU PREVIEW ===== */}
-      <section className="mt-section mt-preview" id="preview">
-        <div className="mt-container mt-preview-grid">
-          <div className="mt-preview-copy">
-            <span className="mt-eyebrow">Aperçu client</span>
-            <h2>
-              Un menu que vos clients <em>ont envie</em> de lire.
-            </h2>
+      {/* ===== LE PROBLÈME ===== */}
+      <section className="relative overflow-hidden bg-primary text-background">
+        <div className="absolute inset-0 pointer-events-none z-0" aria-hidden="true">
+          <div className="absolute -top-[140px] -right-[140px] w-[420px] h-[420px] rounded-full border border-green-soft/15" />
+          <div className="absolute -bottom-[120px] -left-[120px] w-[300px] h-[300px] rounded-full border border-green-soft/10" />
+        </div>
+        <div className="relative z-10 max-w-[920px] mx-auto px-8 py-20 sm:py-[110px] text-center">
+          <span className="inline-block font-sans text-[12px] tracking-[0.22em] uppercase text-accent font-semibold mb-5">
+            Le constat
+          </span>
+          <h2 className="font-serif text-[clamp(32px,4.5vw,52px)] leading-[1.1] tracking-tight text-balance">
+            Votre carte papier vous coûte plus cher que vous ne le <em className="italic">pensez</em>.
+          </h2>
+          <div className="text-[18px] text-background/80 leading-[1.65] mt-8 space-y-5 max-w-[680px] mx-auto">
             <p>
-              Design soigné, navigation fluide, chargement instantané. Le tout aux couleurs
-              de votre restaurant — et adaptable à chaque saison.
+              Réimpression à chaque changement de prix. Plats indisponibles annoncés 30 fois
+              par soir. Clientèle internationale qui n’arrive pas à lire. Allergènes à
+              expliquer un par un. Et toujours pas un seul moyen de savoir si vos clients
+              reviennent.
+            </p>
+            <p className="text-background font-medium">
+              MonTablo règle tout ça en une seule plateforme.
+            </p>
+          </div>
+          <Link
+            href="/fonctionnalites"
+            className="inline-flex items-center gap-2 mt-10 text-accent font-semibold text-[15px] hover:gap-3 transition-all"
+          >
+            Voir comment ça marche
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </section>
+
+      {/* ===== POUR QUI C'EST FAIT ===== */}
+      <section className="py-20 sm:py-[100px]">
+        <div className="max-w-[1240px] mx-auto px-8">
+          <div className="max-w-[640px] mb-14">
+            <span className={EYEBROW}>Pour qui c’est fait</span>
+            <h2 className="font-serif text-[clamp(32px,4vw,48px)] leading-[1.1] tracking-tight text-primary text-balance">
+              Pensé pour les restaurants qui servent une <em className="italic">clientèle exigeante</em>.
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+            {personas.map((p) => {
+              const Icon = p.icon
+              return (
+                <Link
+                  key={p.title}
+                  href={p.href}
+                  className="group bg-white border border-border rounded-2xl p-7 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(30,57,50,0.08)] transition"
+                >
+                  <div className="w-11 h-11 rounded-xl bg-green-mist flex items-center justify-center mb-5">
+                    <Icon className="w-5 h-5 text-primary" strokeWidth={1.8} />
+                  </div>
+                  <h3 className="font-serif text-[20px] text-primary leading-tight mb-2 font-medium">
+                    {p.title}
+                  </h3>
+                  <p className="text-[14px] text-muted leading-relaxed">{p.desc}</p>
+                </Link>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== EXEMPLE (menu preview interactif) ===== */}
+      <section id="exemple" className="relative overflow-hidden bg-primary text-background">
+        <div className="absolute inset-0 pointer-events-none z-0" aria-hidden="true">
+          <div className="absolute -bottom-[160px] -right-[160px] w-[480px] h-[480px] rounded-full border border-green-soft/12" />
+        </div>
+        <div className="relative z-10 max-w-[1240px] mx-auto px-8 py-20 sm:py-[100px] grid lg:grid-cols-2 gap-16 items-center">
+          <div>
+            <span className="inline-block font-sans text-[12px] tracking-[0.22em] uppercase text-accent font-semibold mb-5">
+              Aperçu client
+            </span>
+            <h2 className="font-serif text-[clamp(32px,4vw,48px)] leading-[1.1] tracking-tight text-balance">
+              Voilà ce que vos clients <em className="italic">voient vraiment</em>.
+            </h2>
+            <p className="text-[18px] text-background/75 mt-5 leading-relaxed max-w-[480px]">
+              Photos de plats, prix à jour, allergènes intégrés, badges promotionnels,
+              tout dans la langue du client. Aucune application à installer.
             </p>
             <CTALink
               href="/signup"
-              label="preview_creer_menu"
-              className="mt-btn mt-btn-primary"
+              label="exemple_creer"
+              className={`${BTN_BASE} mt-9 bg-background text-primary hover:bg-accent`}
             >
               Créer mon menu
             </CTALink>
           </div>
-
-          <MenuPreview />
-        </div>
-      </section>
-
-      {/* ===== FEATURES BENTO ===== */}
-      <section className="mt-section mt-features" id="features">
-        <div className="mt-container">
-          <div className="mt-features-head">
-            <div>
-              <span className="mt-eyebrow">Pourquoi MonTablo</span>
-              <h2>Tout ce qu&apos;il faut.<br />Rien de superflu.</h2>
-            </div>
-            <p>
-              Chaque fonctionnalité a sa raison d&apos;être. Nous avons conçu MonTablo
-              avec des restaurateurs, pour des restaurateurs.
-            </p>
-          </div>
-
-          <div className="mt-features-grid">
-            <div className="mt-feature mt-tall">
-              <div>
-                <div className="mt-feature-icon" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
-                  </svg>
-                </div>
-                <h3>Mises à jour en temps réel</h3>
-                <p>
-                  Changez un prix, ajoutez un plat du jour, retirez une rupture — vos clients
-                  voient l&apos;update instantanément. Plus jamais de réimpressions le lundi matin.
-                </p>
-              </div>
-              <div className="mt-feature-quote">
-                « J&apos;ai retiré la truite à 11h02.<br />
-                À 11h03, elle n&apos;était plus sur la carte. »
-              </div>
-            </div>
-
-            <div className="mt-feature">
-              <div className="mt-feature-icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M4 7h16M4 12h10M4 17h16" />
-                </svg>
-              </div>
-              <h3>Menu du jour</h3>
-              <p>Publié en un clic, visible toute la journée, archivé automatiquement.</p>
-            </div>
-
-            <div className="mt-feature">
-              <div className="mt-feature-icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="9" />
-                  <path d="M12 7v5l3 2" />
-                </svg>
-              </div>
-              <h3>Promotions programmables</h3>
-              <p>Happy hours, offres week-end : programmées à l&apos;avance, publiées toutes seules.</p>
-            </div>
-
-            <div className="mt-feature mt-wide">
-              <div className="mt-feature-icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M4 4h16v12H4zM4 20l4-4h8" />
-                </svg>
-              </div>
-              <h3>Cartes de fidélité intégrées</h3>
-              <p>
-                Google Wallet &amp; Apple Wallet. Vos clients ajoutent leur carte en un tap —
-                vous gardez le lien, même après la visite.
-              </p>
-            </div>
-
-            <div className="mt-feature">
-              <div className="mt-feature-icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="4" />
-                  <path d="M3 12h2M19 12h2M12 3v2M12 19v2" />
-                </svg>
-              </div>
-              <h3>Vos couleurs</h3>
-              <p>Logo, palette, typographie — votre identité, pixel près.</p>
-            </div>
-
-            <div className="mt-feature">
-              <div className="mt-feature-icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M5 8l7-5 7 5v10a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2z" />
-                  <path d="M9 13h6" />
-                </svg>
-              </div>
-              <h3>Bilingue FR / EN</h3>
-              <p>Une carte, deux langues, zéro traduction manquée.</p>
-            </div>
-
-            <div className="mt-feature">
-              <div className="mt-feature-icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="4" y="4" width="7" height="7" />
-                  <rect x="13" y="4" width="7" height="7" />
-                  <rect x="4" y="13" width="7" height="7" />
-                  <path d="M13 13h3M20 13v3M13 20h7" />
-                </svg>
-              </div>
-              <h3>QR personnalisé</h3>
-              <p>Votre logo au centre, vos couleurs. Imprimable en haute définition.</p>
-            </div>
-
-            <div className="mt-feature">
-              <div className="mt-feature-icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2l2.39 4.84L20 8l-4 3.9.94 5.5L12 14.8 7.06 17.4 8 11.9 4 8l5.61-1.16z" />
-                </svg>
-              </div>
-              <h3>Import IA</h3>
-              <p>Photographiez votre carte papier. On s&apos;occupe du reste en 10 secondes.</p>
-            </div>
+          <div className="lg:pl-4">
+            <MenuPreview />
           </div>
         </div>
       </section>
 
-      {/* ===== PRICING ===== */}
-      <section className="mt-section mt-pricing" id="pricing">
-        <div className="mt-container">
-          <div className="mt-pricing-head">
-            <span className="mt-eyebrow">Tarifs</span>
-            <h2>Trois formules.<br />Aucune surprise.</h2>
-            <p>
-              Essentiel pour démarrer, Pro pour fidéliser, Premium pour les groupes.
-              Essai gratuit de 14 jours sur Essentiel et Pro — sans carte bancaire.
-            </p>
+      {/* ===== OBJECTIONS / FAQ ===== */}
+      <section className="py-20 sm:py-[100px]">
+        <div className="max-w-[860px] mx-auto px-8">
+          <div className="text-center mb-12">
+            <span className={EYEBROW}>FAQ</span>
+            <h2 className="font-serif text-[clamp(32px,4vw,48px)] leading-[1.1] tracking-tight text-primary text-balance">
+              Les questions qu’on nous pose en <em className="italic">premier</em>.
+            </h2>
           </div>
-
-          <PricingToggle />
-
-          <p className="mt-price-note" style={{ marginTop: 32 }}>
-            <Link href="/tarifs" style={{ color: 'var(--mt-green-core)', fontWeight: 600 }}>
-              Voir la comparaison complète →
+          <div className="space-y-4">
+            {faq.map((item, i) => (
+              <details
+                key={i}
+                className="group bg-white border border-border rounded-2xl px-6 py-5 open:shadow-[0_10px_30px_rgba(30,57,50,0.06)]"
+              >
+                <summary className="flex items-center justify-between gap-6 cursor-pointer list-none font-serif text-[19px] text-primary font-medium">
+                  <span>{item.q}</span>
+                  <span className="w-7 h-7 rounded-full bg-green-mist flex items-center justify-center shrink-0 transition group-open:rotate-45">
+                    <span className="block w-3 h-px bg-primary relative before:absolute before:left-1/2 before:top-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-px before:h-3 before:bg-primary" />
+                  </span>
+                </summary>
+                <p className="text-[15px] text-muted leading-relaxed mt-4">{item.a}</p>
+              </details>
+            ))}
+          </div>
+          <p className="text-center mt-10 text-[15px] text-muted">
+            Plus de questions ?{' '}
+            <Link href="/faq" className="text-primary font-semibold hover:underline">
+              Voir la FAQ complète →
             </Link>
           </p>
         </div>
       </section>
 
-      {/* ===== FINAL CTA ===== */}
-      <section className="mt-final-cta">
-        <div className="mt-container">
-          <h2>
-            Vos plats méritent <em>mieux</em><br />qu&apos;un PDF.
+      {/* ===== TARIFS ===== */}
+      <section className="bg-surface border-y border-border">
+        <div className="max-w-[1240px] mx-auto px-8 py-20 sm:py-[100px]">
+          <div className="text-center max-w-[640px] mx-auto mb-12">
+            <span className={EYEBROW}>Tarifs</span>
+            <h2 className="font-serif text-[clamp(32px,4vw,48px)] leading-[1.1] tracking-tight text-primary text-balance">
+              Un tarif clair. <em className="italic">Sans engagement.</em>
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-5 max-w-[1040px] mx-auto">
+            {tiers.map((t) => (
+              <div
+                key={t.name}
+                className={`relative bg-white rounded-3xl p-8 flex flex-col ${
+                  t.highlighted
+                    ? 'border-2 border-primary shadow-[0_30px_60px_rgba(30,57,50,0.10)]'
+                    : 'border border-border'
+                }`}
+              >
+                {t.highlighted && (
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent text-primary text-[11px] font-bold tracking-[0.18em] uppercase px-3 py-1 rounded-full">
+                    Recommandée
+                  </span>
+                )}
+                <h3 className="font-serif italic text-[28px] text-primary font-medium mb-2">
+                  {t.name}
+                </h3>
+                <p className="text-[14px] text-muted mb-6">{t.desc}</p>
+                <div className="font-serif text-[40px] text-primary font-medium leading-none">
+                  {t.price}
+                  {t.priceSuffix && (
+                    <span className="text-[14px] font-sans font-medium text-muted ml-1.5">
+                      {t.priceSuffix}
+                    </span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <Link
+              href="/tarifs"
+              className="inline-flex items-center gap-2 text-primary font-semibold text-[15px] hover:gap-3 transition-all"
+            >
+              Voir tous les détails
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <p className="text-[14px] text-muted mt-3">
+              14 jours d’essai gratuit sur Pro. Sans carte bancaire.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== CTA FINAL ===== */}
+      <section className="relative overflow-hidden bg-primary text-background pt-32 sm:pt-[140px] pb-20 sm:pb-28">
+        <div className="absolute inset-0 pointer-events-none z-0" aria-hidden="true">
+          <div className="absolute -top-[200px] -left-[200px] w-[600px] h-[600px] rounded-full border border-green-soft/15" />
+          <div className="absolute top-[40px] -right-[180px] w-[420px] h-[420px] rounded-full border border-green-soft/12" />
+        </div>
+        <div className="relative z-10 max-w-[820px] mx-auto px-8 text-center">
+          <h2 className="font-serif text-[clamp(36px,5vw,60px)] leading-[1.05] tracking-tight text-balance">
+            Essayez MonTablo <em className="italic text-green-soft">14 jours</em>, gratuitement.
           </h2>
-          <p>
-            Rejoignez les restaurateurs qui ont remplacé leur carte papier par
-            une expérience digitale à leur image.
+          <p className="text-[18px] text-background/70 mt-5 max-w-[560px] mx-auto leading-relaxed">
+            Sans carte bancaire. Sans engagement. Configuration en 5 minutes.
           </p>
-          <CTALink
-            href="/signup"
-            label="footer_cta"
-            className="mt-btn mt-btn-primary"
-          >
-            Créer mon menu gratuitement
-          </CTALink>
+          <div className="flex flex-wrap items-center justify-center gap-3 mt-9">
+            <CTALink
+              href="/signup"
+              label="final_essai"
+              className={`${BTN_BASE} bg-background text-primary hover:bg-accent`}
+            >
+              Démarrer mon essai gratuit
+            </CTALink>
+            <Link
+              href="/contact"
+              className={`${BTN_BASE} bg-transparent text-background border-background/40 hover:bg-background hover:text-primary`}
+            >
+              Demander une démo
+            </Link>
+          </div>
         </div>
       </section>
 
       {/* ===== FOOTER ===== */}
-      <footer className="mt-footer">
-        <div className="mt-container">
-          <div className="mt-foot-grid">
-            <div className="mt-foot-brand">
+      <footer className="bg-primary text-background pt-16 pb-10">
+        <div className="max-w-[1240px] mx-auto px-8 pt-10 border-t border-green-soft/12">
+          <div className="grid grid-cols-2 md:grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-10 md:gap-[40px] mb-14">
+            <div className="col-span-2 md:col-span-1">
               <Link
                 href="/"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 10, marginBottom: 4, color: 'var(--mt-cream)' }}
+                className="inline-flex items-center gap-2.5 font-serif text-2xl font-semibold text-background tracking-tight mb-3"
                 aria-label="MonTablo — accueil"
               >
                 <UtensilsCrossed width={26} height={26} strokeWidth={1.6} />
-                <h4 style={{ margin: 0 }}>MonTablo</h4>
+                <span>MonTablo</span>
               </Link>
-              <p>
-                Le menu digital pour les restaurants exigeants. Conçu en Haute-Savoie,
-                mitonné avec soin.
+              <p className="max-w-[300px] text-sm text-background/70 leading-relaxed">
+                Conçu à Saint-Julien-en-Genevois pour les restaurants du Genevois français.
               </p>
             </div>
-            <div className="mt-foot-col">
-              <h5>Produit</h5>
-              <Link href="/fonctionnalites">Fonctionnalités</Link>
-              <Link href="/tarifs">Tarifs</Link>
-              <Link href="/menu/demo">Voir un exemple</Link>
-              <Link href="/solutions/bistrot">Solutions</Link>
-            </div>
-            <div className="mt-foot-col">
-              <h5>Ressources</h5>
-              <Link href="/blog">Blog</Link>
-              <Link href="/faq">FAQ</Link>
-              <Link href="/a-propos">À propos</Link>
-              <Link href="/contact">Contact</Link>
-            </div>
-            <div className="mt-foot-col">
-              <h5>Legal</h5>
-              <Link href="/mentions-legales">Mentions légales</Link>
-              <Link href="/cgu">CGU</Link>
-              <Link href="/confidentialite">Confidentialité</Link>
-              <Link href="/cookies">Cookies</Link>
-            </div>
+            <FooterCol
+              title="Produit"
+              links={[
+                { href: '/fonctionnalites', label: 'Fonctionnalités' },
+                { href: '/tarifs', label: 'Tarifs' },
+                { href: '/menu/demo', label: 'Démo' },
+              ]}
+            />
+            <FooterCol
+              title="Pour qui"
+              links={[
+                { href: '/solutions/bistrot', label: 'Bistrots' },
+                { href: '/solutions/brasserie', label: 'Brasseries' },
+                { href: '/solutions/pizzeria', label: 'Pizzerias' },
+                { href: '/solutions/haute-savoie', label: 'Restaurants de station' },
+              ]}
+            />
+            <FooterCol
+              title="Ressources"
+              links={[
+                { href: '/faq', label: 'FAQ' },
+                { href: '/blog', label: 'Blog' },
+              ]}
+            />
+            <FooterCol
+              title="Entreprise"
+              links={[
+                { href: '/a-propos', label: 'À propos' },
+                { href: '/contact', label: 'Contact' },
+                { href: '/mentions-legales', label: 'Mentions légales' },
+                { href: '/cgu', label: 'CGV' },
+                { href: '/confidentialite', label: 'Confidentialité' },
+              ]}
+            />
           </div>
-          <div className="mt-foot-bottom">
+
+          <div className="pt-8 border-t border-background/15 flex flex-col sm:flex-row items-center justify-between gap-3 text-[13px] text-background/55">
             <span>© {new Date().getFullYear()} MonTablo. Tous droits réservés.</span>
-            <span>Fait avec soin en Haute-Savoie 🍷</span>
+            <div className="flex items-center gap-4">
+              <ManageCookiesButton className="text-[13px] text-background/55 hover:text-accent transition cursor-pointer" />
+              <span>Conçu à Saint-Julien-en-Genevois.</span>
+            </div>
           </div>
         </div>
       </footer>
+    </div>
+  )
+}
 
-      {/* ===== FLOATING CIRCULAR CTA ===== */}
-      <CTALink
-        href="/signup"
-        label="float_cta"
-        className="mt-float-cta"
-      >
-        <svg viewBox="0 0 100 100" aria-hidden="true">
-          <defs>
-            <path
-              id="mt-circle-text"
-              d="M 50,50 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0"
-            />
-          </defs>
-          <text
-            fill="rgba(212, 233, 226, 0.55)"
-            fontFamily="Fraunces, serif"
-            fontStyle="italic"
-            fontSize="10"
-            letterSpacing="2"
-          >
-            <textPath href="#mt-circle-text">
-              · Essayer gratuitement · 14 jours offerts
-            </textPath>
-          </text>
-        </svg>
-        <div className="mt-inner">
-          <strong>Scan</strong>
-          <span>Commencer</span>
-        </div>
-      </CTALink>
+function PhoneItem({
+  img,
+  name,
+  desc,
+  price,
+}: {
+  img: string
+  name: string
+  desc: string
+  price: string
+}) {
+  return (
+    <div className="grid grid-cols-[44px_1fr_auto] gap-2.5 items-center py-[9px] border-b border-dashed border-border">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={img} alt="" loading="lazy" className="w-11 h-11 rounded-lg object-cover block" />
+      <div className="min-w-0">
+        <div className="font-semibold text-primary text-[13px] leading-[1.2] truncate">{name}</div>
+        <div className="text-[11px] text-muted italic mt-0.5 leading-[1.3] truncate">{desc}</div>
+      </div>
+      <div className="font-bold text-primary-light text-[13px] self-center">{price}</div>
+    </div>
+  )
+}
+
+function FooterCol({
+  title,
+  links,
+}: {
+  title: string
+  links: { href: string; label: string }[]
+}) {
+  return (
+    <div>
+      <h4 className="font-sans text-[12px] tracking-[0.18em] uppercase text-background/45 font-semibold mb-4">
+        {title}
+      </h4>
+      <ul className="space-y-2.5">
+        {links.map((l) => (
+          <li key={l.href}>
+            <Link
+              href={l.href}
+              className="text-[14px] text-background/80 hover:text-accent transition"
+            >
+              {l.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }

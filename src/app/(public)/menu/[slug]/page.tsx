@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!restaurant) return { title: 'Menu introuvable' }
 
-  const ogImageUrl = `/api/og?name=${encodeURIComponent(restaurant.name)}&color=${encodeURIComponent(restaurant.primary_color || '#2C3E2D')}`
+  const ogImageUrl = `/api/og?name=${encodeURIComponent(restaurant.name)}&color=${encodeURIComponent(restaurant.primary_color || '#1E3932')}`
 
   return {
     title: `${restaurant.name} — Menu`,
@@ -56,9 +56,9 @@ export default async function PublicMenuPage({ params }: Props) {
   if (!restaurant) notFound()
 
   if (!isSubscriptionActive(restaurant as Restaurant)) {
-    const primaryColor = restaurant.primary_color || '#2C3E2D'
+    const primaryColor = restaurant.primary_color || '#1E3932'
     return (
-      <div className="min-h-screen bg-[#FAFAF7] flex items-center justify-center px-4">
+      <div className="min-h-screen bg-background flex items-center justify-center px-4">
         <div className="text-center max-w-sm">
           <div
             className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 text-3xl"
@@ -66,15 +66,15 @@ export default async function PublicMenuPage({ params }: Props) {
           >
             🍽️
           </div>
-          <h1 className="font-serif text-2xl text-[#1A1A1A] mb-2">
+          <h1 className="font-serif text-2xl text-foreground mb-2">
             {restaurant.name}
           </h1>
-          <p className="text-[15px] text-[#6B6B6B] leading-relaxed">
+          <p className="text-[15px] text-muted leading-relaxed">
             Ce menu n&apos;est pas disponible actuellement.
           </p>
-          <div className="mt-8 inline-flex items-center gap-1.5 text-[11px] text-[#9B9B9B]/60">
+          <div className="mt-8 inline-flex items-center gap-1.5 text-[11px] text-muted-light/60">
             Propulsé par{' '}
-            <a href="/" className="text-[#D4A574] font-semibold no-underline hover:text-[#C08E5A] transition-colors">
+            <a href="/" className="text-accent font-semibold no-underline hover:text-accent-dark transition-colors">
               MonTablo
             </a>
           </div>
@@ -110,7 +110,7 @@ export default async function PublicMenuPage({ params }: Props) {
     .eq('is_active', true)
     .single()
 
-  const primaryColor = restaurant.primary_color || '#2C3E2D'
+  const primaryColor = restaurant.primary_color || '#1E3932'
 
   const jsonLd = menuPageJsonLd({
     restaurant: { name: restaurant.name, slug: restaurant.slug },
@@ -119,7 +119,7 @@ export default async function PublicMenuPage({ params }: Props) {
   })
 
   return (
-    <div className="min-h-screen bg-[#FAFAF7] max-w-[430px] mx-auto relative">
+    <div className="min-h-screen bg-background max-w-[430px] mx-auto relative">
       <JsonLd data={jsonLd} />
       {/* Cover */}
       <div className="relative h-[240px] overflow-hidden">
@@ -181,13 +181,13 @@ export default async function PublicMenuPage({ params }: Props) {
       )}
 
       {/* Footer */}
-      <footer className="text-center py-10 px-4 border-t border-[#E8E8E4] mt-4">
-        <div className="text-[12px] text-[#9B9B9B]">
+      <footer className="text-center py-10 px-4 border-t border-border mt-4">
+        <div className="text-[12px] text-muted-light">
           Les prix sont en euros, TTC
         </div>
-        <div className="inline-flex items-center gap-1.5 mt-3 text-[11px] text-[#9B9B9B]/60">
+        <div className="inline-flex items-center gap-1.5 mt-3 text-[11px] text-muted-light/60">
           Propulsé par{' '}
-          <a href="/" className="text-[#D4A574] font-semibold no-underline hover:text-[#C08E5A] transition-colors">
+          <a href="/" className="text-accent font-semibold no-underline hover:text-accent-dark transition-colors">
             MonTablo
           </a>
         </div>

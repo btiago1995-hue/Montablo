@@ -337,7 +337,7 @@ export default function MenuDigitalRestaurantPage() {
             <Link href="/tarifs" className="text-primary hover:underline">
               MonTablo propose un tarif simple et transparent
             </Link>{' '}
-            : 29,99 euros par mois (ou 26,99 euros/mois en abonnement annuel). Toutes les
+            : 19 € HT par mois (Essentiel) à 39 € HT par mois (Pro), avec −10 % en annuel. Toutes les
             fonctionnalités sont incluses, sans frais cachés : plats illimités, QR code
             personnalisé, menu du jour, promotions, import IA, bilingue FR/EN.
           </p>

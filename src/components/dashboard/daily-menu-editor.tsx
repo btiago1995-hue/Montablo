@@ -8,12 +8,17 @@ import { Input, Textarea } from '@/components/ui/input'
 import type { DailyMenu } from '@/types/database'
 import { CalendarDays, Check, Languages } from 'lucide-react'
 
-async function autoTranslate(texts: Record<string, string>): Promise<Record<string, string | null>> {
+type TargetLang = 'en' | 'de'
+
+async function autoTranslate(
+  texts: Record<string, string>,
+  targetLang: TargetLang = 'en'
+): Promise<Record<string, string | null>> {
   try {
     const res = await fetch('/api/translate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ texts }),
+      body: JSON.stringify({ texts, targetLang }),
     })
     if (!res.ok) return {}
     const { translations } = await res.json()
@@ -35,11 +40,17 @@ export function DailyMenuEditor({
   const router = useRouter()
   const [titleFr, setTitleFr] = useState(initialMenu?.title_fr ?? 'Menu du jour')
   const [titleEn, setTitleEn] = useState(initialMenu?.title_en ?? '')
+  const [titleDe, setTitleDe] = useState(initialMenu?.title_de ?? '')
   const [descFr, setDescFr] = useState(initialMenu?.description_fr ?? '')
   const [descEn, setDescEn] = useState(initialMenu?.description_en ?? '')
+  const [descDe, setDescDe] = useState(initialMenu?.description_de ?? '')
   const [itemsDescFr, setItemsDescFr] = useState(initialMenu?.items_description_fr ?? '')
   const [itemsDescEn, setItemsDescEn] = useState(initialMenu?.items_description_en ?? '')
-  const [showEn, setShowEn] = useState(!!(initialMenu?.title_en || initialMenu?.description_en || initialMenu?.items_description_en))
+  const [itemsDescDe, setItemsDescDe] = useState(initialMenu?.items_description_de ?? '')
+  const [showTranslations, setShowTranslations] = useState(
+    !!(initialMenu?.title_en || initialMenu?.description_en || initialMenu?.items_description_en ||
+       initialMenu?.title_de || initialMenu?.description_de || initialMenu?.items_description_de)
+  )
   const [price, setPrice] = useState(initialMenu?.price?.toString() ?? '')
   const [isActive, setIsActive] = useState(initialMenu?.is_active ?? true)
   const [loading, setLoading] = useState(false)
@@ -51,30 +62,45 @@ export function DailyMenuEditor({
 
     const supabase = createClient()
 
-    // Auto-translate French fields without manual English overrides
+    // Auto-translate French fields without manual overrides (EN + DE)
     let finalTitleEn = titleEn || null
     let finalDescEn = descEn || null
     let finalItemsDescEn = itemsDescEn || null
+    let finalTitleDe = titleDe || null
+    let finalDescDe = descDe || null
+    let finalItemsDescDe = itemsDescDe || null
 
-    const toTranslate: Record<string, string> = {}
-    if (!titleEn && titleFr.trim()) toTranslate.title = titleFr
-    if (!descEn && descFr.trim()) toTranslate.desc = descFr
-    if (!itemsDescEn && itemsDescFr.trim()) toTranslate.items = itemsDescFr
+    const toEn: Record<string, string> = {}
+    const toDe: Record<string, string> = {}
+    if (!titleEn && titleFr.trim()) toEn.title = titleFr
+    if (!descEn && descFr.trim()) toEn.desc = descFr
+    if (!itemsDescEn && itemsDescFr.trim()) toEn.items = itemsDescFr
+    if (!titleDe && titleFr.trim()) toDe.title = titleFr
+    if (!descDe && descFr.trim()) toDe.desc = descFr
+    if (!itemsDescDe && itemsDescFr.trim()) toDe.items = itemsDescFr
 
-    if (Object.keys(toTranslate).length > 0) {
-      const translations = await autoTranslate(toTranslate)
-      if (!titleEn && translations.title) finalTitleEn = translations.title
-      if (!descEn && translations.desc) finalDescEn = translations.desc
-      if (!itemsDescEn && translations.items) finalItemsDescEn = translations.items
-    }
+    const [trEn, trDe] = await Promise.all([
+      Object.keys(toEn).length > 0 ? autoTranslate(toEn, 'en') : Promise.resolve({} as Record<string, string | null>),
+      Object.keys(toDe).length > 0 ? autoTranslate(toDe, 'de') : Promise.resolve({} as Record<string, string | null>),
+    ])
+
+    if (!titleEn && trEn.title) finalTitleEn = trEn.title
+    if (!descEn && trEn.desc) finalDescEn = trEn.desc
+    if (!itemsDescEn && trEn.items) finalItemsDescEn = trEn.items
+    if (!titleDe && trDe.title) finalTitleDe = trDe.title
+    if (!descDe && trDe.desc) finalDescDe = trDe.desc
+    if (!itemsDescDe && trDe.items) finalItemsDescDe = trDe.items
 
     const data = {
       title_fr: titleFr,
       title_en: finalTitleEn,
+      title_de: finalTitleDe,
       description_fr: descFr || null,
       description_en: finalDescEn,
+      description_de: finalDescDe,
       items_description_fr: itemsDescFr || null,
       items_description_en: finalItemsDescEn,
+      items_description_de: finalItemsDescDe,
       price: price ? parseFloat(price) : null,
       is_active: isActive,
     }
@@ -141,48 +167,46 @@ export function DailyMenuEditor({
           placeholder="15.90"
         />
 
-        {showEn ? (
-          <div className="space-y-3 p-4 bg-[#F5F5F2] rounded-lg">
+        {showTranslations ? (
+          <div className="space-y-5 p-4 bg-surface rounded-lg">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-medium text-[#6B6B6B] flex items-center gap-1.5">
+              <span className="text-xs font-medium text-muted flex items-center gap-1.5">
                 <Languages className="w-3.5 h-3.5" />
-                Traduction anglaise (optionnel)
+                Traductions (optionnel)
               </span>
               <button
                 type="button"
-                onClick={() => { setShowEn(false); setTitleEn(''); setDescEn(''); setItemsDescEn('') }}
-                className="text-[11px] text-[#9B9B9B] hover:text-[#1A1A1A]"
+                onClick={() => {
+                  setShowTranslations(false)
+                  setTitleEn(''); setDescEn(''); setItemsDescEn('')
+                  setTitleDe(''); setDescDe(''); setItemsDescDe('')
+                }}
+                className="text-[11px] text-muted-light hover:text-foreground"
               >
                 Utiliser la traduction auto
               </button>
             </div>
-            <Input
-              label="Titre (EN)"
-              value={titleEn}
-              onChange={(e) => setTitleEn(e.target.value)}
-              placeholder="Daily menu"
-            />
-            <Textarea
-              label="Description (EN)"
-              value={descEn}
-              onChange={(e) => setDescEn(e.target.value)}
-              placeholder="Our daily selection..."
-            />
-            <Textarea
-              label="Composition (EN)"
-              value={itemsDescEn}
-              onChange={(e) => setItemsDescEn(e.target.value)}
-              placeholder="Starter: Onion soup&#10;Main: Beef bourguignon&#10;Dessert: Tarte tatin"
-            />
+            <div className="space-y-3">
+              <p className="text-[11px] uppercase tracking-wide font-semibold text-primary-light">Anglais</p>
+              <Input label="Titre (EN)" value={titleEn} onChange={(e) => setTitleEn(e.target.value)} placeholder="Daily menu" />
+              <Textarea label="Description (EN)" value={descEn} onChange={(e) => setDescEn(e.target.value)} placeholder="Our daily selection..." />
+              <Textarea label="Composition (EN)" value={itemsDescEn} onChange={(e) => setItemsDescEn(e.target.value)} placeholder="Starter: Onion soup&#10;Main: Beef bourguignon&#10;Dessert: Tarte tatin" />
+            </div>
+            <div className="space-y-3 pt-3 border-t border-border">
+              <p className="text-[11px] uppercase tracking-wide font-semibold text-primary-light">Allemand</p>
+              <Input label="Titel (DE)" value={titleDe} onChange={(e) => setTitleDe(e.target.value)} placeholder="Tagesmenü" />
+              <Textarea label="Beschreibung (DE)" value={descDe} onChange={(e) => setDescDe(e.target.value)} placeholder="Unsere tägliche Auswahl..." />
+              <Textarea label="Zusammensetzung (DE)" value={itemsDescDe} onChange={(e) => setItemsDescDe(e.target.value)} placeholder="Vorspeise: Zwiebelsuppe&#10;Hauptgang: Rindergulasch&#10;Nachtisch: Tarte Tatin" />
+            </div>
           </div>
         ) : (
           <button
             type="button"
-            onClick={() => setShowEn(true)}
-            className="flex items-center gap-1.5 text-xs text-[#6B6B6B] hover:text-[#1A1A1A] transition-colors"
+            onClick={() => setShowTranslations(true)}
+            className="flex items-center gap-1.5 text-xs text-muted hover:text-foreground transition-colors"
           >
             <Languages className="w-3.5 h-3.5" />
-            Modifier la traduction anglaise
+            Modifier les traductions (EN, DE)
           </button>
         )}
 

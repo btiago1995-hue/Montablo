@@ -48,7 +48,7 @@ export function LoyaltyNewCustomer() {
           onChange={(e) => setName(e.target.value)}
           required
           placeholder="Marie Dupont"
-          className="w-full px-4 py-3 border border-[#E8E8E4] rounded-lg text-sm focus:outline-none focus:border-[#2C3E2D]"
+          className="w-full px-4 py-2.5 border border-border bg-white rounded-xl text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
         />
       </div>
       <div>
@@ -59,7 +59,7 @@ export function LoyaltyNewCustomer() {
           onChange={(e) => setEmail(e.target.value)}
           required
           placeholder="marie@exemple.com"
-          className="w-full px-4 py-3 border border-[#E8E8E4] rounded-lg text-sm focus:outline-none focus:border-[#2C3E2D]"
+          className="w-full px-4 py-2.5 border border-border bg-white rounded-xl text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
         />
       </div>
       <div>
@@ -69,13 +69,13 @@ export function LoyaltyNewCustomer() {
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
           placeholder="+33 6 12 34 56 78"
-          className="w-full px-4 py-3 border border-[#E8E8E4] rounded-lg text-sm focus:outline-none focus:border-[#2C3E2D]"
+          className="w-full px-4 py-2.5 border border-border bg-white rounded-xl text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
         />
       </div>
       <button
         type="submit"
         disabled={saving || !name || !email}
-        className="w-full bg-[#2C3E2D] text-white py-3 px-6 rounded-lg text-sm font-medium hover:bg-[#243325] disabled:opacity-50 transition-colors"
+        className="w-full bg-primary text-background py-2.5 px-5 rounded-full text-sm font-semibold hover:bg-primary-light disabled:opacity-50 transition-colors"
       >
         {saving ? 'Envoi en cours...' : 'Créer et envoyer la carte'}
       </button>

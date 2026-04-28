@@ -19,7 +19,7 @@ const comparisonRows = [
     icon: Euro,
     criteria: 'Coût annuel',
     paper: '400 a 1 200 € (impressions repetees)',
-    montablo: 'À partir de 26,99 €/mois, tout inclus',
+    montablo: 'À partir de 19 € HT/mois (Essentiel)',
     advantage: 'montablo' as const,
   },
   {
@@ -84,7 +84,7 @@ const faqs = [
   {
     question: 'Combien coûte un menu papier par an pour un restaurant ?',
     answer:
-      'Un restaurant qui met à jour sa carte 3 a 4 fois par an depense entre 400 et 1 200 euros en frais d\'impression, graphisme et livraison. Avec MonTablo, vous payez un forfait fixe à partir de 26,99 euros par mois, mises à jour illimitées incluses.',
+      'Un restaurant qui met à jour sa carte 3 a 4 fois par an depense entre 400 et 1 200 euros en frais d\'impression, graphisme et livraison. Avec MonTablo, vous payez un forfait fixe à partir de 19 € HT par mois, mises à jour illimitées incluses.',
   },
   {
     question: 'Le menu digital remplace-t-il totalement le menu papier ?',
@@ -169,15 +169,14 @@ export default function ComparePage() {
           Comparatif
         </p>
         <h1 className="font-serif text-4xl sm:text-5xl text-foreground mb-4 text-balance">
-          Menu papier vs menu digital : pourquoi changer ?
+          MonTablo vs menu papier : la comparaison honnête.
         </h1>
         <p className="text-lg text-muted max-w-2xl mx-auto leading-relaxed">
-          Le menu papier a fait son temps. Découvrez pourquoi des centaines de restaurateurs
-          passent au{' '}
+          Coût, mise à jour, hygiène, multilingue. Ce que vous gagnez vraiment en passant au{' '}
           <Link href="/fonctionnalites" className="text-primary hover:underline">
             menu digital
-          </Link>{' '}
-          avec MonTablo.
+          </Link>
+          , et ce que vous perdez.
         </p>
       </section>
 
@@ -244,7 +243,7 @@ export default function ComparePage() {
             <p className="text-[15px] text-muted leading-relaxed">
               Avec MonTablo, vous payez un{' '}
               <Link href="/tarifs" className="text-primary hover:underline">
-                forfait fixe à partir de 26,99 euros par mois
+                forfait fixe à partir de 19 € HT par mois (Essentiel)
               </Link>
               . Mises à jour illimitées, aucun coût supplementaire. Le retour sur
               investissement est immédiat des le deuxieme mois.

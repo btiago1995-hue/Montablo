@@ -15,7 +15,7 @@ export function QRCodeGenerator({
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [copied, setCopied] = useState(false)
   const [size, setSize] = useState(300)
-  const [color, setColor] = useState('#2C3E2D')
+  const [color, setColor] = useState('#1E3932')
 
   useEffect(() => {
     if (!canvasRef.current) return
@@ -46,7 +46,7 @@ export function QRCodeGenerator({
   return (
     <div className="grid lg:grid-cols-2 gap-8">
       {/* Preview */}
-      <div className="bg-white rounded-xl border border-border p-8 flex flex-col items-center">
+      <div className="bg-white rounded-2xl border border-border p-8 flex flex-col items-center">
         <canvas ref={canvasRef} className="rounded-lg" />
         <p className="mt-4 text-sm text-muted text-center break-all">{menuUrl}</p>
         <div className="flex gap-3 mt-6">
@@ -63,8 +63,8 @@ export function QRCodeGenerator({
 
       {/* Options */}
       <div className="space-y-6">
-        <div className="bg-white rounded-xl border border-border p-6">
-          <h2 className="font-serif text-xl text-foreground mb-4">Personnalisation</h2>
+        <div className="bg-white rounded-2xl border border-border p-6">
+          <h2 className="font-serif text-xl text-primary mb-4">Personnalisation</h2>
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-foreground mb-1.5">
@@ -98,8 +98,8 @@ export function QRCodeGenerator({
           </div>
         </div>
 
-        <div className="bg-white rounded-xl border border-border p-6">
-          <h2 className="font-serif text-xl text-foreground mb-3">Conseils</h2>
+        <div className="bg-white rounded-2xl border border-border p-6">
+          <h2 className="font-serif text-xl text-primary mb-3">Conseils</h2>
           <ul className="space-y-2 text-sm text-muted">
             <li>• Imprimez le QR code en taille suffisante (min. 3×3 cm)</li>
             <li>• Placez-le sur chaque table, au comptoir, ou en vitrine</li>

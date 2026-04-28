@@ -1,97 +1,39 @@
 import Link from 'next/link'
-import {
-  ArrowRight,
-  UtensilsCrossed,
-  QrCode,
-  Zap,
-  MapPin,
-  Smartphone,
-  RefreshCw,
-  Truck,
-} from 'lucide-react'
+import { ArrowRight, CalendarDays, Camera, QrCode } from 'lucide-react'
 import { JsonLd, breadcrumbJsonLd } from '@/components/seo/json-ld'
+import { PublicNav, PublicFooter, EYEBROW, BTN_PRIMARY, BTN_SECONDARY } from '@/components/public/site-chrome'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Menu digital pour food truck | MonTablo',
+  title: 'Menu digital pour food trucks — MonTablo',
   description:
-    'Le menu digital parfait pour les food trucks. QR code sur le camion, mises à jour instantanées, fonctionne partout. Sans carte physique.',
+    'Une carte unique, accessible par QR code. Vos clients voient vos plats avant même de faire la queue. Pour les food trucks qui changent d’emplacement.',
+  alternates: { canonical: '/solutions/food-truck' },
   openGraph: {
-    title: 'Menu digital pour food truck | MonTablo',
+    title: 'Menu digital pour food trucks — MonTablo',
     description:
-      'QR code sur le camion, mises à jour instantanées, fonctionne partout. La solution food truck.',
+      'Une carte unique, accessible par QR code. Pour les food trucks qui changent d’emplacement.',
   },
 }
 
-const benefits = [
-  {
-    icon: QrCode,
-    title: 'QR code sur votre camion',
-    description:
-      'Collez votre QR code directement sur le camion. Vos clients scannent et découvrent votre menu sans attendre, même dans la file.',
-  },
-  {
-    icon: Zap,
-    title: 'Mises à jour instantanées',
-    description:
-      'Votre menu change d\'un emplacement a l\'autre ? Modifiez vos plats et prix en quelques secondes depuis votre téléphone.',
-  },
-  {
-    icon: MapPin,
-    title: 'Fonctionne partout',
-    description:
-      'Marche, festival, zone industrielle. Votre menu digital suit votre food truck ou que vous alliez, sans besoin d\'imprimer.',
-  },
-]
-
 const features = [
   {
+    icon: CalendarDays,
+    title: 'Menu du jour',
+    description:
+      'Le plat du jour change selon l’événement ou l’humeur. Modifiez la carte en 30 secondes depuis votre téléphone, entre deux services.',
+  },
+  {
+    icon: Camera,
+    title: 'Photos par plat',
+    description:
+      'Une photo par plat, importée en quelques secondes. Vos clients choisissent en regardant, pas en demandant.',
+  },
+  {
     icon: QrCode,
-    title: 'QR code prêt a coller',
-    description: 'Générez un QR code haute résolution aux couleurs de votre food truck. Collez-le sur le camion, le comptoir ou un panneau.',
-  },
-  {
-    icon: Smartphone,
-    title: '100% mobile',
-    description: 'Gerez votre menu entierement depuis votre téléphone. Ajoutez, modifiez ou désactivez un plat en plein service.',
-  },
-  {
-    icon: Zap,
-    title: 'Changements en temps réel',
-    description: 'Un plat est epuise ? Desactivez-le en un tap. Vos clients voient toujours ce qui est disponible.',
-  },
-  {
-    icon: RefreshCw,
-    title: 'Menu adaptable',
-    description: 'Changez votre carte selon l\'emplacement ou la saison. Pas besoin de réimprimer, tout se fait en ligne.',
-  },
-  {
-    icon: Truck,
-    title: 'Pas de carte physique',
-    description: 'Fini les menus plastifies qui s\'abiment et prennent de la place. Votre carte tient dans un QR code.',
-  },
-  {
-    icon: MapPin,
-    title: 'Partage sur les réseaux',
-    description: 'Partagez le lien de votre menu sur Instagram, Facebook ou Google. Vos clients consultent votre carte avant de venir.',
-  },
-]
-
-const steps = [
-  {
-    number: '1',
-    title: 'Créez votre menu',
-    description: 'Ajoutez vos plats, prix et photos depuis votre téléphone en quelques minutes.',
-  },
-  {
-    number: '2',
-    title: 'Générez votre QR code',
-    description: 'Personnalisez les couleurs et téléchargez votre QR code en haute résolution.',
-  },
-  {
-    number: '3',
-    title: 'Collez et c\'est parti',
-    description: 'Collez le QR code sur votre camion. Vos clients scannent et commandent.',
+    title: 'QR personnalisé',
+    description:
+      'Un QR code aux couleurs de votre camion, prêt à coller sur la fenêtre, le comptoir ou la carrosserie. Imprimé une fois, valable partout.',
   },
 ]
 
@@ -99,219 +41,109 @@ export default function FoodTruckPage() {
   const base = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.montablo.com'
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background min-h-screen text-foreground font-sans antialiased">
       <JsonLd
         data={breadcrumbJsonLd([
           { name: 'Accueil', url: base },
           { name: 'Solutions', url: `${base}/solutions` },
-          { name: 'Food truck', url: `${base}/solutions/food-truck` },
+          { name: 'Food trucks', url: `${base}/solutions/food-truck` },
         ])}
       />
 
-      {/* Nav */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/85 backdrop-blur-xl border-b border-border/50">
-        <div className="flex items-center justify-between px-6 py-4 max-w-[1120px] mx-auto">
-          <Link href="/" className="flex items-center gap-2">
-            <UtensilsCrossed className="w-6 h-6 text-primary" />
-            <span className="font-serif text-xl text-primary tracking-tight">MonTablo</span>
-          </Link>
-          <div className="flex items-center gap-6">
-            <Link href="/fonctionnalites" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
-              Fonctionnalités
-            </Link>
-            <Link href="/tarifs" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
-              Tarifs
-            </Link>
-            <Link href="/blog" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
-              Blog
-            </Link>
-            <Link href="/login" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
-              Connexion
-            </Link>
-            <Link
-              href="/signup"
-              className="text-sm font-medium bg-primary text-white px-5 py-2 rounded-full hover:bg-primary-light transition-all hover:shadow-lg hover:shadow-primary/15"
-            >
-              Essai gratuit
-            </Link>
-          </div>
-        </div>
-      </nav>
-
-      {/* Breadcrumb */}
-      <div className="max-w-[1120px] mx-auto px-6 pt-[100px]">
-        <nav className="text-[13px] text-muted/60">
-          <Link href="/" className="hover:text-muted transition-colors">Accueil</Link>
-          <span className="mx-2">/</span>
-          <span className="hover:text-muted transition-colors">Solutions</span>
-          <span className="mx-2">/</span>
-          <span className="text-foreground">Food truck</span>
-        </nav>
-      </div>
+      <PublicNav ctaLabel="solution_foodtruck_nav_essai" />
 
       {/* Hero */}
-      <section className="max-w-[1120px] mx-auto px-6 pt-8 pb-16">
-        <p className="text-[13px] font-medium tracking-[0.08em] uppercase text-accent-dark mb-3">
-          Solution food truck
-        </p>
-        <h1 className="font-serif text-4xl sm:text-5xl text-foreground mb-4 max-w-[680px] leading-tight">
-          Le menu digital qui roule avec votre food truck.
+      <section className="max-w-[1120px] mx-auto px-8 pt-16 sm:pt-20 pb-16">
+        <span className={EYEBROW}>Solution food trucks</span>
+        <h1 className="font-serif font-medium text-primary text-[clamp(36px,5vw,64px)] leading-[1.05] tracking-[-0.022em] text-balance max-w-[820px]">
+          Le menu digital pour food trucks qui <em className="italic font-medium text-primary-light">changent d’emplacement</em>.
         </h1>
-        <p className="text-lg text-muted max-w-[520px] mb-10 leading-relaxed">
-          Vous changez d&apos;emplacement, votre menu suit. QR code sur le camion, mises à jour
-          depuis votre téléphone, zéro carte physique.
+        <p className="text-[18px] text-muted leading-relaxed mt-6 max-w-[600px]">
+          Une carte unique, accessible par QR. Vos clients voient vos plats avant même de faire la queue.
         </p>
-        <Link
-          href="/signup"
-          className="group inline-flex items-center gap-2.5 bg-primary text-white font-medium px-8 py-3.5 rounded-full hover:bg-primary-light transition-all hover:shadow-xl hover:shadow-primary/18 hover:-translate-y-px text-[15px]"
-        >
-          Essayer 14 jours gratuitement
-          <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-        </Link>
-      </section>
-
-      {/* Benefits */}
-      <section className="max-w-[1120px] mx-auto px-6 pb-24">
-        <h2 className="font-serif text-3xl text-foreground mb-10">
-          Pourquoi MonTablo pour votre food truck
-        </h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          {benefits.map((benefit) => {
-            const Icon = benefit.icon
-            return (
-              <div key={benefit.title} className="bg-white border border-border/50 rounded-[16px] p-8 hover:shadow-lg hover:shadow-black/[0.03] transition-shadow duration-300">
-                <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center mb-4">
-                  <Icon className="w-5 h-5 text-accent-dark" />
-                </div>
-                <h3 className="font-serif text-xl text-foreground mb-2">{benefit.title}</h3>
-                <p className="text-[15px] text-muted leading-relaxed">{benefit.description}</p>
-              </div>
-            )
-          })}
+        <div className="flex flex-wrap gap-3 mt-9">
+          <Link href="/signup" className={BTN_PRIMARY}>
+            Essayer 14 jours gratuitement
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+          <Link href="/menu/demo" className={BTN_SECONDARY}>
+            Voir un menu en exemple
+          </Link>
         </div>
       </section>
 
-      {/* How it works */}
-      <section className="max-w-[1120px] mx-auto px-6 pb-24">
-        <h2 className="font-serif text-3xl text-foreground mb-10">
-          Comment ca marche
-        </h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          {steps.map((step) => (
-            <div key={step.number} className="text-center">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <span className="text-lg font-medium text-primary">{step.number}</span>
-              </div>
-              <h3 className="font-serif text-xl text-foreground mb-2">{step.title}</h3>
-              <p className="text-[15px] text-muted leading-relaxed">{step.description}</p>
-            </div>
-          ))}
+      {/* Pain points */}
+      <section className="bg-primary text-background">
+        <div className="max-w-[860px] mx-auto px-8 py-20 sm:py-24 text-center">
+          <span className="inline-block font-sans text-[12px] tracking-[0.22em] uppercase text-accent font-semibold mb-5">
+            Le constat
+          </span>
+          <h2 className="font-serif text-[clamp(28px,4vw,44px)] leading-[1.1] tracking-tight text-balance">
+            L’ardoise lavable, ça <em className="italic">finit par s’user</em>.
+          </h2>
+          <div className="text-[17px] text-background/80 leading-[1.65] mt-7 space-y-4 max-w-[620px] mx-auto">
+            <p>
+              Les photos sont absentes, parce qu’on ne va pas plastifier un menu pour le détruire en deux semaines. Le plat du jour est griffonné au feutre. Quand vous faites un événement ponctuel, vous bricolez une nouvelle carte sur place.
+            </p>
+            <p className="text-background font-medium">
+              Un QR code sur le camion remplace tout ça.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* Feature highlights */}
-      <section className="max-w-[1120px] mx-auto px-6 pb-24">
-        <h2 className="font-serif text-3xl text-foreground mb-10">
-          Les fonctionnalités clés pour votre food truck
-        </h2>
-        <div className="grid md:grid-cols-2 gap-8">
-          {features.map((feature) => {
-            const Icon = feature.icon
-            return (
-              <div key={feature.title} className="bg-white border border-border/50 rounded-[16px] p-8 hover:shadow-lg hover:shadow-black/[0.03] transition-shadow duration-300">
-                <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center mb-4">
-                  <Icon className="w-5 h-5 text-accent-dark" />
+      {/* Features */}
+      <section className="py-20 sm:py-24">
+        <div className="max-w-[1120px] mx-auto px-8">
+          <div className="max-w-[640px] mb-12">
+            <span className={EYEBROW}>Ce que vous gagnez</span>
+            <h2 className="font-serif text-[clamp(28px,4vw,44px)] leading-[1.1] tracking-tight text-primary text-balance">
+              Trois choses qui changent <em className="italic">tout de suite</em>.
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-5">
+            {features.map((f) => {
+              const Icon = f.icon
+              return (
+                <div
+                  key={f.title}
+                  className="bg-white border border-border rounded-3xl p-8"
+                >
+                  <div className="w-12 h-12 rounded-2xl bg-green-soft flex items-center justify-center mb-6">
+                    <Icon className="w-6 h-6 text-primary" strokeWidth={1.8} />
+                  </div>
+                  <h3 className="font-serif text-[22px] text-primary font-medium leading-tight mb-3">
+                    {f.title}
+                  </h3>
+                  <p className="text-[15px] text-muted leading-relaxed">{f.description}</p>
                 </div>
-                <h3 className="font-serif text-xl text-foreground mb-2">{feature.title}</h3>
-                <p className="text-[15px] text-muted leading-relaxed">{feature.description}</p>
-              </div>
-            )
-          })}
+              )
+            })}
+          </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="max-w-[1120px] mx-auto px-6 pb-24">
-        <div className="bg-primary rounded-[20px] py-16 px-8 text-center">
-          <h2 className="font-serif text-3xl text-white mb-3">
-            Prêt a equiper votre food truck d&apos;un menu digital ?
+      <section className="py-20 sm:py-24">
+        <div className="max-w-[820px] mx-auto px-8 text-center">
+          <h2 className="font-serif text-[clamp(32px,4.5vw,52px)] leading-[1.05] tracking-tight text-primary text-balance">
+            Essayez MonTablo <em className="italic">14 jours</em>, gratuitement.
           </h2>
-          <p className="text-white/60 mb-8 max-w-md mx-auto">
-            14 jours d&apos;essai gratuit. Aucune carte bancaire requise.
+          <p className="text-[17px] text-muted mt-5 max-w-[520px] mx-auto leading-relaxed">
+            Sans carte bancaire. Sans engagement. Configuration en 5 minutes.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href="/signup"
-              className="group inline-flex items-center gap-2.5 bg-accent text-foreground font-medium px-8 py-3.5 rounded-full hover:bg-accent-light transition-all text-[15px]"
-            >
-              Commencer l&apos;essai gratuit
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+          <div className="flex flex-wrap items-center justify-center gap-3 mt-8">
+            <Link href="/signup" className={BTN_PRIMARY}>
+              Démarrer mon essai gratuit
             </Link>
-            <Link
-              href="/tarifs"
-              className="text-white/80 hover:text-white text-[15px] transition-colors"
-            >
-              Voir les tarifs
+            <Link href="/contact" className={BTN_SECONDARY}>
+              Demander une démo
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Internal links */}
-      <section className="max-w-[1120px] mx-auto px-6 pb-16">
-        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[13px] text-muted/60">
-          <Link href="/fonctionnalites" className="hover:text-muted transition-colors">Fonctionnalités</Link>
-          <Link href="/tarifs" className="hover:text-muted transition-colors">Tarifs</Link>
-          <Link href="/menu-digital-restaurant" className="hover:text-muted transition-colors">Menu digital restaurant</Link>
-          <Link href="/qr-code-restaurant" className="hover:text-muted transition-colors">QR code restaurant</Link>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="border-t border-border py-12 px-6">
-        <div className="max-w-[1120px] mx-auto">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 mb-10">
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <UtensilsCrossed className="w-[18px] h-[18px] text-primary" />
-                <span className="font-serif text-base text-primary">MonTablo</span>
-              </div>
-              <p className="text-[13px] text-muted/60 leading-relaxed">
-                Le menu digital pour les restaurants exigeants.
-              </p>
-            </div>
-            <div>
-              <p className="text-[13px] font-medium text-foreground mb-3">Produit</p>
-              <div className="space-y-3">
-                <Link href="/fonctionnalites" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Fonctionnalités</Link>
-                <Link href="/tarifs" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Tarifs</Link>
-                <Link href="/menu/demo" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Voir un exemple</Link>
-              </div>
-            </div>
-            <div>
-              <p className="text-[13px] font-medium text-foreground mb-3">Ressources</p>
-              <div className="space-y-3">
-                <Link href="/blog" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Blog</Link>
-                <Link href="/faq" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">FAQ</Link>
-              </div>
-            </div>
-            <div>
-              <p className="text-[13px] font-medium text-foreground mb-3">Legal</p>
-              <div className="space-y-3">
-                <Link href="/mentions-légales" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Mentions légales</Link>
-                <Link href="/cgu" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">CGU</Link>
-                <Link href="/confidentialite" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Confidentialité</Link>
-                <Link href="/cookies" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Cookies</Link>
-              </div>
-            </div>
-          </div>
-          <div className="border-t border-border/50 pt-6 text-center">
-            <p className="text-sm text-muted/60">
-              &copy; {new Date().getFullYear()} MonTablo. Tous droits réservés.
-            </p>
-          </div>
-        </div>
-      </footer>
+      <PublicFooter />
     </div>
   )
 }

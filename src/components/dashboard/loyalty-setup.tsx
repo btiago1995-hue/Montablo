@@ -74,20 +74,20 @@ export function LoyaltySetup({ existing, restaurant }: Props) {
         <div className="flex gap-3">
           <button
             onClick={() => setType('visits')}
-            className={`flex-1 py-3 px-4 rounded-lg border text-sm font-medium transition-colors ${
+            className={`flex-1 py-3 px-4 rounded-xl border text-sm font-semibold transition-colors ${
               type === 'visits'
-                ? 'bg-[#2C3E2D] text-white border-[#2C3E2D]'
-                : 'bg-white text-foreground border-[#E8E8E4] hover:border-[#2C3E2D]'
+                ? 'bg-primary text-background border-primary'
+                : 'bg-white text-foreground border-border hover:border-primary/30 hover:bg-surface'
             }`}
           >
             Par visites
           </button>
           <button
             onClick={() => setType('spend')}
-            className={`flex-1 py-3 px-4 rounded-lg border text-sm font-medium transition-colors ${
+            className={`flex-1 py-3 px-4 rounded-xl border text-sm font-semibold transition-colors ${
               type === 'spend'
-                ? 'bg-[#2C3E2D] text-white border-[#2C3E2D]'
-                : 'bg-white text-foreground border-[#E8E8E4] hover:border-[#2C3E2D]'
+                ? 'bg-primary text-background border-primary'
+                : 'bg-white text-foreground border-border hover:border-primary/30 hover:bg-surface'
             }`}
           >
             Par dépenses
@@ -104,7 +104,7 @@ export function LoyaltySetup({ existing, restaurant }: Props) {
           value={goal}
           onChange={(e) => setGoal(e.target.value)}
           placeholder={type === 'visits' ? '10' : '50'}
-          className="w-full px-4 py-3 border border-[#E8E8E4] rounded-lg text-sm focus:outline-none focus:border-[#2C3E2D]"
+          className="w-full px-4 py-2.5 border border-border bg-white rounded-xl text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
         />
       </div>
 
@@ -115,7 +115,7 @@ export function LoyaltySetup({ existing, restaurant }: Props) {
           value={rewardDescription}
           onChange={(e) => setRewardDescription(e.target.value)}
           placeholder="1 café offert"
-          className="w-full px-4 py-3 border border-[#E8E8E4] rounded-lg text-sm focus:outline-none focus:border-[#2C3E2D]"
+          className="w-full px-4 py-2.5 border border-border bg-white rounded-xl text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
         />
       </div>
 
@@ -126,14 +126,14 @@ export function LoyaltySetup({ existing, restaurant }: Props) {
           value={cardTagline}
           onChange={(e) => setCardTagline(e.target.value)}
           placeholder="Merci pour votre fidélité !"
-          className="w-full px-4 py-3 border border-[#E8E8E4] rounded-lg text-sm focus:outline-none focus:border-[#2C3E2D]"
+          className="w-full px-4 py-2.5 border border-border bg-white rounded-xl text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
         />
       </div>
 
       <button
         onClick={handleSave}
         disabled={saving || !goal || !rewardDescription}
-        className="w-full bg-[#2C3E2D] text-white py-3 px-6 rounded-lg text-sm font-medium hover:bg-[#243325] disabled:opacity-50 transition-colors"
+        className="w-full bg-primary text-background py-2.5 px-5 rounded-full text-sm font-semibold hover:bg-primary-light disabled:opacity-50 transition-colors"
       >
         {saving ? 'Enregistrement...' : 'Enregistrer le programme'}
       </button>

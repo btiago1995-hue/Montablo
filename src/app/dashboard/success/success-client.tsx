@@ -11,11 +11,11 @@ function ProgressBar() {
     <div className="flex items-center gap-0 mb-8">
       {steps.map((label, i) => (
         <div key={label} className="flex items-center">
-          {i > 0 && <div className="w-10 sm:w-12 h-0.5 mx-2 sm:mx-3 bg-[#2D6A4F]" />}
+          {i > 0 && <div className="w-10 sm:w-12 h-0.5 mx-2 sm:mx-3 bg-primary-light" />}
           <div className="flex items-center gap-2">
             <div
               className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
-                i < 2 ? 'bg-[#2D6A4F] text-white' : 'bg-primary text-white'
+                i < 2 ? 'bg-primary-light text-white' : 'bg-primary text-white'
               }`}
             >
               {i < 2 ? '✓' : '3'}
@@ -57,7 +57,7 @@ export function SuccessClient({
 
       <ProgressBar />
 
-      <div className="w-16 h-16 rounded-full bg-[#2D6A4F] flex items-center justify-center mb-5">
+      <div className="w-16 h-16 rounded-full bg-primary-light flex items-center justify-center mb-5">
         <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" className="w-8 h-8">
           <path d="M5 13l4 4L19 7" />
         </svg>

@@ -5,8 +5,8 @@ const styles: Record<SubscriptionStatus, string> = {
   active: 'bg-emerald-950 text-emerald-400',
   trialing: 'bg-blue-950 text-blue-400',
   past_due: 'bg-orange-950 text-orange-400',
-  canceled: 'bg-slate-800 text-slate-500',
-  inactive: 'bg-slate-800 text-slate-500',
+  canceled: 'bg-white/10 text-white/60',
+  inactive: 'bg-white/10 text-white/60',
 }
 
 const labels: Record<SubscriptionStatus, string> = {

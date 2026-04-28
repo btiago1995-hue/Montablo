@@ -89,7 +89,7 @@ const faqs = [
   {
     question: 'Le menu PDF est-il vraiment gratuit ?',
     answer:
-      'Le PDF lui-même ne coûte rien a heberger, c\'est vrai. Mais les coûts cachés sont reels : le temps passe a mettre à jour le fichier a chaque changement de carte, la perte de clients frustres par l\'expérience mobile, l\'absence de referencement sur Google, et l\'impossibilite de proposer un menu multilingue facilement. Ces coûts invisibles depassent largement les 26,99 euros par mois d\'un menu digital.',
+      'Le PDF lui-même ne coûte rien a heberger, c\'est vrai. Mais les coûts cachés sont reels : le temps passe a mettre à jour le fichier a chaque changement de carte, la perte de clients frustres par l\'expérience mobile, l\'absence de referencement sur Google, et l\'impossibilite de proposer un menu multilingue facilement. Ces coûts invisibles depassent largement les 19 € HT par mois d\'un menu digital.',
   },
   {
     question: 'Google peut-il indexer un menu PDF ?',
@@ -169,15 +169,14 @@ export default function ComparePdfPage() {
           Comparatif
         </p>
         <h1 className="font-serif text-4xl sm:text-5xl text-foreground mb-4 text-balance">
-          Menu PDF vs menu digital : pourquoi abandonner le PDF
+          MonTablo vs menu PDF : la comparaison honnête.
         </h1>
         <p className="text-lg text-muted max-w-2xl mx-auto leading-relaxed">
-          Beaucoup de restaurants utilisent encore un PDF comme menu en ligne.
-          Découvrez pourquoi c&apos;est une erreur et comment un{' '}
+          Le PDF reste répandu, et il coûte cher en clients perdus. Voici ce que change un vrai{' '}
           <Link href="/fonctionnalites" className="text-primary hover:underline">
             menu digital
-          </Link>{' '}
-          transforme l&apos;expérience client.
+          </Link>
+          .
         </p>
       </section>
 
@@ -303,7 +302,7 @@ export default function ComparePdfPage() {
             <p className="text-[15px] text-muted leading-relaxed">
               A{' '}
               <Link href="/tarifs" className="text-primary hover:underline">
-                26,99 euros par mois
+                19 € HT par mois
               </Link>
               , MonTablo vous fait gagner du temps, amélioré l&apos;expérience de vos
               clients et renforce votre presence en ligne. C&apos;est un investissement

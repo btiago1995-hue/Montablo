@@ -24,7 +24,7 @@ export default async function LoyaltyCustomersPage() {
         <ChevronLeft className="w-4 h-4" />
         Retour
       </Link>
-      <h1 className="font-serif text-3xl text-foreground mb-2">Clients fidèles</h1>
+      <h1 className="font-serif text-3xl text-primary mb-2">Clients fidèles</h1>
       <p className="text-muted mb-8">Gérez vos clients et leurs récompenses.</p>
       <LoyaltyCustomers cards={cards ?? []} program={program} />
     </div>

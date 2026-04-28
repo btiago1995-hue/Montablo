@@ -8,7 +8,7 @@ export default async function SettingsPage() {
 
   return (
     <div>
-      <h1 className="font-serif text-3xl text-foreground mb-2">Paramètres</h1>
+      <h1 className="font-serif text-3xl text-primary mb-2">Paramètres</h1>
       <p className="text-muted mb-8">Personnalisez votre restaurant et gérez votre abonnement.</p>
       <SettingsForm restaurant={restaurant} />
     </div>

@@ -8,7 +8,7 @@ export default async function AbonnementPage() {
 
   return (
     <div>
-      <h1 className="font-serif text-3xl text-foreground mb-2">Abonnement</h1>
+      <h1 className="font-serif text-3xl text-primary mb-2">Abonnement</h1>
       <p className="text-muted mb-8">
         Gérez votre formule, changez de plan ou résiliez à tout moment.
       </p>

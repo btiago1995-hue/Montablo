@@ -3,7 +3,7 @@
 import { useState } from 'react'
 
 const PALETTES = [
-  { id: 'classique', name: 'Classique', primary: '#2C3E2D', accent: '#D4A574' },
+  { id: 'classique', name: 'Classique', primary: '#1E3932', accent: '#CBA258' },
   { id: 'elegant', name: 'Élégant', primary: '#1B1B2F', accent: '#E8D5B7' },
   { id: 'bistrot', name: 'Bistrot', primary: '#8B2500', accent: '#F5E6C8' },
   { id: 'moderne', name: 'Moderne', primary: '#0D4F4F', accent: '#F0E6D3' },

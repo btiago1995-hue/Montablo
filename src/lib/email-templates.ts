@@ -12,13 +12,13 @@
  */
 
 const BRAND = {
-  primary: '#2C3E2D',
-  accent: '#D4A574',
-  bg: '#FAFAF7',
-  text: '#1A1A1A',
-  muted: '#6B7280',
-  success: '#16A34A',
-  danger: '#DC2626',
+  primary: '#1E3932',
+  accent: '#CBA258',
+  bg: '#F7F4EE',
+  text: '#1E3932',
+  muted: '#4A5A54',
+  success: '#00754A',
+  danger: '#C43E3E',
 }
 
 function layout(content: string) {
@@ -30,7 +30,7 @@ function layout(content: string) {
     <div style="text-align:center;margin-bottom:32px">
       <span style="font-family:Georgia,serif;font-size:24px;font-weight:bold;color:${BRAND.primary}">Mon</span><span style="font-family:Georgia,serif;font-size:24px;font-weight:bold;color:${BRAND.accent}">Tablo</span>
     </div>
-    <div style="background:white;border-radius:12px;padding:32px;border:1px solid #E5E5E0">
+    <div style="background:white;border-radius:12px;padding:32px;border:1px solid #E3DDD0">
       ${content}
     </div>
     <div style="text-align:center;margin-top:24px">
@@ -53,7 +53,7 @@ function button(text: string, url: string) {
 }
 
 function divider() {
-  return `<hr style="border:none;border-top:1px solid #E5E5E0;margin:24px 0">`
+  return `<hr style="border:none;border-top:1px solid #E3DDD0;margin:24px 0">`
 }
 
 function tip(icon: string, text: string) {
@@ -283,8 +283,8 @@ export function invoiceIssued(
           <td style="font-size:14px;color:${BRAND.text};font-weight:600;text-align:right;padding:8px 0">${amount}</td>
         </tr>
         <tr>
-          <td style="font-size:14px;color:${BRAND.muted};padding:8px 0;border-top:1px solid #E5E5E0">Période couverte</td>
-          <td style="font-size:14px;color:${BRAND.text};text-align:right;padding:8px 0;border-top:1px solid #E5E5E0">${period}</td>
+          <td style="font-size:14px;color:${BRAND.muted};padding:8px 0;border-top:1px solid #E3DDD0">Période couverte</td>
+          <td style="font-size:14px;color:${BRAND.text};text-align:right;padding:8px 0;border-top:1px solid #E3DDD0">${period}</td>
         </tr>
       </table>
 

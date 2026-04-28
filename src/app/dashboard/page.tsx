@@ -93,7 +93,7 @@ export default async function DashboardPage() {
       </div>
 
       {/* Stat bar */}
-      <div className="bg-white border border-border rounded-xl p-5 sm:px-6 mb-6">
+      <div className="bg-white border border-border rounded-2xl p-5 sm:px-6 mb-6">
         {/* Desktop: single row */}
         <div className="hidden sm:flex items-center">
           <div className="flex items-center gap-6 flex-1">
@@ -197,7 +197,7 @@ export default async function DashboardPage() {
       </div>
 
       {/* Items section */}
-      <div className="bg-white border border-border rounded-xl overflow-hidden">
+      <div className="bg-white border border-border rounded-2xl overflow-hidden">
         <div className="flex items-center justify-between px-5 sm:px-6 py-4 border-b border-border">
           <span className="font-serif text-xl font-semibold text-foreground">Mes plats</span>
           <Link
@@ -243,7 +243,7 @@ export default async function DashboardPage() {
                     </span>
                     <span
                       className={`w-2.5 h-2.5 rounded-full ${
-                        item.is_available ? 'bg-[#2D6A4F]' : 'bg-muted-light'
+                        item.is_available ? 'bg-primary' : 'bg-muted-light'
                       }`}
                     />
                   </div>
@@ -255,7 +255,7 @@ export default async function DashboardPage() {
             <div className="hidden sm:block">
               <table className="w-full">
                 <thead>
-                  <tr className="bg-background">
+                  <tr className="bg-surface">
                     <th className="text-left px-6 py-3.5 text-xs uppercase tracking-[0.08em] text-muted-light font-semibold border-b border-border">
                       Plat
                     </th>
@@ -321,13 +321,13 @@ export default async function DashboardPage() {
                         <span
                           className={`inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full ${
                             item.is_available
-                              ? 'bg-[#E8F5E9] text-[#2D6A4F]'
+                              ? 'bg-green-soft text-primary'
                               : 'bg-background text-muted-light'
                           }`}
                         >
                           <span
                             className={`w-2 h-2 rounded-full ${
-                              item.is_available ? 'bg-[#2D6A4F]' : 'bg-muted-light'
+                              item.is_available ? 'bg-primary' : 'bg-muted-light'
                             }`}
                           />
                           {item.is_available ? 'Actif' : 'Inactif'}

@@ -34,7 +34,7 @@ export function AbonnementClient({ restaurant }: { restaurant: Restaurant }) {
   return (
     <div className="max-w-4xl space-y-6">
       {/* État actuel */}
-      <div className="bg-white rounded-xl border border-border p-6">
+      <div className="bg-white rounded-2xl border border-border p-6">
         <p className="text-sm font-medium tracking-wide uppercase text-muted mb-2">Formule actuelle</p>
         {isTrialing && (
           <>
@@ -91,8 +91,8 @@ export function AbonnementClient({ restaurant }: { restaurant: Restaurant }) {
           return (
             <div
               key={t.id}
-              className={`bg-white rounded-xl p-6 border ${
-                t.highlighted ? 'border-primary' : 'border-border'
+              className={`bg-white rounded-2xl p-6 border ${
+                isCurrent ? 'border-2 border-primary' : t.highlighted ? 'border-2 border-primary' : 'border border-border'
               }`}
             >
               <h3 className="font-serif text-xl text-foreground mb-1">{t.name}</h3>
@@ -114,12 +114,10 @@ export function AbonnementClient({ restaurant }: { restaurant: Restaurant }) {
               <button
                 onClick={() => subscribe(key)}
                 disabled={loadingTier !== null || isCurrent}
-                className={`w-full py-2.5 rounded-full font-medium text-sm transition-all ${
+                className={`w-full py-2.5 rounded-full font-semibold text-sm transition-all ${
                   isCurrent
-                    ? 'bg-background text-muted cursor-default'
-                    : t.highlighted
-                      ? 'bg-primary text-white hover:bg-primary-light'
-                      : 'border border-foreground text-foreground hover:bg-foreground hover:text-white'
+                    ? 'bg-surface text-muted cursor-default'
+                    : 'bg-primary text-background hover:bg-primary-light'
                 }`}
               >
                 {loadingTier === key ? (
@@ -138,14 +136,14 @@ export function AbonnementClient({ restaurant }: { restaurant: Restaurant }) {
       </div>
 
       {/* Premium */}
-      <div className="bg-background rounded-xl border border-dashed border-border p-6 text-center">
-        <h3 className="font-serif text-xl text-foreground mb-1">Besoin de plus ?</h3>
+      <div className="bg-surface rounded-2xl border border-dashed border-border p-6 text-center">
+        <h3 className="font-serif text-xl text-primary mb-1">Besoin de plus ?</h3>
         <p className="text-sm text-muted mb-4">
           Multi-établissements, géolocalisation Wallet, account manager dédié.
         </p>
         <a
           href="/contact?sujet=premium"
-          className="inline-block border border-foreground text-foreground font-medium px-6 py-2.5 rounded-full text-sm hover:bg-foreground hover:text-white transition-all"
+          className="inline-block border border-border bg-white text-foreground font-semibold px-5 py-2.5 rounded-full text-sm hover:border-primary/30 hover:bg-surface transition-all"
         >
           Demander un devis Premium
         </a>

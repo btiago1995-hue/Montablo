@@ -4,8 +4,8 @@
   "description": "Menu digital pour restaurants",
   "start_url": "/dashboard",
   "display": "standalone",
-  "background_color": "#FAFAF7",
-  "theme_color": "#2C3E2D",
+  "background_color": "#F7F4EE",
+  "theme_color": "#1E3932",
   "icons": [
     {
       "src": "/icons/icon.svg",

@@ -134,9 +134,12 @@ export default function ConfidentialitePage() {
           <section>
             <h2 className="font-serif text-lg text-foreground mt-8 mb-3">8. Cookies</h2>
             <p>
-              MonTablo utilise uniquement des cookies strictement nécessaires au fonctionnement
-              du service (authentification de session). Aucun cookie de tracking ou publicitaire
-              n&apos;est utilisé. Pour plus de détails, consultez notre{' '}
+              MonTablo utilise des cookies strictement nécessaires (authentification, sécurité,
+              paiement) qui ne requièrent pas de consentement. Un cookie de mesure d&apos;audience
+              Google Ads est déposé uniquement après votre acceptation explicite via la bannière
+              de cookies affichée à votre première visite. Vous pouvez modifier votre choix à
+              tout moment via le lien <strong className="text-foreground">« Gérer les cookies »</strong>{' '}
+              en bas de chaque page. Pour la liste détaillée, consultez notre{' '}
               <Link href="/cookies" className="text-primary hover:underline">
                 Politique de cookies
               </Link>.

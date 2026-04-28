@@ -6,7 +6,7 @@ export const runtime = 'edge'
 export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl
   const name = searchParams.get('name') || 'MonTablo'
-  const color = searchParams.get('color') || '#2C3E2D'
+  const color = searchParams.get('color') || '#1E3932'
 
   // Determine if this is the default MonTablo branding (no restaurant name passed)
   const isDefault = !searchParams.get('name')
@@ -33,7 +33,7 @@ export async function GET(request: NextRequest) {
             left: 0,
             right: 0,
             height: '6px',
-            backgroundColor: '#D4A574',
+            backgroundColor: '#CBA258',
             display: 'flex',
           }}
         />
@@ -69,7 +69,7 @@ export async function GET(request: NextRequest) {
           style={{
             width: '80px',
             height: '2px',
-            backgroundColor: '#D4A574',
+            backgroundColor: '#CBA258',
             marginTop: 28,
             marginBottom: 28,
             display: 'flex',
@@ -80,7 +80,7 @@ export async function GET(request: NextRequest) {
         <div
           style={{
             fontSize: 28,
-            color: '#D4A574',
+            color: '#CBA258',
             letterSpacing: '0.1em',
             display: 'flex',
           }}
@@ -117,7 +117,7 @@ export async function GET(request: NextRequest) {
             left: 0,
             right: 0,
             height: '6px',
-            backgroundColor: '#D4A574',
+            backgroundColor: '#CBA258',
             display: 'flex',
           }}
         />

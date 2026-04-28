@@ -16,13 +16,13 @@ function ProgressBar({ step }: { step: 1 | 2 | 3 }) {
       {steps.map((label, i) => (
         <div key={label} className="flex items-center">
           {i > 0 && (
-            <div className={`w-10 sm:w-12 h-0.5 mx-2 sm:mx-3 ${i < step ? 'bg-[#2D6A4F]' : 'bg-border'}`} />
+            <div className={`w-10 sm:w-12 h-0.5 mx-2 sm:mx-3 ${i < step ? 'bg-primary-light' : 'bg-border'}`} />
           )}
           <div className="flex items-center gap-2">
             <div
               className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
                 i + 1 < step
-                  ? 'bg-[#2D6A4F] text-white'
+                  ? 'bg-primary-light text-white'
                   : i + 1 === step
                     ? 'bg-primary text-white'
                     : 'bg-border text-muted'

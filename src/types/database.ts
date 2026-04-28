@@ -36,6 +36,7 @@ export type Category = {
   restaurant_id: string
   name_fr: string
   name_en: string | null
+  name_de: string | null
   icon: string | null
   sort_order: number
   is_visible: boolean
@@ -48,8 +49,10 @@ export type Item = {
   category_id: string | null
   name_fr: string
   name_en: string | null
+  name_de: string | null
   description_fr: string | null
   description_en: string | null
+  description_de: string | null
   price: number
   image_url: string | null
   tags: string[]
@@ -92,11 +95,14 @@ export type DailyMenu = {
   restaurant_id: string
   title_fr: string
   title_en: string | null
+  title_de: string | null
   description_fr: string | null
   description_en: string | null
+  description_de: string | null
   price: number | null
   items_description_fr: string | null
   items_description_en: string | null
+  items_description_de: string | null
   valid_date: string
   is_active: boolean
   created_at: string

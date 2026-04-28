@@ -19,9 +19,9 @@ export async function GET(request: NextRequest) {
   const format = searchParams.get('format') || 'landscape'
   const city = searchParams.get('city') || 'Haute-Savoie'
 
-  const PRIMARY = '#2C3E2D'
-  const DARK = '#1a2a1b'
-  const ACCENT = '#D4A574'
+  const PRIMARY = '#1E3932'
+  const DARK = '#0F1F1A'
+  const ACCENT = '#CBA258'
   const RED = '#e74c3c'
   const WHITE = '#FFFFFF'
   const WHITE60 = 'rgba(255,255,255,0.6)'
@@ -1295,7 +1295,7 @@ export async function GET(request: NextRequest) {
           <div
             style={{
               width: '280px',
-              backgroundColor: '#FAFAF7',
+              backgroundColor: '#F7F4EE',
               borderRadius: '20px',
               padding: '28px 24px',
               display: 'flex',
@@ -1309,7 +1309,7 @@ export async function GET(request: NextRequest) {
               style={{
                 textAlign: 'center',
                 paddingBottom: '16px',
-                borderBottom: '1px solid #E5E5E0',
+                borderBottom: '1px solid #E3DDD0',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
@@ -1334,7 +1334,7 @@ export async function GET(request: NextRequest) {
                   display: 'flex',
                   justifyContent: 'space-between',
                   padding: '10px 0',
-                  borderBottom: '1px solid #E5E5E0',
+                  borderBottom: '1px solid #E3DDD0',
                 }}
               >
                 <div style={{ fontSize: '13px', color: '#1A1A1A', display: 'flex' }}>{item.name}</div>

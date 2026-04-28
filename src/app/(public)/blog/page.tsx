@@ -1,17 +1,18 @@
 import Link from 'next/link'
-import { ArrowRight, UtensilsCrossed } from 'lucide-react'
 import { getAllPosts } from '@/lib/blog'
 import { JsonLd, breadcrumbJsonLd } from '@/components/seo/json-ld'
+import { PublicNav, PublicFooter, EYEBROW } from '@/components/public/site-chrome'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Blog — MonTablo | Conseils pour digitaliser votre restaurant',
+  title: 'Le carnet MonTablo — articles & retours d’expérience',
   description:
-    'Guides pratiques, conseils et tendances pour les restaurateurs qui veulent digitaliser leur carte avec un menu digital et QR code.',
+    'Articles, retours d’expérience et conseils pour les restaurants du Genevois français.',
+  alternates: { canonical: '/blog' },
   openGraph: {
-    title: 'Blog — MonTablo',
+    title: 'Le carnet MonTablo',
     description:
-      'Guides pratiques et conseils pour digitaliser votre restaurant.',
+      'Articles, retours d’expérience et conseils pour les restaurants du Genevois français.',
   },
 }
 
@@ -20,7 +21,7 @@ export default function BlogPage() {
   const posts = getAllPosts()
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background min-h-screen text-foreground font-sans antialiased">
       <JsonLd
         data={breadcrumbJsonLd([
           { name: 'Accueil', url: base },
@@ -28,70 +29,39 @@ export default function BlogPage() {
         ])}
       />
 
-      {/* Nav */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/85 backdrop-blur-xl border-b border-border/50">
-        <div className="flex items-center justify-between px-6 py-4 max-w-[1120px] mx-auto">
-          <Link href="/" className="flex items-center gap-2">
-            <UtensilsCrossed className="w-6 h-6 text-primary" />
-            <span className="font-serif text-xl text-primary tracking-tight">MonTablo</span>
-          </Link>
-          <div className="flex items-center gap-6">
-            <Link href="/fonctionnalites" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
-              Fonctionnalités
-            </Link>
-            <Link href="/tarifs" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
-              Tarifs
-            </Link>
-            <Link href="/login" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
-              Connexion
-            </Link>
-            <Link
-              href="/signup"
-              className="text-sm font-medium bg-primary text-white px-5 py-2 rounded-full hover:bg-primary-light transition-all hover:shadow-lg hover:shadow-primary/15"
-            >
-              Essai gratuit
-            </Link>
-          </div>
-        </div>
-      </nav>
-
-      {/* Breadcrumb */}
-      <div className="max-w-[780px] mx-auto px-6 pt-[100px]">
-        <nav className="text-[13px] text-muted/60">
-          <Link href="/" className="hover:text-muted transition-colors">Accueil</Link>
-          <span className="mx-2">/</span>
-          <span className="text-foreground">Blog</span>
-        </nav>
-      </div>
+      <PublicNav ctaLabel="blog_nav_essai" />
 
       {/* Hero */}
-      <section className="max-w-[780px] mx-auto px-6 pt-8 pb-12">
-        <h1 className="font-serif text-4xl sm:text-5xl text-foreground mb-4">Blog</h1>
-        <p className="text-lg text-muted leading-relaxed">
-          Guides pratiques et conseils pour digitaliser votre restaurant.
+      <section className="max-w-[860px] mx-auto px-8 pt-16 sm:pt-20 pb-10">
+        <span className={EYEBROW}>Blog</span>
+        <h1 className="font-serif font-medium text-primary text-[clamp(40px,5vw,64px)] leading-[1.05] tracking-[-0.022em] text-balance">
+          Le carnet <em className="italic font-medium text-primary-light">MonTablo</em>.
+        </h1>
+        <p className="text-[18px] text-muted leading-relaxed mt-5 max-w-[620px]">
+          Articles, retours d’expérience et conseils pour les restaurants du Genevois français.
         </p>
       </section>
 
       {/* Posts */}
-      <section className="max-w-[780px] mx-auto px-6 pb-24">
+      <section className="max-w-[860px] mx-auto px-8 pb-24">
         {posts.length === 0 ? (
           <p className="text-muted text-center py-12">
-            Les premiers articles arrivent bientôt. Revenez vite !
+            Les premiers articles arrivent bientôt. Revenez vite.
           </p>
         ) : (
-          <div className="space-y-8">
+          <div className="space-y-5">
             {posts.map((post) => (
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className="block group bg-white border border-border/50 rounded-[16px] p-8 hover:shadow-lg hover:shadow-black/[0.03] transition-shadow duration-300"
+                className="group block bg-white border border-border rounded-2xl p-6 sm:p-8 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(30,57,50,0.08)] transition"
               >
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="text-[12px] font-medium text-accent-dark bg-accent/10 px-2.5 py-0.5 rounded-full">
+                <div className="flex flex-wrap items-center gap-3 mb-3">
+                  <span className="text-[11px] font-semibold tracking-[0.18em] uppercase text-primary-light">
                     {post.category}
                   </span>
-                  <span className="text-[12px] text-muted/60">{post.readTime} de lecture</span>
-                  <span className="text-[12px] text-muted/60">
+                  <span className="text-[12px] text-muted">{post.readTime} de lecture</span>
+                  <span className="text-[12px] text-muted">
                     {new Date(post.date).toLocaleDateString('fr-FR', {
                       day: 'numeric',
                       month: 'long',
@@ -99,13 +69,12 @@ export default function BlogPage() {
                     })}
                   </span>
                 </div>
-                <h2 className="font-serif text-xl text-foreground mb-2 group-hover:text-primary transition-colors">
+                <h2 className="font-serif text-[22px] sm:text-[26px] text-primary font-medium leading-tight mb-2">
                   {post.title}
                 </h2>
                 <p className="text-[15px] text-muted leading-relaxed mb-4">{post.description}</p>
-                <span className="inline-flex items-center gap-1.5 text-[14px] font-medium text-primary">
-                  Lire l&apos;article
-                  <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+                <span className="inline-flex items-center gap-1.5 text-[14px] font-semibold text-primary-light group-hover:gap-2.5 transition-all">
+                  Lire l&apos;article →
                 </span>
               </Link>
             ))}
@@ -113,29 +82,7 @@ export default function BlogPage() {
         )}
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-border py-8 px-6">
-        <div className="max-w-[1120px] mx-auto">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4">
-            <div className="flex items-center gap-2">
-              <UtensilsCrossed className="w-[18px] h-[18px] text-primary" />
-              <span className="font-serif text-[15px] text-primary">MonTablo</span>
-            </div>
-            <p className="text-xs text-muted/60">
-              &copy; {new Date().getFullYear()} MonTablo. Tous droits réservés.
-            </p>
-          </div>
-          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] text-muted/50">
-            <Link href="/mentions-légales" className="hover:text-muted transition-colors">Mentions légales</Link>
-            <span className="hidden sm:inline">&middot;</span>
-            <Link href="/cgu" className="hover:text-muted transition-colors">CGU</Link>
-            <span className="hidden sm:inline">&middot;</span>
-            <Link href="/confidentialite" className="hover:text-muted transition-colors">Confidentialité</Link>
-            <span className="hidden sm:inline">&middot;</span>
-            <Link href="/cookies" className="hover:text-muted transition-colors">Cookies</Link>
-          </div>
-        </div>
-      </footer>
+      <PublicFooter />
     </div>
   )
 }

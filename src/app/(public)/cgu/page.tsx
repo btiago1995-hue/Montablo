@@ -71,14 +71,33 @@ export default function CGUPage() {
               À l&apos;issue de la période d&apos;essai, l&apos;accès au tableau de bord et le menu public
               seront désactivés jusqu&apos;à la souscription d&apos;un abonnement payant.
             </p>
-            <p>Les formules disponibles sont :</p>
-            <ul className="list-disc pl-5 space-y-1 mt-3">
-              <li><strong className="text-foreground">Mensuel :</strong> 29,99 &euro; TTC / mois</li>
-              <li><strong className="text-foreground">Annuel :</strong> 26,99 &euro; TTC / mois (323,89 &euro; / an)</li>
+            <p>
+              Trois formules sont disponibles. Tous les prix sont indiqués hors taxes (HT) et
+              soumis à la TVA française au taux en vigueur (20 % à la date de publication).
+            </p>
+            <ul className="list-disc pl-5 space-y-2 mt-3">
+              <li>
+                <strong className="text-foreground">Essentiel — 19 €&nbsp;HT&nbsp;/&nbsp;mois</strong>{' '}
+                en mensuel, ou <strong className="text-foreground">17,10 €&nbsp;HT&nbsp;/&nbsp;mois</strong>{' '}
+                en annuel (205&nbsp;€&nbsp;HT&nbsp;/&nbsp;an, soit −10&nbsp;%).
+              </li>
+              <li>
+                <strong className="text-foreground">Pro — 39 €&nbsp;HT&nbsp;/&nbsp;mois</strong>{' '}
+                en mensuel, ou <strong className="text-foreground">35,10 €&nbsp;HT&nbsp;/&nbsp;mois</strong>{' '}
+                en annuel (421&nbsp;€&nbsp;HT&nbsp;/&nbsp;an, soit −10&nbsp;%).
+              </li>
+              <li>
+                <strong className="text-foreground">Premium — sur devis</strong>{' '}
+                pour les groupes multi-établissements et les demandes spécifiques (multi-localisations,
+                géolocalisation Wallet, account manager dédié, formation sur site).
+              </li>
             </ul>
             <p className="mt-3">
-              Le paiement est géré par Stripe. L&apos;abonnement se renouvelle automatiquement sauf
-              annulation par le restaurateur depuis ses paramètres.
+              L&apos;essai gratuit de 14 jours s&apos;applique aux formules Essentiel et Pro,
+              sans carte bancaire requise. Le paiement est ensuite géré par Stripe.
+              L&apos;abonnement se renouvelle automatiquement sauf annulation par le restaurateur
+              depuis ses paramètres. Les tarifs en vigueur au moment de l&apos;abonnement sont
+              ceux applicables ; toute évolution future ne s&apos;applique pas aux abonnements en cours.
             </p>
           </section>
 

@@ -1,19 +1,23 @@
 import Link from 'next/link'
-import { Mail, UtensilsCrossed } from 'lucide-react'
+import { Mail, MapPin, UtensilsCrossed, ArrowRight } from 'lucide-react'
 import { JsonLd, breadcrumbJsonLd } from '@/components/seo/json-ld'
+import { CTALink } from '@/components/public/cta-link'
 import type { Metadata } from 'next'
 import { ContactForm } from './contact-form'
 
 export const metadata: Metadata = {
-  title: 'Contact — MonTablo | Contactez notre équipe',
+  title: 'Contact — MonTablo | Une question, une demande de démo ?',
   description:
-    'Une question, un projet, un besoin d\'accompagnement ? Contactez l\'équipe MonTablo et nous vous répondrons rapidement.',
+    'Une question, une demande de démo, un partenariat ? Réponse sous 24h ouvrées, directement par le founder.',
   openGraph: {
     title: 'Contact — MonTablo',
     description:
-      'Contactez l\'équipe MonTablo. Nous vous répondons rapidement.',
+      'Réponse sous 24h ouvrées. C\'est le founder qui répond.',
   },
 }
+
+const EYEBROW =
+  'inline-block font-sans text-[12px] tracking-[0.22em] uppercase text-primary-light font-semibold mb-5'
 
 export default function ContactPage() {
   const base = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.montablo.com'
@@ -28,74 +32,110 @@ export default function ContactPage() {
       />
 
       {/* Nav */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/85 backdrop-blur-xl border-b border-border/50">
-        <div className="flex items-center justify-between px-6 py-4 max-w-[1120px] mx-auto">
-          <Link href="/" className="flex items-center gap-2">
-            <UtensilsCrossed className="w-6 h-6 text-primary" />
-            <span className="font-serif text-xl text-primary tracking-tight">MonTablo</span>
+      <nav className="sticky top-0 z-50 backdrop-blur-[14px] bg-background/80 border-b border-primary/5">
+        <div className="max-w-[1240px] mx-auto px-8 flex items-center justify-between h-[76px]">
+          <Link
+            href="/"
+            className="flex items-center gap-2.5 font-serif text-2xl font-semibold text-primary tracking-tight"
+            aria-label="MonTablo — accueil"
+          >
+            <UtensilsCrossed width={26} height={26} strokeWidth={1.6} />
+            <span>MonTablo</span>
           </Link>
-          <div className="flex items-center gap-6">
-            <Link href="/fonctionnalites" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
+          <div className="hidden md:flex items-center gap-1.5">
+            <Link href="/fonctionnalites" className="px-4 py-2.5 text-[15px] text-primary font-medium rounded-full hover:bg-green-mist transition">
               Fonctionnalités
             </Link>
-            <Link href="/tarifs" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
+            <Link href="/tarifs" className="px-4 py-2.5 text-[15px] text-primary font-medium rounded-full hover:bg-green-mist transition">
               Tarifs
             </Link>
-            <Link href="/login" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
+            <Link href="/faq" className="px-4 py-2.5 text-[15px] text-primary font-medium rounded-full hover:bg-green-mist transition">
+              FAQ
+            </Link>
+          </div>
+          <div className="flex items-center gap-2.5">
+            <Link href="/login" className="hidden sm:inline-flex items-center justify-center gap-2 h-10 px-5 rounded-full font-semibold text-sm text-primary hover:bg-green-mist transition">
               Connexion
             </Link>
-            <Link
+            <CTALink
               href="/signup"
-              className="text-sm font-medium bg-primary text-white px-5 py-2 rounded-full hover:bg-primary-light transition-all hover:shadow-lg hover:shadow-primary/15"
+              label="contact_nav"
+              className="inline-flex items-center justify-center gap-2 h-10 px-5 rounded-full font-semibold text-sm bg-primary text-background hover:bg-primary-light transition"
             >
               Essai gratuit
-            </Link>
+            </CTALink>
           </div>
         </div>
       </nav>
 
-      {/* Breadcrumb */}
-      <div className="max-w-[720px] mx-auto px-6 pt-[100px]">
-        <nav className="text-[13px] text-muted/60">
-          <Link href="/" className="hover:text-muted transition-colors">Accueil</Link>
-          <span className="mx-2">/</span>
-          <span className="text-foreground">Contact</span>
-        </nav>
-      </div>
-
       {/* Hero */}
-      <section className="max-w-[720px] mx-auto px-6 pt-8 pb-10">
-        <p className="text-[13px] font-medium tracking-[0.08em] uppercase text-accent-dark mb-3">
-          Contact
-        </p>
-        <h1 className="font-serif text-4xl sm:text-5xl text-foreground mb-4 leading-tight">
-          Parlons de votre projet.
+      <section className="max-w-[820px] mx-auto px-8 pt-16 sm:pt-20 pb-10">
+        <span className={EYEBROW}>Contact</span>
+        <h1 className="font-serif font-medium text-primary text-[clamp(34px,4.6vw,52px)] leading-[1.05] tracking-[-0.022em] text-balance">
+          Une question ? Une demande de démo ? <em className="italic font-medium text-primary-light">Écrivez-nous.</em>
         </h1>
-        <p className="text-lg text-muted leading-relaxed">
-          Une question sur MonTablo, un besoin d&apos;accompagnement, une demande presse ou
-          partenariat ? Écrivez-nous ci-dessous, nous vous répondons rapidement.
+        <p className="text-[18px] text-muted leading-relaxed mt-5 max-w-[600px]">
+          Réponse sous 24h ouvrées. Et oui, c&apos;est le founder qui répond.
         </p>
       </section>
 
-      {/* Form */}
-      <section className="max-w-[720px] mx-auto px-6 pb-12">
-        <ContactForm />
+      {/* Trust band — self-serve */}
+      <section className="max-w-[820px] mx-auto px-8 pb-10">
+        <div className="bg-green-mist border border-border rounded-2xl px-6 py-5 flex flex-wrap items-center justify-between gap-4">
+          <p className="text-[14px] text-foreground leading-relaxed">
+            Pour démarrer un essai gratuit, pas besoin de nous contacter — c&apos;est 1 clic.
+          </p>
+          <CTALink
+            href="/signup"
+            label="contact_self_serve"
+            className="inline-flex items-center gap-2 h-10 px-5 rounded-full font-semibold text-sm bg-primary text-background hover:bg-primary-light transition whitespace-nowrap"
+          >
+            Démarrer l&apos;essai
+            <ArrowRight className="w-4 h-4" />
+          </CTALink>
+        </div>
       </section>
 
-      {/* Direct contact info */}
-      <section className="max-w-[720px] mx-auto px-6 pb-24">
-        <div className="flex items-center gap-3 text-sm text-muted">
-          <Mail className="w-4 h-4 text-accent-dark" />
-          <span>
-            Vous pouvez aussi nous écrire directement à{' '}
+      {/* Form + info grid */}
+      <section className="max-w-[1080px] mx-auto px-8 pb-20 grid lg:grid-cols-[1.4fr_0.8fr] gap-10">
+        <div>
+          <h2 className="font-serif text-[24px] text-primary mb-6 font-medium">
+            Le formulaire
+          </h2>
+          <ContactForm />
+        </div>
+        <aside className="space-y-5">
+          <h2 className="font-serif text-[24px] text-primary mb-2 font-medium">
+            Autres moyens
+          </h2>
+          <div className="bg-white border border-border rounded-2xl p-6">
+            <div className="w-10 h-10 rounded-xl bg-green-soft flex items-center justify-center mb-4">
+              <Mail className="w-5 h-5 text-primary" strokeWidth={1.8} />
+            </div>
+            <h3 className="font-serif text-[18px] text-primary mb-1.5 font-medium">Email</h3>
             <a
               href="mailto:contact@montablo.com"
-              className="text-primary font-medium hover:underline"
+              className="text-[14px] text-primary-light font-semibold hover:underline"
             >
               contact@montablo.com
             </a>
-          </span>
-        </div>
+            <p className="text-[13px] text-muted mt-2 leading-relaxed">
+              Le moyen le plus simple. Réponse sous 24h ouvrées.
+            </p>
+          </div>
+          <div className="bg-white border border-border rounded-2xl p-6">
+            <div className="w-10 h-10 rounded-xl bg-green-soft flex items-center justify-center mb-4">
+              <MapPin className="w-5 h-5 text-primary" strokeWidth={1.8} />
+            </div>
+            <h3 className="font-serif text-[18px] text-primary mb-1.5 font-medium">Localisation</h3>
+            <p className="text-[14px] text-foreground font-medium">
+              Saint-Julien-en-Genevois
+            </p>
+            <p className="text-[13px] text-muted mt-2 leading-relaxed">
+              Haute-Savoie, France. À 10 minutes de Genève.
+            </p>
+          </div>
+        </aside>
       </section>
 
       {/* Footer */}
@@ -111,7 +151,7 @@ export default function ContactPage() {
             </p>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] text-muted/50">
-            <Link href="/mentions-légales" className="hover:text-muted transition-colors">Mentions légales</Link>
+            <Link href="/mentions-legales" className="hover:text-muted transition-colors">Mentions légales</Link>
             <span className="hidden sm:inline">&middot;</span>
             <Link href="/cgu" className="hover:text-muted transition-colors">CGU</Link>
             <span className="hidden sm:inline">&middot;</span>

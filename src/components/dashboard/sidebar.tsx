@@ -69,7 +69,7 @@ export function Sidebar({ restaurant }: { restaurant: Restaurant }) {
       {/* Mobile toggle */}
       <button
         onClick={() => setOpen(true)}
-        className="lg:hidden fixed top-4 left-4 z-50 bg-white border border-[#E8E8E4] rounded-lg p-2 shadow-sm"
+        className="lg:hidden fixed top-4 left-4 z-50 bg-white border border-border rounded-lg p-2 shadow-sm"
       >
         <Menu className="w-5 h-5" />
       </button>
@@ -85,7 +85,7 @@ export function Sidebar({ restaurant }: { restaurant: Restaurant }) {
       {/* Sidebar */}
       <aside
         className={cn(
-          'fixed top-0 left-0 h-dvh w-[260px] bg-[#2C3E2D] text-white z-50 flex flex-col transition-transform duration-200',
+          'fixed top-0 left-0 h-dvh w-[260px] bg-primary text-white z-50 flex flex-col transition-transform duration-200',
           open ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         )}
       >

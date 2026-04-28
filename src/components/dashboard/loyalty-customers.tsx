@@ -61,7 +61,7 @@ export function LoyaltyCustomers({ cards, program }: Props) {
         <p className="text-sm text-muted">{cards.length} client{cards.length !== 1 ? 's' : ''} inscrits</p>
         <Link
           href="/dashboard/loyalty/customers/new"
-          className="flex items-center gap-2 bg-[#2C3E2D] text-white px-5 py-3 rounded-xl text-sm font-medium hover:bg-[#243325] transition-colors"
+          className="flex items-center gap-2 bg-primary text-background px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-primary-light transition-colors"
         >
           <UserPlus className="w-5 h-5" />
           Nouveau client
@@ -75,7 +75,7 @@ export function LoyaltyCustomers({ cards, program }: Props) {
           placeholder="Rechercher par nom ou email…"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full pl-11 pr-4 py-3 border border-[#E8E8E4] rounded-xl text-sm bg-white focus:outline-none focus:border-[#2C3E2D]"
+          className="w-full pl-11 pr-4 py-2.5 border border-border rounded-xl text-sm bg-white focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
         />
       </div>
 
@@ -102,7 +102,7 @@ export function LoyaltyCustomers({ cards, program }: Props) {
           return (
             <div
               key={card.id}
-              className={`bg-white border rounded-xl p-5 ${hasReward ? 'border-amber-300 bg-amber-50' : 'border-[#E8E8E4]'}`}
+              className={`bg-white border rounded-2xl p-6 ${hasReward ? 'border-amber-300 bg-amber-50' : 'border-border'}`}
             >
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1 min-w-0">
@@ -114,13 +114,13 @@ export function LoyaltyCustomers({ cards, program }: Props) {
                         type="email"
                         value={emailDraft}
                         onChange={(e) => setEmailDraft(e.target.value)}
-                        className="flex-1 text-sm border border-[#2C3E2D] rounded-lg px-3 py-2 focus:outline-none min-w-0"
+                        className="flex-1 text-sm border border-primary rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/20 min-w-0"
                         autoFocus
                       />
                       <button
                         onClick={() => saveEmail(card.id)}
                         disabled={savingEmail}
-                        className="text-[#2C3E2D] hover:text-[#1a2b1b] disabled:opacity-50 p-1"
+                        className="text-primary hover:text-primary-dark disabled:opacity-50 p-1"
                       >
                         <Check className="w-5 h-5" />
                       </button>
@@ -163,7 +163,7 @@ export function LoyaltyCustomers({ cards, program }: Props) {
                   <button
                     onClick={() => handleResend(card.id)}
                     disabled={resending === card.id}
-                    className="flex items-center gap-2 border border-[#E8E8E4] text-muted px-4 py-2.5 rounded-xl text-sm font-medium hover:border-[#2C3E2D] hover:text-foreground disabled:opacity-50 transition-colors"
+                    className="flex items-center gap-2 border border-border bg-white text-muted px-4 py-2.5 rounded-full text-sm font-semibold hover:border-primary/30 hover:bg-surface hover:text-foreground disabled:opacity-50 transition-colors"
                     title="Renvoyer la carte par email"
                   >
                     <Mail className="w-5 h-5" />

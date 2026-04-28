@@ -135,7 +135,7 @@ const posts: BlogPost[] = [
         heading: 'Comment MonTablo répond aux besoins des restaurants de station',
         paragraphs: [
           'MonTablo est conçu pour être géré par une seule personne, même sans compétence technique. L\'interface d\'administration est entièrement mobile : vous modifiez votre carte depuis votre téléphone entre deux services. Aucune formation, aucun matériel supplémentaire, aucun abonnement annuel bloquant.',
-          'Pour les restaurants de Chamonix, Megève, La Clusaz ou Les Gets qui veulent moderniser leur expérience client sans investissement lourd, MonTablo propose un essai gratuit de 14 jours puis 29,99 € / mois sans engagement. Le coût est amorti dès le premier mois d\'économies d\'impression.',
+          'Pour les restaurants de Chamonix, Megève, La Clusaz ou Les Gets qui veulent moderniser leur expérience client sans investissement lourd, MonTablo propose un essai gratuit de 14 jours puis 19 € HT / mois (Essentiel) ou 39 € HT / mois (Pro). Le coût est amorti dès le premier mois d\'économies d\'impression.',
         ],
       },
     ],
@@ -253,7 +253,7 @@ const posts: BlogPost[] = [
         heading: 'Comment démarrer avec MonTablo à Annecy',
         paragraphs: [
           'Démarrer avec MonTablo prend moins de 5 minutes. Vous créez votre compte, ajoutez vos plats et catégories (entrées, plats, desserts, boissons), personnalisez les couleurs aux couleurs de votre restaurant, et générez votre QR code. Vous pouvez l\'imprimer sur des chevalets de table ou des autocollants et le poser sur vos tables dès le service suivant.',
-          'L\'essai gratuit de 14 jours est sans carte bancaire. Si MonTablo correspond à vos besoins — et pour les restaurants d\'Annecy, il devrait — vous continuez à 29,99 € / mois ou 26,99 € / mois en annuel. Plats illimités, mises à jour illimitées.',
+          'L\'essai gratuit de 14 jours est sans carte bancaire. Si MonTablo correspond à vos besoins — et pour les restaurants d\'Annecy, il devrait — vous continuez à 19 € HT / mois (Essentiel) ou 39 € HT / mois (Pro), avec −10 % en annuel. Plats illimités, mises à jour illimitées.',
         ],
       },
     ],
@@ -527,7 +527,7 @@ const posts: BlogPost[] = [
         heading: 'Le milieu de gamme : les solutions SaaS entre 15 et 50 euros par mois',
         paragraphs: [
           'C\'est dans cette fourchette que se situe la majorite des solutions professionnelles, dont MonTablo. A ce niveau de prix, vous beneficiez generalement d\'un menu entierement personnalisable, sans publicite, avec un QR code permanent, des mises a jour illimitees et un support client reactif.',
-          'Les tarifs varient selon les fonctionnalites incluses : gestion multilingue, photos de plats, menu du jour, allergenes, nombre de categories, etc. Chez MonTablo, l\'abonnement se situe entre 26,99 et 29,99 euros par mois, tout inclus, sans frais caches ni limites sur le nombre de plats ou de modifications. C\'est un tarif previsible qui se rentabilise des le premier mois par rapport au cout d\'impression de cartes papier.',
+          'Les tarifs varient selon les fonctionnalites incluses : gestion multilingue, photos de plats, menu du jour, allergenes, nombre de categories, etc. Chez MonTablo, l\'abonnement se situe entre 19 € HT (Essentiel) et 39 € HT (Pro) par mois, tout inclus, sans frais caches ni limites sur le nombre de plats ou de modifications. C\'est un tarif previsible qui se rentabilise des le premier mois par rapport au cout d\'impression de cartes papier.',
           'A ce niveau de prix, le rapport qualite-prix est generalement excellent. Vous disposez d\'un outil professionnel, fiable, qui evolue regulierement avec de nouvelles fonctionnalites.',
         ],
       },

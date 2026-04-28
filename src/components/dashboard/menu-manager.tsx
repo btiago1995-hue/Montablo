@@ -24,12 +24,17 @@ import {
   Sparkles,
 } from 'lucide-react'
 
-async function autoTranslate(texts: Record<string, string>): Promise<Record<string, string | null>> {
+type TargetLang = 'en' | 'de'
+
+async function autoTranslate(
+  texts: Record<string, string>,
+  targetLang: TargetLang = 'en'
+): Promise<Record<string, string | null>> {
   try {
     const res = await fetch('/api/translate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ texts }),
+      body: JSON.stringify({ texts, targetLang }),
     })
     if (!res.ok) return {}
     const { translations } = await res.json()
@@ -52,7 +57,10 @@ function CategoryForm({
 }) {
   const [nameFr, setNameFr] = useState(initial?.name_fr ?? '')
   const [nameEn, setNameEn] = useState(initial?.name_en ?? '')
-  const [showEn, setShowEn] = useState(!!initial?.name_en)
+  const [nameDe, setNameDe] = useState(initial?.name_de ?? '')
+  const [showTranslations, setShowTranslations] = useState(
+    !!(initial?.name_en || initial?.name_de)
+  )
   const [icon, setIcon] = useState(initial?.icon ?? '')
   const [loading, setLoading] = useState(false)
   const router = useRouter()
@@ -62,23 +70,45 @@ function CategoryForm({
     setLoading(true)
     const supabase = createClient()
 
-    // Auto-translate if no manual English override
+    // Auto-translate if no manual override
     let finalNameEn = nameEn || null
-    if (!nameEn && nameFr.trim()) {
-      const translations = await autoTranslate({ name: nameFr })
-      finalNameEn = translations.name || null
+    let finalNameDe = nameDe || null
+
+    if (nameFr.trim()) {
+      const promises: Promise<void>[] = []
+      if (!nameEn) {
+        promises.push(
+          autoTranslate({ name: nameFr }, 'en').then((tr) => {
+            finalNameEn = tr.name || null
+          })
+        )
+      }
+      if (!nameDe) {
+        promises.push(
+          autoTranslate({ name: nameFr }, 'de').then((tr) => {
+            finalNameDe = tr.name || null
+          })
+        )
+      }
+      await Promise.all(promises)
     }
 
     if (initial) {
       await supabase
         .from('categories')
-        .update({ name_fr: nameFr, name_en: finalNameEn, icon: icon || null })
+        .update({
+          name_fr: nameFr,
+          name_en: finalNameEn,
+          name_de: finalNameDe,
+          icon: icon || null,
+        })
         .eq('id', initial.id)
     } else {
       await supabase.from('categories').insert({
         restaurant_id: restaurantId,
         name_fr: nameFr,
         name_en: finalNameEn,
+        name_de: finalNameDe,
         icon: icon || null,
       })
     }
@@ -102,27 +132,35 @@ function CategoryForm({
         onChange={(e) => setIcon(e.target.value)}
         placeholder="🥗"
       />
-      {showEn ? (
-        <Input
-          label="Traduction anglaise (optionnel)"
-          value={nameEn}
-          onChange={(e) => setNameEn(e.target.value)}
-          placeholder="Starters, Mains, Desserts..."
-        />
+      {showTranslations ? (
+        <div className="space-y-3">
+          <Input
+            label="Traduction anglaise (optionnel)"
+            value={nameEn}
+            onChange={(e) => setNameEn(e.target.value)}
+            placeholder="Starters, Mains, Desserts..."
+          />
+          <Input
+            label="Traduction allemande (optionnel)"
+            value={nameDe}
+            onChange={(e) => setNameDe(e.target.value)}
+            placeholder="Vorspeisen, Hauptgerichte, Desserts..."
+          />
+        </div>
       ) : (
         <button
           type="button"
-          onClick={() => setShowEn(true)}
-          className="flex items-center gap-1.5 text-xs text-[#6B6B6B] hover:text-[#1A1A1A] transition-colors"
+          onClick={() => setShowTranslations(true)}
+          className="flex items-center gap-1.5 text-xs text-muted hover:text-foreground transition-colors"
         >
           <Languages className="w-3.5 h-3.5" />
-          Modifier la traduction anglaise
+          Modifier les traductions (EN, DE)
         </button>
       )}
       <div className="flex items-center justify-between pt-2">
-        <span className="text-[11px] text-[#9B9B9B] flex items-center gap-1">
+        <span className="text-[11px] text-muted-light flex items-center gap-1">
           <Languages className="w-3 h-3" />
-          Traduction automatique FR → EN
+          Traduction automatique FR → EN + DE
         </span>
         <div className="flex gap-3">
           <Button type="button" variant="secondary" onClick={onDone}>
@@ -154,14 +192,18 @@ function ItemForm({
 }) {
   const [nameFr, setNameFr] = useState(initial?.name_fr ?? '')
   const [nameEn, setNameEn] = useState(initial?.name_en ?? '')
+  const [nameDe, setNameDe] = useState(initial?.name_de ?? '')
   const [descFr, setDescFr] = useState(initial?.description_fr ?? '')
   const [descEn, setDescEn] = useState(initial?.description_en ?? '')
+  const [descDe, setDescDe] = useState(initial?.description_de ?? '')
   const [price, setPrice] = useState(initial?.price?.toString() ?? '')
   const [categoryId, setCategoryId] = useState(initial?.category_id ?? defaultCategoryId ?? categories[0]?.id ?? '')
   const [tags, setTags] = useState(initial?.tags?.join(', ') ?? '')
   const [allergens, setAllergens] = useState<Allergen[]>(initial?.allergens ?? [])
   const [imageUrl, setImageUrl] = useState(initial?.image_url ?? null)
-  const [showEn, setShowEn] = useState(!!(initial?.name_en || initial?.description_en))
+  const [showTranslations, setShowTranslations] = useState(
+    !!(initial?.name_en || initial?.description_en || initial?.name_de || initial?.description_de)
+  )
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
@@ -176,25 +218,40 @@ function ItemForm({
     setLoading(true)
     const supabase = createClient()
 
-    // Auto-translate French fields that don't have manual English overrides
+    // Auto-translate French fields that don't have manual overrides (EN + DE)
     let finalNameEn = nameEn || null
     let finalDescEn = descEn || null
+    let finalNameDe = nameDe || null
+    let finalDescDe = descDe || null
 
-    const toTranslate: Record<string, string> = {}
-    if (!nameEn && nameFr.trim()) toTranslate.name = nameFr
-    if (!descEn && descFr.trim()) toTranslate.desc = descFr
+    const toTranslateEn: Record<string, string> = {}
+    const toTranslateDe: Record<string, string> = {}
+    if (!nameEn && nameFr.trim()) toTranslateEn.name = nameFr
+    if (!descEn && descFr.trim()) toTranslateEn.desc = descFr
+    if (!nameDe && nameFr.trim()) toTranslateDe.name = nameFr
+    if (!descDe && descFr.trim()) toTranslateDe.desc = descFr
 
-    if (Object.keys(toTranslate).length > 0) {
-      const translations = await autoTranslate(toTranslate)
-      if (!nameEn && translations.name) finalNameEn = translations.name
-      if (!descEn && translations.desc) finalDescEn = translations.desc
-    }
+    const [trEn, trDe] = await Promise.all([
+      Object.keys(toTranslateEn).length > 0
+        ? autoTranslate(toTranslateEn, 'en')
+        : Promise.resolve({} as Record<string, string | null>),
+      Object.keys(toTranslateDe).length > 0
+        ? autoTranslate(toTranslateDe, 'de')
+        : Promise.resolve({} as Record<string, string | null>),
+    ])
+
+    if (!nameEn && trEn.name) finalNameEn = trEn.name
+    if (!descEn && trEn.desc) finalDescEn = trEn.desc
+    if (!nameDe && trDe.name) finalNameDe = trDe.name
+    if (!descDe && trDe.desc) finalDescDe = trDe.desc
 
     const data = {
       name_fr: nameFr,
       name_en: finalNameEn,
+      name_de: finalNameDe,
       description_fr: descFr || null,
       description_en: finalDescEn,
+      description_de: finalDescDe,
       price: parseFloat(price),
       category_id: categoryId || null,
       image_url: imageUrl,
@@ -298,7 +355,7 @@ function ItemForm({
                 className={`flex items-center gap-2 px-3 py-2 rounded-lg border text-sm transition-colors text-left ${
                   active
                     ? 'bg-primary/10 border-primary text-foreground'
-                    : 'bg-white border-border text-[#6B6B6B] hover:bg-[#F5F5F2]'
+                    : 'bg-white border-border text-[#6B6B6B] hover:bg-background'
                 }`}
               >
                 <span className="text-base leading-none shrink-0" aria-hidden>
@@ -310,48 +367,70 @@ function ItemForm({
           })}
         </div>
       </div>
-      {showEn ? (
-        <div className="space-y-3 p-4 bg-[#F5F5F2] rounded-lg">
+      {showTranslations ? (
+        <div className="space-y-5 p-4 bg-background rounded-lg">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-medium text-[#6B6B6B] flex items-center gap-1.5">
+            <span className="text-xs font-medium text-muted flex items-center gap-1.5">
               <Languages className="w-3.5 h-3.5" />
-              Traduction anglaise (optionnel)
+              Traductions (optionnel)
             </span>
             <button
               type="button"
-              onClick={() => { setShowEn(false); setNameEn(''); setDescEn('') }}
-              className="text-[11px] text-[#9B9B9B] hover:text-[#1A1A1A]"
+              onClick={() => {
+                setShowTranslations(false)
+                setNameEn(''); setDescEn('')
+                setNameDe(''); setDescDe('')
+              }}
+              className="text-[11px] text-muted-light hover:text-foreground"
             >
               Utiliser la traduction auto
             </button>
           </div>
-          <Input
-            label="Nom (EN)"
-            value={nameEn}
-            onChange={(e) => setNameEn(e.target.value)}
-            placeholder="Caesar Salad"
-          />
-          <Textarea
-            label="Description (EN)"
-            value={descEn}
-            onChange={(e) => setDescEn(e.target.value)}
-            placeholder="Romaine lettuce, croutons, parmesan..."
-          />
+          <div className="space-y-3">
+            <p className="text-[11px] uppercase tracking-wide font-semibold text-primary-light">Anglais</p>
+            <Input
+              label="Nom (EN)"
+              value={nameEn}
+              onChange={(e) => setNameEn(e.target.value)}
+              placeholder="Caesar Salad"
+            />
+            <Textarea
+              label="Description (EN)"
+              value={descEn}
+              onChange={(e) => setDescEn(e.target.value)}
+              placeholder="Romaine lettuce, croutons, parmesan..."
+            />
+          </div>
+          <div className="space-y-3 pt-3 border-t border-border">
+            <p className="text-[11px] uppercase tracking-wide font-semibold text-primary-light">Allemand</p>
+            <Input
+              label="Nom (DE)"
+              value={nameDe}
+              onChange={(e) => setNameDe(e.target.value)}
+              placeholder="Caesar-Salat"
+            />
+            <Textarea
+              label="Description (DE)"
+              value={descDe}
+              onChange={(e) => setDescDe(e.target.value)}
+              placeholder="Römersalat, Croutons, Parmesan..."
+            />
+          </div>
         </div>
       ) : (
         <button
           type="button"
-          onClick={() => setShowEn(true)}
-          className="flex items-center gap-1.5 text-xs text-[#6B6B6B] hover:text-[#1A1A1A] transition-colors"
+          onClick={() => setShowTranslations(true)}
+          className="flex items-center gap-1.5 text-xs text-muted hover:text-foreground transition-colors"
         >
           <Languages className="w-3.5 h-3.5" />
-          Modifier la traduction anglaise
+          Modifier les traductions (EN, DE)
         </button>
       )}
       <div className="flex items-center justify-between pt-2">
-        <span className="text-[11px] text-[#9B9B9B] flex items-center gap-1">
+        <span className="text-[11px] text-muted-light flex items-center gap-1">
           <Languages className="w-3 h-3" />
-          Traduction automatique FR → EN
+          Traduction automatique FR → EN + DE
         </span>
         <div className="flex gap-3">
           <Button type="button" variant="secondary" onClick={onDone}>
@@ -544,7 +623,7 @@ export function MenuManager({
   return (
     <div className="space-y-3 sm:space-y-6">
       {/* Action bar */}
-      <div className="sticky top-14 sm:static z-10 -mx-4 px-4 py-2 sm:mx-0 sm:px-0 sm:py-0 bg-[#F5F5F2] sm:bg-transparent">
+      <div className="sticky top-14 sm:static z-10 -mx-4 px-4 py-2 sm:mx-0 sm:px-0 sm:py-0 bg-background sm:bg-transparent">
         <div className="flex gap-2 sm:gap-3 overflow-x-auto scrollbar-hide">
           <Button onClick={() => setCatModal({ open: true })} variant="secondary" size="sm" className="whitespace-nowrap sm:text-sm sm:px-4 sm:py-2.5">
             <Plus className="w-4 h-4 shrink-0" />

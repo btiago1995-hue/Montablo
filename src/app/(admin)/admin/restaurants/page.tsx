@@ -33,8 +33,8 @@ export default async function RestaurantsPage({ searchParams }: { searchParams: 
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-slate-100">Restaurantes</h1>
-        <p className="text-sm text-slate-500 mt-1">{all.length} no total</p>
+        <h1 className="text-2xl font-bold text-white">Restaurantes</h1>
+        <p className="text-sm text-white/60 mt-1">{all.length} no total</p>
       </div>
 
       {/* Filter tabs */}
@@ -42,7 +42,7 @@ export default async function RestaurantsPage({ searchParams }: { searchParams: 
         <Link
           href="/admin/restaurants"
           className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${
-            !filter ? 'bg-blue-700 text-white border-blue-700' : 'border-slate-600 text-slate-400 hover:border-slate-400'
+            !filter ? 'bg-accent text-primary border-accent' : 'border-white/20 text-white/70 hover:border-white/50'
           }`}
         >
           Todos ({all.length})
@@ -55,7 +55,7 @@ export default async function RestaurantsPage({ searchParams }: { searchParams: 
               key={s}
               href={`/admin/restaurants?filter=${s}`}
               className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${
-                filter === s ? 'bg-blue-700 text-white border-blue-700' : 'border-slate-600 text-slate-400 hover:border-slate-400'
+                filter === s ? 'bg-accent text-primary border-accent' : 'border-white/20 text-white/70 hover:border-white/50'
               }`}
             >
               {filterLabels[s]} ({count})
@@ -64,10 +64,10 @@ export default async function RestaurantsPage({ searchParams }: { searchParams: 
         })}
       </div>
 
-      <div className="bg-slate-800 border border-slate-700 rounded-xl overflow-hidden">
+      <div className="bg-primary-dark border border-white/10 rounded-xl overflow-hidden">
         <table className="w-full">
           <thead>
-            <tr className="text-xs uppercase tracking-wider text-slate-500 border-b border-slate-700 bg-slate-800/50">
+            <tr className="text-xs uppercase tracking-wider text-white/60 border-b border-white/10 bg-white/5">
               <th className="px-5 py-3 text-left">Restaurante</th>
               <th className="px-5 py-3 text-left">Estado</th>
               <th className="px-5 py-3 text-left">Trial expira</th>
@@ -77,24 +77,24 @@ export default async function RestaurantsPage({ searchParams }: { searchParams: 
           </thead>
           <tbody>
             {restaurants.map(r => (
-              <tr key={r.id} className="border-b border-slate-700/50 hover:bg-slate-700/30">
+              <tr key={r.id} className="border-b border-white/10 hover:bg-white/5">
                 <td className="px-5 py-3">
-                  <p className="text-sm font-medium text-slate-200">{r.name}</p>
-                  <p className="text-xs text-slate-500">{r.slug}</p>
+                  <p className="text-sm font-medium text-white/90">{r.name}</p>
+                  <p className="text-xs text-white/50">{r.slug}</p>
                 </td>
                 <td className="px-5 py-3">
                   <StatusBadge status={r.subscription_status} />
                 </td>
-                <td className="px-5 py-3 text-sm text-slate-400">
+                <td className="px-5 py-3 text-sm text-white/70">
                   {r.subscription_status === 'trialing'
-                    ? <span className={new Date(r.trial_ends_at) < new Date() ? 'text-red-400' : 'text-slate-400'}>
+                    ? <span className={new Date(r.trial_ends_at) < new Date() ? 'text-red-400' : 'text-white/70'}>
                         {formatDate(r.trial_ends_at)}
                       </span>
                     : '—'}
                 </td>
-                <td className="px-5 py-3 text-sm text-slate-400">{formatDate(r.created_at)}</td>
+                <td className="px-5 py-3 text-sm text-white/70">{formatDate(r.created_at)}</td>
                 <td className="px-5 py-3">
-                  <Link href={`/admin/restaurants/${r.slug}`} className="text-xs text-blue-400 hover:underline">
+                  <Link href={`/admin/restaurants/${r.slug}`} className="text-xs text-accent hover:underline">
                     Ver →
                   </Link>
                 </td>
@@ -103,7 +103,7 @@ export default async function RestaurantsPage({ searchParams }: { searchParams: 
           </tbody>
         </table>
         {restaurants.length === 0 && (
-          <p className="text-sm text-slate-500 text-center py-10">Nenhum restaurante encontrado.</p>
+          <p className="text-sm text-white/60 text-center py-10">Nenhum restaurante encontrado.</p>
         )}
       </div>
     </div>

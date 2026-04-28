@@ -18,6 +18,7 @@ type Body = {
   city?: string | null
   postal_code?: string | null
   country_code?: string | null
+  languages?: string[]
 }
 
 const WALLET_TRIGGER_FIELDS = [
@@ -49,10 +50,19 @@ export async function PUT(request: Request) {
     'name', 'logo_url', 'cover_url', 'primary_color', 'secondary_color',
     'unavailable_behavior', 'google_review_url',
     'address_line', 'city', 'postal_code', 'country_code',
+    'languages',
   ]
   const update: Partial<Restaurant> = {} as Partial<Restaurant>
   for (const key of allowedKeys) {
     if (key in body) (update as Record<string, unknown>)[key] = body[key]
+  }
+
+  // Validate languages array — only allow fr/en/de, fr always required
+  if ('languages' in body) {
+    const langs = body.languages
+    if (!Array.isArray(langs) || !langs.every((l) => ['fr', 'en', 'de'].includes(l)) || !langs.includes('fr')) {
+      return NextResponse.json({ error: 'Langues invalides' }, { status: 400 })
+    }
   }
 
   // Postal-code format check for France
