@@ -136,6 +136,18 @@ export type LoyaltyProgram = {
   reward_description: string
   card_tagline: string | null
   is_active: boolean
+  card_color_override: string | null
+  wide_logo_url: string | null
+  enable_directions: boolean
+  enable_review: boolean
+  website_url: string | null
+  instagram_url: string | null
+  facebook_url: string | null
+  allow_multiple_holders: boolean
+  enable_update_notifications: boolean
+  welcome_message_fr: string | null
+  welcome_message_en: string | null
+  welcome_message_de: string | null
   created_at: string
 }
 

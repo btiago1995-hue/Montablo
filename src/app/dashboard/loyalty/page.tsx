@@ -2,7 +2,7 @@ import { getRestaurant } from '@/lib/supabase/cached'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
-import { Gift, Users, QrCode, Settings } from 'lucide-react'
+import { Gift, Users, QrCode, Settings, Palette } from 'lucide-react'
 
 export default async function LoyaltyPage() {
   const restaurant = await getRestaurant()
@@ -92,7 +92,14 @@ export default async function LoyaltyPage() {
         </Link>
       </div>
 
-      <div className="mt-4">
+      <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+        <Link
+          href="/dashboard/loyalty/personnaliser"
+          className="flex items-center gap-2 text-sm text-muted hover:text-foreground transition-colors"
+        >
+          <Palette className="w-4 h-4" />
+          Personnaliser la carte
+        </Link>
         <Link
           href="/dashboard/loyalty/setup"
           className="flex items-center gap-2 text-sm text-muted hover:text-foreground transition-colors"

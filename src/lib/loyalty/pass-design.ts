@@ -7,6 +7,7 @@ export type PassData = {
   foregroundColor: string
   primaryColor: string
   logoUrl: string | null
+  wideLogoUrl: string | null
   progressLabel: string
   progressValue: string
   rewardDescription: string
@@ -27,6 +28,16 @@ export type PassData = {
   city: string | null
   postalCode: string | null
   googleReviewUrl: string | null
+  enableDirections: boolean
+  enableReview: boolean
+  websiteUrl: string | null
+  instagramUrl: string | null
+  facebookUrl: string | null
+  allowMultipleHolders: boolean
+  enableUpdateNotifications: boolean
+  welcomeMessageFr: string | null
+  welcomeMessageEn: string | null
+  welcomeMessageDe: string | null
 }
 
 export function buildPassData(
@@ -54,14 +65,16 @@ export function buildPassData(
   const backgroundColor = `rgb(${r}, ${g}, ${b})`
 
   const shortCode = `MTB-${card.id.slice(-6).toUpperCase()}`
+  const cardColor = program.card_color_override ?? restaurant.primary_color
 
   return {
     serialNumber: card.id,
     authToken: card.apple_auth_token!,
     backgroundColor,
     foregroundColor: 'rgb(255, 255, 255)',
-    primaryColor: restaurant.primary_color,
+    primaryColor: cardColor,
     logoUrl: restaurant.logo_url ?? null,
+    wideLogoUrl: program.wide_logo_url,
     progressLabel: 'PROGRESSION',
     progressValue: hasReward ? '🎁 Récompense disponible!' : progressLabel,
     rewardDescription: program.reward_description,
@@ -82,5 +95,15 @@ export function buildPassData(
     city: restaurant.city,
     postalCode: restaurant.postal_code,
     googleReviewUrl: restaurant.google_review_url,
+    enableDirections: program.enable_directions,
+    enableReview: program.enable_review,
+    websiteUrl: program.website_url,
+    instagramUrl: program.instagram_url,
+    facebookUrl: program.facebook_url,
+    allowMultipleHolders: program.allow_multiple_holders,
+    enableUpdateNotifications: program.enable_update_notifications,
+    welcomeMessageFr: program.welcome_message_fr,
+    welcomeMessageEn: program.welcome_message_en,
+    welcomeMessageDe: program.welcome_message_de,
   }
 }

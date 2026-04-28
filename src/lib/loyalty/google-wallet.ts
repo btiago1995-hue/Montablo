@@ -155,8 +155,8 @@ function buildLinksModule(data: PassData) {
     localizedDescription: localizedTriple('Voir le menu', 'View menu', 'Speisekarte ansehen'),
   })
 
-  // Maps directions (if GPS available)
-  if (data.latitude !== null && data.longitude !== null) {
+  // Maps directions (if GPS available + enabled)
+  if (data.enableDirections && data.latitude !== null && data.longitude !== null) {
     const query = data.addressLine
       ? encodeURIComponent(`${data.addressLine}, ${data.postalCode ?? ''} ${data.city ?? ''}`.trim())
       : `${data.latitude},${data.longitude}`
@@ -168,13 +168,43 @@ function buildLinksModule(data: PassData) {
     })
   }
 
-  // Google review (if set)
-  if (data.googleReviewUrl) {
+  // Google review (if set + enabled)
+  if (data.enableReview && data.googleReviewUrl) {
     uris.push({
       id: 'review',
       uri: data.googleReviewUrl,
       description: 'Laisser un avis',
       localizedDescription: localizedTriple('Laisser un avis', 'Leave a review', 'Bewertung abgeben'),
+    })
+  }
+
+  // Custom website
+  if (data.websiteUrl) {
+    uris.push({
+      id: 'website',
+      uri: data.websiteUrl,
+      description: 'Site web',
+      localizedDescription: localizedTriple('Site web', 'Website', 'Webseite'),
+    })
+  }
+
+  // Instagram
+  if (data.instagramUrl) {
+    uris.push({
+      id: 'instagram',
+      uri: data.instagramUrl,
+      description: 'Instagram',
+      localizedDescription: localizedTriple('Instagram', 'Instagram', 'Instagram'),
+    })
+  }
+
+  // Facebook
+  if (data.facebookUrl) {
+    uris.push({
+      id: 'facebook',
+      uri: data.facebookUrl,
+      description: 'Facebook',
+      localizedDescription: localizedTriple('Facebook', 'Facebook', 'Facebook'),
     })
   }
 
@@ -209,6 +239,20 @@ async function ensureLoyaltyClass(
     localizedAccountIdLabel: localizedTriple('ID de membre', 'Member ID', 'Mitgliedsnr.'),
     accountNameLabel: 'Nom de membre',
     localizedAccountNameLabel: localizedTriple('Nom de membre', 'Member name', 'Mitgliedsname'),
+    multipleDevicesAndHoldersAllowedStatus: data.allowMultipleHolders
+      ? 'MULTIPLE_HOLDERS'
+      : 'ONE_USER_ALL_DEVICES',
+  }
+
+  if (data.enableUpdateNotifications) {
+    classBody.notifyPreference = 'NOTIFY_ON_UPDATE'
+  }
+
+  if (data.wideLogoUrl) {
+    classBody.wideProgramLogo = {
+      sourceUri: { uri: walletCompatImageUrl(data.wideLogoUrl) },
+      contentDescription: { defaultValue: { language: 'fr', value: data.restaurantName } },
+    }
   }
 
   if (data.heroImageUrl) {
@@ -218,8 +262,33 @@ async function ensureLoyaltyClass(
     }
   }
 
+  // merchantLocations replaces deprecated `locations` field
+  // and is the only way to trigger geo notifications.
   if (data.latitude !== null && data.longitude !== null) {
-    classBody.locations = [{ latitude: data.latitude, longitude: data.longitude }]
+    classBody.merchantLocations = [
+      {
+        merchantName: data.restaurantName,
+        latitude: data.latitude,
+        longitude: data.longitude,
+      },
+    ]
+  }
+
+  // Welcome message as textModuleData on the class
+  if (data.welcomeMessageFr) {
+    classBody.textModulesData = [
+      {
+        id: 'welcome',
+        header: 'Bienvenue',
+        body: data.welcomeMessageFr,
+        localizedHeader: localizedTriple('Bienvenue', 'Welcome', 'Willkommen'),
+        localizedBody: localizedTriple(
+          data.welcomeMessageFr,
+          data.welcomeMessageEn ?? data.welcomeMessageFr,
+          data.welcomeMessageDe ?? data.welcomeMessageFr,
+        ),
+      },
+    ]
   }
 
   const linksModuleData = buildLinksModule(data)
@@ -251,14 +320,18 @@ async function ensureLoyaltyClass(
         programName: classBody.programName,
         localizedProgramName: classBody.localizedProgramName,
         programLogo: classBody.programLogo,
+        wideProgramLogo: classBody.wideProgramLogo ?? null,
         hexBackgroundColor: classBody.hexBackgroundColor,
         heroImage: classBody.heroImage ?? null,
-        locations: classBody.locations ?? null,
+        merchantLocations: classBody.merchantLocations ?? null,
         linksModuleData: classBody.linksModuleData ?? null,
+        textModulesData: classBody.textModulesData ?? null,
         accountIdLabel: classBody.accountIdLabel,
         localizedAccountIdLabel: classBody.localizedAccountIdLabel,
         accountNameLabel: classBody.accountNameLabel,
         localizedAccountNameLabel: classBody.localizedAccountNameLabel,
+        multipleDevicesAndHoldersAllowedStatus: classBody.multipleDevicesAndHoldersAllowedStatus,
+        notifyPreference: classBody.notifyPreference ?? null,
         // Required when patching an already-approved class:
         // Google rejects edits unless we explicitly demote it for review.
         // The backend re-approves automatically since the issuer is approved.
