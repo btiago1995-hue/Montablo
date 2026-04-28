@@ -81,7 +81,7 @@ export async function POST(request: Request) {
         const couponId = typeof coupon === 'object' && coupon !== null ? coupon.id : coupon
         if (couponId === 'LANCEMENT_GENEVOIS') {
           isLaunchOffer = true
-          lockedPrice = 24.0
+          lockedPrice = 24.18
         }
       }
 

@@ -101,5 +101,7 @@ export function priceIdToTier(priceId: string): { tier: Tier; cycle: BillingCycl
 }
 
 export const LAUNCH_COUPON_ID = 'LANCEMENT_GENEVOIS'
-export const LAUNCH_DISCOUNT_PERCENT = 38.46
-export const LAUNCH_LOCKED_PRICE_HT = 24.0
+// Stripe UI rejects decimal percent_off, so the live coupon is set to 38%.
+// 39 × (1 - 0.38) = 24.18€/month locked price. Marketing pitch rounds to "24€".
+export const LAUNCH_DISCOUNT_PERCENT = 38
+export const LAUNCH_LOCKED_PRICE_HT = 24.18
