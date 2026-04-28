@@ -158,7 +158,7 @@ export function CardDesigner({ restaurant, program }: Props) {
                   Aucun
                 </div>
               )}
-              <a href="/dashboard/parametres" className="text-xs text-primary hover:underline">
+              <a href="/dashboard/settings" className="text-xs text-primary hover:underline">
                 Modifier dans Réglages
               </a>
             </div>
@@ -178,7 +178,7 @@ export function CardDesigner({ restaurant, program }: Props) {
                   Aucune
                 </div>
               )}
-              <a href="/dashboard/parametres" className="text-xs text-primary hover:underline">
+              <a href="/dashboard/settings" className="text-xs text-primary hover:underline">
                 Modifier dans Réglages
               </a>
             </div>

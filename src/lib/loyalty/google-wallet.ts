@@ -150,7 +150,7 @@ function buildLinksModule(data: PassData) {
   // Restaurant menu (always present)
   uris.push({
     id: 'menu',
-    uri: `https://www.montablo.com/r/${data.restaurantSlug}`,
+    uri: `https://www.montablo.com/menu/${data.restaurantSlug}`,
     description: 'Voir le menu',
     localizedDescription: localizedTriple('Voir le menu', 'View menu', 'Speisekarte ansehen'),
   })
