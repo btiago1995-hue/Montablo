@@ -1,56 +1,72 @@
-const MYMEMORY_URL = 'https://api.mymemory.translated.net/get'
+import Anthropic from '@anthropic-ai/sdk'
 
-/**
- * Translate French text to English using MyMemory free API.
- * Falls back to null if translation fails (graceful degradation).
- * Free tier: 1000 requests/day, no API key needed.
- */
-export async function translateFrToEn(text: string): Promise<string | null> {
-  if (!text || !text.trim()) return null
+export type TargetLang = 'en' | 'de'
 
-  try {
-    const params = new URLSearchParams({
-      q: text.trim(),
-      langpair: 'fr|en',
-    })
-
-    const res = await fetch(`${MYMEMORY_URL}?${params}`, {
-      signal: AbortSignal.timeout(5000),
-    })
-
-    if (!res.ok) return null
-
-    const data = await res.json()
-
-    if (data.responseStatus !== 200) return null
-
-    const translated = data.responseData?.translatedText
-    if (!translated) return null
-
-    // MyMemory sometimes returns the input unchanged for short phrases
-    // or returns all-caps. Clean it up.
-    const cleaned = translated.trim()
-    if (cleaned.toLowerCase() === text.trim().toLowerCase()) return null
-
-    return cleaned
-  } catch {
-    return null
-  }
+const LANG_LABELS: Record<TargetLang, string> = {
+  en: 'English',
+  de: 'German',
 }
 
 /**
- * Batch translate multiple French texts to English.
- * Returns a map of original → translated.
+ * Batch translate multiple French texts to a target language using Anthropic Claude.
+ * Returns a map of input-key → translated text (or null if translation failed).
+ *
+ * Used by the menu manager and daily-menu editor to fill _en / _de columns
+ * automatically when the restaurant adds or edits an item in French.
  */
 export async function translateBatch(
-  texts: Record<string, string>
+  texts: Record<string, string>,
+  targetLang: TargetLang = 'en'
 ): Promise<Record<string, string | null>> {
   const entries = Object.entries(texts).filter(([, v]) => v?.trim())
-  const results = await Promise.all(
-    entries.map(async ([key, value]) => {
-      const translated = await translateFrToEn(value)
-      return [key, translated] as const
+  if (entries.length === 0) return {}
+
+  const apiKey = process.env.ANTHROPIC_API_KEY
+  if (!apiKey) {
+    return Object.fromEntries(entries.map(([k]) => [k, null] as const))
+  }
+
+  const anthropic = new Anthropic({ apiKey })
+  const targetName = LANG_LABELS[targetLang]
+
+  const systemPrompt = `Tu es un traducteur spécialisé dans les menus de restaurant français. Tu traduis du français vers ${targetName} en respectant ces règles :
+- Préserve les noms régionaux français qui n'ont pas d'équivalent direct (tartiflette, fondue savoyarde, Côtes du Rhône, etc.). Tu peux ajouter une brève précision entre parenthèses si utile.
+- Conserve les accents et la ponctuation française quand ils restent pertinents.
+- Garde le ton concis, appétissant, professionnel d'un menu de restaurant.
+- Ne traduis pas une chaîne vide : retourne une chaîne vide.
+Tu reçois un tableau JSON ordonné de chaînes en français. Tu retournes EXACTEMENT le même tableau JSON dans le même ordre, mais traduit en ${targetName}, sans aucun texte additionnel ni bloc markdown.`
+
+  try {
+    const sources = entries.map(([, v]) => v)
+    const response = await anthropic.messages.create({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 4000,
+      system: systemPrompt,
+      messages: [{ role: 'user', content: JSON.stringify(sources) }],
     })
-  )
-  return Object.fromEntries(results)
+
+    const block = response.content.find((c) => c.type === 'text')
+    if (!block || block.type !== 'text') return {}
+
+    const cleaned = block.text
+      .trim()
+      .replace(/^```(?:json)?\s*/i, '')
+      .replace(/\s*```$/i, '')
+      .trim()
+
+    const parsed = JSON.parse(cleaned)
+    if (
+      !Array.isArray(parsed) ||
+      parsed.length !== sources.length ||
+      parsed.some((t) => typeof t !== 'string')
+    ) {
+      return {}
+    }
+
+    return Object.fromEntries(
+      entries.map(([k], i) => [k, (parsed[i] as string).trim() || null] as const)
+    )
+  } catch {
+    return Object.fromEntries(entries.map(([k]) => [k, null] as const))
+  }
 }

@@ -24,7 +24,7 @@ export default async function RevenuePage() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-slate-100">Receita</h1>
+        <h1 className="text-2xl font-bold text-white">Receita</h1>
       </div>
 
       {/* KPIs */}
@@ -36,35 +36,35 @@ export default async function RevenuePage() {
       </div>
 
       {/* Monthly signups chart */}
-      <div className="bg-slate-800 border border-slate-700 rounded-xl mb-6">
-        <div className="px-5 py-4 border-b border-slate-700 text-sm font-semibold text-slate-200">
+      <div className="bg-primary-dark border border-white/10 rounded-xl mb-6">
+        <div className="px-5 py-4 border-b border-white/10 text-sm font-semibold text-white/80">
           Novos clientes — últimos 12 meses
         </div>
         <div className="flex items-end gap-2 px-5 py-4 h-48">
           {monthlySignups.map(({ month, count }) => (
             <div key={month} className="flex flex-col items-center gap-1 flex-1">
-              <span className="text-xs text-slate-400">{count > 0 ? count : ''}</span>
+              <span className="text-xs text-white/70">{count > 0 ? count : ''}</span>
               <div
-                className="w-full bg-blue-600 rounded-t"
+                className="w-full bg-accent rounded-t"
                 style={{ height: `${Math.round((count / maxSignups) * 100)}px`, minHeight: count > 0 ? '4px' : '0' }}
               />
-              <span className="text-[9px] text-slate-500 rotate-45 origin-left ml-2">{month}</span>
+              <span className="text-[9px] text-white/60 rotate-45 origin-left ml-2">{month}</span>
             </div>
           ))}
         </div>
       </div>
 
       {/* Active subscriptions table */}
-      <div className="bg-slate-800 border border-slate-700 rounded-xl">
-        <div className="px-5 py-4 border-b border-slate-700 text-sm font-semibold text-slate-200">
+      <div className="bg-primary-dark border border-white/10 rounded-xl">
+        <div className="px-5 py-4 border-b border-white/10 text-sm font-semibold text-white/80">
           Subscrições activas ({subscriptions.length})
         </div>
         {subscriptions.length === 0 ? (
-          <p className="text-sm text-slate-500 text-center py-10">Nenhuma subscrição activa no Stripe.</p>
+          <p className="text-sm text-white/60 text-center py-10">Nenhuma subscrição activa no Stripe.</p>
         ) : (
           <table className="w-full">
             <thead>
-              <tr className="text-xs uppercase tracking-wider text-slate-500 border-b border-slate-700">
+              <tr className="text-xs uppercase tracking-wider text-white/60 border-b border-white/10">
                 <th className="px-5 py-3 text-left">Restaurante</th>
                 <th className="px-5 py-3 text-left">Plano</th>
                 <th className="px-5 py-3 text-left">Valor</th>
@@ -74,12 +74,12 @@ export default async function RevenuePage() {
             </thead>
             <tbody>
               {subscriptions.map(sub => (
-                <tr key={sub.slug} className="border-b border-slate-700/50 hover:bg-slate-700/30">
-                  <td className="px-5 py-3 text-sm text-slate-300">{sub.restaurantName}</td>
-                  <td className="px-5 py-3 text-sm text-slate-400">{sub.interval}</td>
-                  <td className="px-5 py-3 text-sm text-slate-200 font-medium">{formatEur(sub.amountEur)}</td>
-                  <td className="px-5 py-3 text-sm text-slate-400">{sub.startDate}</td>
-                  <td className="px-5 py-3 text-sm text-slate-400">{sub.currentPeriodEnd}</td>
+                <tr key={sub.slug} className="border-b border-white/10 hover:bg-white/5">
+                  <td className="px-5 py-3 text-sm text-white/90">{sub.restaurantName}</td>
+                  <td className="px-5 py-3 text-sm text-white/70">{sub.interval}</td>
+                  <td className="px-5 py-3 text-sm text-white font-medium">{formatEur(sub.amountEur)}</td>
+                  <td className="px-5 py-3 text-sm text-white/70">{sub.startDate}</td>
+                  <td className="px-5 py-3 text-sm text-white/70">{sub.currentPeriodEnd}</td>
                 </tr>
               ))}
             </tbody>

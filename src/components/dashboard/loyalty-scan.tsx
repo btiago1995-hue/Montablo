@@ -90,7 +90,7 @@ export function LoyaltyScan() {
         <h2 className="font-serif text-2xl mb-4">Fait !</h2>
         <button
           onClick={startScanner}
-          className="bg-[#2C3E2D] text-white px-6 py-3 rounded-xl text-sm font-medium"
+          className="bg-primary text-background px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-primary-light transition-colors"
         >
           Scanner un autre client
         </button>
@@ -117,7 +117,7 @@ export function LoyaltyScan() {
           {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
           <button
             onClick={startScanner}
-            className="bg-[#2C3E2D] text-white px-8 py-4 rounded-xl text-base font-medium w-full"
+            className="bg-primary text-background px-8 py-4 rounded-full text-base font-semibold hover:bg-primary-light transition-colors w-full"
           >
             📷 Réessayer
           </button>
@@ -125,7 +125,7 @@ export function LoyaltyScan() {
       )}
 
       {result && !done && (
-        <div className="bg-white border border-[#E8E8E4] rounded-xl p-6 text-center space-y-4">
+        <div className="bg-white border border-border rounded-2xl p-6 text-center space-y-4">
           <div className="text-4xl">👤</div>
           <h3 className="font-serif text-2xl">{result.customer_name}</h3>
           <p className="text-sm text-muted">
@@ -140,7 +140,7 @@ export function LoyaltyScan() {
             <button
               onClick={handleStamp}
               disabled={stamping}
-              className="flex-1 bg-[#2C3E2D] text-white py-4 rounded-xl text-base font-medium disabled:opacity-50"
+              className="flex-1 bg-primary text-background py-4 rounded-xl text-base font-medium disabled:opacity-50"
             >
               {stamping ? '…' : '+ Ajouter un tampon'}
             </button>

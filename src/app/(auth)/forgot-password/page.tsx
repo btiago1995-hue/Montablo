@@ -46,20 +46,24 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex bg-background">
       {/* Left panel — branding */}
-      <div className="hidden lg:flex lg:w-1/2 bg-primary items-center justify-center p-12">
-        <div className="max-w-md text-center">
-          <UtensilsCrossed className="w-16 h-16 text-accent mx-auto mb-6" />
-          <h1 className="font-serif text-4xl text-white mb-4">MonTablo</h1>
-          <p className="text-white/70 text-lg">
-            Le menu digital qui fait la différence pour votre restaurant.
+      <div className="hidden lg:flex lg:w-1/2 bg-primary items-center justify-center p-12 relative">
+        <Link href="/" className="absolute top-8 left-8 text-background/70 hover:text-background text-sm font-medium transition-colors">
+          ← Retour à l&apos;accueil
+        </Link>
+        <div className="max-w-md">
+          <UtensilsCrossed className="w-14 h-14 text-accent mb-8" />
+          <h1 className="font-serif text-5xl text-background mb-6 leading-tight">MonTablo</h1>
+          <div className="w-16 h-px bg-accent mb-6" />
+          <p className="font-serif italic text-2xl text-background/80 leading-relaxed">
+            Le menu digital pour les restaurants exigeants.
           </p>
         </div>
       </div>
 
       {/* Right panel — form */}
-      <div className="flex-1 flex items-center justify-center p-8">
+      <div className="flex-1 flex items-center justify-center p-8 bg-background">
         <div className="w-full max-w-md">
           <div className="lg:hidden flex items-center gap-3 mb-8">
             <UtensilsCrossed className="w-8 h-8 text-primary" />
@@ -68,22 +72,26 @@ export default function ForgotPasswordPage() {
 
           {emailSent ? (
             <>
-              <h2 className="font-serif text-3xl text-foreground mb-2">Email envoyé</h2>
+              <h2 className="font-serif text-4xl text-primary mb-2">
+                <span className="italic">Email envoyé</span>
+              </h2>
               <p className="text-muted mb-6">
                 Un email de réinitialisation a été envoyé à <strong className="text-foreground">{email}</strong>.
               </p>
-              <div className="bg-primary/5 border border-primary/20 text-foreground text-sm px-4 py-4 rounded-lg mb-6">
+              <div className="bg-green-soft border border-green-soft text-primary text-sm px-4 py-3 rounded-xl mb-6">
                 Cliquez sur le lien dans l&apos;email pour réinitialiser votre mot de passe.
               </div>
               <p className="text-center text-sm text-muted">
-                <Link href="/login" className="text-primary font-medium hover:underline">
+                <Link href="/login" className="text-primary-light hover:text-primary font-medium transition-colors">
                   Retour à la connexion
                 </Link>
               </p>
             </>
           ) : (
             <>
-              <h2 className="font-serif text-3xl text-foreground mb-2">Mot de passe oublié</h2>
+              <h2 className="font-serif text-4xl text-primary mb-2">
+                <span className="italic">Mot de passe oublié</span>
+              </h2>
               <p className="text-muted mb-8">
                 Entrez votre email pour recevoir un lien de réinitialisation.
               </p>
@@ -100,7 +108,7 @@ export default function ForgotPasswordPage() {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                     placeholder="vous@restaurant.fr"
-                    className="w-full px-4 py-3 rounded-lg border border-border bg-white text-foreground placeholder:text-muted/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
+                    className="w-full px-4 py-3 rounded-xl border border-border bg-white text-foreground placeholder:text-muted/50 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition"
                   />
                 </div>
 
@@ -118,7 +126,7 @@ export default function ForgotPasswordPage() {
                 )}
 
                 {error && (
-                  <div className="bg-red-50 text-red-600 text-sm px-4 py-3 rounded-lg">
+                  <div className="bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-3 rounded-xl">
                     {error}
                   </div>
                 )}
@@ -126,14 +134,14 @@ export default function ForgotPasswordPage() {
                 <button
                   type="submit"
                   disabled={loading || (!!TURNSTILE_SITE_KEY && !captchaToken)}
-                  className="w-full bg-primary hover:bg-primary-light text-white font-medium py-3 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-primary hover:bg-primary-light text-background font-semibold py-3 px-6 rounded-full transition disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading ? 'Envoi...' : 'Envoyer le lien'}
                 </button>
               </form>
 
               <p className="mt-6 text-center text-sm text-muted">
-                <Link href="/login" className="text-primary font-medium hover:underline">
+                <Link href="/login" className="text-primary-light hover:text-primary font-medium transition-colors">
                   Retour à la connexion
                 </Link>
               </p>

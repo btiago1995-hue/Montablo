@@ -19,7 +19,7 @@ const comparisonRows = [
     icon: Euro,
     criteria: 'Prix',
     competitor: 'Tarification variable, souvent plus élevée',
-    montablo: 'À partir de 26,99 euros/mois, tout inclus',
+    montablo: 'À partir de 19 € HT/mois (Essentiel)',
     advantage: 'montablo' as const,
   },
   {
@@ -96,7 +96,7 @@ const faqs = [
   {
     question: 'Sunday est-il plus cher que MonTablo ?',
     answer:
-      'Sunday applique generalement une commission sur les transactions de paiement en plus d\'eventuels frais d\'abonnement. MonTablo propose un forfait fixe à partir de 26,99 euros par mois (abonnement annuel) ou 29,99 euros par mois sans engagement, sans commission ni frais cachés.',
+      'Sunday applique generalement une commission sur les transactions de paiement en plus d\'eventuels frais d\'abonnement. MonTablo propose un forfait fixe à partir de 19 € HT par mois (Essentiel) ou 39 € HT par mois (Pro), avec −10 % en annuel, sans commission ni frais cachés.',
   },
   {
     question: 'Puis-je utiliser MonTablo et Sunday en même temps ?',
@@ -176,14 +176,14 @@ export default function CompareSundayPage() {
           Comparatif
         </p>
         <h1 className="font-serif text-4xl sm:text-5xl text-foreground mb-4 text-balance">
-          MonTablo vs Sunday : quelle solution pour votre menu digital ?
+          MonTablo vs Sunday : la comparaison honnête.
         </h1>
         <p className="text-lg text-muted max-w-2xl mx-auto leading-relaxed">
-          Sunday excelle dans le paiement a table. MonTablo se concentre sur le{' '}
+          Sunday est conçu pour le paiement à table. MonTablo est conçu pour le{' '}
           <Link href="/fonctionnalites" className="text-primary hover:underline">
             menu digital
           </Link>
-          . Découvrez quelle solution correspond le mieux a vos besoins.
+          . Deux outils différents, pour deux besoins différents.
         </p>
       </section>
 
@@ -279,7 +279,7 @@ export default function CompareSundayPage() {
             <p className="text-[15px] text-muted leading-relaxed">
               MonTablo propose un{' '}
               <Link href="/tarifs" className="text-primary hover:underline">
-                forfait fixe à partir de 26,99 euros par mois
+                forfait fixe à partir de 19 € HT par mois (Essentiel)
               </Link>
               , sans commission, sans frais cachés et sans engagement. Vous savez exactement
               ce que vous payez chaque mois.

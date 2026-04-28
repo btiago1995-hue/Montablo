@@ -41,7 +41,7 @@ export function homepageJsonLd() {
         'Menu digital pour restaurants avec QR code, mises à jour en temps réel, menu du jour, promotions et design personnalisable.',
       offers: {
         '@type': 'Offer',
-        price: '26.99',
+        price: '19.00',
         priceCurrency: 'EUR',
         priceValidUntil: '2027-12-31',
         availability: 'https://schema.org/InStock',

@@ -1,22 +1,25 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Sans, DM_Serif_Display } from "next/font/google";
+import { Work_Sans, Fraunces } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
-import Script from "next/script";
+import { CookieBanner } from "@/components/public/cookie-banner";
+import { AnalyticsScripts } from "@/components/public/analytics-scripts";
 import "./globals.css";
 
-const dmSans = DM_Sans({
+const workSans = Work_Sans({
   subsets: ["latin"],
-  variable: "--font-dm-sans",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-work-sans",
 });
 
-const dmSerif = DM_Serif_Display({
-  weight: "400",
+const fraunces = Fraunces({
   subsets: ["latin"],
-  variable: "--font-dm-serif",
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-fraunces",
 });
 
 export const viewport: Viewport = {
-  themeColor: "#2C3E2D",
+  themeColor: "#1E3932",
 };
 
 export const metadata: Metadata = {
@@ -58,22 +61,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <head>
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=AW-18093408110"
-          strategy="afterInteractive"
-        />
-        <Script id="google-ads" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'AW-18093408110');
-          `}
-        </Script>
-      </head>
-      <body className={`${dmSans.variable} ${dmSerif.variable} font-sans`}>
+      <body className={`${workSans.variable} ${fraunces.variable} font-sans`}>
         {children}
+        <CookieBanner />
+        <AnalyticsScripts />
         <Analytics />
       </body>
     </html>

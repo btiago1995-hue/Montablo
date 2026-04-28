@@ -54,18 +54,23 @@ function t(lang: Lang, key: string): string {
   return UI_STRINGS[lang][key] ?? UI_STRINGS.fr[key] ?? key
 }
 
-function localized<T extends { name_fr: string; name_en: string | null }>(
-  entity: T,
-  lang: Lang
-): string {
+function localized<
+  T extends { name_fr: string; name_en: string | null; name_de?: string | null },
+>(entity: T, lang: Lang): string {
+  if (lang === 'de' && entity.name_de) return entity.name_de
   if (lang === 'en' && entity.name_en) return entity.name_en
   return entity.name_fr
 }
 
 function localizedDesc(
-  entity: { description_fr: string | null; description_en: string | null },
+  entity: {
+    description_fr: string | null
+    description_en: string | null
+    description_de?: string | null
+  },
   lang: Lang
 ): string | null {
+  if (lang === 'de' && entity.description_de) return entity.description_de
   if (lang === 'en' && entity.description_en) return entity.description_en
   return entity.description_fr
 }
@@ -133,7 +138,7 @@ function ItemDetail({
             </button>
           )}
           <h3 className="font-serif text-2xl tracking-tight mb-2">{name}</h3>
-          {desc && <p className="text-sm text-[#6B6B6B] leading-relaxed mb-4">{desc}</p>}
+          {desc && <p className="text-sm text-muted leading-relaxed mb-4">{desc}</p>}
           {item.tags && item.tags.length > 0 && (
             <div className="flex gap-1.5 flex-wrap mb-4">
               {item.tags.map((tag) => (
@@ -145,7 +150,7 @@ function ItemDetail({
           )}
           {allergens.length > 0 && (
             <div className="mb-4 p-3 bg-[#FFF8E1] rounded-lg">
-              <p className="text-[10.5px] uppercase tracking-wide font-semibold text-[#8D6E00] mb-2">
+              <p className="text-[10.5px] uppercase tracking-wide font-semibold text-accent-dark mb-2">
                 {ALLERGEN_LEGEND_TITLE[allergenLocale]}
               </p>
               <div className="flex gap-1.5 flex-wrap">
@@ -154,7 +159,7 @@ function ItemDetail({
                   return (
                     <span
                       key={code}
-                      className="inline-flex items-center gap-1 text-[11.5px] text-[#8D6E00] bg-white/60 px-2 py-1 rounded"
+                      className="inline-flex items-center gap-1 text-[11.5px] text-accent-dark bg-white/60 px-2 py-1 rounded"
                     >
                       <span aria-hidden>{def.icon}</span>
                       {getAllergenLabel(code, allergenLocale)}
@@ -164,10 +169,10 @@ function ItemDetail({
               </div>
             </div>
           )}
-          <div className="text-2xl font-bold text-[#2C3E2D]">
+          <div className="text-2xl font-bold text-primary">
             {promo ? (
               <>
-                <span className="text-sm text-[#9B9B9B] line-through font-normal mr-2">
+                <span className="text-sm text-muted-light line-through font-normal mr-2">
                   {formatPrice(promo.original_price)}
                 </span>
                 <span className="text-[#C43E3E]">{formatPrice(promo.promo_price)}</span>
@@ -279,7 +284,7 @@ export function MenuContent({
               onClick={() => setLang(l)}
               aria-label={LANG_LABELS[l].name}
               className={`px-2.5 py-1 rounded-md text-xs font-semibold tracking-wide transition-all flex items-center gap-1 ${
-                lang === l ? 'bg-white/95 text-[#1A1A1A]' : 'text-white/70'
+                lang === l ? 'bg-white/95 text-foreground' : 'text-white/70'
               }`}
             >
               <span aria-hidden>{LANG_LABELS[l].flag}</span>
@@ -300,16 +305,16 @@ export function MenuContent({
             {t(lang, 'dailyMenu')}
           </div>
           <div className="font-serif text-[19px] leading-snug mb-1.5">
-            {lang === 'en' && dailyMenu.title_en ? dailyMenu.title_en : dailyMenu.title_fr}
+            {(lang === 'de' && dailyMenu.title_de) || (lang === 'en' && dailyMenu.title_en) || dailyMenu.title_fr}
           </div>
-          {(lang === 'en' ? dailyMenu.description_en || dailyMenu.description_fr : dailyMenu.description_fr) && (
+          {((lang === 'de' && dailyMenu.description_de) || (lang === 'en' && dailyMenu.description_en) || dailyMenu.description_fr) && (
             <div className="text-[13px] opacity-80 leading-relaxed mb-3">
-              {lang === 'en' && dailyMenu.description_en ? dailyMenu.description_en : dailyMenu.description_fr}
+              {(lang === 'de' && dailyMenu.description_de) || (lang === 'en' && dailyMenu.description_en) || dailyMenu.description_fr}
             </div>
           )}
-          {(lang === 'en' ? dailyMenu.items_description_en : dailyMenu.items_description_fr) && (
+          {((lang === 'de' && dailyMenu.items_description_de) || (lang === 'en' && dailyMenu.items_description_en) || dailyMenu.items_description_fr) && (
             <div className="text-[13px] opacity-80 leading-relaxed mb-3 whitespace-pre-line">
-              {lang === 'en' && dailyMenu.items_description_en ? dailyMenu.items_description_en : dailyMenu.items_description_fr}
+              {(lang === 'de' && dailyMenu.items_description_de) || (lang === 'en' && dailyMenu.items_description_en) || dailyMenu.items_description_fr}
             </div>
           )}
           {dailyMenu.price && (
@@ -324,14 +329,14 @@ export function MenuContent({
       )}
 
       {/* Allergen notice (INCO) */}
-      <div className="mx-4 mt-3 px-4 py-3 bg-[#FFF8E1] rounded-lg flex items-start gap-2 text-[12px] text-[#8D6E00] leading-relaxed">
+      <div className="mx-4 mt-3 px-4 py-3 bg-[#FFF8E1] rounded-lg flex items-start gap-2 text-[12px] text-accent-dark leading-relaxed">
         <Info className="w-4 h-4 shrink-0 mt-0.5" />
         <span>{t(lang, 'allergenNotice')}</span>
       </div>
 
       {/* Category tabs - sticky */}
       {categories.length > 0 && (
-        <div className="sticky top-0 z-20 bg-[#FAFAF7]/95 backdrop-blur-md pt-4">
+        <div className="sticky top-0 z-20 bg-background/95 backdrop-blur-md pt-4">
           <div className="flex gap-2 overflow-x-auto px-4 pb-3 scrollbar-hide">
             {categories.map((cat) => (
               <button
@@ -340,16 +345,16 @@ export function MenuContent({
                 className={`shrink-0 px-[18px] py-2 rounded-full text-[13px] font-medium border-[1.5px] transition-all whitespace-nowrap ${
                   activeCategory === cat.id
                     ? 'text-white border-transparent'
-                    : 'bg-white border-[#E8E8E4] text-[#6B6B6B] hover:border-[#9B9B9B]'
+                    : 'bg-white border-border text-muted hover:border-muted-light'
                 }`}
                 style={activeCategory === cat.id ? { backgroundColor: primaryColor, borderColor: primaryColor } : undefined}
               >
                 {cat.icon && <span className="mr-1">{cat.icon}</span>}
-                {lang === 'en' && cat.name_en ? cat.name_en : cat.name_fr}
+                {localized(cat, lang)}
               </button>
             ))}
           </div>
-          <div className="h-px bg-[#E8E8E4]" />
+          <div className="h-px bg-border" />
         </div>
       )}
 
@@ -364,10 +369,10 @@ export function MenuContent({
 
             return (
               <section key={category.id} id={`cat-${category.id}`} className="px-4 pt-6 pb-2">
-                <h2 className="font-serif text-[22px] tracking-tight text-[#1A1A1A] mb-1">
-                  {lang === 'en' && category.name_en ? category.name_en : category.name_fr}
+                <h2 className="font-serif text-[22px] tracking-tight text-foreground mb-1">
+                  {localized(category, lang)}
                 </h2>
-                <p className="text-[12px] text-[#9B9B9B] mb-4">
+                <p className="text-[12px] text-muted-light mb-4">
                   {categoryItems.length} {categoryItems.length === 1 ? t(lang, 'article') : t(lang, 'articles')}
                 </p>
 
@@ -375,19 +380,19 @@ export function MenuContent({
                   {categoryItems.map((item) => {
                     const promo = promoMap.get(item.id)
                     const isUnavailable = !item.is_available
-                    const name = lang === 'en' && item.name_en ? item.name_en : item.name_fr
-                    const desc = lang === 'en' ? (item.description_en || item.description_fr) : item.description_fr
+                    const name = localized(item, lang)
+                    const desc = localizedDesc(item, lang)
 
                     return (
                       <div
                         key={item.id}
                         onClick={() => !isUnavailable && setSelectedItem(item)}
-                        className={`flex gap-3.5 bg-white rounded-xl p-3.5 border border-[#E8E8E4] shadow-[0_1px_3px_rgba(0,0,0,0.04)] relative overflow-hidden transition-transform active:scale-[0.985] ${
+                        className={`flex gap-3.5 bg-white rounded-xl p-3.5 border border-border shadow-[0_1px_3px_rgba(0,0,0,0.04)] relative overflow-hidden transition-transform active:scale-[0.985] ${
                           isUnavailable ? 'opacity-[0.45] pointer-events-none' : 'cursor-pointer'
                         }`}
                       >
                         {item.image_url ? (
-                          <div className="relative w-[88px] h-[88px] shrink-0 rounded-lg overflow-hidden bg-[#F0EDE8]">
+                          <div className="relative w-[88px] h-[88px] shrink-0 rounded-lg overflow-hidden bg-surface">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
                               src={item.image_url}
@@ -412,11 +417,11 @@ export function MenuContent({
 
                         <div className="flex-1 min-w-0 flex flex-col justify-between">
                           <div>
-                            <h3 className="text-[15px] font-semibold leading-snug text-[#1A1A1A] mb-0.5">
+                            <h3 className="text-[15px] font-semibold leading-snug text-foreground mb-0.5">
                               {name}
                             </h3>
                             {desc && (
-                              <p className="text-[12.5px] text-[#6B6B6B] leading-relaxed line-clamp-2">
+                              <p className="text-[12.5px] text-muted leading-relaxed line-clamp-2">
                                 {desc}
                               </p>
                             )}
@@ -442,13 +447,13 @@ export function MenuContent({
                             <div className="text-[16px] font-bold tracking-tight">
                               {promo ? (
                                 <>
-                                  <span className="text-[13px] text-[#9B9B9B] line-through font-normal mr-1.5">
+                                  <span className="text-[13px] text-muted-light line-through font-normal mr-1.5">
                                     {formatPrice(promo.original_price)}
                                   </span>
                                   <span className="text-[#C43E3E]">{formatPrice(promo.promo_price)}</span>
                                 </>
                               ) : (
-                                <span className="text-[#2C3E2D]">{formatPrice(item.price)}</span>
+                                <span className="text-primary">{formatPrice(item.price)}</span>
                               )}
                             </div>
                             {item.tags && item.tags.length > 0 && (
@@ -474,15 +479,15 @@ export function MenuContent({
           })
         ) : (
           <div className="text-center py-16">
-            <UtensilsCrossed className="w-12 h-12 text-[#9B9B9B]/30 mx-auto mb-4" />
-            <p className="text-[#9B9B9B]">{t(lang, 'menuComing')}</p>
+            <UtensilsCrossed className="w-12 h-12 text-muted-light/30 mx-auto mb-4" />
+            <p className="text-muted-light">{t(lang, 'menuComing')}</p>
           </div>
         )}
 
         {/* Allergen legend + INCO legal footer */}
         {usedAllergens.length > 0 && (
-          <div className="mx-4 mt-6 p-4 bg-white border border-[#E8E8E4] rounded-xl">
-            <p className="text-[11px] uppercase tracking-[0.08em] font-semibold text-[#6B6B6B] mb-3">
+          <div className="mx-4 mt-6 p-4 bg-white border border-border rounded-xl">
+            <p className="text-[11px] uppercase tracking-[0.08em] font-semibold text-muted mb-3">
               {ALLERGEN_LEGEND_TITLE[allergenLocale]}
             </p>
             <div className="flex gap-1.5 flex-wrap">
@@ -491,7 +496,7 @@ export function MenuContent({
                 return (
                   <span
                     key={code}
-                    className="inline-flex items-center gap-1 text-[11.5px] text-[#4B4B4B] bg-[#FAFAF7] px-2 py-1 rounded border border-[#E8E8E4]"
+                    className="inline-flex items-center gap-1 text-[11.5px] text-muted bg-background px-2 py-1 rounded border border-border"
                   >
                     <span aria-hidden>{def.icon}</span>
                     {getAllergenLabel(code, allergenLocale)}
@@ -501,7 +506,7 @@ export function MenuContent({
             </div>
           </div>
         )}
-        <p className="mx-4 mt-4 text-[10.5px] text-[#9B9B9B] leading-relaxed">
+        <p className="mx-4 mt-4 text-[10.5px] text-muted-light leading-relaxed">
           {ALLERGEN_FOOTER[allergenLocale]}
         </p>
       </div>

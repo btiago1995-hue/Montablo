@@ -10,7 +10,7 @@ export default async function QRCodePage() {
 
   return (
     <div>
-      <h1 className="font-serif text-3xl text-foreground mb-2">QR Code</h1>
+      <h1 className="font-serif text-3xl text-primary mb-2">QR Code</h1>
       <p className="text-muted mb-8">Générez et téléchargez votre QR code pour vos tables.</p>
       <QRCodeGenerator menuUrl={menuUrl} restaurantName={restaurant.name} />
     </div>

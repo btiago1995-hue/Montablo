@@ -31,11 +31,11 @@ export function ConfirmDialog({ label, description, confirmLabel, onConfirm, var
 
   const btnClass = variant === 'danger'
     ? 'bg-red-700 hover:bg-red-600 text-white'
-    : 'bg-blue-600 hover:bg-blue-500 text-white'
+    : 'bg-accent hover:bg-accent-light text-primary'
 
   const triggerClass = variant === 'danger'
     ? 'bg-red-950 border-red-900 text-red-400 hover:bg-red-900'
-    : 'bg-slate-800 border-slate-600 text-slate-300 hover:bg-slate-700'
+    : 'bg-white/5 border-white/20 text-white/90 hover:bg-white/10'
 
   return (
     <>
@@ -50,15 +50,15 @@ export function ConfirmDialog({ label, description, confirmLabel, onConfirm, var
 
       {open && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
-          <div className="bg-slate-800 border border-slate-700 rounded-xl w-full max-w-sm p-6">
-            <h2 className="text-sm font-semibold text-slate-200 mb-2">{label}</h2>
-            <p className="text-sm text-slate-400 mb-5">{description}</p>
+          <div className="bg-primary-dark border border-white/10 rounded-xl w-full max-w-sm p-6">
+            <h2 className="text-sm font-semibold text-white/90 mb-2">{label}</h2>
+            <p className="text-sm text-white/70 mb-5">{description}</p>
             {error && <p className="text-xs text-red-400 mb-3">{error}</p>}
             <div className="flex gap-2 justify-end">
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="px-4 py-2 text-sm text-slate-400 hover:text-slate-200"
+                className="px-4 py-2 text-sm text-white/70 hover:text-white"
               >
                 Cancelar
               </button>

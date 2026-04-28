@@ -24,7 +24,7 @@ export default async function LoyaltyScanPage() {
         <ChevronLeft className="w-4 h-4" />
         Retour
       </Link>
-      <h1 className="font-serif text-3xl text-foreground mb-2">Scanner</h1>
+      <h1 className="font-serif text-3xl text-primary mb-2">Scanner</h1>
       <p className="text-muted mb-8">Scannez le QR code du client pour ajouter un tampon.</p>
       <LoyaltyScan />
     </div>

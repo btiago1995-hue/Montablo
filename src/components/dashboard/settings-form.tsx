@@ -18,6 +18,9 @@ export function SettingsForm({ restaurant }: { restaurant: Restaurant }) {
   const [logoUrl, setLogoUrl] = useState(restaurant.logo_url)
   const [coverUrl, setCoverUrl] = useState(restaurant.cover_url)
   const [googleReviewUrl, setGoogleReviewUrl] = useState(restaurant.google_review_url ?? '')
+  const initialLangs = (restaurant.languages && restaurant.languages.length > 0) ? restaurant.languages : ['fr']
+  const [langEn, setLangEn] = useState(initialLangs.includes('en'))
+  const [langDe, setLangDe] = useState(initialLangs.includes('de'))
   const [loading, setLoading] = useState(false)
   const [saved, setSaved] = useState(false)
   const [deleteLoading, setDeleteLoading] = useState(false)
@@ -64,6 +67,10 @@ export function SettingsForm({ restaurant }: { restaurant: Restaurant }) {
     setErrorMsg(null)
     setGeocodeStatus('idle')
 
+    const langs = ['fr']
+    if (langEn) langs.push('en')
+    if (langDe) langs.push('de')
+
     const res = await fetch('/api/restaurant/settings', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -79,6 +86,7 @@ export function SettingsForm({ restaurant }: { restaurant: Restaurant }) {
         city: city.trim() || null,
         postal_code: postalCode.trim() || null,
         country_code: 'FR',
+        languages: langs,
       }),
     })
 
@@ -104,7 +112,7 @@ export function SettingsForm({ restaurant }: { restaurant: Restaurant }) {
   return (
     <div className="max-w-2xl space-y-8">
       {/* Lien vers /dashboard/abonnement */}
-      <div className="bg-white rounded-xl border border-border p-4">
+      <div className="bg-white rounded-2xl border border-border p-6">
         <div className="flex items-center justify-between">
           <div>
             <p className="font-medium text-foreground">Abonnement</p>
@@ -117,8 +125,8 @@ export function SettingsForm({ restaurant }: { restaurant: Restaurant }) {
       </div>
 
       {/* Restaurant info */}
-      <form onSubmit={handleSave} className="bg-white rounded-xl border border-border p-6 space-y-5">
-        <h2 className="font-serif text-xl text-foreground">Informations</h2>
+      <form onSubmit={handleSave} className="bg-white rounded-2xl border border-border p-6 space-y-5">
+        <h2 className="font-serif text-xl text-primary">Informations</h2>
 
         <Input
           label="Nom du restaurant"
@@ -206,6 +214,45 @@ export function SettingsForm({ restaurant }: { restaurant: Restaurant }) {
           </select>
         </div>
 
+        {/* Langues du menu */}
+        <div className="pt-4 border-t border-border space-y-4">
+          <div>
+            <h3 className="font-medium text-foreground">Langues du menu</h3>
+            <p className="text-sm text-muted mt-1">
+              Activez les langues dans lesquelles vos clients peuvent consulter votre carte.
+              Le français est toujours actif. Les traductions sont automatiques (vous pouvez
+              les corriger manuellement plat par plat).
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <span className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium bg-primary text-background">
+              🇫🇷 Français (toujours actif)
+            </span>
+            <button
+              type="button"
+              onClick={() => setLangEn(!langEn)}
+              className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium transition ${
+                langEn
+                  ? 'bg-primary text-background'
+                  : 'bg-white border border-border text-foreground hover:border-primary/30 hover:bg-surface'
+              }`}
+            >
+              {langEn ? '✓' : '+'} 🇬🇧 Anglais
+            </button>
+            <button
+              type="button"
+              onClick={() => setLangDe(!langDe)}
+              className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium transition ${
+                langDe
+                  ? 'bg-primary text-background'
+                  : 'bg-white border border-border text-foreground hover:border-primary/30 hover:bg-surface'
+              }`}
+            >
+              {langDe ? '✓' : '+'} 🇩🇪 Allemand
+            </button>
+          </div>
+        </div>
+
         {/* Google Reviews */}
         <div className="pt-4 border-t border-border space-y-4">
           <div className="flex items-center gap-2">
@@ -289,7 +336,7 @@ export function SettingsForm({ restaurant }: { restaurant: Restaurant }) {
       </form>
 
       {/* Zone dangereuse (collapsed by default) */}
-      <div className="rounded-xl border border-border bg-white p-6">
+      <div className="rounded-2xl border border-border bg-white p-6">
         <button
           type="button"
           onClick={() => setDangerExpanded((v) => !v)}
@@ -298,7 +345,7 @@ export function SettingsForm({ restaurant }: { restaurant: Restaurant }) {
         >
           <div className="flex items-center gap-2">
             <AlertTriangle className="w-5 h-5 text-muted" />
-            <h2 className="font-serif text-xl text-foreground">Zone dangereuse</h2>
+            <h2 className="font-serif text-xl text-primary">Zone dangereuse</h2>
           </div>
           <span className="text-sm text-muted">
             {dangerExpanded ? 'Masquer' : 'Afficher'}

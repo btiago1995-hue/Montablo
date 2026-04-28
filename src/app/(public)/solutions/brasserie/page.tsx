@@ -2,96 +2,74 @@ import Link from 'next/link'
 import {
   ArrowRight,
   UtensilsCrossed,
-  LayoutGrid,
-  Tag,
-  Clock,
-  Layers,
-  Smartphone,
-  Globe,
+  Languages,
+  Camera,
+  Wallet,
+  Sandwich,
+  Quote,
 } from 'lucide-react'
 import { JsonLd, breadcrumbJsonLd } from '@/components/seo/json-ld'
+import { CTALink } from '@/components/public/cta-link'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Menu digital pour brasserie | MonTablo',
+  title: 'Crêperies & restaurants régionaux — MonTablo : menu digital QR multilingue avec fidélité Wallet',
   description:
-    'Gerez le menu digital de votre brasserie facilement. Catégories illimitées, promotions happy hour, carte organisee pour le service continu.',
+    'Le menu digital pour crêperies et tables régionales qui servent une clientèle internationale. Multilingue FR/EN/DE, photos par plat, fidélité Wallet. Essai 14 jours gratuit.',
+  alternates: { canonical: '/solutions/brasserie' },
   openGraph: {
-    title: 'Menu digital pour brasserie | MonTablo',
-    description:
-      'Catégories illimitées, promotions happy hour, carte organisee. La solution pour les brasseries.',
+    title: 'Crêperies & restaurants régionaux — MonTablo',
+    description: 'Le menu digital pour les tables régionales qui servent une clientèle internationale.',
   },
 }
 
-const benefits = [
-  {
-    icon: LayoutGrid,
-    title: 'Catégories illimitées',
-    description:
-      'Entrées, plats, grillades, poissons, desserts, boissons, vins... Organisez votre carte en autant de catégories que nécessaire, sans aucune limite.',
-  },
-  {
-    icon: Tag,
-    title: 'Promotions happy hour',
-    description:
-      'Programmez vos promotions avec dates de debut et de fin. Les offres happy hour apparaissent et disparaissent automatiquement.',
-  },
-  {
-    icon: Clock,
-    title: 'Service continu, carte adaptee',
-    description:
-      'Activez ou désactivez des catégories selon le moment de la journee. Carte du midi, carte du soir, tout se géré en quelques taps.',
-  },
+const BTN_BASE =
+  'inline-flex items-center justify-center gap-2.5 h-[50px] px-7 rounded-full font-semibold text-[15px] whitespace-nowrap border-[1.5px] border-transparent transition hover:-translate-y-px'
+const BTN_PRIMARY = `${BTN_BASE} bg-primary text-background hover:bg-green-classic`
+const BTN_SECONDARY = `${BTN_BASE} bg-transparent text-primary border-primary hover:bg-primary hover:text-background`
+const BTN_GHOST_SM =
+  'inline-flex items-center justify-center gap-2 h-10 px-5 rounded-full font-semibold text-sm text-primary hover:bg-green-mist transition whitespace-nowrap'
+const BTN_PRIMARY_SM =
+  'inline-flex items-center justify-center gap-2 h-10 px-5 rounded-full font-semibold text-sm bg-primary text-background hover:bg-green-classic transition whitespace-nowrap'
+const EYEBROW =
+  'inline-block font-sans text-[12px] tracking-[0.22em] uppercase text-primary-light font-semibold mb-5'
+
+const pains = [
+  "Expliquer la fondue, la galette complète ou le bourguignon en anglais 50 fois par soir.",
+  "Faux pas culturels (lait, gluten) sans pictogrammes sur la carte.",
+  "Photos de plats régionaux qui ne tiennent pas dans la carte papier.",
+  "Touristes qui choisissent au hasard et ne reviennent jamais.",
 ]
 
 const features = [
   {
-    icon: Layers,
-    title: 'Organisation par catégories',
-    description: 'Créez autant de catégories et sous-groupes que vous le souhaitez. Votre carte reste claire même avec 100 plats.',
+    icon: Languages,
+    title: 'Multilingue FR / EN / DE',
+    desc: "Vos clients britanniques, suisses ou allemands lisent la galette complète, la fondue ou le farçon dans leur langue. Traduction automatique, vérifiable plat par plat.",
+    benefit: "Vos serveurs arrêtent de mimer la raclette en anglais.",
   },
   {
-    icon: Tag,
-    title: 'Promotions temporaires',
-    description: 'Happy hour, formules du midi, offres du week-end. Programmez vos promotions et elles apparaissent automatiquement.',
+    icon: Camera,
+    title: 'Photos par plat',
+    desc: "Une vraie photo par spécialité. Les clients étrangers voient ce qu'ils commandent avant de se lancer — et osent enfin la fondue ou la tartiflette.",
+    benefit: "Le ticket moyen monte parce que les plats régionaux deviennent désirables.",
   },
   {
-    icon: Clock,
-    title: 'Mises à jour instantanées',
-    description: 'Changez un prix, ajoutez un plat, désactivez une catégorie. Vos clients voient les modifications en temps réel.',
-  },
-  {
-    icon: Smartphone,
-    title: 'QR code personnalisé',
-    description: 'Un QR code aux couleurs de votre brasserie, prêt a imprimer et a poser sur vos tables ou au comptoir.',
-  },
-  {
-    icon: Globe,
-    title: 'Bilingue français / anglais',
-    description: 'Accueillez une clientèle internationale avec un menu disponible en français et en anglais.',
-  },
-  {
-    icon: UtensilsCrossed,
-    title: 'Design professionnel',
-    description: 'Un menu digital élégant qui reflète l\'image de votre brasserie. Couleurs personnalisables, typographie soignée.',
+    icon: Wallet,
+    title: 'Cartes de fidélité Wallet',
+    desc: "Vos clients ajoutent leur carte à Apple Wallet ou Google Wallet en un scan. Quand ils repassent en vacances l'année suivante, leur carte les rappelle à vous via la géolocalisation.",
+    benefit: "Le touriste de l'an dernier devient un habitué.",
   },
 ]
 
-const steps = [
+const faq = [
   {
-    number: '1',
-    title: 'Importez votre carte',
-    description: 'Ajoutez vos plats manuellement ou photographiez votre carte existante. Notre IA fait le reste.',
+    q: "Mes plats régionaux ont des noms intraduisibles. Comment ça marche ?",
+    a: "Vous gardez le nom français (fondue, farçon, galette complète) et MonTablo ajoute une description traduite en anglais et allemand. Les noms régionaux restent — c'est ce que cherchent vos clients étrangers — et la description leur explique ce qu'il y a dedans.",
   },
   {
-    number: '2',
-    title: 'Organisez par catégories',
-    description: 'Créez vos catégories, ordonnez vos plats, ajoutez photos et descriptions.',
-  },
-  {
-    number: '3',
-    title: 'Publiez et partagez',
-    description: 'Générez votre QR code, posez-le sur les tables. Votre brasserie a son menu digital.',
+    q: 'Les cartes Wallet, ça marche vraiment pour des touristes ?',
+    a: "Oui. Apple Wallet et Google Wallet fonctionnent dans tous les pays. Un client suisse, allemand ou britannique scanne le QR à la fin du repas, ajoute la carte, et la retrouve à sa prochaine visite — même un an plus tard.",
   },
 ]
 
@@ -99,219 +77,248 @@ export default function BrasseriePage() {
   const base = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.montablo.com'
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background min-h-screen text-foreground font-sans text-[17px] leading-[1.55] antialiased overflow-x-hidden">
       <JsonLd
         data={breadcrumbJsonLd([
           { name: 'Accueil', url: base },
           { name: 'Solutions', url: `${base}/solutions` },
-          { name: 'Brasserie', url: `${base}/solutions/brasserie` },
+          { name: 'Crêperies & régionaux', url: `${base}/solutions/brasserie` },
         ])}
       />
 
-      {/* Nav */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/85 backdrop-blur-xl border-b border-border/50">
-        <div className="flex items-center justify-between px-6 py-4 max-w-[1120px] mx-auto">
-          <Link href="/" className="flex items-center gap-2">
-            <UtensilsCrossed className="w-6 h-6 text-primary" />
-            <span className="font-serif text-xl text-primary tracking-tight">MonTablo</span>
+      {/* ===== NAV ===== */}
+      <nav className="sticky top-0 z-50 backdrop-blur-[14px] bg-background/80 border-b border-primary/5">
+        <div className="max-w-[1240px] mx-auto px-8 flex items-center justify-between h-[76px]">
+          <Link href="/" className="flex items-center gap-2.5 font-serif text-2xl font-semibold text-primary tracking-tight">
+            <UtensilsCrossed width={26} height={26} strokeWidth={1.6} />
+            <span>MonTablo</span>
           </Link>
-          <div className="flex items-center gap-6">
-            <Link href="/fonctionnalites" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
-              Fonctionnalités
-            </Link>
-            <Link href="/tarifs" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
-              Tarifs
-            </Link>
-            <Link href="/blog" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
-              Blog
-            </Link>
-            <Link href="/login" className="text-sm text-muted hover:text-foreground transition-colors hidden sm:block">
-              Connexion
-            </Link>
-            <Link
-              href="/signup"
-              className="text-sm font-medium bg-primary text-white px-5 py-2 rounded-full hover:bg-primary-light transition-all hover:shadow-lg hover:shadow-primary/15"
-            >
-              Essai gratuit
-            </Link>
+          <div className="hidden md:flex items-center gap-1.5">
+            <Link href="/fonctionnalites" className="px-4 py-2.5 text-[15px] text-primary font-medium rounded-full hover:bg-green-mist transition">Fonctionnalités</Link>
+            <Link href="/tarifs" className="px-4 py-2.5 text-[15px] text-primary font-medium rounded-full hover:bg-green-mist transition">Tarifs</Link>
+            <Link href="/blog" className="px-4 py-2.5 text-[15px] text-primary font-medium rounded-full hover:bg-green-mist transition">Blog</Link>
+          </div>
+          <div className="flex items-center gap-2.5">
+            <Link href="/login" className={`${BTN_GHOST_SM} hidden sm:inline-flex`}>Connexion</Link>
+            <CTALink href="/signup" label="creperie_nav_essai" className={BTN_PRIMARY_SM}>Essai gratuit</CTALink>
           </div>
         </div>
       </nav>
 
-      {/* Breadcrumb */}
-      <div className="max-w-[1120px] mx-auto px-6 pt-[100px]">
-        <nav className="text-[13px] text-muted/60">
-          <Link href="/" className="hover:text-muted transition-colors">Accueil</Link>
-          <span className="mx-2">/</span>
-          <span className="hover:text-muted transition-colors">Solutions</span>
-          <span className="mx-2">/</span>
-          <span className="text-foreground">Brasserie</span>
-        </nav>
-      </div>
-
-      {/* Hero */}
-      <section className="max-w-[1120px] mx-auto px-6 pt-8 pb-16">
-        <p className="text-[13px] font-medium tracking-[0.08em] uppercase text-accent-dark mb-3">
-          Solution brasserie
-        </p>
-        <h1 className="font-serif text-4xl sm:text-5xl text-foreground mb-4 max-w-[680px] leading-tight">
-          Le menu digital taille pour les brasseries.
-        </h1>
-        <p className="text-lg text-muted max-w-[520px] mb-10 leading-relaxed">
-          Une carte longue avec de nombreuses catégories, un service continu du matin au soir.
-          MonTablo organise tout clairement pour vos clients.
-        </p>
-        <Link
-          href="/signup"
-          className="group inline-flex items-center gap-2.5 bg-primary text-white font-medium px-8 py-3.5 rounded-full hover:bg-primary-light transition-all hover:shadow-xl hover:shadow-primary/18 hover:-translate-y-px text-[15px]"
-        >
-          Essayer 14 jours gratuitement
-          <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-        </Link>
-      </section>
-
-      {/* Benefits */}
-      <section className="max-w-[1120px] mx-auto px-6 pb-24">
-        <h2 className="font-serif text-3xl text-foreground mb-10">
-          Pourquoi MonTablo pour votre brasserie
-        </h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          {benefits.map((benefit) => {
-            const Icon = benefit.icon
-            return (
-              <div key={benefit.title} className="bg-white border border-border/50 rounded-[16px] p-8 hover:shadow-lg hover:shadow-black/[0.03] transition-shadow duration-300">
-                <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center mb-4">
-                  <Icon className="w-5 h-5 text-accent-dark" />
-                </div>
-                <h3 className="font-serif text-xl text-foreground mb-2">{benefit.title}</h3>
-                <p className="text-[15px] text-muted leading-relaxed">{benefit.description}</p>
-              </div>
-            )
-          })}
+      {/* ===== HERO ===== */}
+      <section className="relative overflow-hidden pt-[70px] pb-20">
+        <div className="absolute inset-0 pointer-events-none z-0" aria-hidden="true">
+          <div className="absolute -top-[120px] -right-[120px] w-[420px] h-[420px] rounded-full bg-green-mist" />
+          <div className="absolute bottom-10 -left-[100px] w-[220px] h-[220px] rounded-full bg-surface" />
         </div>
-      </section>
-
-      {/* How it works */}
-      <section className="max-w-[1120px] mx-auto px-6 pb-24">
-        <h2 className="font-serif text-3xl text-foreground mb-10">
-          Comment ca marche
-        </h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          {steps.map((step) => (
-            <div key={step.number} className="text-center">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <span className="text-lg font-medium text-primary">{step.number}</span>
-              </div>
-              <h3 className="font-serif text-xl text-foreground mb-2">{step.title}</h3>
-              <p className="text-[15px] text-muted leading-relaxed">{step.description}</p>
+        <div className="relative z-10 max-w-[1240px] mx-auto px-8 grid md:grid-cols-[1.1fr_0.9fr] gap-[60px] md:gap-20 items-center">
+          <div className="min-w-0">
+            <span className={EYEBROW}>Pour les crêperies & tables régionales</span>
+            <h1 className="font-serif font-medium text-primary text-[clamp(36px,5vw,64px)] leading-[1.05] tracking-[-0.022em] text-balance">
+              Le menu digital pour crêperies qui servent une{' '}
+              <em className="italic font-medium text-primary-light">clientèle internationale</em>.
+            </h1>
+            <p className="text-[19px] text-muted max-w-[560px] my-6 mb-8 leading-[1.5]">
+              Vos clients viennent de loin pour découvrir vos spécialités. Encore faut-il qu&apos;ils comprennent ce qu&apos;il y a dedans.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <CTALink href="/signup" label="creperie_hero_essai" className={BTN_PRIMARY}>
+                Essayer Pro 14 jours gratuitement
+              </CTALink>
+              <Link href="/menu/demo" className={BTN_SECONDARY}>
+                Voir un menu en exemple
+                <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
-          ))}
-        </div>
-      </section>
+          </div>
 
-      {/* Feature highlights */}
-      <section className="max-w-[1120px] mx-auto px-6 pb-24">
-        <h2 className="font-serif text-3xl text-foreground mb-10">
-          Les fonctionnalités clés pour votre brasserie
-        </h2>
-        <div className="grid md:grid-cols-2 gap-8">
-          {features.map((feature) => {
-            const Icon = feature.icon
-            return (
-              <div key={feature.title} className="bg-white border border-border/50 rounded-[16px] p-8 hover:shadow-lg hover:shadow-black/[0.03] transition-shadow duration-300">
-                <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center mb-4">
-                  <Icon className="w-5 h-5 text-accent-dark" />
+          {/* Phone mock — multilingue */}
+          <div className="relative flex justify-center items-center min-h-[460px] md:min-h-[560px]">
+            <div className="relative w-[300px] h-[560px] bg-white rounded-[42px] shadow-[0_30px_60px_rgba(30,57,50,0.18),0_10px_20px_rgba(30,57,50,0.08)] border-[10px] border-primary overflow-hidden -rotate-[3deg]" aria-hidden="true">
+              <div className="absolute top-3 left-1/2 -translate-x-1/2 w-[80px] h-5 bg-primary rounded-xl z-[2]" />
+              <div className="h-full bg-background pt-[44px] px-5 pb-5">
+                <div className="flex items-center justify-between pb-4 border-b border-border">
+                  <h4 className="font-serif text-[18px] italic text-primary font-medium">La Crêperie</h4>
+                  <div className="flex gap-1">
+                    <span className="text-[10px] font-bold bg-primary text-background px-2 py-0.5 rounded-full">FR</span>
+                    <span className="text-[10px] font-medium bg-white text-primary border border-border px-2 py-0.5 rounded-full">EN</span>
+                    <span className="text-[10px] font-medium bg-white text-primary border border-border px-2 py-0.5 rounded-full">DE</span>
+                  </div>
                 </div>
-                <h3 className="font-serif text-xl text-foreground mb-2">{feature.title}</h3>
-                <p className="text-[15px] text-muted leading-relaxed">{feature.description}</p>
+                <div className="font-serif italic text-[12px] text-primary-light mt-4 mb-2 tracking-[0.08em] uppercase font-medium">
+                  — Galettes salées —
+                </div>
+                <div className="space-y-2.5">
+                  <div className="bg-white rounded-xl px-3 py-2.5 border border-border">
+                    <div className="font-semibold text-primary text-[13px]">Complète</div>
+                    <div className="text-[11px] text-muted italic">Jambon, œuf, emmental</div>
+                    <div className="flex items-center gap-1.5 mt-1.5">
+                      <span className="text-[9px] bg-green-soft text-primary px-1.5 py-0.5 rounded font-semibold">Gluten</span>
+                      <span className="text-[9px] bg-green-soft text-primary px-1.5 py-0.5 rounded font-semibold">Œuf</span>
+                      <span className="text-[9px] bg-green-soft text-primary px-1.5 py-0.5 rounded font-semibold">Lait</span>
+                    </div>
+                    <div className="font-bold text-primary-light text-[13px] mt-1.5">9,50 €</div>
+                  </div>
+                  <div className="bg-white rounded-xl px-3 py-2.5 border border-border">
+                    <div className="font-semibold text-primary text-[13px]">Forestière</div>
+                    <div className="text-[11px] text-muted italic">Champignons, crème, persillade</div>
+                    <div className="font-bold text-primary-light text-[13px] mt-1.5">10,00 €</div>
+                  </div>
+                </div>
               </div>
-            )
-          })}
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="max-w-[1120px] mx-auto px-6 pb-24">
-        <div className="bg-primary rounded-[20px] py-16 px-8 text-center">
-          <h2 className="font-serif text-3xl text-white mb-3">
-            Prêt a moderniser la carte de votre brasserie ?
-          </h2>
-          <p className="text-white/60 mb-8 max-w-md mx-auto">
-            14 jours d&apos;essai gratuit. Aucune carte bancaire requise.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href="/signup"
-              className="group inline-flex items-center gap-2.5 bg-accent text-foreground font-medium px-8 py-3.5 rounded-full hover:bg-accent-light transition-all text-[15px]"
-            >
-              Commencer l&apos;essai gratuit
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-            </Link>
-            <Link
-              href="/tarifs"
-              className="text-white/80 hover:text-white text-[15px] transition-colors"
-            >
-              Voir les tarifs
-            </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Internal links */}
-      <section className="max-w-[1120px] mx-auto px-6 pb-16">
-        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[13px] text-muted/60">
-          <Link href="/fonctionnalites" className="hover:text-muted transition-colors">Fonctionnalités</Link>
-          <Link href="/tarifs" className="hover:text-muted transition-colors">Tarifs</Link>
-          <Link href="/menu-digital-restaurant" className="hover:text-muted transition-colors">Menu digital restaurant</Link>
-          <Link href="/qr-code-restaurant" className="hover:text-muted transition-colors">QR code restaurant</Link>
+      {/* ===== DOULEURS ===== */}
+      <section className="bg-white border-y border-border">
+        <div className="max-w-[1040px] mx-auto px-8 py-20 sm:py-[100px]">
+          <div className="max-w-[640px] mb-12">
+            <span className={EYEBROW}>Vos douleurs</span>
+            <h2 className="font-serif text-[clamp(30px,4vw,44px)] leading-[1.1] tracking-tight text-primary text-balance">
+              Ce qu&apos;on entend tous les jours en <em className="italic">crêperie</em>.
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-2 gap-5">
+            {pains.map((pain) => (
+              <div key={pain} className="flex gap-4 bg-background border border-border rounded-2xl p-6">
+                <Quote className="w-5 h-5 text-accent shrink-0 mt-0.5" strokeWidth={1.8} />
+                <p className="font-serif italic text-[18px] text-primary leading-snug">« {pain} »</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-border py-12 px-6">
-        <div className="max-w-[1120px] mx-auto">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 mb-10">
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <UtensilsCrossed className="w-[18px] h-[18px] text-primary" />
-                <span className="font-serif text-base text-primary">MonTablo</span>
-              </div>
-              <p className="text-[13px] text-muted/60 leading-relaxed">
-                Le menu digital pour les restaurants exigeants.
+      {/* ===== CE QUE MONTABLO CHANGE ===== */}
+      <section className="py-20 sm:py-[100px]">
+        <div className="max-w-[1240px] mx-auto px-8">
+          <div className="text-center max-w-[640px] mx-auto mb-14">
+            <span className={EYEBROW}>Ce que MonTablo change</span>
+            <h2 className="font-serif text-[clamp(30px,4vw,44px)] leading-[1.1] tracking-tight text-primary text-balance">
+              MonTablo répond à ces <em className="italic">3 défis</em>.
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {features.map((f) => {
+              const Icon = f.icon
+              return (
+                <div key={f.title} className="bg-white border border-border rounded-3xl p-8 flex flex-col">
+                  <div className="w-12 h-12 rounded-2xl bg-green-soft flex items-center justify-center mb-6">
+                    <Icon className="w-6 h-6 text-primary" strokeWidth={1.8} />
+                  </div>
+                  <h3 className="font-serif text-[22px] text-primary leading-tight mb-3 font-medium">{f.title}</h3>
+                  <p className="text-[15px] text-muted leading-relaxed mb-5">{f.desc}</p>
+                  <p className="mt-auto pt-5 border-t border-border text-[14px] font-semibold text-primary-light leading-snug">{f.benefit}</p>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== FAQ ===== */}
+      <section className="bg-surface border-y border-border py-20 sm:py-[100px]">
+        <div className="max-w-[860px] mx-auto px-8">
+          <div className="text-center mb-12">
+            <span className={EYEBROW}>FAQ crêperie</span>
+            <h2 className="font-serif text-[clamp(30px,4vw,44px)] leading-[1.1] tracking-tight text-primary text-balance">
+              Les questions qu&apos;on nous pose en <em className="italic">premier</em>.
+            </h2>
+          </div>
+          <div className="space-y-4">
+            {faq.map((item, i) => (
+              <details key={i} className="group bg-white border border-border rounded-2xl px-6 py-5 open:shadow-[0_10px_30px_rgba(30,57,50,0.06)]">
+                <summary className="flex items-center justify-between gap-6 cursor-pointer list-none font-serif text-[19px] text-primary font-medium">
+                  <span>{item.q}</span>
+                  <span className="w-7 h-7 rounded-full bg-green-mist flex items-center justify-center shrink-0 transition group-open:rotate-45">
+                    <span className="block w-3 h-px bg-primary relative before:absolute before:left-1/2 before:top-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-px before:h-3 before:bg-primary" />
+                  </span>
+                </summary>
+                <p className="text-[15px] text-muted leading-relaxed mt-4">{item.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== CTA FINAL ===== */}
+      <section className="py-24 sm:py-32">
+        <div className="max-w-[820px] mx-auto px-8 text-center">
+          <div className="w-14 h-14 rounded-2xl bg-green-soft flex items-center justify-center mx-auto mb-6">
+            <Sandwich className="w-7 h-7 text-primary" strokeWidth={1.6} />
+          </div>
+          <h2 className="font-serif text-[clamp(32px,5vw,52px)] leading-[1.05] tracking-tight text-primary text-balance">
+            Essayez MonTablo <em className="italic">14 jours</em>, gratuitement.
+          </h2>
+          <p className="text-[18px] text-muted mt-5 max-w-[560px] mx-auto leading-relaxed">
+            Sans carte bancaire. Sans engagement. Configuration en 5 minutes.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-3 mt-9">
+            <CTALink href="/signup" label="creperie_final_essai" className={BTN_PRIMARY}>Démarrer mon essai gratuit</CTALink>
+            <Link href="/contact" className={BTN_SECONDARY}>Demander une démo</Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== FOOTER ===== */}
+      <footer className="bg-primary text-background pt-16 pb-10">
+        <div className="max-w-[1240px] mx-auto px-8">
+          <div className="grid grid-cols-2 md:grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-10 md:gap-[40px] mb-14">
+            <div className="col-span-2 md:col-span-1">
+              <Link href="/" className="inline-flex items-center gap-2.5 font-serif text-2xl font-semibold text-background tracking-tight mb-3">
+                <UtensilsCrossed width={26} height={26} strokeWidth={1.6} />
+                <span>MonTablo</span>
+              </Link>
+              <p className="max-w-[300px] text-sm text-background/70 leading-relaxed">
+                Conçu à Saint-Julien-en-Genevois pour les restaurants du Genevois français.
               </p>
             </div>
-            <div>
-              <p className="text-[13px] font-medium text-foreground mb-3">Produit</p>
-              <div className="space-y-3">
-                <Link href="/fonctionnalites" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Fonctionnalités</Link>
-                <Link href="/tarifs" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Tarifs</Link>
-                <Link href="/menu/demo" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Voir un exemple</Link>
-              </div>
-            </div>
-            <div>
-              <p className="text-[13px] font-medium text-foreground mb-3">Ressources</p>
-              <div className="space-y-3">
-                <Link href="/blog" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Blog</Link>
-                <Link href="/faq" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">FAQ</Link>
-              </div>
-            </div>
-            <div>
-              <p className="text-[13px] font-medium text-foreground mb-3">Legal</p>
-              <div className="space-y-3">
-                <Link href="/mentions-légales" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Mentions légales</Link>
-                <Link href="/cgu" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">CGU</Link>
-                <Link href="/confidentialite" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Confidentialité</Link>
-                <Link href="/cookies" className="block text-[13px] text-muted/60 hover:text-muted transition-colors">Cookies</Link>
-              </div>
-            </div>
+            <FooterCol title="Produit" links={[
+              { href: '/fonctionnalites', label: 'Fonctionnalités' },
+              { href: '/tarifs', label: 'Tarifs' },
+              { href: '/menu/demo', label: 'Démo' },
+            ]} />
+            <FooterCol title="Pour qui" links={[
+              { href: '/solutions/bistrot', label: 'Bistrots' },
+              { href: '/solutions/brasserie', label: 'Crêperies & régionaux' },
+              { href: '/solutions/pizzeria', label: 'Pizzerias' },
+              { href: '/solutions/haute-savoie', label: 'Restaurants de station' },
+            ]} />
+            <FooterCol title="Ressources" links={[
+              { href: '/faq', label: 'FAQ' },
+              { href: '/blog', label: 'Blog' },
+            ]} />
+            <FooterCol title="Entreprise" links={[
+              { href: '/a-propos', label: 'À propos' },
+              { href: '/contact', label: 'Contact' },
+              { href: '/mentions-legales', label: 'Mentions légales' },
+              { href: '/cgu', label: 'CGV' },
+              { href: '/confidentialite', label: 'Confidentialité' },
+            ]} />
           </div>
-          <div className="border-t border-border/50 pt-6 text-center">
-            <p className="text-sm text-muted/60">
-              &copy; {new Date().getFullYear()} MonTablo. Tous droits réservés.
-            </p>
+          <div className="pt-8 border-t border-background/15 flex flex-col sm:flex-row items-center justify-between gap-3 text-[13px] text-background/55">
+            <span>© {new Date().getFullYear()} MonTablo. Tous droits réservés.</span>
+            <span>Conçu à Saint-Julien-en-Genevois.</span>
           </div>
         </div>
       </footer>
+    </div>
+  )
+}
+
+function FooterCol({ title, links }: { title: string; links: { href: string; label: string }[] }) {
+  return (
+    <div>
+      <h4 className="font-sans text-[12px] tracking-[0.18em] uppercase text-background/45 font-semibold mb-4">{title}</h4>
+      <ul className="space-y-2.5">
+        {links.map((l) => (
+          <li key={l.href}>
+            <Link href={l.href} className="text-[14px] text-background/80 hover:text-accent transition">{l.label}</Link>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }

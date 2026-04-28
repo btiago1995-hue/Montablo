@@ -19,7 +19,7 @@ const comparisonRows = [
     icon: Euro,
     criteria: 'Prix',
     competitor: 'Plusieurs paliers tarifaires, coût variable',
-    montablo: 'Un seul prix : 26,99 euros/mois (annuel) ou 29,99 euros/mois',
+    montablo: '3 formules : Essentiel 19 € HT, Pro 39 € HT, Premium sur devis',
     advantage: 'montablo' as const,
   },
   {
@@ -89,7 +89,7 @@ const faqs = [
   {
     question: 'Tastycloud est-il plus cher que MonTablo ?',
     answer:
-      'Tastycloud propose plusieurs paliers tarifaires selon les fonctionnalités souhaitees, ce qui peut vite faire monter la facture. MonTablo propose un tarif unique à partir de 26,99 euros par mois (annuel) ou 29,99 euros par mois sans engagement, avec toutes les fonctionnalités incluses.',
+      'Tastycloud propose plusieurs paliers tarifaires selon les fonctionnalités souhaitees, ce qui peut vite faire monter la facture. MonTablo propose un tarif unique à partir de 19 € HT par mois (Essentiel) ou 39 € HT par mois (Pro), avec −10 % en annuel, avec toutes les fonctionnalités incluses.',
   },
   {
     question: 'Puis-je migrer de Tastycloud vers MonTablo facilement ?',
@@ -169,15 +169,14 @@ export default function CompareTastyCloudPage() {
           Comparatif
         </p>
         <h1 className="font-serif text-4xl sm:text-5xl text-foreground mb-4 text-balance">
-          MonTablo vs Tastycloud : comparatif des menus digitaux
+          MonTablo vs Tastycloud : la comparaison honnête.
         </h1>
         <p className="text-lg text-muted max-w-2xl mx-auto leading-relaxed">
           Deux solutions de{' '}
           <Link href="/menu-digital-restaurant" className="text-primary hover:underline">
             menu digital
-          </Link>{' '}
-          pour restaurants, deux approches différentes. Comparez les fonctionnalités,
-          les prix et l&apos;expérience utilisateur.
+          </Link>
+          , deux approches. Fonctionnalités, prix, expérience client : ce qui les sépare vraiment.
         </p>
       </section>
 

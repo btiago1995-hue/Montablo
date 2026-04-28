@@ -83,7 +83,7 @@ export function ReviewPopup({
         {/* Close button */}
         <button
           onClick={handleClose}
-          className="absolute top-4 right-4 w-8 h-8 rounded-full bg-black/5 flex items-center justify-center text-[#9B9B9B] hover:text-[#1A1A1A] transition-colors"
+          className="absolute top-4 right-4 w-8 h-8 rounded-full bg-black/5 flex items-center justify-center text-muted-light hover:text-foreground transition-colors"
         >
           <X className="w-4 h-4" />
         </button>
@@ -97,10 +97,10 @@ export function ReviewPopup({
                   <img src={logoUrl} alt={restaurantName} className="w-full h-full object-cover" />
                 </div>
               )}
-              <h3 className="font-serif text-xl text-[#1A1A1A] mb-1">
+              <h3 className="font-serif text-xl text-foreground mb-1">
                 Votre avis compte !
               </h3>
-              <p className="text-sm text-[#6B6B6B] mb-6">
+              <p className="text-sm text-muted mb-6">
                 Comment etait votre experience chez {restaurantName} ?
               </p>
 
@@ -129,7 +129,7 @@ export function ReviewPopup({
                 ))}
               </div>
 
-              <p className="text-xs text-[#9B9B9B]">
+              <p className="text-xs text-muted-light">
                 Touchez une etoile pour evaluer
               </p>
             </>
@@ -140,18 +140,18 @@ export function ReviewPopup({
                   <path d="M20 6L9 17l-5-5" />
                 </svg>
               </div>
-              <h3 className="font-serif text-xl text-[#1A1A1A] mb-1">
+              <h3 className="font-serif text-xl text-foreground mb-1">
                 Merci pour votre retour !
               </h3>
-              <p className="text-sm text-[#6B6B6B] mb-2">
+              <p className="text-sm text-muted mb-2">
                 Nous apprecions vos {rating} etoile{rating > 1 ? 's' : ''} et travaillons chaque jour pour ameliorer votre experience.
               </p>
-              <p className="text-xs text-[#9B9B9B] mb-6">
+              <p className="text-xs text-muted-light mb-6">
                 Votre avis nous aide a progresser.
               </p>
               <button
                 onClick={handleClose}
-                className="px-6 py-2.5 rounded-lg text-white text-sm font-medium transition-colors"
+                className="px-6 py-2.5 rounded-full text-white text-sm font-medium transition-colors"
                 style={{ backgroundColor: primaryColor }}
               >
                 Fermer

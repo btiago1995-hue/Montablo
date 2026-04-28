@@ -33,7 +33,7 @@ export const VILLES: VilleData[] = [
       },
       {
         question: 'Combien coûte un menu digital pour un restaurant à Annecy ?',
-        answer: 'MonTablo propose un essai gratuit de 14 jours sans carte bancaire, puis un abonnement à partir de 26,99 € / mois (facturé annuellement). Pour un restaurant à Annecy, c\'est moins cher qu\'une seule impression de menus papier par an, avec des mises à jour illimitées.',
+        answer: 'MonTablo propose un essai gratuit de 14 jours sans carte bancaire, puis un abonnement à partir de 19 € HT / mois (Essentiel, ou 17,10 € HT / mois en annuel). Pour un restaurant à Annecy, c\'est moins cher qu\'une seule impression de menus papier par an, avec des mises à jour illimitées.',
       },
     ],
     relatedBlogSlugs: [
@@ -188,7 +188,7 @@ export const VILLES: VilleData[] = [
       },
       {
         question: 'Quel est le prix d\'un menu digital pour un restaurant à Cluses ?',
-        answer: 'MonTablo propose 14 jours d\'essai gratuit sans carte bancaire, puis 29,99 € / mois ou 26,99 € / mois en annuel. Pour un restaurant de Cluses, c\'est un investissement rentabilisé dès le premier mois d\'économies d\'impression.',
+        answer: 'MonTablo propose 14 jours d\'essai gratuit sans carte bancaire, puis 19 € HT / mois (Essentiel) ou 39 € HT / mois (Pro), avec −10 % en annuel. Pour un restaurant de Cluses, c\'est un investissement rentabilisé dès le premier mois d\'économies d\'impression.',
       },
     ],
     relatedBlogSlugs: [

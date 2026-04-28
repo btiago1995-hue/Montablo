@@ -12,7 +12,7 @@ export default function Icon() {
       <div
         style={{
           fontSize: 18,
-          background: "#2C3E2D",
+          background: "#1E3932",
           width: "100%",
           height: "100%",
           display: "flex",
@@ -21,7 +21,7 @@ export default function Icon() {
           borderRadius: 6,
           fontFamily: "Georgia, serif",
           fontWeight: 700,
-          color: "#D4A574",
+          color: "#CBA258",
         }}
       >
         MT

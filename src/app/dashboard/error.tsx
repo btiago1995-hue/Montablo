@@ -11,9 +11,9 @@ export default function DashboardError({
   reset: () => void
 }) {
   return (
-    <div className="min-h-screen bg-[#F5F5F2] flex items-center justify-center px-6">
+    <div className="min-h-screen bg-background flex items-center justify-center px-6">
       <div className="text-center max-w-sm">
-        <h2 className="font-serif text-2xl text-foreground mb-3">
+        <h2 className="font-serif text-2xl text-primary mb-3">
           Une erreur est survenue
         </h2>
         <p className="text-sm text-muted mb-6">
@@ -22,7 +22,7 @@ export default function DashboardError({
         <div className="flex flex-col gap-3">
           <button
             onClick={() => reset()}
-            className="bg-primary text-white font-medium px-6 py-3 rounded-lg hover:bg-primary-light transition-colors text-sm"
+            className="bg-primary text-background font-semibold px-6 py-3 rounded-full hover:bg-primary-light transition text-sm"
           >
             Réessayer
           </button>
